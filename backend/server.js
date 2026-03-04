@@ -41,7 +41,7 @@ app.use('/admin', adminRoutes);
 app.use('/', fanRoutes);
 app.use('/api', apiRoutes);
 
-// Home — served by static index.html in public/
+// Home page — landing page served by express.static from public/index.html
 
 // Error handling
 const { errorHandler, notFoundHandler } = require('./src/middleware/errors');
