@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: fanloop
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run seed
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: BASE_URL
+        fromService:
+          type: web
+          name: fanloop
+          property: host
+      - key: PORT
+        value: 3000
+    disk:
+      name: fanloop-data
+      mountPath: /opt/render/project/src/backend/db
+      sizeGB: 1
