@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --primary: <%= brandConfig.primary_color || '#8b5cf6' %>; --secondary: <%= brandConfig.secondary_color || '#ec4899' %>; }
+    body { background: #0a0a0f; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+    .gradient { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+    .card { background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; }
+    .stat-card { background: linear-gradient(135deg, #1a1a2e, #16162a); border: 1px solid #2a2a3e; }
+    .progress-bar { background: #1e1e2e; border-radius: 9999px; overflow: hidden; }
+    .progress-fill { background: linear-gradient(90deg, var(--primary), var(--secondary)); height: 100%; border-radius: 9999px; transition: width 0.5s; }
+    .share-btn { transition: all 0.2s; }
+    .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-2xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8 pt-6">
+      <% if (artist) { %><p class="text-sm text-gray-500 mb-1"><%= artist.name %></p><% } %>
+      <h1 class="text-2xl font-bold"><%= campaign.title %></h1>
+      <p class="text-gray-400 text-sm mt-1">Welcome back, <strong><%= fan.name || fan.email.split('@')[0] %></strong></p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <div class="stat-card rounded-xl p-4 text-center">
+        <div class="text-2xl font-bold"><%= fan.referral_count %></div>
+        <div class="text-xs text-gray-500">Referrals</div>
+      </div>
+      <div class="stat-card rounded-xl p-4 text-center">
+        <div class="text-2xl font-bold" style="color: var(--primary)"><%= rank ? '#' + rank.rank : '--' %></div>
+        <div class="text-xs text-gray-500">Rank</div>
+      </div>
+      <div class="stat-card rounded-xl p-4 text-center">
+        <div class="text-2xl font-bold text-pink-400"><%= claims.filter(c => c.status === 'approved').length %></div>
+        <div class="text-xs text-gray-500">Rewards</div>
+      </div>
+    </div>
+
+    <!-- Progress to Next Tier -->
+    <% if (nextTier) { %>
+      <div class="card p-5 mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium">Next: <%= nextTier.tier || nextTier.name %></span>
+          <span class="text-sm text-gray-500"><%= fan.referral_count %>/<%= nextTier.referrals %></span>
+        </div>
+        <div class="progress-bar h-3">
+          <div class="progress-fill" style="width: <%= Math.min(100, (fan.referral_count / nextTier.referrals * 100)) %>%"></div>
+        </div>
+        <p class="text-xs text-gray-500 mt-2"><%= nextTier.referrals - fan.referral_count %> more referrals to unlock: <strong><%= nextTier.reward %></strong></p>
+      </div>
+    <% } %>
+
+    <!-- Referral Link -->
+    <div class="card p-5 mb-6">
+      <h3 class="text-sm font-semibold text-gray-400 mb-3">YOUR REFERRAL LINK</h3>
+      <div class="flex gap-2">
+        <input id="refLink" type="text" value="<%= referralLink %>" readonly class="flex-1 bg-[#0a0a0f] border border-[#2a2a3e] rounded-lg px-4 py-2.5 text-sm text-purple-400">
+        <button onclick="copyLink()" id="copyBtn" class="gradient px-5 py-2.5 rounded-lg text-white font-semibold text-sm">Copy</button>
+      </div>
+
+      <!-- Share Buttons -->
+      <div class="grid grid-cols-4 gap-2 mt-4">
+        <a href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent((shareMessages.twitter || 'Check this out! {link}').replace('{link}', referralLink)) %>" target="_blank" class="share-btn text-center py-3 rounded-lg bg-[#1da1f2] text-white text-sm font-medium">Twitter</a>
+        <a href="https://wa.me/?text=<%= encodeURIComponent((shareMessages.whatsapp || 'Check this out! {link}').replace('{link}', referralLink)) %>" target="_blank" class="share-btn text-center py-3 rounded-lg bg-[#25d366] text-white text-sm font-medium">WhatsApp</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(referralLink) %>" target="_blank" class="share-btn text-center py-3 rounded-lg bg-[#1877f2] text-white text-sm font-medium">Facebook</a>
+        <a href="mailto:?subject=<%= encodeURIComponent(shareMessages.email_subject || 'Check this out') %>&body=<%= encodeURIComponent((shareMessages.email_body || 'I thought you might like this: {link}').replace('{link}', referralLink)) %>" class="share-btn text-center py-3 rounded-lg bg-[#6366f1] text-white text-sm font-medium">Email</a>
+      </div>
+
+      <!-- QR Code -->
+      <div class="text-center mt-4">
+        <canvas id="qrCanvas" class="mx-auto"></canvas>
+        <p class="text-xs text-gray-500 mt-2">Scan to share</p>
+      </div>
+    </div>
+
+    <!-- Reward Tiers -->
+    <div class="card p-5 mb-6">
+      <h3 class="text-sm font-semibold text-gray-400 mb-3">REWARD TIERS</h3>
+      <div class="space-y-2">
+        <% rewardTiers.forEach(tier => { %>
+          <% const unlocked = fan.referral_count >= tier.referrals; %>
+          <div class="flex items-center justify-between p-3 rounded-lg <%= unlocked ? 'bg-green-900/20 border border-green-800/30' : 'bg-[#0a0a0f]' %>">
+            <div class="flex items-center gap-3">
+              <span class="text-lg"><%= unlocked ? '✅' : '🔒' %></span>
+              <div>
+                <span class="text-sm font-medium"><%= tier.tier || tier.name %></span>
+                <div class="text-xs text-gray-500"><%= tier.reward %></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold" style="color: var(--primary)"><%= tier.referrals %> refs</span>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Referral List -->
+    <% if (referrals.length > 0) { %>
+      <div class="card p-5 mb-6">
+        <h3 class="text-sm font-semibold text-gray-400 mb-3">YOUR REFERRALS (<%= referrals.length %>)</h3>
+        <div class="space-y-2">
+          <% referrals.forEach(ref => { %>
+            <div class="flex items-center justify-between p-2 rounded bg-[#0a0a0f]">
+              <span class="text-sm"><%= ref.name || ref.email.replace(/(.{2}).*(@.*)/, '$1***$2') %></span>
+              <span class="text-xs text-gray-500"><%= new Date(ref.created_at).toLocaleDateString() %></span>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+
+    <!-- Leaderboard link -->
+    <div class="text-center mb-8">
+      <a href="/c/<%= campaign.slug %>/leaderboard" class="text-sm text-purple-400 hover:text-purple-300">View Full Leaderboard →</a>
+    </div>
+
+    <p class="text-center text-xs text-gray-600">Powered by <span class="text-purple-400">FANLOOP</span></p>
+  </div>
+
+  <script>
+    function copyLink() {
+      const link = document.getElementById('refLink').value;
+      navigator.clipboard.writeText(link).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
+
+    // Simple QR Code generation using canvas
+    (function generateQR() {
+      const canvas = document.getElementById('qrCanvas');
+      if (!canvas) return;
+      const link = '<%= referralLink %>';
+      // Use a small QR placeholder — in production, use a QR library
+      const ctx = canvas.getContext('2d');
+      canvas.width = 120;
+      canvas.height = 120;
+      ctx.fillStyle = '#1a1a2e';
+      ctx.fillRect(0, 0, 120, 120);
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('QR Code', 60, 55);
+      ctx.fillText(link.slice(-12), 60, 70);
+
+      // Load QR library dynamically
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js';
+      script.onload = () => {
+        QRCode.toCanvas(canvas, link, { width: 120, margin: 1, color: { dark: '#e2e8f0', light: '#111118' } });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+</body>
+</html>

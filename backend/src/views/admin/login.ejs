@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FANLOOP — Admin Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0a0a0f; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+    input { background: #1a1a2e; border: 1px solid #2a2a3e; color: #e2e8f0; }
+    input:focus { outline: none; border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2); }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-md p-8">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">FANLOOP</h1>
+      <p class="text-gray-500 mt-2">Admin Portal</p>
+    </div>
+
+    <div class="bg-[#111118] border border-[#1e1e2e] rounded-xl p-8">
+      <h2 class="text-xl font-semibold mb-6">Sign In</h2>
+
+      <% if (error) { %>
+        <div class="bg-red-900/30 border border-red-800 text-red-300 px-4 py-3 rounded-lg mb-4 text-sm"><%= error %></div>
+      <% } %>
+
+      <form method="POST" action="/admin/login">
+        <div class="mb-4">
+          <label class="block text-sm text-gray-400 mb-2">Email</label>
+          <input type="email" name="email" required class="w-full rounded-lg px-4 py-3" placeholder="admin@fanloop.io">
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm text-gray-400 mb-2">Password</label>
+          <input type="password" name="password" required class="w-full rounded-lg px-4 py-3" placeholder="Enter password">
+        </div>
+        <button type="submit" class="w-full py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90 transition">Sign In</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

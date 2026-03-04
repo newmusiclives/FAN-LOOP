@@ -1,0 +1,53 @@
+<%- include('../partials/admin-layout') %>
+
+<div class="mb-8">
+  <h2 class="text-2xl font-bold">Fraud Review</h2>
+  <p class="text-gray-500 mt-1"><%= flags.length %> pending flags</p>
+</div>
+
+<div class="card overflow-hidden">
+  <table>
+    <thead>
+      <tr class="text-left">
+        <th class="px-6 py-3">Fan</th>
+        <th class="px-6 py-3">Campaign</th>
+        <th class="px-6 py-3">Reason</th>
+        <th class="px-6 py-3">Details</th>
+        <th class="px-6 py-3">Flagged</th>
+        <th class="px-6 py-3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flags.forEach(flag => { %>
+        <% const details = JSON.parse(flag.details || '{}'); %>
+        <tr class="hover:bg-[#1a1a2e]">
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium"><%= flag.fan_name || flag.fan_email %></div>
+            <div class="text-xs text-gray-500"><%= flag.fan_email %></div>
+          </td>
+          <td class="px-6 py-4 text-sm"><%= flag.campaign_title %></td>
+          <td class="px-6 py-4">
+            <span class="badge badge-red"><%= flag.reason.replace(/_/g, ' ') %></span>
+          </td>
+          <td class="px-6 py-4 text-xs text-gray-400"><%= JSON.stringify(details) %></td>
+          <td class="px-6 py-4 text-xs text-gray-500"><%= new Date(flag.created_at).toLocaleDateString() %></td>
+          <td class="px-6 py-4">
+            <div class="flex gap-2">
+              <form method="POST" action="/admin/fraud/<%= flag.id %>/confirm">
+                <button class="px-3 py-1 rounded text-xs bg-red-900 text-red-300 hover:bg-red-800">Ban</button>
+              </form>
+              <form method="POST" action="/admin/fraud/<%= flag.id %>/dismiss">
+                <button class="px-3 py-1 rounded text-xs bg-[#1a1a2e] text-gray-400 hover:text-white">Dismiss</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (flags.length === 0) { %>
+        <tr><td colspan="6" class="px-6 py-12 text-center text-gray-500">No pending fraud flags</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/admin-footer') %>

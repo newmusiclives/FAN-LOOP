@@ -1,0 +1,121 @@
+<%- include('../partials/admin-layout') %>
+
+<div class="mb-8">
+  <h2 class="text-2xl font-bold">Analytics</h2>
+  <p class="text-gray-500 mt-1">Track campaign performance and growth metrics</p>
+</div>
+
+<!-- Campaign Filter -->
+<div class="mb-6">
+  <select id="campaignFilter" class="px-4 py-2">
+    <option value="">All Campaigns</option>
+    <% campaigns.forEach(c => { %>
+      <option value="<%= c.id %>"><%= c.title %></option>
+    <% }) %>
+  </select>
+</div>
+
+<!-- Stat Cards -->
+<div class="grid grid-cols-4 gap-4 mb-6">
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">K-Factor</div>
+    <div class="text-2xl font-bold text-purple-400" id="kFactorStat">--</div>
+  </div>
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Conversion Rate</div>
+    <div class="text-2xl font-bold text-green-400" id="conversionStat">--</div>
+  </div>
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Page Views</div>
+    <div class="text-2xl font-bold" id="viewsStat">--</div>
+  </div>
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Total Signups</div>
+    <div class="text-2xl font-bold text-pink-400" id="signupsStat">--</div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <div class="card p-6">
+    <h3 class="text-lg font-semibold mb-4">Fan Growth</h3>
+    <canvas id="growthChart" height="200"></canvas>
+  </div>
+  <div class="card p-6">
+    <h3 class="text-lg font-semibold mb-4">Channel Breakdown</h3>
+    <canvas id="channelChart" height="200"></canvas>
+  </div>
+  <div class="card p-6">
+    <h3 class="text-lg font-semibold mb-4">Geographic Distribution</h3>
+    <canvas id="geoChart" height="200"></canvas>
+  </div>
+</div>
+
+<script>
+let growthChart, channelChart, geoChart;
+const filter = document.getElementById('campaignFilter');
+
+function qs(campaignId) { return campaignId ? `?campaign_id=${campaignId}` : ''; }
+
+async function loadAnalytics() {
+  const cid = filter.value;
+
+  // K-Factor
+  fetch(`/api/admin/analytics/kfactor${qs(cid)}`).then(r=>r.json()).then(d=>{
+    document.getElementById('kFactorStat').textContent = d.kFactor;
+  });
+
+  // Conversion
+  if (cid) {
+    fetch(`/api/admin/analytics/conversion?campaign_id=${cid}`).then(r=>r.json()).then(d=>{
+      document.getElementById('conversionStat').textContent = d.rate + '%';
+      document.getElementById('viewsStat').textContent = d.views.toLocaleString();
+      document.getElementById('signupsStat').textContent = d.signups.toLocaleString();
+    });
+  }
+
+  // Growth
+  fetch(`/api/admin/analytics/growth${qs(cid)}&days=30`).then(r=>r.json()).then(data=>{
+    if (growthChart) growthChart.destroy();
+    growthChart = new Chart(document.getElementById('growthChart'), {
+      type: 'line',
+      data: {
+        labels: data.map(d=>d.date),
+        datasets: [{ label: 'New Fans', data: data.map(d=>d.count), borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.1)', fill: true, tension: 0.4 }]
+      },
+      options: { responsive: true, plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#64748b'},grid:{color:'#1e1e2e'}}, y:{ticks:{color:'#64748b'},grid:{color:'#1e1e2e'},beginAtZero:true} } }
+    });
+  });
+
+  // Channels
+  fetch(`/api/admin/analytics/channels${qs(cid)}`).then(r=>r.json()).then(data=>{
+    if (channelChart) channelChart.destroy();
+    const colors = ['#8b5cf6','#ec4899','#10b981','#f59e0b','#60a5fa','#ef4444'];
+    channelChart = new Chart(document.getElementById('channelChart'), {
+      type: 'doughnut',
+      data: {
+        labels: data.map(d=>d.channel),
+        datasets: [{ data: data.map(d=>d.count), backgroundColor: colors }]
+      },
+      options: { responsive: true, plugins:{ legend:{ position:'bottom', labels:{color:'#94a3b8'} } } }
+    });
+  });
+
+  // Geo
+  fetch(`/api/admin/analytics/geo${qs(cid)}`).then(r=>r.json()).then(data=>{
+    if (geoChart) geoChart.destroy();
+    geoChart = new Chart(document.getElementById('geoChart'), {
+      type: 'bar',
+      data: {
+        labels: data.map(d=>d.country),
+        datasets: [{ label: 'Fans', data: data.map(d=>d.count), backgroundColor: '#8b5cf6' }]
+      },
+      options: { indexAxis:'y', responsive: true, plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#64748b'},grid:{color:'#1e1e2e'}}, y:{ticks:{color:'#64748b'},grid:{color:'#1e1e2e'}} } }
+    });
+  });
+}
+
+filter.addEventListener('change', loadAnalytics);
+loadAnalytics();
+</script>
+
+<%- include('../partials/admin-footer') %>

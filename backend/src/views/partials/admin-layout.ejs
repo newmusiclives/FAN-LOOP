@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> — FANLOOP Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    body { background: #0a0a0f; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+    .sidebar { background: #111118; border-right: 1px solid #1e1e2e; }
+    .sidebar a { transition: all 0.2s; }
+    .sidebar a:hover, .sidebar a.active { background: #1e1e2e; color: #a78bfa; }
+    .card { background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; }
+    .btn-primary { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-danger { background: #ef4444; }
+    .btn-danger:hover { opacity: 0.9; }
+    .stat-card { background: linear-gradient(135deg, #1a1a2e, #16162a); border: 1px solid #2a2a3e; }
+    input, select, textarea { background: #1a1a2e; border: 1px solid #2a2a3e; color: #e2e8f0; border-radius: 8px; padding: 8px 12px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2); }
+    table { width: 100%; }
+    th { color: #94a3b8; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
+    td { border-top: 1px solid #1e1e2e; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+    .badge-green { background: #064e3b; color: #34d399; }
+    .badge-yellow { background: #713f12; color: #fbbf24; }
+    .badge-red { background: #7f1d1d; color: #f87171; }
+    .badge-blue { background: #1e3a5f; color: #60a5fa; }
+    .badge-gray { background: #1e1e2e; color: #94a3b8; }
+  </style>
+</head>
+<body class="min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="sidebar w-64 min-h-screen flex flex-col fixed left-0 top-0 z-10">
+    <div class="p-6">
+      <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">FANLOOP</h1>
+      <p class="text-xs text-gray-500 mt-1">Admin Portal</p>
+    </div>
+    <nav class="flex-1 px-3">
+      <a href="/admin" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Dashboard' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">📊</span> Dashboard
+      </a>
+      <a href="/admin/campaigns" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Campaigns' || title.includes('Campaign') ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">🚀</span> Campaigns
+      </a>
+      <a href="/admin/artists" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Artists' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">🎵</span> Artists
+      </a>
+      <a href="/admin/fans" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Fan CRM' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">👥</span> Fan CRM
+      </a>
+      <a href="/admin/analytics" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Analytics' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">📈</span> Analytics
+      </a>
+      <a href="/admin/rewards" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Reward Fulfillment' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">🎁</span> Rewards
+      </a>
+      <a href="/admin/fraud" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Fraud Review' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">🛡️</span> Fraud Review
+      </a>
+      <a href="/admin/settings" class="flex items-center px-3 py-2.5 rounded-lg mb-1 text-sm <%= title === 'Settings' ? 'active' : 'text-gray-400' %>">
+        <span class="mr-3">⚙️</span> Settings
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-800">
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-gray-400"><%= user.name %></span>
+        <a href="/admin/logout" class="text-xs text-gray-500 hover:text-red-400">Logout</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 ml-64 p-8">

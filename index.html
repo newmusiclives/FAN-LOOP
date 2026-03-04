@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FANLOOP — Turn Every Fan Into a Promoter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --violet: #8B5CF6;
+            --violet-glow: rgba(139, 92, 246, 0.4);
+            --violet-dark: #6D28D9;
+            --violet-light: #A78BFA;
+            --pink: #EC4899;
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --amber: #F59E0B;
+            --red: #EF4444;
+            --bg-dark: #0A0A0F;
+            --bg-card: #111118;
+            --bg-card-hover: #1A1A24;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: rgba(139, 92, 246, 0.15);
+            --border-hover: rgba(139, 92, 246, 0.4);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========== UTILITIES ========== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--violet);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 680px;
+            line-height: 1.8;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        /* ========== CTA BUTTONS ========== */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 40px var(--violet-glow), 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 0 60px var(--violet-glow), 0 12px 40px rgba(0,0,0,0.5);
+        }
+
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            border: 2px solid var(--violet);
+            box-shadow: 0 0 20px rgba(139,92,246,0.15);
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(139,92,246,0.1);
+        }
+
+        .cta-sub {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo span { color: var(--violet); }
+
+        .nav-cta {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            background: var(--violet);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--violet-dark);
+            transform: scale(1.05);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,92,246,0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(236,72,153,0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6,182,212,0.06), transparent);
+            pointer-events: none;
+        }
+
+        /* Animated waveform bars */
+        .waveform {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 3px;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .waveform .bar {
+            width: 4px;
+            background: var(--violet);
+            border-radius: 2px 2px 0 0;
+            animation: wave 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes wave {
+            0% { height: 20%; }
+            100% { height: 100%; }
+        }
+
+        .hero-content {
+            max-width: 860px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-pre {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--violet-light);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 6vw, 68px);
+            font-weight: 800;
+            line-height: 1.08;
+            margin-bottom: 28px;
+        }
+
+        .hero-sub {
+            font-size: clamp(16px, 2.5vw, 20px);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .hero-proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--violet-light);
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ========== SOCIAL PROOF BAR ========== */
+        .proof-bar {
+            background: linear-gradient(135deg, var(--violet-dark), #7C3AED);
+            padding: 16px 0;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== PROBLEM SECTION ========== */
+        .problem { background: var(--bg-dark); }
+
+        .pain-list {
+            list-style: none;
+            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .pain-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .pain-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .problem-cta {
+            margin-top: 48px;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(236,72,153,0.05));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .problem-cta p {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .problem-cta .highlight {
+            color: var(--violet-light);
+            font-weight: 700;
+        }
+
+        /* ========== SOLUTION / LOOP SECTION ========== */
+        .solution {
+            background: linear-gradient(180deg, var(--bg-dark), #0D0D14, var(--bg-dark));
+        }
+
+        .loop-diagram {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .loop-step {
+            text-align: center;
+            padding: 32px 20px;
+            position: relative;
+        }
+
+        .loop-step-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 0 30px var(--violet-glow);
+        }
+
+        .loop-step h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .loop-step p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .loop-arrow {
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--violet);
+            font-size: 24px;
+            z-index: 2;
+        }
+
+        .loop-note {
+            text-align: center;
+            margin-top: 16px;
+            padding: 20px;
+            background: rgba(139,92,246,0.08);
+            border: 1px dashed var(--border-hover);
+            border-radius: 12px;
+            color: var(--violet-light);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* ========== FEATURES ========== */
+        .features { background: var(--bg-dark); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(139,92,246,0.1);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h4 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ========== REWARD TIERS ========== */
+        .rewards {
+            background: linear-gradient(180deg, var(--bg-dark), #0D0D14);
+        }
+
+        .reward-track {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .reward-track::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--violet), var(--pink), var(--amber));
+            border-radius: 2px;
+        }
+
+        .reward-tier {
+            display: flex;
+            align-items: flex-start;
+            gap: 28px;
+            padding: 24px 0;
+            position: relative;
+        }
+
+        .reward-badge {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 3px solid;
+            background: var(--bg-dark);
+            z-index: 2;
+        }
+
+        .reward-info h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .reward-info .refs {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--violet-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .reward-info p {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* ========== CAMPAIGNS ========== */
+        .campaigns { background: #0D0D14; }
+
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .campaign-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campaign-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+        }
+
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--violet), var(--pink));
+        }
+
+        .campaign-emoji {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .campaign-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .campaign-card .hook {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--violet-light);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .campaign-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========== TESTIMONIALS ========== */
+        .testimonials {
+            background: linear-gradient(180deg, #0D0D14, var(--bg-dark));
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 72px;
+            color: var(--violet);
+            opacity: 0.2;
+            position: absolute;
+            top: 12px;
+            left: 24px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-quote {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .testimonial-role {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .testimonial-result {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        /* ========== HOW IT WORKS ========== */
+        .how-it-works { background: var(--bg-dark); }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .steps { grid-template-columns: 1fr; }
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-visual {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .step-visual-inner {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .step-visual .mock-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .step-visual .mock-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--violet);
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ========== OFFER STACK ========== */
+        .offer {
+            background: linear-gradient(180deg, var(--bg-dark), #0D0D14, var(--bg-dark));
+        }
+
+        .offer-list {
+            margin: 48px auto;
+            max-width: 700px;
+        }
+
+        .offer-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .offer-item:hover {
+            background: rgba(139,92,246,0.04);
+        }
+
+        .offer-item-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .offer-check {
+            color: var(--green);
+            font-size: 18px;
+        }
+
+        .offer-item-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .offer-total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            margin-top: 8px;
+            background: rgba(139,92,246,0.08);
+            border: 1px solid var(--border-hover);
+            border-radius: 12px;
+        }
+
+        .offer-total-label {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .offer-total-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--violet-light);
+        }
+
+        .price-reveal {
+            text-align: center;
+            margin: 48px 0;
+        }
+
+        .price-crossed {
+            font-size: 22px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin: 0 12px;
+        }
+
+        .price-final {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin: 16px 0;
+        }
+
+        .price-final sup {
+            font-size: 36px;
+            vertical-align: super;
+        }
+
+        .price-note {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ========== BONUSES ========== */
+        .bonuses { background: #0D0D14; }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .bonus-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-card::before {
+            content: 'BONUS';
+            position: absolute;
+            top: 16px;
+            right: -28px;
+            background: linear-gradient(135deg, var(--amber), #D97706);
+            color: #000;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 36px;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
+        .bonus-num {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--amber);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .bonus-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .bonus-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .bonus-value {
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--amber);
+        }
+
+        /* ========== GUARANTEE ========== */
+        .guarantee { background: var(--bg-dark); }
+
+        .guarantee-box {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--bg-card);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .guarantee-badge {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green), #059669);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+
+        .guarantee-badge::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px dashed rgba(16, 185, 129, 0.4);
+        }
+
+        .guarantee-badge-inner {
+            text-align: center;
+            color: #fff;
+        }
+
+        .guarantee-badge-inner .days {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .guarantee-badge-inner .label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .guarantee-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .guarantee-box p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ========== FAQ ========== */
+        .faq { background: linear-gradient(180deg, var(--bg-dark), #0D0D14); }
+
+        .faq-list {
+            max-width: 750px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover { color: var(--violet-light); }
+
+        .faq-toggle {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(139,92,246,0.1);
+            color: var(--violet);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-top: 16px;
+        }
+
+        .faq-answer p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ========== FINAL CTA ========== */
+        .final-cta {
+            background: linear-gradient(180deg, #0D0D14, var(--bg-dark));
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 100%, rgba(139,92,246,0.12), transparent);
+            pointer-events: none;
+        }
+
+        .final-cta .container { position: relative; z-index: 2; }
+
+        /* ========== URGENCY TIMER ========== */
+        .urgency-bar {
+            background: linear-gradient(135deg, #7C3AED, var(--pink));
+            padding: 16px 0;
+            text-align: center;
+        }
+
+        .timer {
+            display: inline-flex;
+            gap: 8px;
+            margin: 0 16px;
+        }
+
+        .timer-block {
+            background: rgba(0,0,0,0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .timer-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .timer-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .footer-copy {
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .section { padding: 60px 0; }
+
+            .loop-diagram {
+                grid-template-columns: 1fr;
+            }
+
+            .loop-arrow { display: none; }
+
+            .features-grid,
+            .campaign-grid,
+            .testimonial-grid,
+            .bonus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-proof {
+                gap: 20px;
+            }
+
+            .offer-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .reward-tier {
+                gap: 16px;
+            }
+
+            .reward-badge {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+
+            .reward-track::before {
+                left: 24px;
+            }
+
+            .guarantee-box {
+                padding: 40px 24px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--violet);
+            opacity: 0.15;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Floating Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="container">
+        <a href="#" class="nav-logo">FAN<span>LOOP</span></a>
+        <a href="#pricing" class="nav-cta">Get Started &mdash; $37</a>
+    </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+    <div class="waveform" id="waveform"></div>
+    <div class="hero-content">
+        <p class="hero-pre">The #1 Fan Growth System for Independent Artists</p>
+        <h1 class="hero-title">
+            Turn Every Fan Into a Promoter.<br>
+            <span class="text-gradient">Turn Every Promoter Into 10 More Fans.</span>
+        </h1>
+        <p class="hero-sub">
+            FANLOOP is the viral referral engine that transforms your existing fans into an unstoppable street team &mdash; automatically growing your email list, SMS subscribers, and superfan community while you focus on making music.
+        </p>
+        <a href="#pricing" class="cta-btn">Start Growing Your Fanbase &mdash; $37 One-Time</a>
+        <p class="cta-sub">One-time payment &bull; Lifetime access &bull; 30-day guarantee</p>
+
+        <div class="hero-proof">
+            <div class="hero-stat">
+                <div class="hero-stat-num" id="counter-artists">2,400+</div>
+                <div class="hero-stat-label">Independent Artists</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">1.2M+</div>
+                <div class="hero-stat-label">Fans Acquired</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">$0</div>
+                <div class="hero-stat-label">Ad Spend Required</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">10.5x</div>
+                <div class="hero-stat-label">Avg. List Growth</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Urgency Timer -->
+<div class="urgency-bar">
+    <span>Launch pricing ends in</span>
+    <div class="timer">
+        <div class="timer-block">
+            <div class="timer-num" id="timer-h">23</div>
+            <div class="timer-label">Hours</div>
+        </div>
+        <div class="timer-block">
+            <div class="timer-num" id="timer-m">47</div>
+            <div class="timer-label">Mins</div>
+        </div>
+        <div class="timer-block">
+            <div class="timer-num" id="timer-s">12</div>
+            <div class="timer-label">Secs</div>
+        </div>
+    </div>
+    <span>then it switches to <strong>$29/mo</strong></span>
+</div>
+
+<!-- ========== PROBLEM ========== -->
+<section class="section problem" id="problem">
+    <div class="container fade-in">
+        <span class="section-label">The Reality Check</span>
+        <h2 class="section-title">You're Making Great Music.<br><span class="text-gradient">But Nobody's Hearing It.</span></h2>
+
+        <ul class="pain-list">
+            <li>
+                <span class="pain-icon">&times;</span>
+                <span>You post on Instagram, TikTok, and Twitter daily&hellip; but the algorithm decides who sees it <em>(spoiler: almost nobody)</em></span>
+            </li>
+            <li>
+                <span class="pain-icon">&times;</span>
+                <span>You've tried running ads, but $500 got you 200 followers who never streamed a single track</span>
+            </li>
+            <li>
+                <span class="pain-icon">&times;</span>
+                <span>Your "fans" are scattered across 6 platforms you don't own &mdash; one algorithm change could erase them overnight</span>
+            </li>
+            <li>
+                <span class="pain-icon">&times;</span>
+                <span>You dropped a single last month. Your mom liked it. Your producer shared it. That was the whole marketing campaign.</span>
+            </li>
+            <li>
+                <span class="pain-icon">&times;</span>
+                <span>You know you need an email/SMS list, but building one feels like pushing a boulder uphill</span>
+            </li>
+            <li>
+                <span class="pain-icon">&times;</span>
+                <span>Your Spotify has 50K monthly listeners but you can't fill a 200-cap venue because you can't <strong>reach</strong> those people directly</span>
+            </li>
+        </ul>
+
+        <div class="problem-cta">
+            <p>The core problem isn't your music. It's that you <span class="highlight">don't OWN your audience.</span></p>
+            <p style="color: var(--text-secondary); margin-top: 12px; font-size: 16px;">Social followers are rented. Email subscribers are <strong>OWNED</strong>. What if every fan you have could bring you 5 more &mdash; automatically?</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SOLUTION / VIRAL LOOP ========== -->
+<section class="section solution" id="solution">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">The Solution</span>
+            <h2 class="section-title">Introducing FANLOOP:<br><span class="text-gradient">Your Automated Fan Multiplication Engine</span></h2>
+            <p class="section-subtitle mx-auto">FANLOOP turns your existing fans into your marketing department. Here's how the viral loop works:</p>
+        </div>
+
+        <div class="loop-diagram fade-in">
+            <div class="loop-step">
+                <div class="loop-step-num">1</div>
+                <h4>Fan Signs Up</h4>
+                <p>Via your campaign landing page (pre-save, giveaway, exclusive drop)</p>
+                <span class="loop-arrow">&rarr;</span>
+            </div>
+            <div class="loop-step">
+                <div class="loop-step-num">2</div>
+                <h4>Gets Unique Link</h4>
+                <p>Personal referral URL + dashboard with progress tracking</p>
+                <span class="loop-arrow">&rarr;</span>
+            </div>
+            <div class="loop-step">
+                <div class="loop-step-num">3</div>
+                <h4>Shares With Friends</h4>
+                <p>One-tap share to IG, TikTok, WhatsApp, text, Discord &amp; more</p>
+                <span class="loop-arrow">&rarr;</span>
+            </div>
+            <div class="loop-step">
+                <div class="loop-step-num">4</div>
+                <h4>Friends Sign Up</h4>
+                <p>Automatically tracked &amp; attributed to the original fan</p>
+                <span class="loop-arrow">&rarr;</span>
+            </div>
+            <div class="loop-step">
+                <div class="loop-step-num">5</div>
+                <h4>Rewards Unlock</h4>
+                <p>Tiers from unreleased tracks to backstage passes &mdash; fans keep sharing</p>
+            </div>
+        </div>
+
+        <div class="loop-note fade-in">
+            Every new fan gets THEIR OWN referral link &rarr; the cycle repeats and accelerates endlessly
+        </div>
+
+        <div class="text-center" style="margin-top: 48px;">
+            <a href="#pricing" class="cta-btn">Yes &mdash; I Want to Multiply My Fanbase</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FEATURES ========== -->
+<section class="section features" id="features">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Features</span>
+            <h2 class="section-title">Everything You Need to Turn<br><span class="text-gradient">Fans Into an Army</span></h2>
+        </div>
+
+        <div class="features-grid fade-in">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">&#9835;</div>
+                <h4>7 Campaign Templates</h4>
+                <p>Pre-Save, Tour, Music Drop, Merch, Contest, Listening Party, Fan Club &mdash; launch in minutes</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">&#9733;</div>
+                <h4>AI Copy Generator</h4>
+                <p>Headlines, share messages, and emails written for you &mdash; just pick your vibe and genre</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(6,182,212,0.12); color: var(--cyan);">&#9783;</div>
+                <h4>Mobile-First Pages</h4>
+                <p>Beautiful, branded landing pages that convert on any device. Your fans browse on mobile &mdash; we built for that.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(16,185,129,0.12); color: var(--green);">&#10140;</div>
+                <h4>One-Tap Social Sharing</h4>
+                <p>Fans share to IG, TikTok, Twitter, WhatsApp, SMS, Discord &mdash; instantly with pre-loaded messages</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(245,158,11,0.12); color: var(--amber);">&#9678;</div>
+                <h4>Smart Referral Tracking</h4>
+                <p>Every signup attributed to the right fan with real-time notifications. No guesswork. No spreadsheets.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">&#9830;</div>
+                <h4>Tiered Reward System</h4>
+                <p>7 customizable reward levels from digital downloads to VIP experiences &mdash; you choose what to unlock at each milestone</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">&#9819;</div>
+                <h4>Real-Time Leaderboard</h4>
+                <p>Gamified competition that turns casual listeners into obsessed promoters competing for top-fan status</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(6,182,212,0.12); color: var(--cyan);">&#8644;</div>
+                <h4>Fan CRM + Export</h4>
+                <p>Tag, segment, and export your list to Mailchimp, ConvertKit, Beehiiv, Klaviyo &mdash; or anywhere via webhook</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(16,185,129,0.12); color: var(--green);">&#9737;</div>
+                <h4>Anti-Fraud Protection</h4>
+                <p>IP/device detection prevents fake signups and gaming. Only real fans count toward rewards.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(245,158,11,0.12); color: var(--amber);">&#9638;</div>
+                <h4>QR Code Sharing</h4>
+                <p>Print for merch inserts, concert posters, and flyers &mdash; turn every live show into a list-building machine</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">&#9783;</div>
+                <h4>Analytics Dashboard</h4>
+                <p>Viral coefficient, top channels, geographic heat map, growth velocity &mdash; see exactly what's working</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">&#9889;</div>
+                <h4>Automated Rewards</h4>
+                <p>Digital rewards delivered instantly upon tier unlock. Physical rewards queued to your fulfillment pipeline.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== REWARD TIERS ========== -->
+<section class="section rewards" id="rewards">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Reward Engine</span>
+            <h2 class="section-title">7 Tiers That Turn Casual Listeners<br><span class="text-gradient">Into Obsessed Promoters</span></h2>
+            <p class="section-subtitle mx-auto">Each tier unlocks progressively more exclusive rewards. Fans see their progress and compete to reach the top.</p>
+        </div>
+
+        <div class="reward-track fade-in">
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: #94A3B8; color: #94A3B8;">&#127911;</div>
+                <div class="reward-info">
+                    <div class="refs">1 Referral</div>
+                    <h4>Listener</h4>
+                    <p>Unreleased demo or acoustic version &mdash; instant gratification for their first share</p>
+                </div>
+            </div>
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: var(--cyan); color: var(--cyan);">&#128153;</div>
+                <div class="reward-info">
+                    <div class="refs">3 Referrals</div>
+                    <h4>Supporter</h4>
+                    <p>Exclusive wallpaper pack + digital download &mdash; identity and belonging</p>
+                </div>
+            </div>
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: var(--violet); color: var(--violet);">&#11088;</div>
+                <div class="reward-info">
+                    <div class="refs">5 Referrals</div>
+                    <h4>Superfan</h4>
+                    <p>Name in album credits ("Special Thanks") &mdash; permanent recognition</p>
+                </div>
+            </div>
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: var(--green); color: var(--green);">&#128170;</div>
+                <div class="reward-info">
+                    <div class="refs">10 Referrals</div>
+                    <h4>Street Team</h4>
+                    <p>Free merch item (sticker pack, pin, or hat) &mdash; they become a walking billboard</p>
+                </div>
+            </div>
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: var(--pink); color: var(--pink);">&#128142;</div>
+                <div class="reward-info">
+                    <div class="refs">25 Referrals</div>
+                    <h4>Inner Circle</h4>
+                    <p>Private Discord/group chat access with the artist &mdash; true exclusivity</p>
+                </div>
+            </div>
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: var(--amber); color: var(--amber);">&#127942;</div>
+                <div class="reward-info">
+                    <div class="refs">50 Referrals</div>
+                    <h4>Day One</h4>
+                    <p>Free concert ticket + meet &amp; greet entry &mdash; the aspirational prize</p>
+                </div>
+            </div>
+            <div class="reward-tier">
+                <div class="reward-badge" style="border-color: #F59E0B; background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(236,72,153,0.1)); color: var(--amber);">&#128081;</div>
+                <div class="reward-info">
+                    <div class="refs">100+ Referrals</div>
+                    <h4>Legend</h4>
+                    <p>Producer credit, studio session invite, or custom voice note from the artist &mdash; the ultimate reward</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CAMPAIGN TYPES ========== -->
+<section class="section campaigns" id="campaigns">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Campaign Templates</span>
+            <h2 class="section-title">7 Battle-Tested Campaigns<br><span class="text-gradient">Ready to Launch in Minutes</span></h2>
+        </div>
+
+        <div class="campaign-grid fade-in">
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127925;</span>
+                <h4>Pre-Save Campaign</h4>
+                <div class="hook">"Be the first to hear it &mdash; and unlock bonus tracks by sharing"</div>
+                <p>Maximize pre-save numbers + grow your list simultaneously. Perfect for singles, EPs, and albums.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127908;</span>
+                <h4>Tour / Show Announcement</h4>
+                <div class="hook">"Win free tickets + backstage passes &mdash; the more friends you bring, the better your seats"</div>
+                <p>Sell tickets through fan-driven promotion. Capture data by city for tour routing.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#128293;</span>
+                <h4>Unreleased Music Drop</h4>
+                <div class="hook">"I made something special. Only fans who share get to hear it."</div>
+                <p>Keep engagement alive between release cycles. Re-engage your dormant list + acquire new fans.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#128085;</span>
+                <h4>Merch Launch</h4>
+                <div class="hook">"Help us spread the word and earn free gear"</div>
+                <p>Drive merch sales through word-of-mouth. Fans earn discount codes and free items at each tier.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127942;</span>
+                <h4>Fan Competition</h4>
+                <div class="hook">"Top 10 on the leaderboard win [grand prize]. Compete now."</div>
+                <p>Intense short-burst list growth through gamified competition. Perfect for high-energy fanbases.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127911;</span>
+                <h4>Listening Party</h4>
+                <div class="hook">"Join the private listening party &mdash; invite friends for VIP access"</div>
+                <p>Create release-day buzz. Fans earn VIP room access and artist Q&amp;A time by referring others.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#128142;</span>
+                <h4>Lifetime Fan Club</h4>
+                <div class="hook">"Join the inner circle. Earn rewards for life just by spreading the music."</div>
+                <p>Always-on growth engine running 24/7. Perpetual referral tracking with seasonal reward refreshes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="section testimonials" id="testimonials">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Results</span>
+            <h2 class="section-title">Artists Are Blowing Up<br><span class="text-gradient">With FANLOOP</span></h2>
+        </div>
+
+        <div class="testimonial-grid fade-in">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"I launched a pre-save campaign for my EP. Started with my 400-person email list. Two weeks later I had 4,200 subscribers and my pre-save numbers were 10x anything I'd done before. The leaderboard made my fans go CRAZY competing."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JM</div>
+                    <div>
+                        <div class="testimonial-name">Jade M.</div>
+                        <div class="testimonial-role">Independent R&amp;B Artist, Atlanta</div>
+                    </div>
+                </div>
+                <div class="testimonial-result">400 &rarr; 4,200 subscribers in 14 days</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"I used FANLOOP to give away free beat packs. Each person who signed up got a referral link, and if 5 friends joined they got exclusive stems. I added 2,800 producers and artists to my list in 9 days. Zero ad spend."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MT</div>
+                    <div>
+                        <div class="testimonial-name">Marcus T.</div>
+                        <div class="testimonial-role">Producer, Los Angeles</div>
+                    </div>
+                </div>
+                <div class="testimonial-result">+2,800 subscribers in 9 days &bull; $0 ad spend</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"We set up a ticket giveaway for our tour. Fans earned upgrades by referring friends &mdash; GA to VIP to backstage. We sold out 3 venues that were previously at 60% capacity. Our email list grew by 6,000."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">TW</div>
+                    <div>
+                        <div class="testimonial-name">The Waves</div>
+                        <div class="testimonial-role">Indie Rock Band, Nashville</div>
+                    </div>
+                </div>
+                <div class="testimonial-result">3 sold-out venues + 6,000 new fans</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"FANLOOP is what I wish I had 5 years ago. I'm adding 500+ real fans per week to my SMS list without spending a cent on ads. My booking agent noticed. My guarantee went up 40%."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DP</div>
+                    <div>
+                        <div class="testimonial-name">DJ Prism</div>
+                        <div class="testimonial-role">Electronic Artist, Miami</div>
+                    </div>
+                </div>
+                <div class="testimonial-result">+500 fans/week &bull; Booking rate up 40%</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"I manage 4 artists. FANLOOP's label dashboard lets me run campaigns for all of them from one place. Combined, we've added 18,000 fans in 3 months. Most cost-effective marketing tool in music right now."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">KR</div>
+                    <div>
+                        <div class="testimonial-name">Kevin R.</div>
+                        <div class="testimonial-role">Artist Manager, New York</div>
+                    </div>
+                </div>
+                <div class="testimonial-result">18,000 fans across 4 artists in 3 months</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="section how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">How It Works</span>
+            <h2 class="section-title">Go From Zero to Viral<br><span class="text-gradient">In 3 Steps</span></h2>
+        </div>
+
+        <div class="steps fade-in">
+            <div class="step">
+                <div class="step-visual">
+                    <div class="step-visual-inner">
+                        <div class="mock-icon">&#127912;</div>
+                        <div class="mock-text">
+                            <strong>Template Selector</strong><br>
+                            Pre-Save &bull; Tour &bull; Drop<br>
+                            Merch &bull; Contest &bull; Party<br>
+                            <span style="color: var(--violet);">&#9654; Click to customize</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-num">1</div>
+                <h4>Pick Your Campaign</h4>
+                <p>Choose from 7 templates. Customize branding, upload rewards, let AI write your copy. Takes 5 minutes.</p>
+            </div>
+            <div class="step">
+                <div class="step-visual">
+                    <div class="step-visual-inner">
+                        <div class="mock-icon">&#128640;</div>
+                        <div class="mock-text">
+                            <strong>Share Everywhere</strong><br>
+                            IG &bull; TikTok &bull; Twitter<br>
+                            WhatsApp &bull; SMS &bull; Discord<br>
+                            <span style="color: var(--green);">&#10003; Link copied!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-num">2</div>
+                <h4>Launch &amp; Seed</h4>
+                <p>Share your campaign with your existing audience &mdash; even if it's just 50 people. Post it, text it, drop it in your bio.</p>
+            </div>
+            <div class="step">
+                <div class="step-visual">
+                    <div class="step-visual-inner">
+                        <div class="mock-icon">&#128200;</div>
+                        <div class="mock-text">
+                            <strong>Growth Dashboard</strong><br>
+                            Today: +347 fans<br>
+                            K-Factor: 3.2x<br>
+                            <span style="color: var(--amber);">&#9650; Trending up</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-num">3</div>
+                <h4>Watch It Multiply</h4>
+                <p>Fans share with THEIR fans. Referrals tracked. Rewards unlock. Your list grows while you sleep.</p>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 48px;">
+            <a href="#pricing" class="cta-btn">Start My First Campaign &mdash; Only $37</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== OFFER STACK ========== -->
+<section class="section offer" id="pricing">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Launch Offer</span>
+            <h2 class="section-title">Here's Everything You're<br><span class="text-gradient">Getting Today</span></h2>
+        </div>
+
+        <div class="offer-list fade-in">
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> FANLOOP Campaign Builder (7 templates)</div>
+                <div class="offer-item-value">$297</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> AI Copy Generator for Music</div>
+                <div class="offer-item-value">$197</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Fan Referral Tracking Engine</div>
+                <div class="offer-item-value">$297</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Tiered Reward System (fully customizable)</div>
+                <div class="offer-item-value">$197</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Real-Time Leaderboard &amp; Gamification</div>
+                <div class="offer-item-value">$147</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Mobile-First Landing Page Builder</div>
+                <div class="offer-item-value">$197</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Fan CRM + Export Tools</div>
+                <div class="offer-item-value">$147</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Anti-Fraud Detection System</div>
+                <div class="offer-item-value">$97</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> Analytics &amp; Growth Dashboard</div>
+                <div class="offer-item-value">$147</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> QR Code Generator for Offline Sharing</div>
+                <div class="offer-item-value">$47</div>
+            </div>
+            <div class="offer-item">
+                <div class="offer-item-name"><span class="offer-check">&#10003;</span> 50+ Niche Campaign Templates</div>
+                <div class="offer-item-value">$197</div>
+            </div>
+
+            <div class="offer-total">
+                <div class="offer-total-label">Total Value</div>
+                <div class="offer-total-value">$1,967</div>
+            </div>
+        </div>
+
+        <div class="price-reveal fade-in">
+            <div>
+                <span class="price-crossed">$1,967</span>
+                <span class="price-crossed">$497</span>
+                <span class="price-crossed">$197</span>
+            </div>
+            <div class="price-final"><sup>$</sup>37</div>
+            <div class="price-note">One-Time Payment &bull; No Monthly Fees &bull; Yours Forever</div>
+            <div style="margin-top: 32px;">
+                <a href="#" class="cta-btn">Get FANLOOP Now for Just $37</a>
+                <p class="cta-sub">Launch-week pricing. Switches to $29/mo after timer expires.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BONUSES ========== -->
+<section class="section bonuses" id="bonuses">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">Launch Bonuses</span>
+            <h2 class="section-title">Exclusive Bonuses That<br><span class="text-gradient">Disappear After Launch Week</span></h2>
+        </div>
+
+        <div class="bonus-grid fade-in">
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #1</div>
+                <h4>Commercial License</h4>
+                <p>Run FANLOOP campaigns for OTHER artists and keep 100% of what you charge. Perfect for managers, labels, and music marketers.</p>
+                <div class="bonus-value">Value: $497</div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #2</div>
+                <h4>Genre-Specific Swipe File</h4>
+                <p>Pre-written campaigns for Hip-Hop, R&amp;B, Pop, EDM, Rock, Country, Latin, Indie, and Gospel. Just plug in your artist name.</p>
+                <div class="bonus-value">Value: $197</div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #3</div>
+                <h4>"First 1,000 Fans" Playbook</h4>
+                <p>Step-by-step guide for artists starting from zero. How to seed your campaign and hit 1,000 subscribers in your first 30 days.</p>
+                <div class="bonus-value">Value: $97</div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #4</div>
+                <h4>Concert QR Strategy Kit</h4>
+                <p>Templates for merch inserts, poster QR codes, table cards, and wristband tags. Turn every live show into a list-building machine.</p>
+                <div class="bonus-value">Value: $97</div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #5</div>
+                <h4>Superfan Nurture Sequence</h4>
+                <p>10-part email sequence that turns new signups into streaming fans, merch buyers, and ticket purchasers. 45%+ open rates.</p>
+                <div class="bonus-value">Value: $147</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== GUARANTEE ========== -->
+<section class="section guarantee" id="guarantee">
+    <div class="container fade-in">
+        <div class="guarantee-box">
+            <div class="guarantee-badge">
+                <div class="guarantee-badge-inner">
+                    <div class="days">30</div>
+                    <div class="label">Day Guarantee</div>
+                </div>
+            </div>
+            <h3>The "1,000 Fans" Guarantee</h3>
+            <p>Launch your first FANLOOP campaign. If you don't add at least <strong>100 new fans</strong> to your list in 30 days (starting from ANY audience size), email us for a full refund. No questions. No hassle.</p>
+            <p style="margin-top: 16px;">We'll even help you optimize your campaign before you decide. We can offer this because <strong>the system works</strong>. When fans have a reason to share and a reward for doing it, they share. It's human nature.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="section faq" id="faq">
+    <div class="container">
+        <div class="text-center fade-in">
+            <span class="section-label">FAQ</span>
+            <h2 class="section-title">Got Questions?<br><span class="text-gradient">We've Got Answers.</span></h2>
+        </div>
+
+        <div class="faq-list fade-in">
+            <div class="faq-item open">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>I only have a small following (under 500). Will this work?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. FANLOOP is designed to multiply what you have. Even 50 engaged fans can seed a campaign that reaches thousands. The viral loop does the heavy lifting &mdash; you just need a starting point.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What kind of rewards should I offer?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We include a reward strategy guide for every genre. The most effective rewards are things that cost you nothing but fans value highly: unreleased tracks, album credits, private livestreams, voice notes, early access. Physical merch works great at higher tiers.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do I need to be tech-savvy?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>If you can post on Instagram, you can use FANLOOP. Campaign setup takes 5 minutes with our templates. No coding, no design skills needed.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I use this for multiple campaigns / releases?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>The Starter plan includes 3 active campaigns. Upgrade to Pro for unlimited campaigns across all your releases, tours, and merch drops.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How do fans share their referral links?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>One-tap sharing to Instagram, TikTok, Twitter, WhatsApp, iMessage, Discord, email, and more. They can also copy the link or use a QR code. We provide pre-written share messages optimized for each platform.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What integrations do you support?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Export to CSV, Mailchimp, ConvertKit, Beehiiv, Klaviyo, and any platform via Zapier webhook. Spotify pre-save integration coming soon.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is there a monthly fee?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>During launch week, it's a one-time payment of $37 for lifetime access. After launch week, FANLOOP switches to $29/month. Lock in the one-time price now before the timer expires.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="final-cta" id="final">
+    <div class="container fade-in">
+        <span class="section-label">Don't Wait</span>
+        <h2 class="section-title">Your Fans Are Already Talking About You.<br><span class="text-gradient">Give Them a Reason to Recruit.</span></h2>
+        <p class="section-subtitle mx-auto text-center" style="margin-bottom: 40px;">
+            Every day you wait is a day your fans are sharing other artists' music instead of yours. FANLOOP gives them the tools, the incentive, and the reason to bring their entire network to YOU.
+        </p>
+        <p style="font-size: 22px; font-weight: 700; margin-bottom: 40px;">
+            100 fans &rarr; 1,000. &nbsp;&nbsp; 1,000 &rarr; 10,000. &nbsp;&nbsp; <span class="text-gradient">When do you start?</span>
+        </p>
+        <a href="#pricing" class="cta-btn" style="font-size: 20px; padding: 24px 48px;">Start Growing My Fanbase &mdash; $37 One-Time</a>
+        <p class="cta-sub" style="margin-top: 16px;">One-time payment &bull; Lifetime access &bull; 30-day guarantee &bull; Cancel-proof fan list</p>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-trust">
+            <span>&#128274; Secure Checkout</span>
+            <span>&#128179; All Major Cards Accepted</span>
+            <span>&#128231; support@fanloop.io</span>
+        </div>
+        <p class="footer-copy">&copy; 2026 FANLOOP. All rights reserved. | <a href="#" style="color: var(--text-muted);">Privacy Policy</a> | <a href="#" style="color: var(--text-muted);">Terms of Service</a></p>
+    </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+    // Countdown timer
+    (function() {
+        const end = new Date();
+        end.setHours(end.getHours() + 23, end.getMinutes() + 47, end.getSeconds() + 12);
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = end - now;
+            if (diff <= 0) return;
+
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('timer-h').textContent = String(h).padStart(2, '0');
+            document.getElementById('timer-m').textContent = String(m).padStart(2, '0');
+            document.getElementById('timer-s').textContent = String(s).padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+    })();
+
+    // FAQ toggle
+    function toggleFaq(el) {
+        const item = el.closest('.faq-item');
+        item.classList.toggle('open');
+    }
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Generate waveform bars
+    (function() {
+        const waveform = document.getElementById('waveform');
+        for (let i = 0; i < 80; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.animationDelay = (Math.random() * 1.5) + 's';
+            bar.style.height = (20 + Math.random() * 80) + '%';
+            waveform.appendChild(bar);
+        }
+    })();
+
+    // Generate floating particles
+    (function() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (8 + Math.random() * 12) + 's';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+            container.appendChild(p);
+        }
+    })();
+</script>
+
+</body>
+</html>

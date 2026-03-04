@@ -1,0 +1,144 @@
+<%- include('../partials/admin-layout') %>
+
+<div class="mb-8">
+  <a href="/admin/campaigns" class="text-sm text-gray-500 hover:text-gray-300">&larr; Back to Campaigns</a>
+  <h2 class="text-2xl font-bold mt-2"><%= title %></h2>
+</div>
+
+<% if (error) { %>
+  <div class="bg-red-900/30 border border-red-800 text-red-300 px-4 py-3 rounded-lg mb-6 text-sm"><%= error %></div>
+<% } %>
+
+<form method="POST" action="<%= campaign && campaign.id ? `/admin/campaigns/${campaign.id}` : '/admin/campaigns' %>" class="max-w-3xl">
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-4">Basic Info</h3>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Title *</label>
+        <input type="text" name="title" required value="<%= campaign?.title || '' %>" class="w-full" placeholder="My Awesome Campaign">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Slug *</label>
+        <input type="text" name="slug" required value="<%= campaign?.slug || '' %>" class="w-full" placeholder="my-awesome-campaign" pattern="[a-z0-9-]+">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Artist *</label>
+        <select name="artist_id" required class="w-full">
+          <option value="">Select artist...</option>
+          <% artists.forEach(a => { %>
+            <option value="<%= a.id %>" <%= (campaign?.artist_id == a.id) ? 'selected' : '' %>><%= a.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Type</label>
+        <select name="type" class="w-full">
+          <% ['pre-save','merch-drop','ticket-giveaway','exclusive-content','meet-greet','fan-club','contest'].forEach(t => { %>
+            <option value="<%= t %>" <%= (campaign?.type === t) ? 'selected' : '' %>><%= t %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm text-gray-400 mb-1">Headline</label>
+      <input type="text" name="headline" value="<%= campaign?.headline || '' %>" class="w-full" placeholder="Be the First to Hear...">
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm text-gray-400 mb-1">Subheadline</label>
+      <input type="text" name="subheadline" value="<%= campaign?.subheadline || '' %>" class="w-full" placeholder="Pre-save now & unlock rewards">
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm text-gray-400 mb-1">Description</label>
+      <textarea name="description" rows="3" class="w-full"><%= campaign?.description || '' %></textarea>
+    </div>
+  </div>
+
+  <!-- Brand Customization -->
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-4">Brand Colors</h3>
+    <% const bc = campaign?.brand_config ? (typeof campaign.brand_config === 'string' ? JSON.parse(campaign.brand_config) : campaign.brand_config) : {}; %>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Primary Color</label>
+        <input type="color" name="primary_color" value="<%= bc.primary_color || '#8b5cf6' %>" class="w-full h-10 cursor-pointer">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Secondary Color</label>
+        <input type="color" name="secondary_color" value="<%= bc.secondary_color || '#ec4899' %>" class="w-full h-10 cursor-pointer">
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Messages -->
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-4">Share Messages</h3>
+    <p class="text-xs text-gray-500 mb-4">Use {link} where the referral link should go</p>
+    <% const sm = campaign?.share_messages ? (typeof campaign.share_messages === 'string' ? JSON.parse(campaign.share_messages) : campaign.share_messages) : {}; %>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Twitter/X</label>
+        <textarea name="share_twitter" rows="2" class="w-full"><%= sm.twitter || '' %></textarea>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">WhatsApp/SMS</label>
+        <textarea name="share_whatsapp" rows="2" class="w-full"><%= sm.whatsapp || '' %></textarea>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Email Subject</label>
+        <input type="text" name="share_email_subject" value="<%= sm.email_subject || '' %>" class="w-full">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Email Body</label>
+        <textarea name="share_email_body" rows="3" class="w-full"><%= sm.email_body || '' %></textarea>
+      </div>
+    </div>
+
+    <!-- AI Copy Generator -->
+    <div class="mt-4 p-4 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e]">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-medium text-purple-400">AI Copy Generator</span>
+        <button type="button" id="aiGenerateBtn" class="text-xs px-3 py-1 bg-purple-600 rounded-lg hover:bg-purple-500 text-white">Generate</button>
+      </div>
+      <div id="aiResults" class="hidden space-y-2 mt-3"></div>
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button type="submit" class="btn-primary px-6 py-2.5 rounded-lg text-white font-semibold">Save Campaign</button>
+    <a href="/admin/campaigns" class="px-6 py-2.5 rounded-lg text-gray-400 hover:text-white">Cancel</a>
+  </div>
+</form>
+
+<script>
+document.getElementById('aiGenerateBtn')?.addEventListener('click', async () => {
+  const btn = document.getElementById('aiGenerateBtn');
+  const results = document.getElementById('aiResults');
+  btn.textContent = 'Generating...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/admin/ai/generate-copy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'share_message',
+        artist_id: document.querySelector('[name=artist_id]').value,
+        campaign_title: document.querySelector('[name=title]').value,
+        campaign_type: document.querySelector('[name=type]').value
+      })
+    });
+    const data = await res.json();
+    results.classList.remove('hidden');
+    results.innerHTML = data.results.map(r =>
+      `<div class="p-2 rounded bg-[#111118] text-sm cursor-pointer hover:border-purple-500 border border-transparent" onclick="document.querySelector('[name=share_twitter]').value = this.textContent">${r}</div>`
+    ).join('');
+  } catch (e) {
+    results.innerHTML = '<p class="text-red-400 text-sm">Generation failed</p>';
+    results.classList.remove('hidden');
+  }
+  btn.textContent = 'Generate';
+  btn.disabled = false;
+});
+</script>
+
+<%- include('../partials/admin-footer') %>

@@ -1,0 +1,28 @@
+{
+  "name": "fanloop-backend",
+  "version": "1.0.0",
+  "description": "FANLOOP — Viral Fan Base Growth Engine",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "seed": "node db/seed.js",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "csv-stringify": "^6.5.2",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^11.0.5"
+  }
+}

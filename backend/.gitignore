@@ -1,0 +1,5 @@
+node_modules/
+db/fanloop.db
+db/fanloop.db-wal
+db/fanloop.db-shm
+.env

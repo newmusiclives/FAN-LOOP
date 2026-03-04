@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --primary: <%= brandConfig.primary_color || '#8b5cf6' %>; --secondary: <%= brandConfig.secondary_color || '#ec4899' %>; }
+    body { background: #0a0a0f; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+    .gradient { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+    .card { background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-lg mx-auto pt-6">
+    <div class="text-center mb-6">
+      <% if (artist) { %><p class="text-sm text-gray-500"><%= artist.name %></p><% } %>
+      <h1 class="text-2xl font-bold mb-1"><%= campaign.title %></h1>
+      <p class="text-gray-400 text-sm">Leaderboard</p>
+    </div>
+
+    <!-- Period Tabs -->
+    <div class="flex gap-2 justify-center mb-6">
+      <% ['alltime', 'monthly', 'weekly'].forEach(p => { %>
+        <a href="?period=<%= p %>" class="px-4 py-2 rounded-lg text-sm <%= period === p ? 'gradient text-white font-semibold' : 'bg-[#1a1a2e] text-gray-400 hover:text-white' %>">
+          <%= p === 'alltime' ? 'All Time' : p.charAt(0).toUpperCase() + p.slice(1) %>
+        </a>
+      <% }) %>
+    </div>
+
+    <div class="card overflow-hidden">
+      <% if (leaderboard.length > 0) { %>
+        <% leaderboard.forEach((entry, i) => { %>
+          <div class="flex items-center justify-between px-5 py-4 <%= i > 0 ? 'border-t border-[#1e1e2e]' : '' %>">
+            <div class="flex items-center gap-4">
+              <span class="text-lg font-bold w-8 text-center <%= i < 3 ? 'text-yellow-400' : 'text-gray-500' %>">
+                <%= i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : entry.rank %>
+              </span>
+              <div>
+                <div class="text-sm font-medium"><%= entry.fan_name || entry.fan_email.replace(/(.{2}).*(@.*)/, '$1***$2') %></div>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold" style="color: var(--primary)"><%= entry.referral_count %></span>
+              <span class="text-xs text-gray-500 ml-1">refs</span>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="px-5 py-12 text-center text-gray-500">
+          <p>No entries yet. Be the first to refer friends!</p>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="text-center mt-6">
+      <a href="/c/<%= campaign.slug %>" class="text-sm text-purple-400 hover:text-purple-300">&larr; Back to Campaign</a>
+    </div>
+
+    <p class="text-center text-xs text-gray-600 mt-6">Powered by <span class="text-purple-400">FANLOOP</span></p>
+  </div>
+</body>
+</html>

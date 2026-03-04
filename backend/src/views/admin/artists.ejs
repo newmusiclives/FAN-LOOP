@@ -1,0 +1,34 @@
+<%- include('../partials/admin-layout') %>
+
+<div class="flex items-center justify-between mb-8">
+  <div>
+    <h2 class="text-2xl font-bold">Artists</h2>
+    <p class="text-gray-500 mt-1"><%= artists.length %> artists</p>
+  </div>
+  <a href="/admin/artists/new" class="btn-primary px-5 py-2.5 rounded-lg text-white font-semibold text-sm">+ New Artist</a>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <% artists.forEach(artist => { %>
+    <div class="card p-6">
+      <h3 class="text-lg font-semibold"><%= artist.name %></h3>
+      <div class="text-sm text-gray-500 mt-1"><%= artist.genre || 'No genre' %></div>
+      <div class="text-xs text-gray-600 mt-1">/<%= artist.slug %></div>
+      <% if (artist.bio) { %><p class="text-sm text-gray-400 mt-3 line-clamp-2"><%= artist.bio %></p><% } %>
+      <div class="flex gap-2 mt-4">
+        <a href="/admin/artists/<%= artist.id %>/edit" class="text-sm text-purple-400 hover:text-purple-300">Edit</a>
+        <form method="POST" action="/admin/artists/<%= artist.id %>/delete" onsubmit="return confirm('Delete this artist?')">
+          <button class="text-sm text-red-400 hover:text-red-300">Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<% if (artists.length === 0) { %>
+  <div class="card p-12 text-center">
+    <p class="text-gray-500">No artists yet. Add your first artist to start creating campaigns.</p>
+  </div>
+<% } %>
+
+<%- include('../partials/admin-footer') %>

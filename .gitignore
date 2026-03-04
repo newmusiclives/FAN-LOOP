@@ -1,0 +1,7 @@
+node_modules/
+backend/db/fanloop.db
+backend/db/fanloop.db-wal
+backend/db/fanloop.db-shm
+backend/.env
+.DS_Store
+.claude/

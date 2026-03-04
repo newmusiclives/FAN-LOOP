@@ -1,0 +1,99 @@
+<%- include('../partials/admin-layout') %>
+
+<div class="mb-8">
+  <a href="/admin/fans" class="text-sm text-gray-500 hover:text-gray-300">&larr; Back to CRM</a>
+  <h2 class="text-2xl font-bold mt-2"><%= fan.name || fan.email %></h2>
+  <div class="flex items-center gap-2 mt-1">
+    <span class="text-sm text-gray-500"><%= fan.email %></span>
+    <span class="badge <%= fan.status === 'active' ? 'badge-green' : 'badge-red' %>"><%= fan.status %></span>
+    <% if (fan.verified) { %><span class="badge badge-blue">verified</span><% } %>
+  </div>
+</div>
+
+<div class="grid grid-cols-4 gap-4 mb-6">
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Referrals</div>
+    <div class="text-2xl font-bold"><%= fan.referral_count %></div>
+  </div>
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Campaign</div>
+    <div class="text-sm font-medium mt-1"><%= campaign?.title || 'Unknown' %></div>
+  </div>
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Source</div>
+    <div class="text-sm font-medium mt-1"><%= fan.source || 'direct' %></div>
+  </div>
+  <div class="stat-card rounded-xl p-4">
+    <div class="text-gray-400 text-xs">Joined</div>
+    <div class="text-sm font-medium mt-1"><%= new Date(fan.created_at).toLocaleDateString() %></div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <!-- Referral Tree -->
+  <div class="card p-6">
+    <h3 class="text-lg font-semibold mb-4">Referral Tree (<%= referrals.length %> referred)</h3>
+    <div class="space-y-2">
+      <% referrals.forEach(ref => { %>
+        <div class="flex items-center justify-between p-2 rounded bg-[#1a1a2e]">
+          <a href="/admin/fans/<%= ref.id %>" class="text-sm hover:text-purple-400"><%= ref.name || ref.email %></a>
+          <span class="text-xs text-gray-500"><%= new Date(ref.created_at).toLocaleDateString() %></span>
+        </div>
+      <% }) %>
+      <% if (referrals.length === 0) { %>
+        <p class="text-sm text-gray-500">No referrals yet</p>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Tags + Rewards -->
+  <div class="space-y-6">
+    <div class="card p-6">
+      <h3 class="text-lg font-semibold mb-4">Tags</h3>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <% fanTags.forEach(tag => { %>
+          <form method="POST" action="/admin/fans/<%= fan.id %>/untag" class="inline">
+            <input type="hidden" name="tag_id" value="<%= tag.id %>">
+            <button class="badge cursor-pointer" style="background: <%= tag.color %>20; color: <%= tag.color %>" title="Click to remove"><%= tag.name %> x</button>
+          </form>
+        <% }) %>
+      </div>
+      <form method="POST" action="/admin/fans/<%= fan.id %>/tag" class="flex gap-2">
+        <select name="tag_id" class="text-sm flex-1">
+          <% allTags.forEach(tag => { %>
+            <option value="<%= tag.id %>"><%= tag.name %></option>
+          <% }) %>
+        </select>
+        <button class="text-sm text-purple-400">Add Tag</button>
+      </form>
+    </div>
+
+    <div class="card p-6">
+      <h3 class="text-lg font-semibold mb-4">Reward Claims</h3>
+      <% claims.forEach(claim => { %>
+        <div class="flex items-center justify-between p-2 rounded bg-[#1a1a2e] mb-2">
+          <div>
+            <div class="text-sm font-medium"><%= claim.tier_name %></div>
+            <div class="text-xs text-gray-500"><%= claim.reward_description %></div>
+          </div>
+          <span class="badge <%= claim.status === 'approved' ? 'badge-green' : claim.status === 'pending' ? 'badge-yellow' : 'badge-red' %>"><%= claim.status %></span>
+        </div>
+      <% }) %>
+      <% if (claims.length === 0) { %>
+        <p class="text-sm text-gray-500">No rewards claimed</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="card p-6 mt-6">
+  <h3 class="text-lg font-semibold mb-4">Details</h3>
+  <div class="grid grid-cols-2 gap-4 text-sm">
+    <div><span class="text-gray-500">Referral Code:</span> <code class="text-purple-400"><%= fan.referral_code %></code></div>
+    <div><span class="text-gray-500">IP Address:</span> <%= fan.ip_address || 'Unknown' %></div>
+    <div><span class="text-gray-500">Country:</span> <%= fan.country || 'Unknown' %></div>
+    <div><span class="text-gray-500">Device Fingerprint:</span> <%= fan.device_fingerprint ? fan.device_fingerprint.substring(0, 12) + '...' : 'None' %></div>
+  </div>
+</div>
+
+<%- include('../partials/admin-footer') %>

@@ -1,0 +1,48 @@
+<%- include('../partials/admin-layout') %>
+
+<div class="flex items-center justify-between mb-8">
+  <div>
+    <h2 class="text-2xl font-bold">Campaigns</h2>
+    <p class="text-gray-500 mt-1"><%= campaigns.length %> total campaigns</p>
+  </div>
+  <a href="/admin/campaigns/new" class="btn-primary px-5 py-2.5 rounded-lg text-white font-semibold text-sm">+ New Campaign</a>
+</div>
+
+<div class="card overflow-hidden">
+  <table>
+    <thead>
+      <tr class="text-left">
+        <th class="px-6 py-3">Campaign</th>
+        <th class="px-6 py-3">Type</th>
+        <th class="px-6 py-3">Status</th>
+        <th class="px-6 py-3">Fans</th>
+        <th class="px-6 py-3">Created</th>
+        <th class="px-6 py-3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% campaigns.forEach(campaign => { %>
+        <tr class="hover:bg-[#1a1a2e]">
+          <td class="px-6 py-4">
+            <a href="/admin/campaigns/<%= campaign.id %>" class="font-medium hover:text-purple-400"><%= campaign.title %></a>
+            <div class="text-xs text-gray-500">/c/<%= campaign.slug %></div>
+          </td>
+          <td class="px-6 py-4 text-sm"><%= campaign.type %></td>
+          <td class="px-6 py-4">
+            <span class="badge <%= campaign.status === 'active' ? 'badge-green' : campaign.status === 'draft' ? 'badge-gray' : 'badge-yellow' %>"><%= campaign.status %></span>
+          </td>
+          <td class="px-6 py-4 font-semibold"><%= campaign.fan_count %></td>
+          <td class="px-6 py-4 text-sm text-gray-500"><%= new Date(campaign.created_at).toLocaleDateString() %></td>
+          <td class="px-6 py-4 text-right">
+            <a href="/admin/campaigns/<%= campaign.id %>/edit" class="text-sm text-purple-400 hover:text-purple-300">Edit</a>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (campaigns.length === 0) { %>
+        <tr><td colspan="6" class="px-6 py-12 text-center text-gray-500">No campaigns yet. Create your first one!</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/admin-footer') %>
