@@ -41,10 +41,7 @@ app.use('/admin', adminRoutes);
 app.use('/', fanRoutes);
 app.use('/api', apiRoutes);
 
-// Home redirect
-app.get('/', (req, res) => {
-  res.redirect('/admin');
-});
+// Home — served by static index.html in public/
 
 // Error handling
 const { errorHandler, notFoundHandler } = require('./src/middleware/errors');
