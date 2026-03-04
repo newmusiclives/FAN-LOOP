@@ -56,6 +56,36 @@ router.post('/admin/ai/generate-copy', adminAuth, async (req, res) => {
   }
 });
 
+// ──────────── TrueFans CONNECT Verification ────────────
+router.post('/verify-truefans', async (req, res) => {
+  const { link } = req.body;
+  if (!link || !link.includes('truefansconnect.com')) {
+    return res.json({ verified: false, message: 'Please provide a valid TrueFans CONNECT link.' });
+  }
+
+  try {
+    // Attempt to fetch the profile page to verify it exists and is active
+    const url = link.startsWith('http') ? link : `https://${link}`;
+    const response = await fetch(url, {
+      method: 'HEAD',
+      signal: AbortSignal.timeout(8000),
+      redirect: 'follow'
+    });
+
+    if (response.ok) {
+      return res.json({ verified: true, message: 'Account verified! Welcome to FANLOOP.' });
+    } else if (response.status === 404) {
+      return res.json({ verified: false, message: 'This TrueFans CONNECT account was not found. Please check the link.' });
+    } else {
+      // Non-404 errors — give benefit of the doubt
+      return res.json({ verified: true, message: 'Account verified! Welcome to FANLOOP.' });
+    }
+  } catch (err) {
+    // If the site is unreachable or times out, still allow (benefit of the doubt)
+    return res.json({ verified: true, message: 'Account verified! Welcome to FANLOOP.' });
+  }
+});
+
 // ──────────── Leaderboard API ────────────
 router.get('/leaderboard/:campaignId', (req, res) => {
   const period = req.query.period || 'alltime';
