@@ -35,6 +35,7 @@ const authRoutes = require('./src/routes/auth');
 const adminRoutes = require('./src/routes/admin');
 const fanRoutes = require('./src/routes/fan');
 const apiRoutes = require('./src/routes/api');
+const checkoutRoutes = require('./src/routes/checkout');
 
 // Home page — serve landing page
 app.get('/', (req, res) => {
@@ -45,6 +46,7 @@ app.use('/admin', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/', fanRoutes);
 app.use('/api', apiRoutes);
+app.use('/', checkoutRoutes);
 
 // Error handling
 const { errorHandler, notFoundHandler } = require('./src/middleware/errors');

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrueFans LOOP — Checkout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0f; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
+    .checkout-container { max-width: 520px; margin: 0 auto; padding: 40px 24px; }
+    .logo { text-align: center; margin-bottom: 32px; }
+    .logo a { text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card { background: #111118; border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 32px; }
+    .card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .card p.sub { color: #94a3b8; font-size: 14px; margin-bottom: 24px; }
+    .price-tag { display: flex; align-items: baseline; gap: 6px; margin-bottom: 24px; padding: 16px; background: #1a1a2e; border-radius: 12px; }
+    .price-tag .amount { font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .price-tag .period { color: #94a3b8; font-size: 16px; }
+    .features { list-style: none; margin-bottom: 24px; }
+    .features li { padding: 6px 0; color: #94a3b8; font-size: 14px; }
+    .features li::before { content: "✓ "; color: #10b981; font-weight: 700; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; color: #94a3b8; margin-bottom: 6px; font-weight: 500; }
+    .form-group input { width: 100%; padding: 12px 14px; background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; color: #e2e8f0; font-size: 15px; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus { border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139,92,246,0.2); }
+    .divider { border: none; border-top: 1px solid #1e1e2e; margin: 24px 0; }
+    #payment-container { min-height: 200px; border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    #payment-container iframe { border-radius: 10px; }
+    .btn-pay { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
+    .btn-pay:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-pay:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .status-msg { text-align: center; font-size: 14px; margin-top: 12px; min-height: 20px; }
+    .back-link { display: block; text-align: center; margin-top: 24px; color: #64748b; font-size: 14px; text-decoration: none; }
+    .back-link:hover { color: #94a3b8; }
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .step-indicator { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; }
+    .step { width: 32px; height: 4px; border-radius: 2px; background: #2a2a3e; }
+    .step.active { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+    .success-card { text-align: center; padding: 48px 32px; }
+    .success-card .icon { font-size: 64px; margin-bottom: 16px; }
+    .success-card h2 { color: #10b981; margin-bottom: 12px; }
+    .success-card p { color: #94a3b8; margin-bottom: 24px; }
+    .success-card .btn-dashboard { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 700; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="checkout-container">
+  <div class="logo"><a href="/">TrueFans LOOP</a></div>
+
+  <div class="step-indicator">
+    <div class="step active" id="step1"></div>
+    <div class="step" id="step2"></div>
+    <div class="step" id="step3"></div>
+  </div>
+
+  <!-- Step 1: Account Info -->
+  <div class="card" id="info-step">
+    <h2>Create Your Account</h2>
+    <p class="sub">Get unlimited viral campaigns, analytics, and fan management.</p>
+
+    <div class="price-tag">
+      <span class="amount">$27</span>
+      <span class="period">/month</span>
+    </div>
+
+    <ul class="features">
+      <li>Unlimited viral referral campaigns</li>
+      <li>Fan CRM with tagging &amp; export</li>
+      <li>Real-time analytics dashboard</li>
+      <li>AI-powered copy generator</li>
+      <li>Anti-fraud protection</li>
+      <li>Leaderboards &amp; reward tiers</li>
+    </ul>
+
+    <hr class="divider">
+
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" id="firstName" placeholder="Jane" required>
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" id="lastName" placeholder="Doe" required>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="jane@example.com" required>
+    </div>
+
+    <button class="btn-pay" id="continueBtn" onclick="continueToPayment()">Continue to Payment</button>
+    <div class="status-msg" id="infoMsg"></div>
+    <a href="/" class="back-link">&larr; Back to TrueFans LOOP</a>
+  </div>
+
+  <!-- Step 2: Payment -->
+  <div class="card hidden" id="payment-step">
+    <h2>Payment Details</h2>
+    <p class="sub">Enter your card details below. Your card will be charged $27.00 today.</p>
+
+    <div id="payment-container">
+      <div style="text-align:center; padding:40px; color:#64748b;">
+        <div class="spinner"></div> Loading secure payment form...
+      </div>
+    </div>
+
+    <button class="btn-pay" id="payBtn" onclick="processPayment()" disabled>Pay $27.00</button>
+    <div class="status-msg" id="payMsg"></div>
+    <a href="#" class="back-link" onclick="backToInfo(); return false;">&larr; Back to account info</a>
+  </div>
+
+  <!-- Step 3: Success -->
+  <div class="card hidden" id="success-step">
+    <div class="success-card">
+      <div class="icon">🎉</div>
+      <h2>Welcome to TrueFans LOOP!</h2>
+      <p>Your account has been created and payment processed. You're ready to start growing your fanbase.</p>
+      <a href="/admin/login" class="btn-dashboard">Go to Your Dashboard &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://checkout.sandbox.manifestfinancial.com/checkout.js"></script>
+<script>
+  let buyerId = null;
+  let paymentMethodReady = false;
+
+  async function continueToPayment() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const msgEl = document.getElementById('infoMsg');
+    const btn = document.getElementById('continueBtn');
+
+    if (!firstName || !lastName || !email) {
+      msgEl.textContent = 'Please fill in all fields.';
+      msgEl.style.color = '#f87171';
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      msgEl.textContent = 'Please enter a valid email address.';
+      msgEl.style.color = '#f87171';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Creating account...';
+    msgEl.textContent = '';
+
+    try {
+      const res = await fetch('/api/checkout/create-buyer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ first_name: firstName, last_name: lastName, email })
+      });
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || 'Failed to create account');
+      }
+
+      buyerId = data.buyer_id;
+
+      // Show payment step
+      document.getElementById('info-step').classList.add('hidden');
+      document.getElementById('payment-step').classList.remove('hidden');
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+
+      // Embed Manifest payment form
+      const container = document.getElementById('payment-container');
+      container.innerHTML = '';
+
+      if (typeof MCheckout !== 'undefined') {
+        MCheckout.render({
+          container: container,
+          embed_url: data.embed_url,
+          onPaymentMethodUpdated: function() {
+            paymentMethodReady = true;
+            document.getElementById('payBtn').disabled = false;
+            document.getElementById('payMsg').textContent = 'Card accepted! Click Pay to complete.';
+            document.getElementById('payMsg').style.color = '#34d399';
+          },
+          onError: function(err) {
+            document.getElementById('payMsg').textContent = 'Payment form error. Please try again.';
+            document.getElementById('payMsg').style.color = '#f87171';
+          }
+        });
+      } else {
+        container.innerHTML = '<p style="text-align:center;color:#f87171;padding:20px;">Payment form failed to load. Please refresh the page.</p>';
+      }
+
+    } catch (e) {
+      msgEl.textContent = e.message;
+      msgEl.style.color = '#f87171';
+      btn.disabled = false;
+      btn.textContent = 'Continue to Payment';
+    }
+  }
+
+  async function processPayment() {
+    if (!paymentMethodReady || !buyerId) return;
+
+    const btn = document.getElementById('payBtn');
+    const msgEl = document.getElementById('payMsg');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Processing payment...';
+    msgEl.textContent = '';
+
+    try {
+      const res = await fetch('/api/checkout/process-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ buyer_id: buyerId })
+      });
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || 'Payment failed');
+      }
+
+      // Show success step
+      document.getElementById('payment-step').classList.add('hidden');
+      document.getElementById('success-step').classList.remove('hidden');
+      document.getElementById('step2').classList.remove('active');
+      document.getElementById('step3').classList.add('active');
+
+    } catch (e) {
+      msgEl.textContent = e.message;
+      msgEl.style.color = '#f87171';
+      btn.disabled = false;
+      btn.textContent = 'Pay $27.00';
+    }
+  }
+
+  function backToInfo() {
+    document.getElementById('payment-step').classList.add('hidden');
+    document.getElementById('info-step').classList.remove('hidden');
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step1').classList.add('active');
+  }
+</script>
+
+</body>
+</html>
