@@ -36,12 +36,15 @@ const adminRoutes = require('./src/routes/admin');
 const fanRoutes = require('./src/routes/fan');
 const apiRoutes = require('./src/routes/api');
 
+// Home page — serve landing page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'public', 'index.html'));
+});
+
 app.use('/admin', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/', fanRoutes);
 app.use('/api', apiRoutes);
-
-// Home page — landing page served by express.static from public/index.html
 
 // Error handling
 const { errorHandler, notFoundHandler } = require('./src/middleware/errors');
