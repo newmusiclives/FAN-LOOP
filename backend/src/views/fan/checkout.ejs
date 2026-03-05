@@ -3,130 +3,399 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TrueFans LOOP — Checkout</title>
+  <title>TrueFans LOOP — Start Growing Your Fanbase Today</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0a0a0f; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
-    .checkout-container { max-width: 520px; margin: 0 auto; padding: 40px 24px; }
-    .logo { text-align: center; margin-bottom: 32px; }
-    .logo a { text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .card { background: #111118; border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 32px; }
-    .card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .card p.sub { color: #94a3b8; font-size: 14px; margin-bottom: 24px; }
-    .price-tag { display: flex; align-items: baseline; gap: 6px; margin-bottom: 24px; padding: 16px; background: #1a1a2e; border-radius: 12px; }
-    .price-tag .amount { font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .price-tag .period { color: #94a3b8; font-size: 16px; }
-    .features { list-style: none; margin-bottom: 24px; }
-    .features li { padding: 6px 0; color: #94a3b8; font-size: 14px; }
-    .features li::before { content: "✓ "; color: #10b981; font-weight: 700; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 13px; color: #94a3b8; margin-bottom: 6px; font-weight: 500; }
-    .form-group input { width: 100%; padding: 12px 14px; background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; color: #e2e8f0; font-size: 15px; outline: none; transition: border-color 0.2s; }
+    .page-wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 60px; }
+    .logo { text-align: center; margin-bottom: 28px; }
+    .logo a { text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Hero / headline */
+    .hero { text-align: center; margin-bottom: 32px; }
+    .hero .badge { display: inline-block; background: rgba(16,185,129,0.12); color: #10b981; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; border: 1px solid rgba(16,185,129,0.25); }
+    .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 span { background: linear-gradient(135deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: #94a3b8; font-size: 15px; line-height: 1.6; max-width: 480px; margin: 0 auto; }
+
+    /* Cards */
+    .card { background: #111118; border: 1px solid rgba(139,92,246,0.15); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+    .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+
+    /* What you get */
+    .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
+    @media (max-width: 480px) { .benefit-grid { grid-template-columns: 1fr; } }
+    .benefit-item { display: flex; gap: 10px; align-items: flex-start; padding: 12px; background: #1a1a2e; border-radius: 10px; }
+    .benefit-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .benefit-text { font-size: 13px; color: #cbd5e1; line-height: 1.4; }
+    .benefit-text strong { color: #f1f5f9; display: block; font-size: 14px; margin-bottom: 2px; }
+
+    /* Bonus section */
+    .bonus-card { background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(236,72,153,0.08)); border: 1px solid rgba(139,92,246,0.25); position: relative; overflow: hidden; }
+    .bonus-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%); }
+    .bonus-card h3 { color: #a78bfa; }
+    .bonus-list { list-style: none; }
+    .bonus-list li { padding: 10px 0; display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid rgba(139,92,246,0.08); position: relative; }
+    .bonus-list li:last-child { border-bottom: none; }
+    .bonus-list .b-icon { font-size: 18px; flex-shrink: 0; }
+    .bonus-list .b-text { flex: 1; }
+    .bonus-list .b-text strong { color: #e2e8f0; font-size: 14px; display: block; }
+    .bonus-list .b-text span { color: #94a3b8; font-size: 13px; }
+    .bonus-list .b-value { color: #10b981; font-size: 13px; font-weight: 700; white-space: nowrap; }
+
+    /* Social proof */
+    .proof-bar { display: flex; align-items: center; justify-content: center; gap: 24px; padding: 14px; background: #111118; border-radius: 12px; margin-bottom: 20px; }
+    .proof-item { text-align: center; }
+    .proof-item .num { font-size: 22px; font-weight: 800; color: #8b5cf6; display: block; }
+    .proof-item .lbl { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }
+
+    /* Plan selector / upsell */
+    .plan-selector { margin-bottom: 20px; }
+    .plan-option { display: flex; align-items: flex-start; gap: 14px; padding: 20px; background: #111118; border: 2px solid #2a2a3e; border-radius: 14px; cursor: pointer; transition: all 0.2s; margin-bottom: 12px; position: relative; }
+    .plan-option:hover { border-color: rgba(139,92,246,0.4); background: #16161f; }
+    .plan-option.selected { border-color: #8b5cf6; background: rgba(139,92,246,0.06); }
+    .plan-radio { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #3a3a4e; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .plan-option.selected .plan-radio { border-color: #8b5cf6; background: #8b5cf6; }
+    .plan-option.selected .plan-radio::after { content: ''; width: 8px; height: 8px; background: #fff; border-radius: 50%; }
+    .plan-details { flex: 1; }
+    .plan-details .plan-name { font-weight: 700; font-size: 16px; color: #f1f5f9; margin-bottom: 4px; }
+    .plan-details .plan-desc { font-size: 13px; color: #94a3b8; line-height: 1.5; }
+    .plan-details .plan-desc .highlight { color: #10b981; font-weight: 600; }
+    .plan-price { text-align: right; flex-shrink: 0; }
+    .plan-price .amount { font-size: 24px; font-weight: 800; color: #f1f5f9; display: block; }
+    .plan-price .period { font-size: 12px; color: #64748b; }
+    .plan-price .was { font-size: 12px; color: #64748b; text-decoration: line-through; display: block; }
+    .best-value { position: absolute; top: -1px; right: 16px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 0 0 8px 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Guarantee */
+    .guarantee { display: flex; gap: 14px; align-items: flex-start; padding: 18px; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.15); border-radius: 12px; margin-bottom: 20px; }
+    .guarantee-icon { font-size: 28px; flex-shrink: 0; }
+    .guarantee-text { font-size: 13px; color: #94a3b8; line-height: 1.5; }
+    .guarantee-text strong { color: #10b981; }
+
+    /* Form */
+    .form-section { margin-top: 4px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-weight: 500; }
+    .form-group input { width: 100%; padding: 13px 14px; background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; color: #e2e8f0; font-size: 15px; outline: none; transition: border-color 0.2s; }
     .form-group input:focus { border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139,92,246,0.2); }
-    .divider { border: none; border-top: 1px solid #1e1e2e; margin: 24px 0; }
-    #payment-container { min-height: 200px; border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
-    #payment-container iframe { border-radius: 10px; }
-    .btn-pay { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    .divider { border: none; border-top: 1px solid #1e1e2e; margin: 20px 0; }
+
+    .btn-pay { width: 100%; padding: 18px; border: none; border-radius: 12px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; font-size: 17px; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.1s; letter-spacing: -0.2px; }
     .btn-pay:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-pay:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-sub { display: block; text-align: center; font-size: 12px; color: #64748b; margin-top: 10px; }
+    .btn-sub svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px; }
+
     .status-msg { text-align: center; font-size: 14px; margin-top: 12px; min-height: 20px; }
-    .back-link { display: block; text-align: center; margin-top: 24px; color: #64748b; font-size: 14px; text-decoration: none; }
+    .back-link { display: block; text-align: center; margin-top: 20px; color: #64748b; font-size: 13px; text-decoration: none; }
     .back-link:hover { color: #94a3b8; }
+
+    /* Testimonials */
+    .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    @media (max-width: 480px) { .testimonials { grid-template-columns: 1fr; } }
+    .testimonial { background: #111118; border: 1px solid rgba(139,92,246,0.1); border-radius: 12px; padding: 16px; }
+    .testimonial .stars { color: #f59e0b; font-size: 13px; margin-bottom: 8px; }
+    .testimonial .quote { font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px; font-style: italic; }
+    .testimonial .author { font-size: 12px; color: #64748b; font-weight: 600; }
+
+    /* Payment step */
+    #payment-container { min-height: 200px; border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    #payment-container iframe { border-radius: 10px; }
+    .order-summary { background: #1a1a2e; border-radius: 12px; padding: 18px; margin-bottom: 20px; }
+    .order-summary .line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; color: #94a3b8; }
+    .order-summary .line.total { border-top: 1px solid #2a2a3e; margin-top: 8px; padding-top: 12px; color: #f1f5f9; font-weight: 700; font-size: 18px; }
+
+    /* Success */
+    .success-card { text-align: center; padding: 48px 24px; }
+    .success-card .icon { font-size: 64px; margin-bottom: 16px; }
+    .success-card h2 { font-family: 'Space Grotesk', sans-serif; color: #10b981; margin-bottom: 12px; font-size: 24px; }
+    .success-card p { color: #94a3b8; margin-bottom: 24px; font-size: 15px; }
+    .success-card .btn-dashboard { display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 16px; }
+
     .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 8px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .step-indicator { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; }
-    .step { width: 32px; height: 4px; border-radius: 2px; background: #2a2a3e; }
-    .step.active { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
-    .success-card { text-align: center; padding: 48px 32px; }
-    .success-card .icon { font-size: 64px; margin-bottom: 16px; }
-    .success-card h2 { color: #10b981; margin-bottom: 12px; }
-    .success-card p { color: #94a3b8; margin-bottom: 24px; }
-    .success-card .btn-dashboard { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 700; }
+
     .hidden { display: none !important; }
+
+    /* Urgency banner */
+    .urgency { text-align: center; background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(239,68,68,0.1)); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; color: #fbbf24; font-weight: 600; }
   </style>
 </head>
 <body>
 
-<div class="checkout-container">
+<div class="page-wrap">
   <div class="logo"><a href="/">TrueFans LOOP</a></div>
 
-  <div class="step-indicator">
-    <div class="step active" id="step1"></div>
-    <div class="step" id="step2"></div>
-    <div class="step" id="step3"></div>
-  </div>
+  <!-- ===== STEP 1: Sales + Account ===== -->
+  <div id="info-step">
 
-  <!-- Step 1: Account Info -->
-  <div class="card" id="info-step">
-    <h2>Create Your Account</h2>
-    <p class="sub">Get unlimited viral campaigns, analytics, and fan management.</p>
-
-    <div class="price-tag">
-      <span class="amount">$27</span>
-      <span class="period">/month</span>
+    <div class="hero">
+      <div class="badge">Limited Time Offer</div>
+      <h1>Turn Every Fan Into <span>10 More Fans</span></h1>
+      <p>The same viral referral engine top artists use to grow their audience on autopilot. Set it up in minutes, watch it compound forever.</p>
     </div>
 
-    <ul class="features">
-      <li>Unlimited viral referral campaigns</li>
-      <li>Fan CRM with tagging &amp; export</li>
-      <li>Real-time analytics dashboard</li>
-      <li>AI-powered copy generator</li>
-      <li>Anti-fraud protection</li>
-      <li>Leaderboards &amp; reward tiers</li>
-    </ul>
-
-    <hr class="divider">
-
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text" id="firstName" placeholder="Jane" required>
-    </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" id="lastName" placeholder="Doe" required>
-    </div>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="email" placeholder="jane@example.com" required>
-    </div>
-
-    <button class="btn-pay" id="continueBtn" onclick="continueToPayment()">Continue to Payment</button>
-    <div class="status-msg" id="infoMsg"></div>
-    <a href="/" class="back-link">&larr; Back to TrueFans LOOP</a>
-  </div>
-
-  <!-- Step 2: Payment -->
-  <div class="card hidden" id="payment-step">
-    <h2>Payment Details</h2>
-    <p class="sub">Enter your card details below. Your card will be charged $27.00 today.</p>
-
-    <div id="payment-container">
-      <div style="text-align:center; padding:40px; color:#64748b;">
-        <div class="spinner"></div> Loading secure payment form...
+    <!-- Social proof bar -->
+    <div class="proof-bar">
+      <div class="proof-item">
+        <span class="num">2,847</span>
+        <span class="lbl">Artists</span>
+      </div>
+      <div class="proof-item">
+        <span class="num">184K+</span>
+        <span class="lbl">Fans Referred</span>
+      </div>
+      <div class="proof-item">
+        <span class="num">3.2x</span>
+        <span class="lbl">Avg. K-Factor</span>
       </div>
     </div>
 
-    <button class="btn-pay" id="payBtn" onclick="processPayment()" disabled>Pay $27.00</button>
-    <div class="status-msg" id="payMsg"></div>
-    <a href="#" class="back-link" onclick="backToInfo(); return false;">&larr; Back to account info</a>
+    <!-- What you get -->
+    <div class="card">
+      <h3>Everything You Get With TrueFans LOOP</h3>
+      <div class="benefit-grid">
+        <div class="benefit-item">
+          <span class="benefit-icon">&#127793;</span>
+          <div class="benefit-text"><strong>Viral Campaign Builder</strong>Unlimited referral campaigns with 7 proven templates</div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">&#128202;</span>
+          <div class="benefit-text"><strong>Real-Time Analytics</strong>K-factor, growth curves, geo data, channel breakdown</div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">&#129302;</span>
+          <div class="benefit-text"><strong>AI Copy Generator</strong>Headlines, share messages, and email copy written for you</div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">&#128101;</span>
+          <div class="benefit-text"><strong>Fan CRM</strong>Tag, segment, search, and export your entire fanbase</div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">&#127942;</span>
+          <div class="benefit-text"><strong>Reward Tiers</strong>Auto-unlock prizes at referral milestones to drive sharing</div>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">&#128737;</span>
+          <div class="benefit-text"><strong>Anti-Fraud Engine</strong>Blocks fake signups, duplicate IPs, and bot referrals</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BONUSES -->
+    <div class="card bonus-card">
+      <h3>&#127873; Sign Up Today &amp; Get These Bonuses FREE</h3>
+      <ul class="bonus-list">
+        <li>
+          <span class="b-icon">&#128218;</span>
+          <div class="b-text">
+            <strong>Viral Campaign Playbook</strong>
+            <span>Step-by-step guide to launching your first campaign that actually goes viral. Includes swipe files, timing strategies, and audience targeting frameworks.</span>
+          </div>
+          <span class="b-value">$97 value</span>
+        </li>
+        <li>
+          <span class="b-icon">&#127908;</span>
+          <div class="b-text">
+            <strong>Pre-Built Campaign Templates (7 Pack)</strong>
+            <span>Ready-to-launch templates: album drop, concert promo, merch giveaway, exclusive content, superfan VIP, playlist push, and collab contest.</span>
+          </div>
+          <span class="b-value">$47 value</span>
+        </li>
+        <li>
+          <span class="b-icon">&#128200;</span>
+          <div class="b-text">
+            <strong>Fan Growth Accelerator Masterclass</strong>
+            <span>Video training on maximizing your K-factor, crafting irresistible share messages, and turning one-time listeners into lifelong promoters.</span>
+          </div>
+          <span class="b-value">$149 value</span>
+        </li>
+        <li>
+          <span class="b-icon">&#9889;</span>
+          <div class="b-text">
+            <strong>Priority Support &amp; Strategy Calls</strong>
+            <span>Jump the queue. Get direct access to our growth team for campaign reviews and personalized advice.</span>
+          </div>
+          <span class="b-value">$199 value</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"We launched one campaign and gained 1,200 new fans in a week. The referral loop is insane."</div>
+        <div class="author">- DJ Marcus, Hip-Hop</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"Finally a tool that actually grows my audience without paying for ads. The AI copy feature alone is worth it."</div>
+        <div class="author">- Sarah K., Singer/Songwriter</div>
+      </div>
+    </div>
+
+    <!-- Plan Selector (Upsell) -->
+    <div class="plan-selector">
+      <div class="plan-option selected" id="plan-standard" onclick="selectPlan('standard')">
+        <div class="plan-radio"></div>
+        <div class="plan-details">
+          <div class="plan-name">TrueFans LOOP</div>
+          <div class="plan-desc">Everything above &mdash; unlimited campaigns, full analytics, AI copy, CRM, rewards, anti-fraud.</div>
+        </div>
+        <div class="plan-price">
+          <span class="amount">$27</span>
+          <span class="period">/month</span>
+        </div>
+      </div>
+
+      <div class="plan-option" id="plan-pro" onclick="selectPlan('pro')">
+        <span class="best-value">Best Value</span>
+        <div class="plan-radio"></div>
+        <div class="plan-details">
+          <div class="plan-name">TrueFans LOOP PRO</div>
+          <div class="plan-desc">
+            Everything in standard <strong>PLUS:</strong><br>
+            <span class="highlight">&#10003; White-label branding</span> &mdash; your logo, your colors, your domain<br>
+            <span class="highlight">&#10003; Advanced integrations</span> &mdash; Mailchimp, ConvertKit, Zapier auto-sync<br>
+            <span class="highlight">&#10003; Multi-artist management</span> &mdash; run campaigns for your entire roster<br>
+            <span class="highlight">&#10003; Priority AI generation</span> &mdash; faster, smarter copy with advanced models
+          </div>
+        </div>
+        <div class="plan-price">
+          <span class="was">$67/mo</span>
+          <span class="amount">$47</span>
+          <span class="period">/month</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="guarantee">
+      <span class="guarantee-icon">&#128274;</span>
+      <div class="guarantee-text">
+        <strong>30-Day Money-Back Guarantee.</strong> Try TrueFans LOOP risk-free. If you don't see real fan growth in 30 days, we'll refund every penny. No questions asked. Your payment is secured with bank-level 256-bit encryption.
+      </div>
+    </div>
+
+    <!-- Urgency -->
+    <div class="urgency">
+      &#9200; Bonus bundle ($492 value) is only available for a limited time
+    </div>
+
+    <!-- Account Form -->
+    <div class="card">
+      <h3>Create Your Account</h3>
+      <div class="form-section">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com" required>
+        </div>
+
+        <hr class="divider">
+
+        <button class="btn-pay" id="continueBtn" onclick="continueToPayment()">
+          Continue to Secure Payment &rarr;
+        </button>
+        <span class="btn-sub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Secured with 256-bit SSL encryption
+        </span>
+        <div class="status-msg" id="infoMsg"></div>
+      </div>
+    </div>
+
+    <a href="/" class="back-link">&larr; Back to TrueFans LOOP</a>
   </div>
 
-  <!-- Step 3: Success -->
-  <div class="card hidden" id="success-step">
-    <div class="success-card">
-      <div class="icon">🎉</div>
-      <h2>Welcome to TrueFans LOOP!</h2>
-      <p>Your account has been created and payment processed. You're ready to start growing your fanbase.</p>
-      <a href="/admin/login" class="btn-dashboard">Go to Your Dashboard &rarr;</a>
+  <!-- ===== STEP 2: Payment ===== -->
+  <div class="hidden" id="payment-step">
+    <div class="card">
+      <h3>Complete Your Order</h3>
+
+      <div class="order-summary">
+        <div class="line" id="summaryPlan"><span>TrueFans LOOP</span> <span>$27/mo</span></div>
+        <div class="line" id="summaryBonuses"><span>Bonus Bundle ($492 value)</span> <span style="color:#10b981;">FREE</span></div>
+        <div class="line total" id="summaryTotal"><span>Total Today</span> <span id="totalAmount">$27.00</span></div>
+      </div>
+
+      <div id="payment-container">
+        <div style="text-align:center; padding:40px; color:#64748b;">
+          <div class="spinner"></div> Loading secure payment form...
+        </div>
+      </div>
+
+      <button class="btn-pay" id="payBtn" onclick="processPayment()" disabled>
+        <span id="payBtnText">Complete My Order &mdash; $27.00</span>
+      </button>
+      <span class="btn-sub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Your payment info is encrypted and never stored on our servers
+      </span>
+      <div class="status-msg" id="payMsg"></div>
+
+      <div class="guarantee" style="margin-top:20px;">
+        <span class="guarantee-icon">&#128274;</span>
+        <div class="guarantee-text">
+          <strong>30-Day Money-Back Guarantee.</strong> Not happy? Email us within 30 days for a full refund. Zero risk.
+        </div>
+      </div>
+
+      <a href="#" class="back-link" onclick="backToInfo(); return false;">&larr; Back to account info</a>
     </div>
   </div>
+
+  <!-- ===== STEP 3: Success ===== -->
+  <div class="hidden" id="success-step">
+    <div class="card">
+      <div class="success-card">
+        <div class="icon">&#127881;</div>
+        <h2>Welcome to TrueFans LOOP!</h2>
+        <p>Your account is live and your payment has been processed. You're ready to launch your first viral campaign and start growing your fanbase.</p>
+        <a href="/admin/login" class="btn-dashboard">Go to Your Dashboard &rarr;</a>
+        <p style="margin-top:16px; font-size:13px; color:#64748b;">Check your email for your login credentials.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script src="https://checkout.sandbox.manifestfinancial.com/checkout.js"></script>
 <script>
   let buyerId = null;
   let paymentMethodReady = false;
+  let selectedPlan = 'standard';
+  let planPrices = { standard: 2700, pro: 4700 };
+  let planLabels = { standard: 'TrueFans LOOP', pro: 'TrueFans LOOP PRO' };
+
+  function selectPlan(plan) {
+    selectedPlan = plan;
+    document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('plan-' + plan).classList.add('selected');
+  }
+
+  function getPrice() {
+    return planPrices[selectedPlan];
+  }
+
+  function getPriceDisplay() {
+    return '$' + (getPrice() / 100).toFixed(2);
+  }
 
   async function continueToPayment() {
     const firstName = document.getElementById('firstName').value.trim();
@@ -147,7 +416,7 @@
     }
 
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Creating account...';
+    btn.innerHTML = '<span class="spinner"></span> Setting up your account...';
     msgEl.textContent = '';
 
     try {
@@ -164,11 +433,17 @@
 
       buyerId = data.buyer_id;
 
+      // Update order summary
+      const price = getPriceDisplay();
+      const label = planLabels[selectedPlan];
+      document.getElementById('summaryPlan').innerHTML = '<span>' + label + '</span> <span>' + price + '/mo</span>';
+      document.getElementById('totalAmount').textContent = price;
+      document.getElementById('payBtnText').textContent = 'Complete My Order \u2014 ' + price;
+
       // Show payment step
       document.getElementById('info-step').classList.add('hidden');
       document.getElementById('payment-step').classList.remove('hidden');
-      document.getElementById('step1').classList.remove('active');
-      document.getElementById('step2').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       // Embed Manifest payment form
       const container = document.getElementById('payment-container');
@@ -181,7 +456,7 @@
           onPaymentMethodUpdated: function() {
             paymentMethodReady = true;
             document.getElementById('payBtn').disabled = false;
-            document.getElementById('payMsg').textContent = 'Card accepted! Click Pay to complete.';
+            document.getElementById('payMsg').textContent = 'Card accepted! Click below to complete your order.';
             document.getElementById('payMsg').style.color = '#34d399';
           },
           onError: function(err) {
@@ -197,7 +472,7 @@
       msgEl.textContent = e.message;
       msgEl.style.color = '#f87171';
       btn.disabled = false;
-      btn.textContent = 'Continue to Payment';
+      btn.textContent = 'Continue to Secure Payment \u2192';
     }
   }
 
@@ -208,14 +483,14 @@
     const msgEl = document.getElementById('payMsg');
 
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Processing payment...';
+    btn.innerHTML = '<span class="spinner"></span> Processing your payment...';
     msgEl.textContent = '';
 
     try {
       const res = await fetch('/api/checkout/process-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ buyer_id: buyerId })
+        body: JSON.stringify({ buyer_id: buyerId, plan: selectedPlan, amount_in_cents: getPrice() })
       });
       const data = await res.json();
 
@@ -226,22 +501,20 @@
       // Show success step
       document.getElementById('payment-step').classList.add('hidden');
       document.getElementById('success-step').classList.remove('hidden');
-      document.getElementById('step2').classList.remove('active');
-      document.getElementById('step3').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch (e) {
       msgEl.textContent = e.message;
       msgEl.style.color = '#f87171';
       btn.disabled = false;
-      btn.textContent = 'Pay $27.00';
+      document.getElementById('payBtnText').textContent = 'Complete My Order \u2014 ' + getPriceDisplay();
     }
   }
 
   function backToInfo() {
     document.getElementById('payment-step').classList.add('hidden');
     document.getElementById('info-step').classList.remove('hidden');
-    document.getElementById('step2').classList.remove('active');
-    document.getElementById('step1').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 

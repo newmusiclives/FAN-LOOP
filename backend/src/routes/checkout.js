@@ -49,16 +49,25 @@ router.post('/api/checkout/create-buyer', async (req, res) => {
 // Step 2: Process payment — create and commit purchase
 router.post('/api/checkout/process-payment', async (req, res) => {
   try {
-    const { buyer_id } = req.body;
+    const { buyer_id, plan, amount_in_cents } = req.body;
 
     if (!buyer_id) {
       return res.status(400).json({ error: 'Missing buyer information.' });
     }
 
-    // Create purchase for $27
+    // Validate plan and amount
+    const validPlans = { standard: 2700, pro: 4700 };
+    const selectedPlan = plan && validPlans[plan] ? plan : 'standard';
+    const amountInCents = validPlans[selectedPlan];
+
+    const planName = selectedPlan === 'pro'
+      ? 'TrueFans LOOP PRO Monthly Subscription'
+      : 'TrueFans LOOP Monthly Subscription';
+
+    // Create purchase
     const purchase = await manifestService.createPurchase(buyer_id, {
-      name: 'TrueFans LOOP Monthly Subscription',
-      amountInCents: 2700
+      name: planName,
+      amountInCents
     });
 
     // Commit (charge) the purchase
