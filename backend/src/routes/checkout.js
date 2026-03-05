@@ -56,7 +56,7 @@ router.post('/api/checkout/process-payment', async (req, res) => {
     }
 
     // Validate plan and amount
-    const validPlans = { standard: 2700, pro: 4700 };
+    const validPlans = { standard: 2700, pro: 6700 };
     const selectedPlan = plan && validPlans[plan] ? plan : 'standard';
     const amountInCents = validPlans[selectedPlan];
 
