@@ -92,7 +92,8 @@ const Fan = {
   },
 
   getRecentByIp(ip, minutes = 5) {
-    return getDb().prepare(`SELECT * FROM fans WHERE ip_address = ? AND created_at >= datetime('now', '-${minutes} minutes')`).all(ip);
+    const mins = parseInt(minutes, 10) || 5;
+    return getDb().prepare(`SELECT * FROM fans WHERE ip_address = ? AND created_at >= datetime('now', '-' || ? || ' minutes')`).all(ip, mins);
   },
 
   countByIpToday(ip) {

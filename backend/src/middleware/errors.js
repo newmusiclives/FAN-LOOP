@@ -19,11 +19,18 @@ class ValidationError extends AppError {
 
 function errorHandler(err, req, res, next) {
   const statusCode = err.statusCode || 500;
-  const message = err.message || 'Internal server error';
+  const isProduction = process.env.NODE_ENV === 'production';
 
-  if (process.env.NODE_ENV === 'development') {
-    console.error(err);
+  // Always log errors
+  console.error(`[${new Date().toISOString()}] ERROR ${statusCode}: ${err.message}`);
+  if (!isProduction) {
+    console.error(err.stack);
   }
+
+  // Don't leak internal error details in production
+  const message = isProduction && statusCode === 500
+    ? 'Internal server error'
+    : err.message || 'Internal server error';
 
   if (req.path.startsWith('/api/')) {
     return res.status(statusCode).json({ error: message });

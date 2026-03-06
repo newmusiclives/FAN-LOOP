@@ -52,21 +52,37 @@ router.post('/admin/ai/generate-copy', adminAuth, async (req, res) => {
     const results = await aiService.generateCopy({ type, artist_name, campaign_title, campaign_type, tone });
     res.json({ results });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: 'Failed to generate copy. Please try again.' });
   }
 });
 
 // ──────────── TrueFans CONNECT Verification ────────────
 router.post('/verify-truefans', async (req, res) => {
   const { link } = req.body;
-  if (!link || !link.includes('truefansconnect.com')) {
-    return res.json({ verified: false, message: 'Please provide a valid TrueFans CONNECT link.' });
+  if (!link) {
+    return res.json({ verified: false, message: 'Please provide a TrueFans CONNECT link.' });
   }
 
+  // Strict URL validation: must be a truefansconnect.com URL
+  let parsedUrl;
   try {
-    // Attempt to fetch the profile page to verify it exists and is active
-    const url = link.startsWith('http') ? link : `https://${link}`;
-    const response = await fetch(url, {
+    const urlStr = link.startsWith('http') ? link : `https://${link}`;
+    parsedUrl = new URL(urlStr);
+  } catch {
+    return res.json({ verified: false, message: 'Please provide a valid URL.' });
+  }
+
+  // Validate the hostname strictly
+  const hostname = parsedUrl.hostname.toLowerCase();
+  if (hostname !== 'truefansconnect.com' && hostname !== 'www.truefansconnect.com') {
+    return res.json({ verified: false, message: 'Please provide a valid TrueFans CONNECT link (truefansconnect.com).' });
+  }
+
+  // Enforce HTTPS
+  parsedUrl.protocol = 'https:';
+
+  try {
+    const response = await fetch(parsedUrl.toString(), {
       method: 'HEAD',
       signal: AbortSignal.timeout(8000),
       redirect: 'follow'
@@ -77,12 +93,10 @@ router.post('/verify-truefans', async (req, res) => {
     } else if (response.status === 404) {
       return res.json({ verified: false, message: 'This TrueFans CONNECT account was not found. Please check the link.' });
     } else {
-      // Non-404 errors — give benefit of the doubt
-      return res.json({ verified: true, message: 'Account verified! Welcome to FANLOOP.' });
+      return res.json({ verified: false, message: 'Unable to verify your account right now. Please try again.' });
     }
   } catch (err) {
-    // If the site is unreachable or times out, still allow (benefit of the doubt)
-    return res.json({ verified: true, message: 'Account verified! Welcome to FANLOOP.' });
+    return res.json({ verified: false, message: 'Unable to reach TrueFans CONNECT. Please try again in a moment.' });
   }
 });
 

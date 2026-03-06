@@ -170,3 +170,4 @@ CREATE INDEX IF NOT EXISTS idx_artists_slug ON artists(slug);
 CREATE INDEX IF NOT EXISTS idx_fraud_flags_status ON fraud_flags(status);
 CREATE INDEX IF NOT EXISTS idx_leaderboard_campaign_period ON leaderboard_cache(campaign_id, period);
 CREATE INDEX IF NOT EXISTS idx_reward_claims_status ON reward_claims(status);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);

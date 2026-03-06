@@ -72,8 +72,9 @@ router.post('/c/:slug/signup', signupLimiter, async (req, res) => {
     });
 
     // Set fan session cookie
+    const isProduction = process.env.NODE_ENV === 'production';
     const token = jwt.sign({ fanId: fan.id, campaignId: campaign.id }, process.env.COOKIE_SECRET, { expiresIn: '30d' });
-    res.cookie('fan_token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'lax' });
+    res.cookie('fan_token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000, sameSite: 'lax', secure: isProduction });
     res.clearCookie('ref_code');
 
     res.json({

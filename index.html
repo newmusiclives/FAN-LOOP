@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrueFans LOOP — Turn Every Fan Into a Promoter</title>
+    <meta name="description" content="TrueFans LOOP is the viral referral engine that transforms your existing fans into an unstoppable street team — automatically growing your email list, SMS subscribers, and superfan community.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://truefansloop.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TrueFans LOOP — Turn Every Fan Into a Promoter">
+    <meta property="og:description" content="The viral referral engine that transforms your existing fans into an unstoppable street team. Grow your fanbase 10x with zero ad spend.">
+    <meta property="og:url" content="https://truefansloop.com/">
+    <meta property="og:site_name" content="TrueFans LOOP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TrueFans LOOP — Turn Every Fan Into a Promoter">
+    <meta name="twitter:description" content="The viral referral engine that transforms your existing fans into an unstoppable street team. Grow your fanbase 10x with zero ad spend.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
     <style>
         /* ========== RESET & BASE ========== */
@@ -177,7 +194,7 @@
         .nav-logo span { color: var(--violet); }
 
         .nav-cta {
-            padding: 10px 24px;
+            padding: 12px 24px;
             font-size: 14px;
             font-weight: 700;
             color: #fff;
@@ -196,7 +213,7 @@
 
         /* ========== HERO ========== */
         .hero {
-            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1042,7 +1059,7 @@
         }
 
         .faq-item.open .faq-answer {
-            max-height: 300px;
+            max-height: 500px;
             padding-top: 16px;
         }
 
@@ -1178,6 +1195,39 @@
             }
         }
 
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .features-grid,
+            .campaign-grid,
+            .bonus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ========== FOCUS STATES ========== */
+        :focus-visible {
+            outline: 2px solid var(--violet);
+            outline-offset: 2px;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--violet-light);
+            outline-offset: 2px;
+        }
+
+        /* ========== REDUCED MOTION ========== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .particles { display: none; }
+            .waveform { display: none; }
+        }
+
         /* ========== ANIMATIONS ========== */
         .fade-in {
             opacity: 0;
@@ -1223,19 +1273,19 @@
 <body>
 
 <!-- Floating Particles -->
-<div class="particles" id="particles"></div>
+<div class="particles" id="particles" aria-hidden="true"></div>
 
 <!-- Navigation -->
-<nav class="nav">
+<nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="container">
-        <a href="#" class="nav-logo">TrueFans <span>LOOP</span></a>
-        <a href="#" class="nav-cta" onclick="openVerifyModal(); return false;">Get Started Free</a>
+        <a href="#top" class="nav-logo" aria-label="TrueFans LOOP - Home">TrueFans <span>LOOP</span></a>
+        <button class="nav-cta" onclick="openVerifyModal();" aria-label="Get started with TrueFans LOOP for free">Get Started Free</button>
     </div>
 </nav>
 
 <!-- ========== HERO ========== -->
 <section class="hero" id="top">
-    <div class="waveform" id="waveform"></div>
+    <div class="waveform" id="waveform" aria-hidden="true"></div>
     <div class="hero-content">
         <p class="hero-pre">The #1 Fan Growth System for Independent Artists</p>
         <h1 class="hero-title">
@@ -1842,7 +1892,7 @@
 
         <div class="faq-list fade-in">
             <div class="faq-item open">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" aria-expanded="true" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>I only have a small following (under 500). Will this work?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1851,7 +1901,7 @@
                 </div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>What kind of rewards should I offer?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1860,7 +1910,7 @@
                 </div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>Do I need to be tech-savvy?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1869,7 +1919,7 @@
                 </div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>Can I use this for multiple campaigns / releases?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1878,7 +1928,7 @@
                 </div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>How do fans share their referral links?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1887,7 +1937,7 @@
                 </div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>What integrations do you support?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1896,7 +1946,7 @@
                 </div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
+                <div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}">
                     <span>Is there a monthly fee?</span>
                     <span class="faq-toggle">+</span>
                 </div>
@@ -1940,18 +1990,30 @@
 <script>
     // TrueFans CONNECT verification modal
     function openVerifyModal() {
-        document.getElementById('tfcModal').style.display = 'flex';
+        var modal = document.getElementById('tfcModal');
+        modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        // Focus the input
+        setTimeout(function() { document.getElementById('tfcLink').focus(); }, 100);
     }
     function closeVerifyModal() {
         document.getElementById('tfcModal').style.display = 'none';
         document.body.style.overflow = '';
     }
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeVerifyModal();
+    });
+    // Close modal on backdrop click
+    document.getElementById('tfcModal').addEventListener('click', function(e) {
+        if (e.target === this) closeVerifyModal();
+    });
+
     async function verifyTrueFans() {
-        const linkInput = document.getElementById('tfcLink');
-        const link = linkInput.value.trim();
-        const msgEl = document.getElementById('tfcMessage');
-        const btn = document.getElementById('tfcVerifyBtn');
+        var linkInput = document.getElementById('tfcLink');
+        var link = linkInput.value.trim();
+        var msgEl = document.getElementById('tfcMessage');
+        var btn = document.getElementById('tfcVerifyBtn');
 
         if (!link) {
             msgEl.textContent = 'Please enter your TrueFans CONNECT account link.';
@@ -1959,8 +2021,15 @@
             return;
         }
 
-        // Basic URL validation for truefansconnect.com
-        if (!link.includes('truefansconnect.com')) {
+        // Strict URL validation for truefansconnect.com
+        try {
+            var urlStr = link.startsWith('http') ? link : 'https://' + link;
+            var parsed = new URL(urlStr);
+            var hostname = parsed.hostname.toLowerCase();
+            if (hostname !== 'truefansconnect.com' && hostname !== 'www.truefansconnect.com') {
+                throw new Error('invalid');
+            }
+        } catch (e) {
             msgEl.textContent = 'Please enter a valid TrueFans CONNECT link (e.g. truefansconnect.com/yourname)';
             msgEl.style.color = '#f87171';
             return;
@@ -1970,17 +2039,17 @@
         btn.disabled = true;
 
         try {
-            const res = await fetch('/api/verify-truefans', {
+            var res = await fetch('/api/verify-truefans', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ link })
+                body: JSON.stringify({ link: link })
             });
-            const data = await res.json();
+            var data = await res.json();
 
             if (data.verified) {
-                msgEl.innerHTML = 'Account verified! Redirecting to your free TrueFans LOOP dashboard...';
+                msgEl.textContent = 'Account verified! Redirecting to your free TrueFans LOOP dashboard...';
                 msgEl.style.color = '#34d399';
-                setTimeout(() => { window.location.href = '/admin/login?ref=truefans&account=' + encodeURIComponent(link); }, 1500);
+                setTimeout(function() { window.location.href = '/admin/login?ref=truefans&account=' + encodeURIComponent(link); }, 1500);
             } else {
                 msgEl.textContent = data.message || 'We could not verify this account. Please check the link and try again, or sign up for $27/mo.';
                 msgEl.style.color = '#fbbf24';
@@ -1997,8 +2066,10 @@
 
     // FAQ toggle
     function toggleFaq(el) {
-        const item = el.closest('.faq-item');
+        var item = el.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
         item.classList.toggle('open');
+        el.setAttribute('aria-expanded', !isOpen);
     }
 
     // Scroll fade-in
@@ -2040,34 +2111,66 @@
 </script>
 
 <!-- TrueFans CONNECT Verification Modal -->
-<div id="tfcModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px;">
+<div id="tfcModal" role="dialog" aria-modal="true" aria-labelledby="tfcModalTitle" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px;">
     <div style="background:#111118; border:1px solid rgba(139,92,246,0.3); border-radius:20px; max-width:520px; width:100%; padding:40px; position:relative;">
-        <button onclick="closeVerifyModal()" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#64748b; font-size:24px; cursor:pointer;">&times;</button>
+        <button onclick="closeVerifyModal()" aria-label="Close verification dialog" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#64748b; font-size:24px; cursor:pointer;">&times;</button>
 
         <div style="text-align:center; margin-bottom:32px;">
-            <div style="font-size:48px; margin-bottom:12px;">🔗</div>
-            <h3 style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#f8fafc; margin-bottom:8px;">Verify Your TrueFans CONNECT Account</h3>
+            <div style="font-size:48px; margin-bottom:12px;" aria-hidden="true">&#128279;</div>
+            <h3 id="tfcModalTitle" style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#f8fafc; margin-bottom:8px;">Verify Your TrueFans CONNECT Account</h3>
             <p style="color:#94a3b8; font-size:14px;">Paste your TrueFans CONNECT profile or account link below so we can verify your active membership and unlock TrueFans LOOP for free.</p>
         </div>
 
         <div style="margin-bottom:16px;">
-            <label style="display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; font-weight:500;">Your TrueFans CONNECT Link</label>
-            <input id="tfcLink" type="url" placeholder="https://truefansconnect.com/yourname" style="width:100%; background:#1a1a2e; border:1px solid #2a2a3e; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-size:15px; outline:none;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='#2a2a3e'">
+            <label for="tfcLink" style="display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; font-weight:500;">Your TrueFans CONNECT Link</label>
+            <input id="tfcLink" type="url" placeholder="https://truefansconnect.com/yourname" autocomplete="url" style="width:100%; background:#1a1a2e; border:1px solid #2a2a3e; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-size:15px; outline:none;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='#2a2a3e'">
         </div>
 
-        <div id="tfcMessage" style="min-height:20px; font-size:13px; margin-bottom:16px; text-align:center;"></div>
+        <div id="tfcMessage" role="alert" aria-live="polite" style="min-height:20px; font-size:13px; margin-bottom:16px; text-align:center;"></div>
 
         <button id="tfcVerifyBtn" onclick="verifyTrueFans()" style="width:100%; padding:14px; border:none; border-radius:10px; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Verify My Account</button>
 
         <div style="text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid #1e1e2e;">
             <p style="color:#94a3b8; font-size:14px; font-weight:600; margin-bottom:14px;">Don't have a TrueFans CONNECT account?</p>
             <div style="display:flex; flex-direction:column; gap:10px;">
-                <a href="https://truefansconnect.com" target="_blank" style="display:block; padding:12px; border-radius:10px; background:#1a1a2e; border:1px solid #10b981; color:#10b981; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign Up for TrueFans CONNECT (Free) &mdash; Then Come Back</a>
+                <a href="https://truefansconnect.com" target="_blank" rel="noopener noreferrer" style="display:block; padding:12px; border-radius:10px; background:#1a1a2e; border:1px solid #10b981; color:#10b981; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign Up for TrueFans CONNECT (Free) &mdash; Then Come Back</a>
                 <a href="/admin/login?plan=paid" onclick="closeVerifyModal();" style="display:block; padding:12px; border-radius:10px; background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Start TrueFans LOOP for $27/mo</a>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "TrueFans LOOP",
+  "applicationCategory": "BusinessApplication",
+  "description": "Viral referral engine that transforms your existing fans into an unstoppable street team, automatically growing your email list and superfan community.",
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "name": "Free with TrueFans CONNECT",
+      "description": "Free access for TrueFans CONNECT members"
+    },
+    {
+      "@type": "Offer",
+      "price": "27",
+      "priceCurrency": "USD",
+      "name": "Monthly Subscription",
+      "description": "Standalone monthly subscription"
+    }
+  ],
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Organization",
+    "name": "TrueFans LOOP"
+  }
+}
+</script>
 </body>
 </html>
+

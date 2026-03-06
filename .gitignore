@@ -5,3 +5,8 @@ backend/db/fanloop.db-shm
 backend/.env
 .DS_Store
 .claude/
+*.log
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,6 +1,7 @@
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const { getDb, closeDb } = require('./database');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 
 function generateCode() {
@@ -10,15 +11,29 @@ function generateCode() {
 function seed() {
   const db = getDb();
 
+  // Check if already seeded
+  const existingAdmin = db.prepare("SELECT * FROM users WHERE email = 'admin@fanloop.io'").get();
+  if (existingAdmin) {
+    console.log('Database already seeded. Skipping.');
+    closeDb();
+    return;
+  }
+
   console.log('Seeding database...');
 
-  // Admin user
-  const adminPassword = bcrypt.hashSync('admin123', 10);
+  // Admin user — use env var or generate a secure default
+  const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || crypto.randomBytes(12).toString('base64url');
+  const adminHash = bcrypt.hashSync(adminPassword, 10);
   db.prepare(`INSERT OR IGNORE INTO users (email, password_hash, name, role) VALUES (?, ?, ?, ?)`).run(
-    'admin@fanloop.io', adminPassword, 'FANLOOP Admin', 'admin'
+    'admin@fanloop.io', adminHash, 'FANLOOP Admin', 'admin'
   );
   const admin = db.prepare("SELECT * FROM users WHERE email = 'admin@fanloop.io'").get();
-  console.log('Admin user: admin@fanloop.io / admin123');
+
+  if (!process.env.ADMIN_INITIAL_PASSWORD) {
+    console.log(`\n  Generated admin password: ${adminPassword}`);
+    console.log('  IMPORTANT: Save this password now. It will not be shown again.');
+    console.log('  Set ADMIN_INITIAL_PASSWORD env var to use a specific password.\n');
+  }
 
   // Sample artist
   db.prepare(`INSERT OR IGNORE INTO artists (user_id, name, slug, genre, bio, brand_config) VALUES (?, ?, ?, ?, ?, ?)`).run(
@@ -82,7 +97,7 @@ function seed() {
       .run(campaign.id, f.email, f.name, f.code, 'direct');
   }
 
-  // Set up referral chain: mike referred by sarah, emma referred by sarah, alex referred by mike
+  // Set up referral chain
   const sarah = db.prepare("SELECT * FROM fans WHERE email = 'sarah@example.com'").get();
   const mike = db.prepare("SELECT * FROM fans WHERE email = 'mike@example.com'").get();
   const emma = db.prepare("SELECT * FROM fans WHERE email = 'emma@example.com'").get();

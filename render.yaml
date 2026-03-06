@@ -5,6 +5,7 @@ services:
     rootDir: backend
     buildCommand: npm install && npm run seed
     startCommand: npm start
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
@@ -19,7 +20,17 @@ services:
           property: host
       - key: PORT
         value: 3000
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: MANIFEST_API_KEY
+        sync: false
+      - key: MANIFEST_ENV
+        sync: false
+      - key: CLAUDE_API_KEY
+        sync: false
+      - key: ADMIN_INITIAL_PASSWORD
+        sync: false
     disk:
       name: fanloop-data
-      mountPath: /opt/render/project/src/backend/db
+      mountPath: /opt/render/project/src/db
       sizeGB: 1

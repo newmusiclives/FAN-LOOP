@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const manifestService = require('../services/manifestService');
 const User = require('../models/User');
@@ -76,7 +77,7 @@ router.post('/api/checkout/process-payment', async (req, res) => {
     // Get buyer info to create the user account
     const buyer = await manifestService.getBuyer(buyer_id);
 
-    // Create admin user account
+    // Create admin user account with secure password
     const password = generatePassword();
     const hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -87,8 +88,9 @@ router.post('/api/checkout/process-payment', async (req, res) => {
       role: 'admin'
     });
 
-    // TODO: Send welcome email with password (for now log it)
-    console.log(`\n  New paid user: ${buyer.email} / ${password}\n`);
+    // TODO: Send welcome email with password
+    // For now, password is returned in response so checkout page can display it
+    // In production, integrate an email service (SendGrid, Postmark, etc.)
 
     res.json({
       success: true,
@@ -97,15 +99,16 @@ router.post('/api/checkout/process-payment', async (req, res) => {
     });
   } catch (err) {
     console.error('Process payment error:', err.message);
-    res.status(500).json({ error: err.message || 'Payment processing failed. Please try again.' });
+    res.status(500).json({ error: 'Payment processing failed. Please try again.' });
   }
 });
 
 function generatePassword() {
-  const chars = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const chars = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%';
+  const bytes = crypto.randomBytes(16);
   let pass = '';
-  for (let i = 0; i < 12; i++) {
-    pass += chars.charAt(Math.floor(Math.random() * chars.length));
+  for (let i = 0; i < 16; i++) {
+    pass += chars.charAt(bytes[i] % chars.length);
   }
   return pass;
 }

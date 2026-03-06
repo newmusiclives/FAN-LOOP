@@ -22,8 +22,14 @@ router.post('/login', authLimiter, (req, res) => {
     return res.render('admin/login', { title: 'Admin Login', error: 'Invalid email or password', layout: false });
   }
 
+  const isProduction = process.env.NODE_ENV === 'production';
   const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '24h' });
-  res.cookie('admin_token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite: 'lax' });
+  res.cookie('admin_token', token, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'lax',
+    secure: isProduction
+  });
   res.redirect('/admin');
 });
 

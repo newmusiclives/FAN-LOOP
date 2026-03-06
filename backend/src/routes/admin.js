@@ -14,6 +14,7 @@ const User = require('../models/User');
 const { campaignCreateRules, artistCreateRules, rewardCreateRules } = require('../middleware/validate');
 const { exportFansCSV } = require('../services/exportService');
 const fraudService = require('../services/fraudService');
+const { authLimiter } = require('../middleware/rateLimiter');
 const router = express.Router();
 
 router.use(adminAuth);
@@ -280,8 +281,11 @@ router.get('/settings', (req, res) => {
   res.render('admin/settings', { title: 'Settings', artists, integrations, user: req.user });
 });
 
-router.post('/settings/password', (req, res) => {
+router.post('/settings/password', authLimiter, (req, res) => {
   const { current_password, new_password } = req.body;
+  if (!new_password || new_password.length < 8) {
+    return res.redirect('/admin/settings?error=password_too_short');
+  }
   if (!User.verifyPassword(req.user, current_password)) {
     return res.redirect('/admin/settings?error=invalid_password');
   }
@@ -292,7 +296,25 @@ router.post('/settings/password', (req, res) => {
 router.post('/settings/integrations', (req, res) => {
   const { artist_id, type, name, webhook_url, api_key } = req.body;
   const config = {};
-  if (webhook_url) config.url = webhook_url;
+  if (webhook_url) {
+    // Validate webhook URL
+    try {
+      const parsed = new URL(webhook_url);
+      if (!['http:', 'https:'].includes(parsed.protocol)) {
+        return res.redirect('/admin/settings?error=invalid_webhook_url');
+      }
+      // Block internal/private network addresses
+      const hostname = parsed.hostname.toLowerCase();
+      if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0' ||
+          hostname.startsWith('10.') || hostname.startsWith('192.168.') || hostname.startsWith('172.') ||
+          hostname === '169.254.169.254') {
+        return res.redirect('/admin/settings?error=invalid_webhook_url');
+      }
+      config.url = parsed.toString();
+    } catch {
+      return res.redirect('/admin/settings?error=invalid_webhook_url');
+    }
+  }
   if (api_key) config.api_key = api_key;
   Integration.create({ artist_id, type, name, config });
   res.redirect('/admin/settings');
