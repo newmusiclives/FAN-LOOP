@@ -52,19 +52,20 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   : ['http://localhost:3000'];
 
 app.use(helmet({
-  contentSecurityPolicy: {
+  contentSecurityPolicy: isProduction ? {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com", "https://cdn.jsdelivr.net"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
       connectSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com", "https://cdn.tailwindcss.com"],
       frameSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com"],
       objectSrc: ["'none'"],
-      upgradeInsecureRequests: isProduction ? [] : null
+      workerSrc: ["'self'", "blob:"],
+      upgradeInsecureRequests: []
     }
-  },
+  } : false,
   crossOriginEmbedderPolicy: false,
   hsts: isProduction ? { maxAge: 31536000, includeSubDomains: true } : false
 }));
