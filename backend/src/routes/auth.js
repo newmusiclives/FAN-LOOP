@@ -4,6 +4,17 @@ const User = require('../models/User');
 const { authLimiter } = require('../middleware/rateLimiter');
 const router = express.Router();
 
+// Alternative uncached login route for testing
+router.get('/login2', (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.send(`<!DOCTYPE html>
+<html><head><title>Login Test</title></head>
+<body>
+<h1>THIS IS LOGIN2 - TIMESTAMP: ${Date.now()}</h1>
+<p>If you see this with a timestamp, the proxy cache is bypassed.</p>
+</body></html>`);
+});
+
 router.get('/login', (req, res) => {
   if (req.cookies?.admin_token) {
     try {
@@ -11,6 +22,10 @@ router.get('/login', (req, res) => {
       return res.redirect('/admin');
     } catch (e) { /* continue to login page */ }
   }
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  res.set('Surrogate-Control', 'no-store');
   res.render('admin/login', { title: 'Admin Login', error: null, layout: false });
 });
 
