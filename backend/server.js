@@ -59,7 +59,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com"],
+      connectSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com", "https://cdn.tailwindcss.com"],
       frameSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: isProduction ? [] : null
@@ -71,11 +71,14 @@ app.use(helmet({
 
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    // Allow requests with no origin (same-origin, server-to-server, mobile apps)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // In development, allow all localhost origins
+    if (!isProduction && origin.match(/^https?:\/\/localhost(:\d+)?$/)) {
+      return callback(null, true);
     }
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true
 }));
