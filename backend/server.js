@@ -21,7 +21,23 @@ for (const envVar of requiredEnvVars) {
 
 // Initialize database
 const { getDb, closeDb } = require('./db/database');
+const bcrypt = require('bcryptjs');
 getDb();
+
+// Reset admin password from env var on every startup
+if (process.env.ADMIN_INITIAL_PASSWORD) {
+  try {
+    const db = getDb();
+    const admin = db.prepare("SELECT id FROM users WHERE email = 'admin@fanloop.io'").get();
+    if (admin) {
+      const hash = bcrypt.hashSync(process.env.ADMIN_INITIAL_PASSWORD, 10);
+      db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hash, admin.id);
+      console.log('Admin password updated from ADMIN_INITIAL_PASSWORD env var.');
+    }
+  } catch (err) {
+    console.error('Failed to reset admin password:', err.message);
+  }
+}
 
 const app = express();
 

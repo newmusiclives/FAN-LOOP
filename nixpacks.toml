@@ -8,4 +8,4 @@ cmds = ["cd backend && npm install"]
 cmds = ["cd backend && npm run seed"]
 
 [start]
-cmd = "cd backend && npm run seed && node db/reset-password.js admin@fanloop.io \"$ADMIN_INITIAL_PASSWORD\" && npm start"
+cmd = "cd backend && npm start"
