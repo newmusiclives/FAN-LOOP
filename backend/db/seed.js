@@ -14,6 +14,12 @@ function seed() {
   // Check if already seeded
   const existingAdmin = db.prepare("SELECT * FROM users WHERE email = 'admin@fanloop.io'").get();
   if (existingAdmin) {
+    // If ADMIN_INITIAL_PASSWORD is set, update the password even if already seeded
+    if (process.env.ADMIN_INITIAL_PASSWORD) {
+      const newHash = bcrypt.hashSync(process.env.ADMIN_INITIAL_PASSWORD, 10);
+      db.prepare("UPDATE users SET password_hash = ?, updated_at = datetime('now') WHERE email = 'admin@fanloop.io'").run(newHash);
+      console.log('Admin password updated from ADMIN_INITIAL_PASSWORD env var.');
+    }
     console.log('Database already seeded. Skipping.');
     closeDb();
     return;
