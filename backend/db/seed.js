@@ -27,8 +27,8 @@ function seed() {
 
   console.log('Seeding database...');
 
-  // Admin user — use env var or generate a secure default
-  const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || crypto.randomBytes(12).toString('base64url');
+  // Admin user — use env var or hardcoded default
+  const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || 'Lennon22!';
   const adminHash = bcrypt.hashSync(adminPassword, 10);
   db.prepare(`INSERT OR IGNORE INTO users (email, password_hash, name, role) VALUES (?, ?, ?, ?)`).run(
     'admin@fanloop.io', adminHash, 'FANLOOP Admin', 'admin'
