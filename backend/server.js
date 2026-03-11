@@ -130,6 +130,11 @@ app.get('/health', (req, res) => {
   }
 });
 
+// Debug: test if browser reaches this server
+app.get('/test-server', (req, res) => {
+  res.send(`<h1 style="color:lime;background:black;padding:20px">Server is LIVE - ${new Date().toISOString()}</h1>`);
+});
+
 // Routes
 const authRoutes = require('./src/routes/auth');
 const adminRoutes = require('./src/routes/admin');
