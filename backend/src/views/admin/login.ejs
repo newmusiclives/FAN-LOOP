@@ -33,5 +33,51 @@
       </form>
     </div>
   </div>
+
+  <script>
+    // Apply styles via JS as fallback
+    var b = document.body;
+    b.style.cssText = 'margin:0;padding:0;background:#0a0a0f;color:#e2e8f0;font-family:Inter,system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center';
+
+    var wrapper = document.querySelector('.login-wrapper');
+    if(wrapper) wrapper.style.cssText = 'width:100%;max-width:420px;padding:2rem';
+
+    var logo = document.querySelector('.logo');
+    if(logo) logo.style.cssText = 'text-align:center;margin-bottom:2rem';
+
+    var h1 = document.querySelector('.logo h1');
+    if(h1) h1.style.cssText = 'margin:0;font-size:2.5rem;font-weight:800;background:linear-gradient(to right,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text';
+
+    var logop = document.querySelector('.logo p');
+    if(logop) logop.style.cssText = 'color:#6b7280;margin-top:0.5rem;font-size:0.95rem';
+
+    var card = document.querySelector('.card');
+    if(card) card.style.cssText = 'background:#111118;border:1px solid #1e1e2e;border-radius:12px;padding:2rem';
+
+    var h2 = document.querySelector('.card h2');
+    if(h2) h2.style.cssText = 'margin:0 0 1.5rem 0;font-size:1.25rem;font-weight:600';
+
+    document.querySelectorAll('.form-group').forEach(function(fg, i) {
+      fg.style.cssText = i === 0 ? 'margin-bottom:1rem' : 'margin-bottom:1.5rem';
+      var label = fg.querySelector('label');
+      if(label) label.style.cssText = 'display:block;font-size:0.875rem;color:#9ca3af;margin-bottom:0.5rem';
+      var input = fg.querySelector('input');
+      if(input) input.style.cssText = 'width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a3e;color:#e2e8f0;border-radius:8px;padding:0.75rem 1rem;font-size:1rem;outline:none';
+    });
+
+    var btn = document.querySelector('.btn-submit');
+    if(btn) btn.style.cssText = 'width:100%;padding:0.75rem;border:none;border-radius:8px;font-weight:600;font-size:1rem;color:white;background:linear-gradient(135deg,#8b5cf6,#ec4899);cursor:pointer';
+
+    var err = document.querySelector('.error-box');
+    if(err) err.style.cssText = 'background:rgba(127,29,29,0.3);border:1px solid #991b1b;color:#fca5a5;padding:0.75rem 1rem;border-radius:8px;margin-bottom:1rem;font-size:0.875rem';
+
+    // Debug: log whether CSS file loaded
+    var sheets = document.styleSheets;
+    console.log('Stylesheets loaded:', sheets.length);
+    for(var i=0; i<sheets.length; i++) {
+      try { console.log('Sheet', i, sheets[i].href, 'rules:', sheets[i].cssRules.length); }
+      catch(e) { console.log('Sheet', i, sheets[i].href, 'access denied'); }
+    }
+  </script>
 </body>
 </html>
