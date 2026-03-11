@@ -126,6 +126,12 @@ const fanRoutes = require('./src/routes/fan');
 const apiRoutes = require('./src/routes/api');
 const checkoutRoutes = require('./src/routes/checkout');
 
+// Debug test page at root level (outside /admin/)
+app.get('/test-page-xyz', (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  res.send('<html><body bgcolor="red"><h1 style="color:white;font-size:60px;text-align:center;margin-top:200px;">TEST PAGE - ' + Date.now() + '</h1><p style="text-align:center;color:yellow;font-size:24px;">If you see RED background and this timestamp, the proxy is bypassed.</p></body></html>');
+});
+
 // Home page — serve landing page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'src', 'public', 'index.html'));
