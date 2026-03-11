@@ -4,6 +4,17 @@ const User = require('../models/User');
 const { authLimiter } = require('../middleware/rateLimiter');
 const router = express.Router();
 
+// Alternative login path to bypass any proxy caching
+router.get('/signin', (req, res) => {
+  if (req.cookies?.admin_token) {
+    try {
+      jwt.verify(req.cookies.admin_token, process.env.JWT_SECRET);
+      return res.redirect('/admin');
+    } catch (e) { /* continue to login page */ }
+  }
+  res.render('admin/login', { title: 'Admin Login', error: null, layout: false });
+});
+
 router.get('/login', (req, res) => {
   if (req.cookies?.admin_token) {
     try {

@@ -7,16 +7,22 @@ const cors = require('cors');
 const morgan = require('morgan');
 const crypto = require('crypto');
 
-// Validate required environment variables
-const requiredEnvVars = ['JWT_SECRET', 'COOKIE_SECRET'];
-for (const envVar of requiredEnvVars) {
-  if (!process.env[envVar] || process.env[envVar].includes('change-in-production')) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error(`FATAL: ${envVar} must be set to a secure value in production`);
-      process.exit(1);
-    }
-    console.warn(`WARNING: ${envVar} is using a development default. Do NOT use this in production.`);
+// Set fallback defaults for required environment variables
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('change-in-production')) {
+  if (process.env.NODE_ENV === 'production') {
+    console.error('FATAL: JWT_SECRET must be set to a secure value in production');
+    process.exit(1);
   }
+  process.env.JWT_SECRET = 'fanloop-dev-jwt-secret-2024';
+  console.warn('WARNING: JWT_SECRET using development default. Do NOT use this in production.');
+}
+if (!process.env.COOKIE_SECRET || process.env.COOKIE_SECRET.includes('change-in-production')) {
+  if (process.env.NODE_ENV === 'production') {
+    console.error('FATAL: COOKIE_SECRET must be set to a secure value in production');
+    process.exit(1);
+  }
+  process.env.COOKIE_SECRET = 'fanloop-dev-cookie-secret-2024';
+  console.warn('WARNING: COOKIE_SECRET using development default. Do NOT use this in production.');
 }
 
 // Initialize database
@@ -24,19 +30,18 @@ const { getDb, closeDb } = require('./db/database');
 const bcrypt = require('bcryptjs');
 getDb();
 
-// Reset admin password from env var on every startup
-if (process.env.ADMIN_INITIAL_PASSWORD) {
-  try {
-    const db = getDb();
-    const admin = db.prepare("SELECT id FROM users WHERE email = 'admin@fanloop.io'").get();
-    if (admin) {
-      const hash = bcrypt.hashSync(process.env.ADMIN_INITIAL_PASSWORD, 10);
-      db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hash, admin.id);
-      console.log('Admin password updated from ADMIN_INITIAL_PASSWORD env var.');
-    }
-  } catch (err) {
-    console.error('Failed to reset admin password:', err.message);
+// Reset admin password on every startup (fallback to hardcoded default)
+try {
+  const db = getDb();
+  const admin = db.prepare("SELECT id FROM users WHERE email = 'admin@fanloop.io'").get();
+  if (admin) {
+    const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || 'Lennon22!';
+    const hash = bcrypt.hashSync(adminPassword, 10);
+    db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hash, admin.id);
+    console.log('Admin password reset on startup.');
   }
+} catch (err) {
+  console.error('Failed to reset admin password:', err.message);
 }
 
 const app = express();
@@ -52,30 +57,34 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   : ['http://localhost:3000'];
 
 app.use(helmet({
-  contentSecurityPolicy: {
+  contentSecurityPolicy: isProduction ? {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com", "https://cdn.jsdelivr.net"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com"],
+      connectSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com", "https://cdn.tailwindcss.com"],
       frameSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com"],
       objectSrc: ["'none'"],
-      upgradeInsecureRequests: isProduction ? [] : null
+      workerSrc: ["'self'", "blob:"],
+      upgradeInsecureRequests: []
     }
-  },
+  } : false,
   crossOriginEmbedderPolicy: false,
   hsts: isProduction ? { maxAge: 31536000, includeSubDomains: true } : false
 }));
 
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    // Allow requests with no origin (same-origin, server-to-server, mobile apps)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // In development, allow all localhost origins
+    if (!isProduction && origin.match(/^https?:\/\/localhost(:\d+)?$/)) {
+      return callback(null, true);
     }
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true
 }));
@@ -95,6 +104,17 @@ if (isProduction) {
   });
 }
 
+// Disable caching for HTML pages (prevent proxy/CDN serving stale content)
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    res.set('Surrogate-Control', 'no-store');
+  }
+  next();
+});
+
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
@@ -113,6 +133,11 @@ app.get('/health', (req, res) => {
   } catch (err) {
     res.status(503).json({ status: 'unhealthy', error: 'Database connection failed' });
   }
+});
+
+// Debug: test if browser reaches this server
+app.get('/test-server', (req, res) => {
+  res.send(`<h1 style="color:lime;background:black;padding:20px">Server is LIVE - ${new Date().toISOString()}</h1>`);
 });
 
 // Routes
