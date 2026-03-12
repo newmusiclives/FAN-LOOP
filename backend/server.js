@@ -68,6 +68,7 @@ app.use(helmet({
       frameSrc: ["'self'", "https://api.manifestfinancial.com", "https://api.sandbox.manifestfinancial.com"],
       objectSrc: ["'none'"],
       workerSrc: ["'self'", "blob:"],
+      scriptSrcAttr: ["'unsafe-inline'"],
       upgradeInsecureRequests: []
     }
   } : false,
@@ -77,14 +78,15 @@ app.use(helmet({
 
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (same-origin, server-to-server, mobile apps)
+    // Allow requests with no origin (same-origin, server-to-server, form submissions)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
     // In development, allow all localhost origins
     if (!isProduction && origin.match(/^https?:\/\/localhost(:\d+)?$/)) {
       return callback(null, true);
     }
-    callback(new Error('Not allowed by CORS'));
+    // Don't error — just don't set CORS headers (browser will enforce)
+    callback(null, false);
   },
   credentials: true
 }));

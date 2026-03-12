@@ -1792,7 +1792,7 @@
             <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px;">
                 <div style="font-size: 14px; font-weight: 600; color: var(--violet-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Standalone</div>
                 <div style="display: flex; align-items: baseline; gap: 4px;">
-                    <div style="font-size: 64px; font-weight: 800; color: var(--text-primary); line-height: 1;"><sup style="font-size: 28px; vertical-align: super;">$</sup>27</div>
+                    <div style="font-size: 64px; font-weight: 800; color: var(--text-primary); line-height: 1;"><sup style="font-size: 28px; vertical-align: super;">$</sup>37</div>
                     <span style="color: var(--text-muted); font-size: 16px;">/month</span>
                 </div>
                 <div style="color: var(--text-muted); font-size: 14px; margin-top: 8px; margin-bottom: 32px;">No TrueFans CONNECT account needed</div>
@@ -1986,6 +1986,36 @@
     </div>
 </footer>
 
+<!-- TrueFans CONNECT Verification Modal -->
+<div id="tfcModal" role="dialog" aria-modal="true" aria-labelledby="tfcModalTitle" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px;">
+    <div style="background:#111118; border:1px solid rgba(139,92,246,0.3); border-radius:20px; max-width:520px; width:100%; padding:40px; position:relative;">
+        <button onclick="closeVerifyModal()" aria-label="Close verification dialog" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#64748b; font-size:24px; cursor:pointer;">&times;</button>
+
+        <div style="text-align:center; margin-bottom:32px;">
+            <div style="font-size:48px; margin-bottom:12px;" aria-hidden="true">&#128279;</div>
+            <h3 id="tfcModalTitle" style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#f8fafc; margin-bottom:8px;">Verify Your TrueFans CONNECT Account</h3>
+            <p style="color:#94a3b8; font-size:14px;">Paste your TrueFans CONNECT profile or account link below so we can verify your active membership and unlock TrueFans LOOP for free.</p>
+        </div>
+
+        <div style="margin-bottom:16px;">
+            <label for="tfcLink" style="display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; font-weight:500;">Your TrueFans CONNECT Link</label>
+            <input id="tfcLink" type="url" placeholder="https://truefansconnect.com/yourname" autocomplete="url" style="width:100%; background:#1a1a2e; border:1px solid #2a2a3e; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-size:15px; outline:none;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='#2a2a3e'">
+        </div>
+
+        <div id="tfcMessage" role="alert" aria-live="polite" style="min-height:20px; font-size:13px; margin-bottom:16px; text-align:center;"></div>
+
+        <button id="tfcVerifyBtn" onclick="verifyTrueFans()" style="width:100%; padding:14px; border:none; border-radius:10px; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Verify My Account</button>
+
+        <div style="text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid #1e1e2e;">
+            <p style="color:#94a3b8; font-size:14px; font-weight:600; margin-bottom:14px;">Don't have a TrueFans CONNECT account?</p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <a href="https://truefansconnect.com" target="_blank" rel="noopener noreferrer" style="display:block; padding:12px; border-radius:10px; background:#1a1a2e; border:1px solid #10b981; color:#10b981; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign Up for TrueFans CONNECT (Free) &mdash; Then Come Back</a>
+                <a href="/admin/login?plan=paid" onclick="closeVerifyModal();" style="display:block; padding:12px; border-radius:10px; background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Start TrueFans LOOP for $37/mo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ========== SCRIPTS ========== -->
 <script>
     // TrueFans CONNECT verification modal
@@ -2000,13 +2030,14 @@
         document.getElementById('tfcModal').style.display = 'none';
         document.body.style.overflow = '';
     }
-    // Close modal on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeVerifyModal();
-    });
-    // Close modal on backdrop click
-    document.getElementById('tfcModal').addEventListener('click', function(e) {
-        if (e.target === this) closeVerifyModal();
+    // Close modal on Escape key and backdrop click (wait for DOM)
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeVerifyModal();
+        });
+        document.getElementById('tfcModal').addEventListener('click', function(e) {
+            if (e.target === this) closeVerifyModal();
+        });
     });
 
     async function verifyTrueFans() {
@@ -2072,73 +2103,46 @@
         el.setAttribute('aria-expanded', !isOpen);
     }
 
-    // Scroll fade-in
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+    // DOM-dependent initializations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Scroll fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Generate waveform bars
+        (function() {
+            const waveform = document.getElementById('waveform');
+            for (let i = 0; i < 80; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.animationDelay = (Math.random() * 1.5) + 's';
+                bar.style.height = (20 + Math.random() * 80) + '%';
+                waveform.appendChild(bar);
             }
-        });
-    }, { threshold: 0.1 });
+        })();
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Generate waveform bars
-    (function() {
-        const waveform = document.getElementById('waveform');
-        for (let i = 0; i < 80; i++) {
-            const bar = document.createElement('div');
-            bar.className = 'bar';
-            bar.style.animationDelay = (Math.random() * 1.5) + 's';
-            bar.style.height = (20 + Math.random() * 80) + '%';
-            waveform.appendChild(bar);
-        }
-    })();
-
-    // Generate floating particles
-    (function() {
-        const container = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDuration = (8 + Math.random() * 12) + 's';
-            p.style.animationDelay = Math.random() * 10 + 's';
-            p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
-            container.appendChild(p);
-        }
-    })();
+        // Generate floating particles
+        (function() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (8 + Math.random() * 12) + 's';
+                p.style.animationDelay = Math.random() * 10 + 's';
+                p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+                container.appendChild(p);
+            }
+        })();
+    });
 </script>
-
-<!-- TrueFans CONNECT Verification Modal -->
-<div id="tfcModal" role="dialog" aria-modal="true" aria-labelledby="tfcModalTitle" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px;">
-    <div style="background:#111118; border:1px solid rgba(139,92,246,0.3); border-radius:20px; max-width:520px; width:100%; padding:40px; position:relative;">
-        <button onclick="closeVerifyModal()" aria-label="Close verification dialog" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#64748b; font-size:24px; cursor:pointer;">&times;</button>
-
-        <div style="text-align:center; margin-bottom:32px;">
-            <div style="font-size:48px; margin-bottom:12px;" aria-hidden="true">&#128279;</div>
-            <h3 id="tfcModalTitle" style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#f8fafc; margin-bottom:8px;">Verify Your TrueFans CONNECT Account</h3>
-            <p style="color:#94a3b8; font-size:14px;">Paste your TrueFans CONNECT profile or account link below so we can verify your active membership and unlock TrueFans LOOP for free.</p>
-        </div>
-
-        <div style="margin-bottom:16px;">
-            <label for="tfcLink" style="display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; font-weight:500;">Your TrueFans CONNECT Link</label>
-            <input id="tfcLink" type="url" placeholder="https://truefansconnect.com/yourname" autocomplete="url" style="width:100%; background:#1a1a2e; border:1px solid #2a2a3e; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-size:15px; outline:none;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='#2a2a3e'">
-        </div>
-
-        <div id="tfcMessage" role="alert" aria-live="polite" style="min-height:20px; font-size:13px; margin-bottom:16px; text-align:center;"></div>
-
-        <button id="tfcVerifyBtn" onclick="verifyTrueFans()" style="width:100%; padding:14px; border:none; border-radius:10px; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Verify My Account</button>
-
-        <div style="text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid #1e1e2e;">
-            <p style="color:#94a3b8; font-size:14px; font-weight:600; margin-bottom:14px;">Don't have a TrueFans CONNECT account?</p>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <a href="https://truefansconnect.com" target="_blank" rel="noopener noreferrer" style="display:block; padding:12px; border-radius:10px; background:#1a1a2e; border:1px solid #10b981; color:#10b981; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign Up for TrueFans CONNECT (Free) &mdash; Then Come Back</a>
-                <a href="/admin/login?plan=paid" onclick="closeVerifyModal();" style="display:block; padding:12px; border-radius:10px; background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Start TrueFans LOOP for $37/mo</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Structured Data -->
 <script type="application/ld+json">
