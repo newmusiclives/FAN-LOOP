@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Launch Toolkit | ViralLoop</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0F;--bg2:#12121A;--bg3:#1A1A2E;--bg4:#22223A;--text:#F8FAFC;--text2:#94A3B8;--purple:#8B5CF6;--purple2:#7C3AED;--green:#10B981;--green2:#059669;--border:#2A2A3E;--red:#EF4444;--blue:#3B82F6;--pink:#EC4899;--yellow:#F59E0B;--orange:#F97316}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+a{color:var(--purple);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{background:linear-gradient(135deg,#1a0533 0%,#0A0A0F 50%,#031a12 100%);border-bottom:1px solid var(--border);padding:40px 20px;text-align:center}
+.header h1{font-size:2.4rem;background:linear-gradient(135deg,var(--purple),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.header p{color:var(--text2);font-size:1.1rem;max-width:600px;margin:0 auto}
+
+/* Container */
+.container{max-width:1200px;margin:0 auto;padding:20px}
+
+/* Sections */
+.section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden}
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;user-select:none;transition:background .2s}
+.section-header:hover{background:var(--bg3)}
+.section-header h2{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+.section-badge{background:var(--purple);color:#fff;font-size:.75rem;padding:2px 10px;border-radius:20px;font-weight:600}
+.section-toggle{font-size:1.5rem;color:var(--text2);transition:transform .3s}
+.section-toggle.open{transform:rotate(180deg)}
+.section-body{padding:0 24px 24px;display:none}
+.section-body.open{display:block}
+
+/* Cards */
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px;position:relative}
+.card-title{font-size:1.1rem;font-weight:700;margin-bottom:12px;color:var(--purple);display:flex;align-items:center;gap:8px}
+.card-subtitle{font-size:.85rem;color:var(--text2);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+
+/* Copy Button */
+.copy-btn{background:var(--bg4);border:1px solid var(--border);color:var(--text2);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;transition:all .2s;display:inline-flex;align-items:center;gap:4px}
+.copy-btn:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+.copy-btn.copied{background:var(--green);color:#fff;border-color:var(--green)}
+.copy-wrap{display:flex;justify-content:flex-end;margin-top:10px;gap:6px;flex-wrap:wrap}
+
+/* Content blocks */
+.content-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin:8px 0;font-size:.92rem;white-space:pre-wrap;line-height:1.7;color:var(--text)}
+.tweet-block{background:var(--bg);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 16px;margin:8px 0;font-size:.92rem;line-height:1.6}
+.tweet-label{font-size:.75rem;color:var(--blue);font-weight:700;margin-bottom:4px;text-transform:uppercase}
+
+/* Platform Tags */
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.75rem;font-weight:600;margin-right:4px}
+.tag-ig{background:#E1306C22;color:#E1306C;border:1px solid #E1306C44}
+.tag-tt{background:#00f2ea22;color:#00f2ea;border:1px solid #00f2ea44}
+.tag-tw{background:#1DA1F222;color:#1DA1F2;border:1px solid #1DA1F244}
+.tag-type{background:var(--purple)22;color:var(--purple);border:1px solid #8B5CF644}
+
+/* Calendar Grid */
+.calendar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.cal-cell{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;transition:border-color .2s}
+.cal-cell:hover{border-color:var(--purple)}
+.cal-day{font-weight:800;font-size:1.1rem;color:var(--purple);margin-bottom:6px}
+.cal-platform{font-size:.8rem;margin-bottom:4px}
+.cal-desc{font-size:.82rem;color:var(--text2);line-height:1.4}
+
+/* Link in Bio Mockup */
+.bio-mockup{max-width:380px;margin:0 auto;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:30px 20px;text-align:center}
+.bio-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--green));margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.bio-name{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.bio-desc{font-size:.85rem;color:var(--text2);margin-bottom:20px}
+.bio-link{display:block;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;text-align:center;font-weight:600;transition:all .2s;color:var(--text)}
+.bio-link:hover{border-color:var(--purple);background:var(--bg4);text-decoration:none}
+.bio-link.primary{background:linear-gradient(135deg,var(--purple),var(--purple2));border:none;color:#fff}
+.bio-socials{display:flex;justify-content:center;gap:16px;margin-top:16px}
+.bio-socials span{width:36px;height:36px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.9rem}
+
+/* Best Practices */
+.bp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.bp-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px}
+.bp-card h4{margin-bottom:12px;color:var(--green);font-size:1rem}
+.bp-card ul{list-style:none;padding:0}
+.bp-card li{padding:6px 0;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--text2)}
+.bp-card li:last-child{border-bottom:none}
+.bp-card li strong{color:var(--text)}
+
+/* Utility */
+.mt-8{margin-top:8px}
+.mt-16{margin-top:16px}
+.mb-16{margin-bottom:16px}
+.flex-gap{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.divider{height:1px;background:var(--border);margin:16px 0}
+
+@media(max-width:768px){
+  .header h1{font-size:1.6rem}
+  .calendar-grid{grid-template-columns:1fr 1fr}
+  .section-header h2{font-size:1.1rem}
+  .bp-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .calendar-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Social Media Launch Toolkit</h1>
+  <p>Everything you need to launch your music across Instagram, TikTok, and Twitter/X. Copy-ready scripts, templates, and strategies for a full 30-day campaign.</p>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: 30-DAY CONTENT CALENDAR -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>30-Day Content Calendar <span class="section-badge">30 Days</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">A complete day-by-day posting plan rotating across Instagram, TikTok, and Twitter/X. Each day includes the platform, content type, and a brief description of what to post.</p>
+    <div class="calendar-grid">
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 1</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Reel</span></div>
+        <div class="cal-desc">Teaser clip: 15-second snippet of the hook of your new song with text overlay "Something new is coming" and a countdown sticker.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 2</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Behind-the-scenes studio footage showing the moment you finished recording. Raw and authentic, no polish needed. Caption teases the release.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 3</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Thread</span></div>
+        <div class="cal-desc">4-tweet thread telling the story behind why you wrote this song. Share the emotional origin, the creative process, and end with a teaser link.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 4</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Story</span></div>
+        <div class="cal-desc">Poll story: "What vibe are you feeling today?" with options that relate to your song's mood. Follow up with a snippet tied to the winning answer.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 5</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Transition video: Start in casual clothes, snap transition to performance mode with your song playing. Use trending transition format.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 6</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Tweet</span></div>
+        <div class="cal-desc">Single tweet with cover art reveal. "Here it is. [SONG TITLE] drops [DATE]. This one is personal." Pin this tweet to your profile.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 7</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Carousel</span></div>
+        <div class="cal-desc">5-slide carousel: Slide 1 cover art, Slides 2-4 handwritten lyrics from key verses, Slide 5 release date announcement with pre-save link in bio CTA.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 8</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Lyric breakdown: Pick the most emotional lyric, display it on screen, and explain what it means to you in 30 seconds. Genuine and unscripted feel.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 9</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Poll</span></div>
+        <div class="cal-desc">Engagement poll: "What matters most to you in a song?" with options like Lyrics, Beat, Vibe, Vocals. Reply to voters with how your song delivers on their pick.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 10</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Reel</span></div>
+        <div class="cal-desc">Acoustic or stripped-back version of the chorus. Sit with a guitar or at a piano. Intimate setting, good lighting. CTA: "Full version drops soon."</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 11</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Challenge launch: Create a simple dance move or gesture tied to your chorus. Do it yourself first. Use text: "Can you do this? Show me." with your song as the sound.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 12</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Thread</span></div>
+        <div class="cal-desc">Production thread: 5 tweets breaking down how the beat was made, what instruments were used, who produced it, and what inspired the sonic direction.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 13</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Story</span></div>
+        <div class="cal-desc">Countdown story with the official countdown sticker set to release day. Add a question box: "What are you hoping this song sounds like?"</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 14</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">React to your own song: Film yourself hearing the final master for the first time. Genuine reaction content performs extremely well on TikTok.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 15</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Reel</span></div>
+        <div class="cal-desc">Release day announcement Reel. High energy, fast cuts of you in the studio, cover art, streaming platforms. Text overlay: "OUT NOW" with link in bio CTA.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 16</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Release day TikTok: "I just dropped my new song and I need you to hear it." Play the best 15 seconds. Point to the link in bio. High energy delivery.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 17</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Thread</span></div>
+        <div class="cal-desc">Release day thread: Tweet 1 announces the drop with link. Tweets 2-4 share lyrics, behind-the-scenes photos. Tweet 5 asks fans to quote-tweet with their reaction.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 18</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Story</span></div>
+        <div class="cal-desc">Share every fan reaction, DM, and comment as a story repost. Add "Thank you" stickers and heart emojis. Show genuine gratitude for early listeners.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 19</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Duet-ready content: Post a clip specifically designed for duets. Sing the chorus and leave space for others to harmonize, react, or add their take.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 20</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Tweet</span></div>
+        <div class="cal-desc">Milestone celebration tweet: "We hit [NUMBER] streams in the first week. I started this in my bedroom. Thank you." Authentic gratitude with a screenshot of stats.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 21</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Reel</span></div>
+        <div class="cal-desc">Fan compilation Reel: Stitch together clips of fans singing along, screenshots of comments, and streaming stats. Set it to your song. Community celebration.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 22</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Storytime format: "The real story behind [SONG TITLE]" with you talking directly to camera. Vulnerable, honest, let people connect to the meaning.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 23</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Thread</span></div>
+        <div class="cal-desc">Lessons learned thread: "5 things I learned releasing [SONG TITLE]" covering what surprised you, what worked, what you would do differently. Value-driven content.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 24</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Carousel</span></div>
+        <div class="cal-desc">Lyric art carousel: Each slide is a beautifully designed lyric quote from the song. Shareable, saveable content. Last slide has streaming link CTA.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 25</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Use a trending sound or format but remix it to promote your song. Ride the algorithm wave by pairing trending content with your music promotion.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 26</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Tweet</span></div>
+        <div class="cal-desc">Direct ask tweet: "If [SONG TITLE] has been on repeat for you, drop a quote tweet and tell me your favorite line. I read every single one." Engagement driver.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 27</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Story</span></div>
+        <div class="cal-desc">Interactive quiz story: "How well do you know [SONG TITLE]?" with quiz stickers about lyrics, the inspiration, and fun facts about the recording process.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 28</div>
+        <div class="cal-platform"><span class="tag tag-tt">TikTok</span> <span class="tag tag-type">Video</span></div>
+        <div class="cal-desc">Live snippet or concert-style performance of the song. Even if filmed in your room, set up lighting and perform like you are on stage. Energy matters.</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 29</div>
+        <div class="cal-platform"><span class="tag tag-ig">Instagram</span> <span class="tag tag-type">Reel</span></div>
+        <div class="cal-desc">Thank you Reel: Montage of the entire 30-day journey. Studio clips, release day, fan reactions, milestones. Text: "This is just the beginning."</div>
+      </div>
+
+      <div class="cal-cell">
+        <div class="cal-day">Day 30</div>
+        <div class="cal-platform"><span class="tag tag-tw">Twitter/X</span> <span class="tag tag-type">Thread</span></div>
+        <div class="cal-desc">Wrap-up thread: Share final stats, favorite fan moments, biggest surprises, and tease what is coming next. End with a heartfelt thank you to everyone who listened.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: 10 INSTAGRAM STORY TEMPLATES -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>Instagram Story Templates <span class="section-badge">10 Templates</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">Fully written Instagram Story sequences. Each template includes the slide layout, text overlay copy, call-to-action text, and sticker suggestions you can apply directly.</p>
+
+    <!-- Story Template 1 -->
+    <div class="card">
+      <div class="card-title">Story Template 1: The Countdown Reveal</div>
+      <div class="content-block" id="story-1"><strong>Slide Layout:</strong> Full-screen dark background with cover art centered at 60% opacity. Text stacked vertically in the center.
+
+<strong>Text Overlay Copy:</strong>
+"I have been working on something for months.
+It kept me up at night.
+It made me cry in the studio.
+And now it is finally yours."
+
+<strong>CTA Text:</strong>
+"Swipe up to pre-save [SONG TITLE] before it drops"
+
+<strong>Sticker Suggestions:</strong>
+- Countdown sticker set to your release date and time
+- Music sticker with a snippet of the song if available
+- Emoji slider sticker with fire emoji asking "How hyped are you?"</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-1',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 2 -->
+    <div class="card">
+      <div class="card-title">Story Template 2: The Behind-the-Scenes Dump</div>
+      <div class="content-block" id="story-2"><strong>Slide Layout:</strong> Multi-slide sequence using raw photos and short video clips from the studio. Each slide slightly tilted with handwritten-style text annotations.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: "Studio dump incoming. Here is what making [SONG TITLE] actually looked like."
+Slide 2: (Photo of recording setup) "3 AM. Fifth take. Still not satisfied."
+Slide 3: (Video clip of you listening back) "The moment we knew the chorus was right."
+Slide 4: (Photo of notes or lyrics) "The original lyrics looked nothing like the final version."
+Slide 5: "This is dropping [DATE]. You are not ready."
+
+<strong>CTA Text:</strong>
+"Link in bio to pre-save. Trust me on this one."
+
+<strong>Sticker Suggestions:</strong>
+- Poll sticker on Slide 2: "Night owl sessions or morning sessions?"
+- Question box on Slide 4: "What do you want to know about this song?"
+- Link sticker on Slide 5 pointing to pre-save page</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-2',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 3 -->
+    <div class="card">
+      <div class="card-title">Story Template 3: The Lyric Tease</div>
+      <div class="content-block" id="story-3"><strong>Slide Layout:</strong> Black background with white serif text centered. Each slide reveals one line of the chorus, building anticipation. Final slide has the cover art.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: (Single line, large text) "You said forever"
+Slide 2: (Single line, large text) "But forever changed its mind"
+Slide 3: (Single line, large text) "Now I am standing in the wreckage"
+Slide 4: (Single line, large text) "Of everything we left behind"
+Slide 5: (Cover art with text) "[SONG TITLE] by [ARTIST NAME] - Out [DATE]"
+
+<strong>CTA Text:</strong>
+"These words hit different when you hear the melody. Pre-save now, link in bio."
+
+<strong>Sticker Suggestions:</strong>
+- Emoji slider on Slide 3 with crying face: "How hard does this hit?"
+- Music sticker on Slide 5 if song is available
+- Countdown sticker on final slide</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-3',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 4 -->
+    <div class="card">
+      <div class="card-title">Story Template 4: The Fan Hype Builder</div>
+      <div class="content-block" id="story-4"><strong>Slide Layout:</strong> Alternating between screenshots of fan DMs and comments (with permission) and your reactions. Use the "Add Yours" sticker format.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: "You all have been asking when new music is coming..."
+Slide 2: (Screenshot of DM asking about new music) "This one is for you."
+Slide 3: (Screenshot of another comment) "And you."
+Slide 4: "I heard you. [SONG TITLE] arrives [DATE]."
+Slide 5: "Share this story if you are ready for it. Let me see how many of us there are."
+
+<strong>CTA Text:</strong>
+"Add this to your story and tag me. I will repost every single one."
+
+<strong>Sticker Suggestions:</strong>
+- "Add Yours" sticker on Slide 5 with prompt "Show me your hype face"
+- Mention sticker tagging your own account
+- Link sticker to pre-save page</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-4',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 5 -->
+    <div class="card">
+      <div class="card-title">Story Template 5: The Release Day Blitz</div>
+      <div class="content-block" id="story-5"><strong>Slide Layout:</strong> High-energy, bright colors matching your cover art palette. Quick slides with large bold text. Celebratory vibe.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: (All caps, huge text) "IT IS HERE."
+Slide 2: (Cover art full screen) "[SONG TITLE] IS OUT RIGHT NOW."
+Slide 3: "Available everywhere you listen to music. Spotify. Apple Music. YouTube. All of it."
+Slide 4: "I need a favor. Listen to it once. If it hits, add it to a playlist. Share it with one friend. That is all I am asking."
+Slide 5: "Thank you for being here since before the streams. You are the reason this exists."
+
+<strong>CTA Text:</strong>
+"Go listen right now. Link in bio. Come back and tell me your favorite part."
+
+<strong>Sticker Suggestions:</strong>
+- Music sticker playing the song on Slide 2
+- Link sticker on Slides 3, 4, and 5
+- Question box on Slide 5: "What is your favorite lyric?"
+- Emoji slider with headphone emoji</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-5',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 6 -->
+    <div class="card">
+      <div class="card-title">Story Template 6: The Personal Voice Note</div>
+      <div class="content-block" id="story-6"><strong>Slide Layout:</strong> Simple selfie-style video story, close-up face, casual setting like your bedroom or car. No filters, no production. Authenticity is the hook.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1 (Video, talking to camera): "Hey, I want to tell you something real quick. I wrote a song that scares me a little bit. It is the most honest thing I have ever put out. It is called [SONG TITLE] and it comes out [DATE]."
+Slide 2 (Still image, black bg): "I do not usually get nervous about releases but this one is different. This one is me with no walls up."
+Slide 3: "If you have ever felt like the real you was too much for people, this song is going to feel like home."
+
+<strong>CTA Text:</strong>
+"Pre-save it. Listen when it drops. And DM me if it resonates. I promise I will read it."
+
+<strong>Sticker Suggestions:</strong>
+- DM Me sticker on Slide 3
+- Countdown sticker on Slide 2
+- Location sticker if relevant to the song's story</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-6',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 7 -->
+    <div class="card">
+      <div class="card-title">Story Template 7: The Before and After</div>
+      <div class="content-block" id="story-7"><strong>Slide Layout:</strong> Split-screen comparison format. Left side shows "before" (early demos, voice memos, rough ideas), right side shows "after" (final polished version).
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: "Every song starts somewhere. Here is where [SONG TITLE] began."
+Slide 2: (Audio clip of early voice memo) "This was the first voice memo. Recorded at 2 AM in my notes app."
+Slide 3: (Audio clip of rough demo) "This was the first demo. Still finding the vibe."
+Slide 4: (Snippet of final song) "And this is what it became."
+Slide 5: "From a 2 AM idea to a fully produced track. [SONG TITLE] drops [DATE]."
+
+<strong>CTA Text:</strong>
+"Which version do you like better? Vote below. Full song link in bio."
+
+<strong>Sticker Suggestions:</strong>
+- Poll sticker on Slide 5: "Voice memo version or final version?"
+- Music sticker on Slide 4
+- Countdown sticker on Slide 5</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-7',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 8 -->
+    <div class="card">
+      <div class="card-title">Story Template 8: The Playlist Pitch</div>
+      <div class="content-block" id="story-8"><strong>Slide Layout:</strong> Clean aesthetic with Spotify/Apple Music green or pink tones. Screenshots of your song on streaming platforms with overlay text.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: "Quick favor that takes 10 seconds and means the world to me."
+Slide 2: "Go to Spotify (or Apple Music, or wherever you listen)."
+Slide 3: "Search for [SONG TITLE] by [ARTIST NAME]."
+Slide 4: "Listen to it. If you like it, add it to one of your playlists. Any playlist."
+Slide 5: "That one add tells the algorithm to show my music to more people. You literally have the power to change an independent artist's career."
+
+<strong>CTA Text:</strong>
+"Will you do it? Tap the link in bio and add [SONG TITLE] to your playlist today."
+
+<strong>Sticker Suggestions:</strong>
+- Poll sticker on Slide 1: "Will you help me out?" Yes / Obviously
+- Link sticker on Slide 5
+- "Add Yours" sticker: "Screenshot your playlist with my song in it"</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-8',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 9 -->
+    <div class="card">
+      <div class="card-title">Story Template 9: The Collab Shoutout</div>
+      <div class="content-block" id="story-9"><strong>Slide Layout:</strong> Tag-heavy story designed to get reshared by everyone involved in the project. Photos of collaborators, producer, mixer, visual artist.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: "It takes a village to make a song. Here is the team behind [SONG TITLE]."
+Slide 2: (Photo or tag of producer) "The beat that started it all. @[PRODUCER] brought this vision to life from day one."
+Slide 3: (Photo or tag of mix engineer) "@[ENGINEER] mixed this until it sounded exactly like what I heard in my head."
+Slide 4: (Photo or tag of cover artist) "The artwork by @[ARTIST] captured the feeling before you even press play."
+Slide 5: "Go show these people love. And go listen to what we made together."
+
+<strong>CTA Text:</strong>
+"Tag someone who needs to hear this song. Link in bio to listen now."
+
+<strong>Sticker Suggestions:</strong>
+- Mention stickers for each collaborator
+- Link sticker on final slide
+- "Support Small Artists" or custom sticker if available</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-9',this)">Copy</button></div>
+    </div>
+
+    <!-- Story Template 10 -->
+    <div class="card">
+      <div class="card-title">Story Template 10: The One-Week Anniversary</div>
+      <div class="content-block" id="story-10"><strong>Slide Layout:</strong> Reflective tone. Muted color palette. Mix of stats screenshots, fan messages, and personal reflection text on simple backgrounds.
+
+<strong>Text Overlay Copy:</strong>
+Slide 1: "[SONG TITLE] has been out for one week. Here is what happened."
+Slide 2: (Screenshot of stream count) "You gave this song [NUMBER] streams in 7 days. I am still processing that."
+Slide 3: (Screenshot of best fan DM) "Messages like this are why I make music. Every single one of you matters."
+Slide 4: "One week ago I was terrified to put this out. Today I am grateful I did."
+Slide 5: "If you have not heard it yet, there is still time. If you have, thank you for being part of this."
+
+<strong>CTA Text:</strong>
+"Share this story if [SONG TITLE] has been on repeat. Let us keep this going. Link in bio."
+
+<strong>Sticker Suggestions:</strong>
+- Emoji slider with heart eyes: "Rate [SONG TITLE]"
+- "Add Yours" sticker: "Your favorite lyric from [SONG TITLE]"
+- Link sticker
+- Question box: "What should the next song be about?"</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('story-10',this)">Copy</button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: 10 TIKTOK VIDEO SCRIPTS -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>TikTok Video Scripts <span class="section-badge">10 Scripts</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">Complete TikTok scripts with hooks, body content, CTAs, captions, and hashtags. Replace [ARTIST NAME], [SONG TITLE], and {link} with your actual details.</p>
+
+    <!-- TikTok Script 1 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 1: The Raw Hook</div>
+      <div class="content-block" id="tt-1"><strong>Hook (First 3 Seconds):</strong>
+(Text on screen, looking directly at camera)
+"I wrote a song that made my producer cry."
+
+<strong>Body (15-30 Seconds):</strong>
+"I am not even exaggerating. We were in the studio working on [SONG TITLE] and when I finished recording the final verse, I looked over and my producer had his head down. I thought something was wrong. He looked up and said, 'That is the one. Do not change a single word.' That is when I knew this song was different. It is the most honest thing I have ever written. It is about the moment you realize you have been holding onto something that already let go of you."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Text on screen with pointing down gesture)
+"Link in bio to hear the song that broke my producer. [SONG TITLE] by [ARTIST NAME] is out now."
+
+<strong>Caption:</strong>
+When your producer feels it before the audience does, you know it is real. [SONG TITLE] is out now, link in bio {link}
+
+<strong>Hashtags:</strong>
+#NewMusic #IndieArtist #SongwriterTikTok #MusicTikTok #StudioSession #NewSong #IndependentArtist #MusicRelease #[ARTISTNAME] #[SONGTITLE]</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-1',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 2 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 2: The Challenge Starter</div>
+      <div class="content-block" id="tt-2"><strong>Hook (First 3 Seconds):</strong>
+(Text on screen, upbeat energy)
+"New song challenge. Can you hit this note?"
+
+<strong>Body (15-30 Seconds):</strong>
+"Okay so I just dropped a song called [SONG TITLE] and there is this one part in the chorus that I can barely even hit myself. I want to see if anyone on TikTok can do it. Here is the part..."
+(Play the challenging vocal section for 5 seconds)
+"That right there. That note. I want to see you try it. Duet this video, stitch it, I do not care. Just let me hear your version. The best one gets a shoutout and I will put you on my story."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Text on screen)
+"Duet this with your attempt. [SONG TITLE] link in bio."
+
+<strong>Caption:</strong>
+I dare you to hit this note. [SONG TITLE] is out now and this part of the chorus is no joke. Show me what you got, duet this {link}
+
+<strong>Hashtags:</strong>
+#SingChallenge #CanYouSingThis #NewMusic #VocalChallenge #DuetThis #[SONGTITLE] #[ARTISTNAME] #IndieMusic #SingerChallenge #MusicChallenge</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-2',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 3 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 3: The Story Behind the Song</div>
+      <div class="content-block" id="tt-3"><strong>Hook (First 3 Seconds):</strong>
+(Sitting down, serious face, text on screen)
+"The real reason I wrote [SONG TITLE]."
+
+<strong>Body (15-30 Seconds):</strong>
+"A lot of people think songwriting is sitting down with a guitar and words just flow out. That is not how [SONG TITLE] happened. This song came from the worst night of my life. I will not go into all the details but I will tell you this. I was sitting in my car in a parking lot at midnight and I could not drive home because I could not stop shaking. I opened my notes app and I just started typing everything I was feeling. No filter, no editing, just raw emotion. Three months later those notes became [SONG TITLE]. Every word in this song is real. Every line actually happened."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Soft tone, text on screen)
+"If you have ever had a night like that, this song is for you. Link in bio."
+
+<strong>Caption:</strong>
+Some songs are written. This one was lived. [SONG TITLE] is out everywhere now. If it finds you at the right time, let me know {link}
+
+<strong>Hashtags:</strong>
+#StorytimeTikTok #Songwriter #BehindTheSong #RealTalk #MusicWithMeaning #IndieArtist #NewRelease #[SONGTITLE] #[ARTISTNAME] #EmotionalMusic</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-3',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 4 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 4: The Transition Flex</div>
+      <div class="content-block" id="tt-4"><strong>Hook (First 3 Seconds):</strong>
+(Casual clothes, messy hair, no makeup, text on screen)
+"What I look like writing music vs. performing it"
+
+<strong>Body (15-30 Seconds):</strong>
+(First 5 seconds: Show yourself in your most casual, messy creative mode. Pajamas, messy room, eating snacks, scribbling in a notebook. Play a rough demo or voice memo of [SONG TITLE] in the background.)
+(Snap transition at the 8-second mark)
+(Next 15 seconds: Full glam or performance mode. Good lighting, good outfit, confident energy. Lip sync or perform the polished final version of [SONG TITLE]. Make it dramatic. Own the camera.)
+(Hold the final pose for 2 seconds)
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Text on screen over the final pose)
+"The glow up is real. [SONG TITLE] out now. Link in bio."
+
+<strong>Caption:</strong>
+The creative process is not pretty but the final product hits different. [SONG TITLE] is officially out. Link in bio to listen {link}
+
+<strong>Hashtags:</strong>
+#TransitionTikTok #GlowUp #MusicianLife #BeforeAndAfter #NewMusic #IndieArtist #[SONGTITLE] #[ARTISTNAME] #MusicTransition #ArtistLife</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-4',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 5 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 5: The Unpopular Opinion Hook</div>
+      <div class="content-block" id="tt-5"><strong>Hook (First 3 Seconds):</strong>
+(Direct to camera, slightly controversial tone, text on screen)
+"Independent artists make better music than signed artists. Here is proof."
+
+<strong>Body (15-30 Seconds):</strong>
+"I know that sounds bold but hear me out. When you do not have a label telling you what is marketable, you make music that is actually real. Nobody told me to write [SONG TITLE]. No A and R shaped the sound. No focus group approved the lyrics. I sat alone in my room and poured my actual life into this song. And I think you can hear the difference. I am not saying major label music is bad. I am saying there is something different about music that was made because the artist could not not make it. [SONG TITLE] is that kind of song."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Text on screen)
+"Prove me right. Listen to [SONG TITLE]. Link in bio."
+
+<strong>Caption:</strong>
+No label. No budget. No focus groups. Just real music made by a real person. [SONG TITLE] is out now and I think you can hear the difference {link}
+
+<strong>Hashtags:</strong>
+#UnpopularOpinion #IndependentMusic #IndieVsMajor #RealMusic #NoLabel #DIYMusician #[SONGTITLE] #[ARTISTNAME] #MusicDebate #SupportIndieArtists</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-5',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 6 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 6: The Green Screen Breakdown</div>
+      <div class="content-block" id="tt-6"><strong>Hook (First 3 Seconds):</strong>
+(Green screen effect with your streaming stats or cover art behind you, text on screen)
+"I released a song with zero followers. Here is what happened."
+
+<strong>Body (15-30 Seconds):</strong>
+"Three months ago I had less than 100 followers on every platform. No connections in the music industry. No budget for marketing. I recorded [SONG TITLE] in my bedroom, mixed it with YouTube tutorials, and uploaded it to every streaming platform I could find. Then I started posting on TikTok. Not viral dance content. Just me talking about my music the way I am talking to you right now. I showed up every day. Some videos got 200 views. Some got 2,000. But every single one brought new listeners."
+(Show stats on green screen)
+"As of today, [SONG TITLE] has been streamed [NUMBER] times. All organic. All from people like you who took a chance on an unknown artist."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Text on screen)
+"Be one of those people. Link in bio to listen to [SONG TITLE]."
+
+<strong>Caption:</strong>
+No connections. No budget. No viral moment. Just consistency and a song I believe in. [SONG TITLE] is out now {link}
+
+<strong>Hashtags:</strong>
+#IndieArtist #GrowthStory #MusicMarketing #BedroomProducer #ZeroToHero #NewArtist #[SONGTITLE] #[ARTISTNAME] #MusicJourney #DIYMusic</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-6',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 7 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 7: The Comment Response</div>
+      <div class="content-block" id="tt-7"><strong>Hook (First 3 Seconds):</strong>
+(Reply to a comment format, or fake a comment on screen, text reads)
+"Someone said my music will never make it. So I wrote this."
+
+<strong>Body (15-30 Seconds):</strong>
+"I got a comment last week that said, 'Bro just get a real job.' And honestly, for a second, it stung. Because there are days where I wonder the same thing. But then I remember why I started. I did not start making music to get famous. I started because music saved my life and I thought maybe it could save someone else's too. So I went back into the studio and I finished [SONG TITLE]. And I put everything that comment made me feel into the bridge. You know what is funny? That comment motivated me more than any compliment ever has. So thank you to whoever wrote it."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Looking at camera, confident)
+"Go listen to [SONG TITLE] and tell me if I should get a real job. Link in bio."
+
+<strong>Caption:</strong>
+They said get a real job. I said listen to [SONG TITLE] and get back to me. Link in bio to decide for yourself {link}
+
+<strong>Hashtags:</strong>
+#HatersMotivateMe #ProveThemWrong #IndieArtist #MusicIsMyJob #Motivation #NewMusic #[SONGTITLE] #[ARTISTNAME] #ArtistStory #NeverGiveUp</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-7',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 8 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 8: The Sing-Along Invite</div>
+      <div class="content-block" id="tt-8"><strong>Hook (First 3 Seconds):</strong>
+(Close up, excited energy, text on screen)
+"Learn this chorus in 10 seconds. I bet you can not stop singing it."
+
+<strong>Body (15-30 Seconds):</strong>
+"Okay, I am going to teach you the chorus of my new song [SONG TITLE] right now. Ready? It goes like this..."
+(Sing the chorus slowly, line by line, with lyrics appearing on screen)
+"Line one..." (sing it, pause)
+"Line two..." (sing it, pause)
+"Now the whole thing together..."
+(Sing the full chorus at normal speed)
+"See? You already know it. Now it is stuck in your head. You are welcome. Or I am sorry. Either way, you are going to be singing this for the rest of the day."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Grinning at camera, text on screen)
+"Full song in bio. Duet me singing along. [SONG TITLE] by [ARTIST NAME]."
+
+<strong>Caption:</strong>
+I am giving you an earworm and I am not sorry about it. Learn the chorus of [SONG TITLE] in 10 seconds and try not to sing it all day {link}
+
+<strong>Hashtags:</strong>
+#SingAlong #CatchyChorus #EarWorm #LearnThisSong #NewMusic #[SONGTITLE] #[ARTISTNAME] #SingWithMe #MusicTikTok #Catchy</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-8',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 9 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 9: The Day in the Life</div>
+      <div class="content-block" id="tt-9"><strong>Hook (First 3 Seconds):</strong>
+(Morning, alarm going off, text on screen)
+"A day in the life of an independent artist on release day."
+
+<strong>Body (15-30 Seconds):</strong>
+(Quick montage format, each clip 2-3 seconds)
+"5 AM: Woke up before my alarm. Could not sleep. Today is the day."
+"6 AM: Refreshing Spotify every 30 seconds. One stream. It was me."
+"8 AM: Posted on every platform. Texted every friend. Called my mom."
+"10 AM: First stream from a stranger. Almost cried in the grocery store."
+"12 PM: Ten streams. Twenty streams. Each one is a real person pressing play."
+"3 PM: Someone DMed me saying the song made them cry on their commute."
+"6 PM: Sitting here realizing this is actually happening."
+"9 PM: One hundred streams. For a major artist that is nothing. For me, that is one hundred people who chose to spend three minutes of their life with my art."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Genuine emotion, text on screen)
+"Be stream one hundred and one. [SONG TITLE] link in bio."
+
+<strong>Caption:</strong>
+Release day as an independent artist is the most terrifying and beautiful experience. [SONG TITLE] is out now and every single stream means the world {link}
+
+<strong>Hashtags:</strong>
+#DayInTheLife #ReleaseDay #IndieArtist #IndependentMusic #FirstRelease #[SONGTITLE] #[ARTISTNAME] #MusicianLife #StreamingLife #NewRelease</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-9',this)">Copy</button></div>
+    </div>
+
+    <!-- TikTok Script 10 -->
+    <div class="card">
+      <div class="card-title">TikTok Script 10: The Comparison Trend</div>
+      <div class="content-block" id="tt-10"><strong>Hook (First 3 Seconds):</strong>
+(Split screen or side by side format, text on screen)
+"Songs about heartbreak on the radio vs. songs about heartbreak from indie artists"
+
+<strong>Body (15-30 Seconds):</strong>
+(Left side or first half: Play a generic-sounding pop beat, lip sync some cliche lyrics exaggeratedly)
+"Radio version: 'Oh baby I miss you, come back to me, I will never let you go again, baby baby.'"
+(Snap transition to right side or second half: Play [SONG TITLE], genuine performance)
+"My version:"
+(Let your actual song play for 10-15 seconds. Pick the most emotionally impactful part. No commentary needed, let the music speak.)
+(Return to camera)
+"That is the difference between writing a song because you have to fill an album and writing a song because you could not keep it inside anymore."
+
+<strong>CTA (Final 3 Seconds):</strong>
+(Text on screen)
+"Real music still exists. [SONG TITLE] link in bio."
+
+<strong>Caption:</strong>
+I am not knocking pop music but there is a difference between a song that was written for a market and a song that was written from a scar. [SONG TITLE] is out now {link}
+
+<strong>Hashtags:</strong>
+#RadioVsIndie #RealMusic #Songwriting #IndieVsPop #Authenticity #[SONGTITLE] #[ARTISTNAME] #MusicComparison #NewMusic #HeartbreakSong</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('tt-10',this)">Copy</button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: 10 TWITTER/X THREAD TEMPLATES -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>Twitter/X Thread Templates <span class="section-badge">10 Threads</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">Complete 4-5 tweet threads ready to copy and post. Each tweet is within character limits and designed for maximum engagement.</p>
+
+    <!-- Thread 1 -->
+    <div class="card">
+      <div class="card-title">Thread 1: The Origin Story</div>
+      <div class="tweet-block" id="tw-1-1"><div class="tweet-label">Tweet 1 of 5</div>I wrote my new song [SONG TITLE] at 2 AM in a parking lot because I could not drive home.
+
+Not because I was drunk. Because I was feeling too much to function.
+
+Here is the story behind the song. A thread.</div>
+      <div class="tweet-block" id="tw-1-2"><div class="tweet-label">Tweet 2 of 5</div>It started with a text message. One of those messages that changes everything. You read it and the ground shifts under you.
+
+I sat in my car staring at my phone for twenty minutes. Then I opened my notes app and started typing.</div>
+      <div class="tweet-block" id="tw-1-3"><div class="tweet-label">Tweet 3 of 5</div>Those notes became the first verse of [SONG TITLE]. Word for word. I did not edit them. I did not make them sound prettier or more poetic.
+
+The raw version was the right version. Sometimes the first draft is the truest one.</div>
+      <div class="tweet-block" id="tw-1-4"><div class="tweet-label">Tweet 4 of 5</div>It took me three months to finish the song because every time I tried to record the bridge, my voice would crack.
+
+My producer told me to leave the cracks in. He said, "People do not connect with perfect. They connect with real."
+
+So I left them in.</div>
+      <div class="tweet-block" id="tw-1-5"><div class="tweet-label">Tweet 5 of 5</div>[SONG TITLE] is out now on every platform.
+
+If you have ever sat in your car because the world felt like too much, this song is yours.
+
+Listen here: {link}
+
+I would love to know if it finds you the way it found me.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-1-1','tw-1-2','tw-1-3','tw-1-4','tw-1-5'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 2 -->
+    <div class="card">
+      <div class="card-title">Thread 2: The Independent Artist Manifesto</div>
+      <div class="tweet-block" id="tw-2-1"><div class="tweet-label">Tweet 1 of 5</div>I do not have a record label.
+I do not have a manager.
+I do not have a marketing budget.
+
+What I have is a song called [SONG TITLE] and the internet.
+
+Here is why that is enough.</div>
+      <div class="tweet-block" id="tw-2-2"><div class="tweet-label">Tweet 2 of 5</div>The music industry wants you to believe you need permission to be an artist. You need to be discovered. You need to be chosen.
+
+That is not true anymore. I recorded [SONG TITLE] in my bedroom. I distributed it myself. And now you are reading about it.</div>
+      <div class="tweet-block" id="tw-2-3"><div class="tweet-label">Tweet 3 of 5</div>Every stream I get is earned. Not bought, not playlisted by an algorithm, not pushed by a PR team.
+
+Every single person who listens to [SONG TITLE] found it because another real person shared it. That is how music is supposed to spread.</div>
+      <div class="tweet-block" id="tw-2-4"><div class="tweet-label">Tweet 4 of 5</div>I am not asking for pity. I am asking for three minutes of your time.
+
+Listen to [SONG TITLE]. If it moves you, share it with one person. That is the entire marketing strategy. Real music shared by real people.</div>
+      <div class="tweet-block" id="tw-2-5"><div class="tweet-label">Tweet 5 of 5</div>No gatekeepers. No middlemen. Just me and you.
+
+[SONG TITLE] is streaming everywhere: {link}
+
+If you believe independent artists deserve to be heard, RT this thread. Let us prove the old model wrong.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-2-1','tw-2-2','tw-2-3','tw-2-4','tw-2-5'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 3 -->
+    <div class="card">
+      <div class="card-title">Thread 3: The Making Of</div>
+      <div class="tweet-block" id="tw-3-1"><div class="tweet-label">Tweet 1 of 4</div>How [SONG TITLE] was made, from first idea to final master.
+
+Most people hear a finished song and think it arrived fully formed. It did not. Here is every stage it went through.</div>
+      <div class="tweet-block" id="tw-3-2"><div class="tweet-label">Tweet 2 of 4</div>Stage 1: Voice memo recorded on my phone at 2 AM. Just me humming the melody over and over so I would not forget it by morning.
+
+Stage 2: Rough guitar demo recorded the next day. Terrible audio quality. Lyrics were 60% placeholder words. But the feeling was there.</div>
+      <div class="tweet-block" id="tw-3-3"><div class="tweet-label">Tweet 3 of 4</div>Stage 3: Full production. This took two weeks of trying different sounds, scrapping ideas, starting over. We went through four completely different versions of the chorus before landing on the one you hear now.
+
+Stage 4: Mixing and mastering. Making everything sit right so it sounds good on earbuds and car speakers alike.</div>
+      <div class="tweet-block" id="tw-3-4"><div class="tweet-label">Tweet 4 of 4</div>Stage 5: Releasing it to you and holding my breath.
+
+That is where we are now. [SONG TITLE] is out everywhere.
+
+Listen here: {link}
+
+Four months of work compressed into one song. I hope you hear every hour that went into it.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-3-1','tw-3-2','tw-3-3','tw-3-4'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 4 -->
+    <div class="card">
+      <div class="card-title">Thread 4: The Lyric Deep Dive</div>
+      <div class="tweet-block" id="tw-4-1"><div class="tweet-label">Tweet 1 of 5</div>I want to break down the lyrics of [SONG TITLE] line by line because there are things hidden in this song that you might not catch on the first listen.
+
+Spoilers ahead. Listen first if you want the full experience: {link}</div>
+      <div class="tweet-block" id="tw-4-2"><div class="tweet-label">Tweet 2 of 5</div>The opening line sets the entire tone: it is not a metaphor. It literally happened. I wrote it exactly as I experienced it because I wanted the listener to feel like they were standing next to me in that moment.
+
+No poetry. Just truth.</div>
+      <div class="tweet-block" id="tw-4-3"><div class="tweet-label">Tweet 3 of 5</div>The chorus is the part most people will sing along to, but the real gut punch is in the pre-chorus. That is where I hid the line that took me the longest to write.
+
+I rewrote it nineteen times. I counted. Version nineteen was the first draft, just with two words changed.</div>
+      <div class="tweet-block" id="tw-4-4"><div class="tweet-label">Tweet 4 of 5</div>The bridge is where the song turns. Up until that point, the narrator is looking backward. In the bridge, they look forward for the first time.
+
+If you listen closely, the production shifts in the bridge too. The reverb opens up. More space. Like taking a first breath after being underwater.</div>
+      <div class="tweet-block" id="tw-4-5"><div class="tweet-label">Tweet 5 of 5</div>The last line of the song is the title. I did that on purpose. I wanted you to spend the entire song wondering what [SONG TITLE] meant, and only understand it when the final word lands.
+
+Go listen again with this context. I promise it will hit differently: {link}</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-4-1','tw-4-2','tw-4-3','tw-4-4','tw-4-5'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 5 -->
+    <div class="card">
+      <div class="card-title">Thread 5: The Gratitude Thread</div>
+      <div class="tweet-block" id="tw-5-1"><div class="tweet-label">Tweet 1 of 4</div>[SONG TITLE] has been out for one week and I need to say some things.
+
+This is not a flex thread. This is a thank you thread.</div>
+      <div class="tweet-block" id="tw-5-2"><div class="tweet-label">Tweet 2 of 4</div>To everyone who streamed it: you gave three minutes of your life to something I made in my bedroom. That is not nothing. That is everything.
+
+To everyone who added it to a playlist: you put my song next to artists I grew up listening to. I still can not believe that.</div>
+      <div class="tweet-block" id="tw-5-3"><div class="tweet-label">Tweet 3 of 4</div>To everyone who sent me a DM about what the song meant to them: I have read every single one. Some of them made me cry. You shared pieces of your life with me and I do not take that lightly.
+
+To the person who told me this song helped them through a hard night: that is why I make music. Full stop.</div>
+      <div class="tweet-block" id="tw-5-4"><div class="tweet-label">Tweet 4 of 4</div>This is just the beginning. More music is coming. More of me poured into songs and handed to you.
+
+If you have not heard [SONG TITLE] yet, here it is: {link}
+
+And if you have, thank you. Genuinely. You have no idea what this means to me.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-5-1','tw-5-2','tw-5-3','tw-5-4'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 6 -->
+    <div class="card">
+      <div class="card-title">Thread 6: The Hot Take Engagement Thread</div>
+      <div class="tweet-block" id="tw-6-1"><div class="tweet-label">Tweet 1 of 4</div>Hot take: the best music being made right now is not on the radio.
+
+It is being uploaded at midnight by independent artists who have day jobs and make music because they have to, not because they are getting paid.
+
+Let me explain.</div>
+      <div class="tweet-block" id="tw-6-2"><div class="tweet-label">Tweet 2 of 4</div>When music is a product, it sounds like a product. Optimized for playlists, designed by committee, tested for commercial appeal.
+
+When music is a confession, it sounds like a confession. Raw, imperfect, undeniably real. You can feel the difference in your chest.</div>
+      <div class="tweet-block" id="tw-6-3"><div class="tweet-label">Tweet 3 of 4</div>I am an independent artist. I made [SONG TITLE] with no label, no budget, and no safety net. The only reason this song exists is because I needed to get these words out of my body.
+
+That kind of music deserves to be heard. Not just mine. All of it.</div>
+      <div class="tweet-block" id="tw-6-4"><div class="tweet-label">Tweet 4 of 4</div>So here is what I am asking. Listen to [SONG TITLE]: {link}
+
+Then reply to this thread with YOUR favorite independent artist. Let us build a thread of underground music that deserves more ears.
+
+The algorithm will not do it. We have to do it ourselves.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-6-1','tw-6-2','tw-6-3','tw-6-4'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 7 -->
+    <div class="card">
+      <div class="card-title">Thread 7: The Numbers Transparency Thread</div>
+      <div class="tweet-block" id="tw-7-1"><div class="tweet-label">Tweet 1 of 5</div>I am going to be completely transparent about what releasing [SONG TITLE] as an independent artist actually looks like. Numbers and all.
+
+No sugarcoating. No humblebragging. Just the truth.</div>
+      <div class="tweet-block" id="tw-7-2"><div class="tweet-label">Tweet 2 of 5</div>Cost to make [SONG TITLE]:
+Recording: a microphone I bought three years ago
+Production: my laptop and free trials of software
+Mixing: a friend who traded mixing for home cooked meals
+Distribution: $20 through DistroKid
+
+Total investment: years of practice and $20.</div>
+      <div class="tweet-block" id="tw-7-3"><div class="tweet-label">Tweet 3 of 5</div>Marketing budget: $0
+Playlist placement budget: $0
+PR budget: $0
+
+Actual marketing strategy: post about my music on social media every day and hope the right people find it. That is literally it. There is no secret. Just showing up.</div>
+      <div class="tweet-block" id="tw-7-4"><div class="tweet-label">Tweet 4 of 5</div>Results after week one:
+Every stream came from real people who chose to press play. Not bots. Not paid promotion. Real humans who heard about this song and decided to give it a chance.
+
+For context, Spotify pays roughly $0.003 per stream. I did not do this for the money.</div>
+      <div class="tweet-block" id="tw-7-5"><div class="tweet-label">Tweet 5 of 5</div>I did this because making music is the only thing that has ever made me feel fully alive.
+
+If you want to be part of this journey, start here: {link}
+
+One stream, one share, one person telling a friend. That is how independent music survives. Thank you for reading this far.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-7-1','tw-7-2','tw-7-3','tw-7-4','tw-7-5'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 8 -->
+    <div class="card">
+      <div class="card-title">Thread 8: The Fan Challenge Thread</div>
+      <div class="tweet-block" id="tw-8-1"><div class="tweet-label">Tweet 1 of 4</div>I have a challenge for you and it takes less than 5 minutes.
+
+I want to see if the internet can take [SONG TITLE] from an underground track to something that gets real traction. No labels involved. Just us.</div>
+      <div class="tweet-block" id="tw-8-2"><div class="tweet-label">Tweet 2 of 4</div>Here is the challenge:
+
+Step 1: Listen to [SONG TITLE] once. Just once. Link: {link}
+Step 2: If you genuinely like it, share this thread.
+Step 3: Add the song to any one of your playlists.
+
+That is it. Three steps. Three minutes.</div>
+      <div class="tweet-block" id="tw-8-3"><div class="tweet-label">Tweet 3 of 4</div>Why does this matter? Because every playlist add tells Spotify's algorithm that real people enjoy this song. That triggers recommendations to new listeners. One playlist add can lead to hundreds of new streams.
+
+You are not just listening to a song. You are voting for independent music to exist.</div>
+      <div class="tweet-block" id="tw-8-4"><div class="tweet-label">Tweet 4 of 4</div>I will track the results and share them in a follow-up thread. Let us see what happens when real people decide to champion a song instead of a label.
+
+Starting point: wherever the streams are right now.
+Goal: let the music speak for itself.
+
+Ready? Go: {link}</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-8-1','tw-8-2','tw-8-3','tw-8-4'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 9 -->
+    <div class="card">
+      <div class="card-title">Thread 9: The Vulnerability Thread</div>
+      <div class="tweet-block" id="tw-9-1"><div class="tweet-label">Tweet 1 of 5</div>I almost did not release [SONG TITLE].
+
+I had my finger on the delete button three separate times. Here is why I pressed publish instead.</div>
+      <div class="tweet-block" id="tw-9-2"><div class="tweet-label">Tweet 2 of 5</div>The first time I almost deleted it was right after I finished recording. I listened back and thought, "This is too personal. People are going to know exactly who this is about. They are going to know exactly what I went through."
+
+And that terrified me.</div>
+      <div class="tweet-block" id="tw-9-3"><div class="tweet-label">Tweet 3 of 5</div>The second time was when I played it for a friend and they went quiet. Not the good quiet. The uncomfortable quiet. The "I did not know you were going through that" quiet.
+
+I realized the song was not just revealing my experience. It was revealing me.</div>
+      <div class="tweet-block" id="tw-9-4"><div class="tweet-label">Tweet 4 of 5</div>The third time was the night before release. Classic panic. Lying in bed at 3 AM thinking about every person who would hear it. Every ex. Every family member. Every stranger on the internet ready to judge.
+
+I called my best friend at 3:15 AM. They said, "The songs that scare you are the ones that matter."</div>
+      <div class="tweet-block" id="tw-9-5"><div class="tweet-label">Tweet 5 of 5</div>So I pressed publish. And here we are.
+
+[SONG TITLE] is the most honest thing I have ever made. It is scary and it is real and it is yours now.
+
+Listen here: {link}
+
+If it makes you feel something, please tell me. I need to know this fear was worth it.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-9-1','tw-9-2','tw-9-3','tw-9-4','tw-9-5'],this)">Copy Full Thread</button></div>
+    </div>
+
+    <!-- Thread 10 -->
+    <div class="card">
+      <div class="card-title">Thread 10: The Future Vision Thread</div>
+      <div class="tweet-block" id="tw-10-1"><div class="tweet-label">Tweet 1 of 4</div>Where I am today: an independent artist who just released [SONG TITLE] from my bedroom.
+
+Where I am going: I want to tell you what the plan is, because I believe in building in public.</div>
+      <div class="tweet-block" id="tw-10-2"><div class="tweet-label">Tweet 2 of 4</div>[SONG TITLE] is not just a single. It is the first piece of a larger project I have been building for over a year. There are more songs coming. Each one tells a different chapter of the same story.
+
+When it is finished, it will be an album that you can listen to front to back like reading a book.</div>
+      <div class="tweet-block" id="tw-10-3"><div class="tweet-label">Tweet 3 of 4</div>My goal this year is simple. Build a community of people who care about real, honest, independent music. Not millions of passive listeners. A smaller group of people who actually feel connected to the art.
+
+If that is you, you are already part of it just by reading this thread.</div>
+      <div class="tweet-block" id="tw-10-4"><div class="tweet-label">Tweet 4 of 4</div>Start with [SONG TITLE]. It is chapter one.
+
+Listen here: {link}
+
+Follow me for the rest of the story. I promise it is going somewhere worth going.
+
+And if you know someone who needs to hear this kind of music, tag them below. Let us find our people.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyThread(['tw-10-1','tw-10-2','tw-10-3','tw-10-4'],this)">Copy Full Thread</button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: 5 INSTAGRAM REEL CONCEPTS -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>Instagram Reel Concepts <span class="section-badge">5 Concepts</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">Complete Reel concepts with shot lists, scripts, captions, and audio suggestions ready to film.</p>
+
+    <!-- Reel 1 -->
+    <div class="card">
+      <div class="card-title">Reel Concept 1: The Evolution Montage</div>
+      <div class="content-block" id="reel-1"><strong>Concept:</strong> Show the evolution of [SONG TITLE] from the very first idea to the final release in a fast-paced, visually dynamic montage.
+
+<strong>Shot List:</strong>
+1. Close-up of phone screen showing a voice memo being recorded (2 sec)
+2. Overhead shot of handwritten lyrics on notebook paper (1.5 sec)
+3. Wide shot of you sitting with an instrument, playing a rough version (2 sec)
+4. Screen recording of the DAW with tracks being laid down (2 sec)
+5. Close-up of your face while recording vocals, headphones on, eyes closed (2 sec)
+6. Time-lapse of mixing session, screen showing waveforms moving (2 sec)
+7. Reveal shot: cover art appearing on screen, dramatic zoom (1.5 sec)
+8. Final shot: you pressing "publish" or holding phone showing the song live on Spotify (2 sec)
+9. End card: text overlay with song title and "Out Now" (1.5 sec)
+
+<strong>Script (Voiceover or Text Overlay):</strong>
+"It started as a voice memo at 2 AM.
+Then it became scribbles in a notebook.
+Then a rough demo that did not sound like much.
+Then hours in the DAW building something from nothing.
+Then vocals that took everything out of me.
+Then mixing until it sounded right.
+Then a cover. Then a deep breath. Then I pressed publish.
+[SONG TITLE] is out now. Months of work. Three and a half minutes of truth."
+
+<strong>Caption:</strong>
+From a 2 AM voice memo to a fully released song. [SONG TITLE] is out now and every second of this journey was worth it. Link in bio to listen.
+
+<strong>Audio Suggestion:</strong> Use [SONG TITLE] as the audio, timed so the chorus hits when the cover art is revealed in shot 7. If the song is not yet available as a Reel audio, use the instrumental version or a trending audio that builds in intensity.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('reel-1',this)">Copy</button></div>
+    </div>
+
+    <!-- Reel 2 -->
+    <div class="card">
+      <div class="card-title">Reel Concept 2: The Two-Sides Split Screen</div>
+      <div class="content-block" id="reel-2"><strong>Concept:</strong> Split the screen to show two versions of you: the everyday person and the artist. The contrast creates visual interest and shows authenticity.
+
+<strong>Shot List:</strong>
+1. Split screen: Left side shows you waking up, messy hair, yawning. Right side shows you on stage or performing confidently (2 sec)
+2. Split screen: Left shows you at a day job or doing chores. Right shows you writing lyrics intensely (2 sec)
+3. Split screen: Left shows you eating instant noodles. Right shows you in a vocal booth giving everything (2 sec)
+4. Split screen: Left shows you scrolling your phone looking bored. Right shows you hearing the final mix for the first time and reacting emotionally (3 sec)
+5. Full screen transition: Both sides merge as you look directly at camera (2 sec)
+6. Full screen: You with text overlay showing the song title (2 sec)
+7. End: Streaming platform logos and "Out Now" (1.5 sec)
+
+<strong>Script (Text Overlay Sequence):</strong>
+"Who they see" (left side label)
+"Who I am when the music starts" (right side label)
+"Same person. Two lives."
+"One of them made [SONG TITLE]."
+"Out now. Link in bio."
+
+<strong>Caption:</strong>
+The person who made [SONG TITLE] also burns toast every morning and wears the same hoodie three days in a row. Art does not come from a perfect life. It comes from a real one. Link in bio to listen.
+
+<strong>Audio Suggestion:</strong> Use [SONG TITLE] starting from the verse, building to the chorus at the merge point in shot 5. The energy shift in the song should match the visual transition from casual to performance mode.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('reel-2',this)">Copy</button></div>
+    </div>
+
+    <!-- Reel 3 -->
+    <div class="card">
+      <div class="card-title">Reel Concept 3: The Lyric Visualization Walk</div>
+      <div class="content-block" id="reel-3"><strong>Concept:</strong> Walk through a visually interesting location while lyrics from [SONG TITLE] appear as text overlays timed to the music. Cinematic, moody, shareable.
+
+<strong>Shot List:</strong>
+1. Opening: Slow motion walk toward camera down an empty street, alley, or hallway. Moody lighting. (3 sec)
+2. Side profile walking shot, lyric line 1 appears as text overlay (2.5 sec)
+3. Close-up of feet walking, lyric line 2 appears (2 sec)
+4. Wide shot from behind, walking away from camera, lyric line 3 appears (2.5 sec)
+5. Stop walking, turn to camera, lyric line 4 appears (the most impactful line) (3 sec)
+6. Close-up of face, direct eye contact with camera, no text, just the music playing (2 sec)
+7. Slow fade to black, song title and "Out Now" appear (2 sec)
+
+<strong>Script (Text Overlays Timed to Lyrics):</strong>
+Shot 2: First line of the chorus
+Shot 3: Second line of the chorus
+Shot 4: Third line of the chorus
+Shot 5: Fourth line of the chorus (the line that hits hardest)
+Shot 7: "[SONG TITLE] by [ARTIST NAME] - Out Now"
+
+<strong>Caption:</strong>
+Some lyrics are meant to be felt, not just heard. [SONG TITLE] is the kind of song that walks with you. Link in bio.
+
+<strong>Audio Suggestion:</strong> Use the chorus of [SONG TITLE] as the Reel audio. Time the lyric text overlays to appear exactly as each line is sung. If the chorus has not dropped yet, use the most melodic section of the song that allows for clean text timing.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('reel-3',this)">Copy</button></div>
+    </div>
+
+    <!-- Reel 4 -->
+    <div class="card">
+      <div class="card-title">Reel Concept 4: The Fan Reaction Compilation</div>
+      <div class="content-block" id="reel-4"><strong>Concept:</strong> Compile screenshots of fan DMs, comments, and messages about [SONG TITLE] into a fast-moving Reel that shows real listener impact. Social proof meets emotional content.
+
+<strong>Shot List:</strong>
+1. Open on you reading your phone with a surprised or emotional expression (2 sec)
+2. Zoom into phone screen showing first fan DM (screenshot with name blurred or with permission) (1.5 sec)
+3. Quick cut to second DM or comment screenshot (1.5 sec)
+4. Quick cut to third DM, this one should be the most emotional or detailed (2 sec)
+5. Cut to your face reacting, genuine emotion (2 sec)
+6. Rapid montage of 5-8 more comments and messages, each shown for 0.5-1 second (4 sec)
+7. Cut to you looking at camera, holding hand to chest (1.5 sec)
+8. Text overlay: "This is why I make music" (2 sec)
+9. End card: Song title, "Still streaming everywhere" and a heart (1.5 sec)
+
+<strong>Script (Voiceover):</strong>
+"When I released [SONG TITLE], I had no idea if anyone would care. Then these messages started coming in. People telling me this song helped them cry when they needed to. People saying it put words to something they could not explain. People playing it on repeat at 3 AM because it felt like someone finally understood. I make music because of this. Every single one of these messages is why I will never stop."
+
+<strong>Caption:</strong>
+I read every single DM. Every comment. Every message. You all have no idea what your words mean to me. [SONG TITLE] was made for moments like these. If it has not found you yet, link in bio.
+
+<strong>Audio Suggestion:</strong> Use the bridge or most emotional instrumental section of [SONG TITLE]. Keep the volume lower to allow the voiceover to be heard clearly. If no voiceover, use the full song and let the visual text carry the story.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('reel-4',this)">Copy</button></div>
+    </div>
+
+    <!-- Reel 5 -->
+    <div class="card">
+      <div class="card-title">Reel Concept 5: The "What If" Scenario</div>
+      <div class="content-block" id="reel-5"><strong>Concept:</strong> A narrative mini-film that asks "What if I never released this song?" and shows an alternate timeline where the music stayed hidden, contrasted with the reality of it being out and connecting with people.
+
+<strong>Shot List:</strong>
+1. Text on screen: "What if I never pressed publish?" Black screen. (2 sec)
+2. Shot of you closing your laptop, putting away your notebook, looking defeated (2 sec)
+3. Shot of you at a generic job, staring out a window, daydreaming (2 sec)
+4. Shot of an empty streaming page with zero plays (1.5 sec)
+5. Text: "But I did press publish." with a snap transition (1 sec)
+6. Quick montage: you performing, fans commenting, stream numbers going up, DMs flooding in (3 sec)
+7. Shot of you smiling, looking at your phone, genuinely happy (2 sec)
+8. Close-up of streaming stats showing real plays (1.5 sec)
+9. Text: "[SONG TITLE] almost did not exist. Thank you for making sure it did." (2.5 sec)
+10. End card: "Streaming now. Link in bio." (1.5 sec)
+
+<strong>Script (Text Overlay Narrative):</strong>
+"In another timeline, I never released [SONG TITLE].
+I convinced myself it was not good enough.
+I let the fear win.
+The song stayed on my hard drive forever.
+Nobody heard it.
+Nobody felt it.
+But that is not what happened.
+I pressed publish.
+And you pressed play.
+And now this song belongs to both of us."
+
+<strong>Caption:</strong>
+I almost let fear win. [SONG TITLE] almost stayed a secret forever. Thank you for giving it a home in your ears and your playlists. This is just the beginning. Link in bio.
+
+<strong>Audio Suggestion:</strong> Start with a quiet, ambient intro or the softest part of [SONG TITLE] for shots 1-4. Hit the chorus or the most powerful drop at the snap transition in shot 5. Let the energy of the song carry through the positive montage in shots 6-10.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('reel-5',this)">Copy</button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: LINK-IN-BIO TEMPLATE -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>Link-in-Bio Template <span class="section-badge">Mockup</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">An optimized bio link page layout. Use this structure to build your own link-in-bio page on services like Linktree, Stan Store, Koji, or a custom website.</p>
+
+    <div class="bio-mockup">
+      <div class="bio-avatar">&#127925;</div>
+      <div class="bio-name">[ARTIST NAME]</div>
+      <div class="bio-desc">Singer / Songwriter / Storyteller<br>New single "[SONG TITLE]" out now</div>
+
+      <a href="#" class="bio-link primary">Stream "[SONG TITLE]" Now</a>
+      <a href="#" class="bio-link">Pre-Save My Next Release</a>
+      <a href="#" class="bio-link">Join My Email List (Free Bonus Track)</a>
+      <a href="#" class="bio-link">Watch the Official Music Video</a>
+      <a href="#" class="bio-link">Book Me for a Show</a>
+      <a href="#" class="bio-link">Merch Store</a>
+      <a href="#" class="bio-link">Support My Music (Tip Jar)</a>
+
+      <div class="bio-socials">
+        <span title="Instagram">IG</span>
+        <span title="TikTok">TT</span>
+        <span title="Twitter/X">X</span>
+        <span title="YouTube">YT</span>
+        <span title="Spotify">SP</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card">
+      <div class="card-title">Link-in-Bio Setup Guide</div>
+      <div class="content-block" id="bio-guide"><strong>Page Structure (Top to Bottom):</strong>
+
+1. PROFILE IMAGE: Use a high-quality, recognizable photo that matches your brand across all platforms. Consistency builds recognition.
+
+2. NAME AND BIO: Keep it short. Your name, what you do in 3 words or fewer, and the name of your current release. Example: "[ARTIST NAME] - Singer/Songwriter - New single [SONG TITLE] out now"
+
+3. PRIMARY LINK (Most Important): This should always be your current release. Make it visually distinct from the other links by using a highlighted or colored button. Change this with every new release.
+
+4. SECONDARY LINKS (In Order of Priority):
+   - Pre-save link for your next release (keeps momentum going)
+   - Email list signup with a free incentive (this is the most valuable link long-term because you own the audience)
+   - Music video or visual content link
+   - Booking inquiry link
+   - Merch store link
+   - Tip jar or support link (put this last so it does not feel pushy)
+
+5. SOCIAL ICONS: Add all your active platforms at the bottom. Do not include platforms you do not actively post on.
+
+<strong>Key Optimization Tips:</strong>
+- Update the primary link within 1 hour of every new release
+- Use action verbs: "Stream Now" performs better than just "Spotify"
+- Add urgency when possible: "Limited merch drop" or "Pre-save before Friday"
+- Track clicks with UTM parameters so you know which platform drives the most traffic
+- The email list link is the most valuable thing on this page because social platforms can change their algorithms but your email list is yours forever
+- Test different link orders every month and see what gets the most clicks
+- Keep the total number of links under 8 so visitors do not get overwhelmed with choices</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('bio-guide',this)">Copy</button></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bio Link Page HTML/CSS Snippet</div>
+      <div class="content-block" id="bio-code"><strong>Copy this HTML/CSS to create your own hosted link page:</strong>
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;title&gt;[ARTIST NAME] | Links&lt;/title&gt;
+&lt;style&gt;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0A0A0F;
+    color: #F8FAFC;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 400px; width: 100%; text-align: center; }
+  .avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 16px;
+    border: 3px solid #8B5CF6;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  .bio { color: #94A3B8; font-size: 0.9rem; margin-bottom: 24px; }
+  .link {
+    display: block;
+    background: #1A1A2E;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    color: #F8FAFC;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .link:hover { border-color: #8B5CF6; transform: translateY(-2px); }
+  .link.primary {
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    border: none;
+  }
+  .socials { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
+  .socials a {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #1A1A2E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F8FAFC;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: background 0.2s;
+  }
+  .socials a:hover { background: #8B5CF6; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container"&gt;
+  &lt;img src="your-photo.jpg" alt="[ARTIST NAME]" class="avatar"&gt;
+  &lt;h1&gt;[ARTIST NAME]&lt;/h1&gt;
+  &lt;p class="bio"&gt;Singer / Songwriter&lt;br&gt;"[SONG TITLE]" out now&lt;/p&gt;
+  &lt;a href="YOUR_LINK" class="link primary"&gt;Stream "[SONG TITLE]" Now&lt;/a&gt;
+  &lt;a href="YOUR_LINK" class="link"&gt;Pre-Save My Next Release&lt;/a&gt;
+  &lt;a href="YOUR_LINK" class="link"&gt;Join My Email List&lt;/a&gt;
+  &lt;a href="YOUR_LINK" class="link"&gt;Watch the Music Video&lt;/a&gt;
+  &lt;a href="YOUR_LINK" class="link"&gt;Book a Show&lt;/a&gt;
+  &lt;a href="YOUR_LINK" class="link"&gt;Merch Store&lt;/a&gt;
+  &lt;div class="socials"&gt;
+    &lt;a href="#"&gt;IG&lt;/a&gt;
+    &lt;a href="#"&gt;TT&lt;/a&gt;
+    &lt;a href="#"&gt;X&lt;/a&gt;
+    &lt;a href="#"&gt;YT&lt;/a&gt;
+    &lt;a href="#"&gt;SP&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('bio-code',this)">Copy</button></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: POSTING BEST PRACTICES -->
+<!-- ============================================================ -->
+<div class="section">
+  <div class="section-header" onclick="toggleSection(this)">
+    <h2>Posting Best Practices <span class="section-badge">Guide</span></h2>
+    <span class="section-toggle">&#9660;</span>
+  </div>
+  <div class="section-body">
+    <p style="color:var(--text2);margin-bottom:16px;">Optimal posting times, frequency recommendations, and platform-specific strategies to maximize reach and engagement.</p>
+
+    <div class="bp-grid">
+
+      <div class="bp-card">
+        <h4>Instagram - Optimal Posting Times</h4>
+        <ul>
+          <li><strong>Monday:</strong> 11 AM, 1 PM, 5 PM</li>
+          <li><strong>Tuesday:</strong> 9 AM, 1 PM, 5 PM</li>
+          <li><strong>Wednesday:</strong> 11 AM, 1 PM, 3 PM</li>
+          <li><strong>Thursday:</strong> 11 AM, 12 PM, 5 PM</li>
+          <li><strong>Friday:</strong> 10 AM, 12 PM, 3 PM</li>
+          <li><strong>Saturday:</strong> 9 AM, 11 AM, 1 PM</li>
+          <li><strong>Sunday:</strong> 10 AM, 1 PM, 4 PM</li>
+          <li><strong>Peak Day:</strong> Wednesday consistently shows highest engagement for music content</li>
+          <li><strong>Time Zone:</strong> All times in your audience's primary time zone. Check Instagram Insights to confirm.</li>
+        </ul>
+      </div>
+
+      <div class="bp-card">
+        <h4>Instagram - Frequency Guide</h4>
+        <ul>
+          <li><strong>Feed Posts (Reels/Carousels):</strong> 3-5 times per week</li>
+          <li><strong>Stories:</strong> 5-10 per day during launch week, 3-5 per day ongoing</li>
+          <li><strong>Reels:</strong> At least 3 per week, Instagram heavily favors Reels in discovery</li>
+          <li><strong>Carousels:</strong> 1-2 per week, great for saves and shares</li>
+          <li><strong>Static Photos:</strong> 1 per week maximum, these get the lowest reach</li>
+          <li><strong>Lives:</strong> 1-2 per week during launch period for real-time connection</li>
+          <li><strong>Key Rule:</strong> Never post more than once every 4 hours to avoid suppressing your own reach</li>
+        </ul>
+      </div>
+
+      <div class="bp-card">
+        <h4>TikTok - Optimal Posting Times</h4>
+        <ul>
+          <li><strong>Monday:</strong> 6 AM, 10 AM, 10 PM</li>
+          <li><strong>Tuesday:</strong> 2 AM, 4 AM, 9 AM</li>
+          <li><strong>Wednesday:</strong> 7 AM, 8 AM, 11 PM</li>
+          <li><strong>Thursday:</strong> 9 AM, 12 PM, 7 PM</li>
+          <li><strong>Friday:</strong> 5 AM, 1 PM, 3 PM</li>
+          <li><strong>Saturday:</strong> 11 AM, 7 PM, 8 PM</li>
+          <li><strong>Sunday:</strong> 7 AM, 8 AM, 4 PM</li>
+          <li><strong>Peak Day:</strong> Tuesday and Thursday see the highest engagement rates on TikTok</li>
+          <li><strong>Note:</strong> TikTok's algorithm is less time-dependent than Instagram. Content quality matters more than posting time.</li>
+        </ul>
+      </div>
+
+      <div class="bp-card">
+        <h4>TikTok - Frequency Guide</h4>
+        <ul>
+          <li><strong>Videos:</strong> 1-3 per day during launch week, 1 per day ongoing</li>
+          <li><strong>Minimum:</strong> 4 videos per week to stay in algorithmic favor</li>
+          <li><strong>Maximum:</strong> 3 per day, more than that dilutes engagement across posts</li>
+          <li><strong>Video Length:</strong> 15-60 seconds performs best. Under 15 sec for hooks, 30-60 sec for stories.</li>
+          <li><strong>Consistency Rule:</strong> Post at the same times daily so the algorithm learns your schedule</li>
+          <li><strong>Reply Videos:</strong> Make 2-3 reply videos per week responding to comments. These get boosted.</li>
+          <li><strong>Key Rule:</strong> The first 3 seconds determine if someone watches. Invest 80% of your effort in the hook.</li>
+        </ul>
+      </div>
+
+      <div class="bp-card">
+        <h4>Twitter/X - Optimal Posting Times</h4>
+        <ul>
+          <li><strong>Monday:</strong> 8 AM, 11 AM, 4 PM</li>
+          <li><strong>Tuesday:</strong> 8 AM, 10 AM, 2 PM</li>
+          <li><strong>Wednesday:</strong> 9 AM, 12 PM, 5 PM</li>
+          <li><strong>Thursday:</strong> 8 AM, 11 AM, 4 PM</li>
+          <li><strong>Friday:</strong> 9 AM, 11 AM, 1 PM</li>
+          <li><strong>Saturday:</strong> 10 AM, 12 PM</li>
+          <li><strong>Sunday:</strong> 10 AM, 2 PM</li>
+          <li><strong>Peak Day:</strong> Wednesday and Thursday have the highest engagement on Twitter/X</li>
+          <li><strong>Note:</strong> Tweets have a much shorter lifespan than other platforms. Peak engagement happens within the first 30 minutes.</li>
+        </ul>
+      </div>
+
+      <div class="bp-card">
+        <h4>Twitter/X - Frequency Guide</h4>
+        <ul>
+          <li><strong>Tweets:</strong> 3-5 per day during launch, 2-3 per day ongoing</li>
+          <li><strong>Threads:</strong> 2-3 per week, threads get significantly more impressions than single tweets</li>
+          <li><strong>Quote Tweets:</strong> 1-2 per day engaging with fans, other artists, or relevant content</li>
+          <li><strong>Replies:</strong> Reply to every mention during launch week. Engagement breeds engagement.</li>
+          <li><strong>Spaces:</strong> Host 1 Twitter Space per week during launch for live Q&A</li>
+          <li><strong>Key Rule:</strong> Twitter rewards conversation. Do not just broadcast. Reply, quote, engage. The algorithm pushes people who are actively talking.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card">
+      <div class="card-title">Cross-Platform Strategy Rules</div>
+      <div class="content-block" id="bp-strategy"><strong>1. Do Not Cross-Post Identical Content</strong>
+Each platform has different cultures and formats. A TikTok reposted to Instagram Reels with the TikTok watermark gets suppressed by Instagram's algorithm. Refilm or re-export natively for each platform.
+
+<strong>2. Content Ratio: 80/20 Rule</strong>
+80% of your content should be valuable, entertaining, or emotionally resonant without directly selling anything. 20% can be direct promotion like "Go stream my song." If every post is "Link in bio," people will unfollow.
+
+<strong>3. The 30-Minute Engagement Window</strong>
+After posting on any platform, spend the next 30 minutes actively engaging. Reply to comments, like posts in your niche, respond to stories. This signals to the algorithm that you are an active user and boosts your post's distribution.
+
+<strong>4. Hashtag Strategy by Platform</strong>
+Instagram: Use 8-15 hashtags. Mix broad (500K+ posts) with niche (10K-100K posts). Put them in the caption, not the comments.
+TikTok: Use 3-5 hashtags. One broad, two niche, one trending if relevant. Keep them in the caption.
+Twitter/X: Use 1-2 hashtags maximum. More than that looks spammy and actually decreases engagement on Twitter.
+
+<strong>5. Release Day Posting Sequence</strong>
+Post in this order on release day:
+- 12:00 AM: Twitter/X announcement tweet with link
+- 6:00 AM: Instagram Story countdown completion celebration
+- 8:00 AM: Instagram Reel with the strongest 15 seconds of the song
+- 10:00 AM: TikTok video with hook and CTA
+- 12:00 PM: Twitter/X thread telling the story behind the song
+- 2:00 PM: Instagram carousel with lyrics and streaming links
+- 4:00 PM: TikTok second video, different angle or format
+- 6:00 PM: Instagram Story reposting fan reactions
+- 8:00 PM: Twitter/X engagement push, quote-tweeting fan reactions
+- 10:00 PM: TikTok late-night post, more personal or vulnerable tone
+
+<strong>6. The Content Recycling Rule</strong>
+A TikTok script can become a Twitter thread. A Twitter thread can become an Instagram carousel. An Instagram Reel concept can become a TikTok video. Adapt the content to the platform's format and culture, but the core ideas can and should be reused across all three.
+
+<strong>7. Batching and Scheduling</strong>
+Film all your content for the week in one session. Spend one day filming 5-7 TikToks, shooting 3-4 Reels, and writing all your tweets. Then schedule them using tools like Later, Buffer, or Hootsuite. This prevents burnout and keeps your posting consistent even on days when you do not feel creative.
+
+<strong>8. Analytics Check-In Schedule</strong>
+Review your analytics every Sunday evening. Look at which posts got the most engagement, which times performed best, and where your followers are located. Adjust your posting schedule for the next week based on what the data tells you, not what a guide tells you. Your audience is unique.</div>
+      <div class="copy-wrap"><button class="copy-btn" onclick="copyText('bp-strategy',this)">Copy</button></div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.section-toggle');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+function getCleanText(el) {
+  return el.innerText || el.textContent;
+}
+
+function copyText(id, btn) {
+  const el = document.getElementById(id);
+  const text = getCleanText(el);
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = 'Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = 'Copy';
+    }, 2000);
+  });
+}
+
+function copyThread(ids, btn) {
+  const texts = ids.map(id => {
+    const el = document.getElementById(id);
+    // Remove the "Tweet X of Y" label
+    const clone = el.cloneNode(true);
+    const label = clone.querySelector('.tweet-label');
+    if (label) label.remove();
+    return (clone.innerText || clone.textContent).trim();
+  });
+  const full = texts.join('\n\n---\n\n');
+  navigator.clipboard.writeText(full).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = 'Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = 'Copy Full Thread';
+    }, 2000);
+  });
+}
+
+// Open first section by default
+document.addEventListener('DOMContentLoaded', function() {
+  const first = document.querySelector('.section-body');
+  const firstToggle = document.querySelector('.section-toggle');
+  if (first) first.classList.add('open');
+  if (firstToggle) firstToggle.classList.add('open');
+});
+</script>
+
+</body>
+</html>
