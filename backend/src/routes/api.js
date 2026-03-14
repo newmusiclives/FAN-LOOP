@@ -115,6 +115,55 @@ router.post('/admin/leaderboard/:campaignId/refresh', adminAuth, (req, res) => {
   res.json({ success: true });
 });
 
+// ──────────── TrueFans CONNECT Integration API (public) ────────────
+// Returns active campaigns for an artist — used by CONNECT link-in-bio, artist pages, show pages
+router.get('/connect/campaigns/:artistSlug', (req, res) => {
+  const artist = Artist.findBySlug(req.params.artistSlug);
+  if (!artist) return res.status(404).json({ error: 'Artist not found' });
+
+  const campaigns = Campaign.getActiveCampaigns()
+    .filter(c => c.artist_id === artist.id)
+    .map(c => ({
+      id: c.id,
+      title: c.title,
+      slug: c.slug,
+      type: c.type,
+      headline: c.headline,
+      subheadline: c.subheadline,
+      fan_count: c.fan_count,
+      signup_url: `/c/${c.slug}`,
+      embed_url: `/embed/${c.slug}`
+    }));
+
+  res.json({
+    artist: { name: artist.name, slug: artist.slug, genre: artist.genre, image_url: artist.image_url },
+    campaigns
+  });
+});
+
+// Returns a single campaign for embedding — used by CONNECT pages
+router.get('/connect/campaign/:slug', (req, res) => {
+  const campaign = Campaign.findBySlug(req.params.slug);
+  if (!campaign || campaign.status !== 'active') return res.status(404).json({ error: 'Campaign not found' });
+
+  const artist = Artist.findById(campaign.artist_id);
+  const bc = campaign.brand_config ? (typeof campaign.brand_config === 'string' ? JSON.parse(campaign.brand_config) : campaign.brand_config) : {};
+
+  res.json({
+    title: campaign.title,
+    slug: campaign.slug,
+    type: campaign.type,
+    headline: campaign.headline,
+    subheadline: campaign.subheadline,
+    description: campaign.description,
+    fan_count: campaign.fan_count,
+    brand_colors: bc,
+    artist: artist ? { name: artist.name, slug: artist.slug } : null,
+    signup_url: `/c/${campaign.slug}`,
+    embed_url: `/embed/${campaign.slug}`
+  });
+});
+
 // ──────────── GoHighLevel Test ────────────
 router.post('/admin/integrations/test-ghl', adminAuth, async (req, res) => {
   const { api_key, location_id } = req.body;

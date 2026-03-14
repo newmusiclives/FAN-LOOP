@@ -99,4 +99,71 @@
   </div>
 </div>
 
+<!-- TrueFans CONNECT Embed Codes -->
+<div class="card p-6 mt-6">
+  <h3 class="text-lg font-semibold mb-2">TrueFans CONNECT Integration</h3>
+  <p class="text-xs text-gray-500 mb-4">Add this campaign to your Link-in-Bio, artist page, or show page. Pick the format that fits.</p>
+
+  <div class="space-y-4">
+    <!-- Direct Link -->
+    <div>
+      <label class="block text-sm text-gray-400 mb-1">Direct Campaign Link</label>
+      <div class="flex gap-2">
+        <input type="text" readonly value="<%= process.env.BASE_URL || 'https://fanloop-backend-production.up.railway.app' %>/c/<%= campaign.slug %>" class="w-full text-sm bg-[#1a1a2e]" id="directLink">
+        <button onclick="copyField('directLink')" class="px-3 py-1 bg-purple-600 rounded text-xs text-white whitespace-nowrap">Copy</button>
+      </div>
+      <span class="text-xs text-gray-600">Use as a button link on your Link-in-Bio or artist page</span>
+    </div>
+
+    <!-- Embed Widget (iframe) -->
+    <div>
+      <label class="block text-sm text-gray-400 mb-1">Embed Widget (iframe)</label>
+      <div class="flex gap-2">
+        <input type="text" readonly value='<iframe src="<%= process.env.BASE_URL || "https://fanloop-backend-production.up.railway.app" %>/embed/<%= campaign.slug %>" width="100%" height="380" frameborder="0" style="border:none;border-radius:16px;max-width:420px;"></iframe>' class="w-full text-sm bg-[#1a1a2e]" id="embedCode">
+        <button onclick="copyField('embedCode')" class="px-3 py-1 bg-purple-600 rounded text-xs text-white whitespace-nowrap">Copy</button>
+      </div>
+      <span class="text-xs text-gray-600">Paste into any HTML page — CONNECT show pages, artist pages, or custom sites</span>
+    </div>
+
+    <!-- Embed Widget URL -->
+    <div>
+      <label class="block text-sm text-gray-400 mb-1">Embed Widget URL (for Link-in-Bio buttons)</label>
+      <div class="flex gap-2">
+        <input type="text" readonly value="<%= process.env.BASE_URL || 'https://fanloop-backend-production.up.railway.app' %>/embed/<%= campaign.slug %>" class="w-full text-sm bg-[#1a1a2e]" id="embedUrl">
+        <button onclick="copyField('embedUrl')" class="px-3 py-1 bg-purple-600 rounded text-xs text-white whitespace-nowrap">Copy</button>
+      </div>
+      <span class="text-xs text-gray-600">Use as the URL for a "Join My Campaign" button on your CONNECT Link-in-Bio</span>
+    </div>
+
+    <!-- API Endpoint -->
+    <div>
+      <label class="block text-sm text-gray-400 mb-1">CONNECT API Endpoint</label>
+      <div class="flex gap-2">
+        <input type="text" readonly value="<%= process.env.BASE_URL || 'https://fanloop-backend-production.up.railway.app' %>/api/connect/campaign/<%= campaign.slug %>" class="w-full text-sm bg-[#1a1a2e]" id="apiUrl">
+        <button onclick="copyField('apiUrl')" class="px-3 py-1 bg-purple-600 rounded text-xs text-white whitespace-nowrap">Copy</button>
+      </div>
+      <span class="text-xs text-gray-600">JSON API — returns campaign data for custom CONNECT integrations</span>
+    </div>
+  </div>
+
+  <div class="mt-4 p-3 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e]">
+    <div class="text-xs text-purple-400 font-semibold mb-1">Where to use these:</div>
+    <div class="text-xs text-gray-400 space-y-1">
+      <div><strong>Link-in-Bio:</strong> Add the Direct Link as a button, or use the Embed URL for an inline signup form</div>
+      <div><strong>Artist Page:</strong> Paste the iframe embed code to show a signup widget on your CONNECT artist page</div>
+      <div><strong>Show Pages:</strong> Add a campaign link or embed for each show — fans sign up and refer friends for that specific event</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function copyField(id) {
+  var input = document.getElementById(id);
+  navigator.clipboard.writeText(input.value);
+  var btn = input.nextElementSibling;
+  btn.textContent = 'Copied!';
+  setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
+}
+</script>
+
 <%- include('../partials/admin-footer') %>
