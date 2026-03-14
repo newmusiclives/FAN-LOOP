@@ -3,39 +3,164 @@
 <div class="mb-8">
   <a href="/admin/artists" class="text-sm text-gray-500 hover:text-gray-300">&larr; Back to Artists</a>
   <h2 class="text-2xl font-bold mt-2"><%= title %></h2>
+  <p class="text-sm text-gray-500 mt-1">Enter your info once — it auto-fills every campaign template you create.</p>
 </div>
 
 <% if (error) { %>
   <div class="bg-red-900/30 border border-red-800 text-red-300 px-4 py-3 rounded-lg mb-6 text-sm"><%= error %></div>
 <% } %>
 
-<form method="POST" action="<%= artist && artist.id ? `/admin/artists/${artist.id}` : '/admin/artists' %>" class="max-w-xl">
-  <div class="card p-6">
-    <div class="space-y-4">
+<form method="POST" action="<%= artist && artist.id ? `/admin/artists/${artist.id}` : '/admin/artists' %>" class="max-w-3xl">
+
+  <!-- ══════════ IDENTITY ══════════ -->
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-1">Artist Identity</h3>
+    <p class="text-xs text-gray-500 mb-4">The basics — your name, genre, and bio appear on all campaign pages.</p>
+    <div class="grid grid-cols-2 gap-4">
       <div>
-        <label class="block text-sm text-gray-400 mb-1">Name *</label>
-        <input type="text" name="name" required value="<%= artist?.name || '' %>" class="w-full">
+        <label class="block text-sm text-gray-400 mb-1">Artist / Band Name *</label>
+        <input type="text" name="name" required value="<%= artist?.name || '' %>" class="w-full" placeholder="Your stage name">
       </div>
       <div>
-        <label class="block text-sm text-gray-400 mb-1">Slug *</label>
-        <input type="text" name="slug" required value="<%= artist?.slug || '' %>" class="w-full" pattern="[a-z0-9-]+" placeholder="artist-name">
+        <label class="block text-sm text-gray-400 mb-1">URL Slug *</label>
+        <input type="text" name="slug" required value="<%= artist?.slug || '' %>" class="w-full" pattern="[a-z0-9-]+" placeholder="your-name">
+        <span class="text-xs text-gray-600">Used in campaign URLs</span>
       </div>
       <div>
         <label class="block text-sm text-gray-400 mb-1">Genre</label>
-        <input type="text" name="genre" value="<%= artist?.genre || '' %>" class="w-full" placeholder="e.g. Electronic / House">
+        <input type="text" name="genre" value="<%= artist?.genre || '' %>" class="w-full" placeholder="e.g. Hip-Hop / R&B">
       </div>
       <div>
-        <label class="block text-sm text-gray-400 mb-1">Bio</label>
-        <textarea name="bio" rows="3" class="w-full"><%= artist?.bio || '' %></textarea>
+        <label class="block text-sm text-gray-400 mb-1">What Do You Call Your Fans?</label>
+        <input type="text" name="fan_noun" value="<%= artist?.fan_noun || '' %>" class="w-full" placeholder="e.g. Swifties, BeyHive, or just 'fans'">
+        <span class="text-xs text-gray-600">Used in share messages &amp; reward descriptions</span>
+      </div>
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm text-gray-400 mb-1">Bio</label>
+      <textarea name="bio" rows="3" class="w-full" placeholder="A short bio that appears on your campaign pages..."><%= artist?.bio || '' %></textarea>
+    </div>
+    <div class="mt-4">
+      <label class="block text-sm text-gray-400 mb-1">Profile Image URL</label>
+      <input type="url" name="image_url" value="<%= artist?.image_url || '' %>" class="w-full" placeholder="https://...">
+    </div>
+  </div>
+
+  <!-- ══════════ SOCIAL MEDIA ══════════ -->
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-1">Social Media &amp; Links</h3>
+    <p class="text-xs text-gray-500 mb-4">These get linked in your campaign pages and used in share messages.</p>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Website</label>
+        <input type="url" name="website" value="<%= artist?.website || '' %>" class="w-full" placeholder="https://yoursite.com">
       </div>
       <div>
-        <label class="block text-sm text-gray-400 mb-1">Image URL</label>
-        <input type="url" name="image_url" value="<%= artist?.image_url || '' %>" class="w-full" placeholder="https://...">
+        <label class="block text-sm text-gray-400 mb-1">Merch Store URL</label>
+        <input type="url" name="merch_store_url" value="<%= artist?.merch_store_url || '' %>" class="w-full" placeholder="https://yourmerch.com">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Instagram</label>
+        <div class="flex items-center">
+          <span class="text-gray-500 mr-1">@</span>
+          <input type="text" name="instagram_handle" value="<%= (artist?.instagram_handle || '').replace(/^@/, '') %>" class="w-full" placeholder="yourhandle">
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">TikTok</label>
+        <div class="flex items-center">
+          <span class="text-gray-500 mr-1">@</span>
+          <input type="text" name="tiktok_handle" value="<%= (artist?.tiktok_handle || '').replace(/^@/, '') %>" class="w-full" placeholder="yourhandle">
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Twitter / X</label>
+        <div class="flex items-center">
+          <span class="text-gray-500 mr-1">@</span>
+          <input type="text" name="twitter_handle" value="<%= (artist?.twitter_handle || '').replace(/^@/, '') %>" class="w-full" placeholder="yourhandle">
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Spotify Profile</label>
+        <input type="url" name="spotify_url" value="<%= artist?.spotify_url || '' %>" class="w-full" placeholder="https://open.spotify.com/artist/...">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Apple Music</label>
+        <input type="url" name="apple_music_url" value="<%= artist?.apple_music_url || '' %>" class="w-full" placeholder="https://music.apple.com/artist/...">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">YouTube</label>
+        <input type="url" name="youtube_url" value="<%= artist?.youtube_url || '' %>" class="w-full" placeholder="https://youtube.com/@...">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Discord</label>
+        <input type="url" name="discord_url" value="<%= artist?.discord_url || '' %>" class="w-full" placeholder="https://discord.gg/...">
       </div>
     </div>
   </div>
-  <div class="flex gap-3 mt-6">
-    <button type="submit" class="btn-primary px-6 py-2.5 rounded-lg text-white font-semibold">Save Artist</button>
+
+  <!-- ══════════ LOCATION & CONTACT ══════════ -->
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-1">Location &amp; Contact</h3>
+    <p class="text-xs text-gray-500 mb-4">Used for tour campaigns, venue auto-fill, and fan geo-targeting.</p>
+    <div class="grid grid-cols-3 gap-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">City</label>
+        <input type="text" name="city" value="<%= artist?.city || '' %>" class="w-full" placeholder="e.g. Los Angeles">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">State / Region</label>
+        <input type="text" name="state_region" value="<%= artist?.state_region || '' %>" class="w-full" placeholder="e.g. California">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Country</label>
+        <input type="text" name="country" value="<%= artist?.country || '' %>" class="w-full" placeholder="e.g. USA">
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Default Venue</label>
+        <input type="text" name="default_venue" value="<%= artist?.default_venue || '' %>" class="w-full" placeholder="e.g. The Troubadour">
+        <span class="text-xs text-gray-600">Auto-fills [VENUE] in tour &amp; show templates</span>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Contact Email</label>
+        <input type="email" name="contact_email" value="<%= artist?.contact_email || '' %>" class="w-full" placeholder="booking@yourname.com">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Phone / SMS</label>
+        <input type="tel" name="phone" value="<%= artist?.phone || '' %>" class="w-full" placeholder="+1 (555) 000-0000">
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ BRAND COLORS ══════════ -->
+  <div class="card p-6 mb-6">
+    <h3 class="text-lg font-semibold mb-1">Brand Colors</h3>
+    <p class="text-xs text-gray-500 mb-4">Default colors for all your campaign pages. You can override per-campaign.</p>
+    <% const bc = artist?.brand_config ? (typeof artist.brand_config === 'string' ? JSON.parse(artist.brand_config) : artist.brand_config) : {}; %>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Primary Color</label>
+        <input type="color" name="primary_color" value="<%= bc.primary_color || '#8b5cf6' %>" class="w-full h-10 cursor-pointer">
+      </div>
+      <div>
+        <label class="block text-sm text-gray-400 mb-1">Secondary Color</label>
+        <input type="color" name="secondary_color" value="<%= bc.secondary_color || '#ec4899' %>" class="w-full h-10 cursor-pointer">
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PROFILE COMPLETENESS ══════════ -->
+  <div class="card p-4 mb-6 bg-[#1a1a2e] border-[#2a2a3e]">
+    <div class="flex items-center gap-3">
+      <div class="text-purple-400 text-sm font-semibold">Profile Tip:</div>
+      <div class="text-xs text-gray-400">The more you fill out, the less you edit per campaign. Your name, socials, city, and venue auto-replace all [BRACKETED] placeholders in every template.</div>
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button type="submit" class="btn-primary px-6 py-2.5 rounded-lg text-white font-semibold">Save Artist Profile</button>
     <a href="/admin/artists" class="px-6 py-2.5 rounded-lg text-gray-400 hover:text-white">Cancel</a>
   </div>
 </form>

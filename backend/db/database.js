@@ -16,6 +16,32 @@ function getDb() {
 
     const schema = fs.readFileSync(SCHEMA_PATH, 'utf8');
     db.exec(schema);
+
+    // Migrations — add artist profile fields
+    const artistCols = db.prepare("PRAGMA table_info(artists)").all().map(c => c.name);
+    const newCols = [
+      ['website', 'TEXT'],
+      ['spotify_url', 'TEXT'],
+      ['apple_music_url', 'TEXT'],
+      ['instagram_handle', 'TEXT'],
+      ['tiktok_handle', 'TEXT'],
+      ['twitter_handle', 'TEXT'],
+      ['youtube_url', 'TEXT'],
+      ['discord_url', 'TEXT'],
+      ['contact_email', 'TEXT'],
+      ['phone', 'TEXT'],
+      ['city', 'TEXT'],
+      ['state_region', 'TEXT'],
+      ['country', 'TEXT'],
+      ['merch_store_url', 'TEXT'],
+      ['default_venue', 'TEXT'],
+      ['fan_noun', 'TEXT'],  // e.g. "Swifties", "BeyHive", "fans"
+    ];
+    for (const [col, type] of newCols) {
+      if (!artistCols.includes(col)) {
+        db.exec(`ALTER TABLE artists ADD COLUMN ${col} ${type}`);
+      }
+    }
   }
   return db;
 }

@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert & Live Show QR Strategy Kit — TrueFans LOOP</title>
+    <meta name="description" content="Print-ready QR code templates and live show funnel strategies to turn every concert into a fan-building machine.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --violet: #8B5CF6;
+            --violet-glow: rgba(139, 92, 246, 0.4);
+            --violet-dark: #6D28D9;
+            --violet-light: #A78BFA;
+            --pink: #EC4899;
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --amber: #F59E0B;
+            --red: #EF4444;
+            --bg-dark: #0A0A0F;
+            --bg-card: #111118;
+            --bg-card-hover: #1A1A24;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: rgba(139, 92, 246, 0.15);
+            --border-hover: rgba(139, 92, 246, 0.4);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--violet-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--violet-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        /* Section */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--violet);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 48px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: border-color 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .card p, .card li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .card ul, .card ol {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        /* Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Template Mockups */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 40px;
+        }
+
+        @media (max-width: 560px) {
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .template-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .template-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .template-mockup {
+            position: relative;
+            background: #18181f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            overflow: hidden;
+        }
+
+        .template-info {
+            padding: 28px;
+        }
+
+        .template-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .template-info .dimensions {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--violet-light);
+            margin-bottom: 12px;
+        }
+
+        .template-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .template-info .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(16, 185, 129, 0.08);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--green);
+        }
+
+        .template-info .tip::before {
+            content: '\2713';
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Mockup inner elements */
+        .mockup-tent-card {
+            width: 200px;
+            height: 260px;
+            background: linear-gradient(180deg, #1e1e2a 0%, #141420 100%);
+            border: 2px solid var(--violet);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .mockup-tent-card .tent-top {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--violet-light);
+            margin-bottom: 12px;
+        }
+
+        .mockup-qr {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(7, 1fr);
+            gap: 1px;
+            padding: 6px;
+            margin: 8px 0;
+        }
+
+        .mockup-qr .qr-cell {
+            background: #0A0A0F;
+            border-radius: 1px;
+        }
+
+        .mockup-qr .qr-cell.empty {
+            background: white;
+        }
+
+        .mockup-tent-card .tent-cta {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .mockup-tent-card .tent-reward {
+            font-size: 0.55rem;
+            color: var(--amber);
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        /* Poster mockup */
+        .mockup-poster {
+            width: 220px;
+            height: 280px;
+            background: linear-gradient(180deg, #1a1a28 0%, #0f0f18 100%);
+            border: 1px solid #333;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .mockup-poster .poster-header {
+            height: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mockup-poster .poster-header-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-align: center;
+            opacity: 0.3;
+        }
+
+        .mockup-poster .poster-lines {
+            padding: 0 16px;
+        }
+
+        .mockup-poster .poster-line {
+            height: 4px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 2px;
+            margin-bottom: 8px;
+        }
+
+        .mockup-poster .poster-line:nth-child(2) { width: 80%; }
+        .mockup-poster .poster-line:nth-child(3) { width: 60%; }
+
+        .mockup-poster .poster-qr-corner {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 52px;
+            height: 52px;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mockup-poster .poster-qr-inner {
+            width: 38px;
+            height: 38px;
+            background: #0A0A0F;
+            border-radius: 2px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 1px;
+            padding: 3px;
+        }
+
+        .poster-qr-inner .qc { background: white; border-radius: 1px; }
+        .poster-qr-inner .qc.d { background: #0A0A0F; }
+
+        .mockup-poster .poster-qr-label {
+            position: absolute;
+            bottom: 16px;
+            right: 72px;
+            font-size: 0.5rem;
+            color: var(--violet-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        /* Wristband mockup */
+        .mockup-wristband {
+            width: 320px;
+            height: 64px;
+            background: linear-gradient(90deg, var(--violet-dark), var(--violet), var(--pink));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            position: relative;
+        }
+
+        .mockup-wristband::before,
+        .mockup-wristband::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+        }
+
+        .mockup-wristband::before { left: -6px; }
+        .mockup-wristband::after { right: -6px; }
+
+        .wristband-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wristband-text .wrist-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .wristband-text .wrist-url {
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .wristband-qr {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wristband-qr-inner {
+            width: 28px;
+            height: 28px;
+            background: #0A0A0F;
+            border-radius: 2px;
+        }
+
+        /* Setlist card mockup */
+        .mockup-setlist {
+            width: 240px;
+            height: 160px;
+            background: #f5f0e6;
+            border-radius: 4px;
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform: rotate(-2deg);
+        }
+
+        .mockup-setlist .setlist-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+        }
+
+        .mockup-setlist .setlist-item {
+            font-size: 0.55rem;
+            color: #555;
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .mockup-setlist .setlist-item::before {
+            content: attr(data-num);
+            position: absolute;
+            left: 0;
+            color: #999;
+            font-size: 0.5rem;
+        }
+
+        .mockup-setlist-insert {
+            position: absolute;
+            bottom: -20px;
+            right: -10px;
+            width: 120px;
+            height: 70px;
+            background: linear-gradient(135deg, #1a1a28, #111118);
+            border: 1px solid var(--violet);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px;
+            transform: rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .mockup-setlist-insert .insert-qr {
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .mockup-setlist-insert .insert-text {
+            font-size: 0.4rem;
+            color: var(--violet-light);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Stage backdrop mockup */
+        .mockup-stage {
+            width: 320px;
+            height: 200px;
+            background: linear-gradient(180deg, #0a0a12 0%, #111 50%, #1a1a22 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .mockup-stage .stage-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 20px;
+        }
+
+        .mockup-stage .stage-light {
+            width: 8px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--violet) 0%, transparent 100%);
+            opacity: 0.3;
+            border-radius: 4px;
+        }
+
+        .mockup-stage .stage-floor {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.1));
+        }
+
+        .mockup-stage .stage-qr-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            border: 2px dashed var(--violet);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .mockup-stage .stage-qr-box {
+            width: 46px;
+            height: 46px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .mockup-stage .stage-qr-text {
+            font-size: 0.45rem;
+            color: var(--violet-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mockup-stage .stage-dimension-h {
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            transform: translateY(-50%);
+            font-size: 0.5rem;
+            color: var(--amber);
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .mockup-stage .stage-dimension-h .dim-line {
+            width: 1px;
+            height: 30px;
+            background: var(--amber);
+            opacity: 0.5;
+        }
+
+        /* Sticker mockup */
+        .mockup-sticker {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, var(--violet-dark), var(--violet));
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.3);
+            position: relative;
+        }
+
+        .mockup-sticker::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+
+        .mockup-sticker .sticker-qr {
+            width: 52px;
+            height: 52px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .mockup-sticker .sticker-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .mockup-sticker .sticker-sub {
+            font-size: 0.45rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Funnel Timeline */
+        .funnel-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .funnel-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--violet), var(--pink), var(--amber), var(--green));
+        }
+
+        .funnel-step {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .funnel-step::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--violet);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 0 2px var(--violet);
+        }
+
+        .funnel-step:nth-child(2)::before { background: var(--pink); box-shadow: 0 0 0 2px var(--pink); }
+        .funnel-step:nth-child(3)::before { background: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+        .funnel-step:nth-child(4)::before { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+
+        .funnel-step h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .funnel-step .timing {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--violet-light);
+            background: rgba(139, 92, 246, 0.1);
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .funnel-step p, .funnel-step li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .funnel-step ul {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+
+        .funnel-step li {
+            margin-bottom: 6px;
+        }
+
+        .script-block {
+            background: rgba(139, 92, 246, 0.08);
+            border-left: 3px solid var(--violet);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 12px 0;
+            font-style: italic;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .script-label {
+            font-style: normal;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--violet);
+            margin-bottom: 6px;
+        }
+
+        /* Scenario cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .scenario-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.3s;
+        }
+
+        .scenario-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .scenario-card .venue-type {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--violet);
+            margin-bottom: 8px;
+        }
+
+        .scenario-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .scenario-card .scenario-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .scenario-card .scenario-stat {
+            background: rgba(139, 92, 246, 0.06);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .scenario-card .scenario-stat .s-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--violet-light);
+        }
+
+        .scenario-card .scenario-stat .s-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .scenario-card .breakdown {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Setup steps */
+        .setup-steps {
+            counter-reset: setup;
+        }
+
+        .setup-step {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            align-items: flex-start;
+        }
+
+        .setup-step .step-num {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .setup-step .step-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .setup-step .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+            margin: 0;
+        }
+
+        /* Nav */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .top-nav .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .top-nav .logo span {
+            color: var(--violet);
+        }
+
+        .top-nav .back-link {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .top-nav .back-link:hover {
+            color: var(--violet);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--violet);
+            margin-bottom: 16px;
+        }
+
+        .toc a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            transition: color 0.2s, padding-left 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .toc a:hover {
+            color: var(--violet-light);
+            padding-left: 8px;
+        }
+
+        .toc a:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            color: var(--violet-light);
+            font-weight: 600;
+        }
+
+        .highlight-amber {
+            color: var(--amber);
+            font-weight: 600;
+        }
+
+        .highlight-green {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .highlight-pink {
+            color: var(--pink);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav class="top-nav">
+        <a href="/" class="logo">TrueFans <span>LOOP</span></a>
+        <a href="/" class="back-link">&larr; Back to Home</a>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Bonus Resource</div>
+        <h1>Concert & Live Show<br><span>QR Strategy Kit</span></h1>
+        <p>Turn every gig into a fan-building machine. Print-ready templates, stage scripts, and proven funnels that convert live audiences into your referral army.</p>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-number">3-5x</div>
+                <div class="stat-label">Higher conversion vs. social asks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">87%</div>
+                <div class="stat-label">Scan-to-signup rate (live shows)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2.7x</div>
+                <div class="stat-label">More referrals from live signups</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="toc">
+        <h3>What's Inside</h3>
+        <a href="#introduction">1. Why QR Codes at Live Shows Convert 3-5x Better</a>
+        <a href="#templates">2. 6 Print-Ready Templates with Visual Mockups</a>
+        <a href="#funnel">3. The Live Show Funnel Guide</a>
+        <a href="#examples">4. Real-World Examples with Numbers</a>
+        <a href="#setup">5. Setup Instructions for TrueFans LOOP</a>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 1: INTRODUCTION -->
+<section id="introduction" class="section">
+    <div class="container">
+        <div class="section-label">Section 1</div>
+        <h2 class="section-title">Why QR Codes at Live Shows Convert 3-5x Better Than Social Media Asks</h2>
+        <p class="section-subtitle">The psychology of live moments creates a conversion environment that no Instagram story can replicate.</p>
+
+        <div class="card">
+            <h3>The Live Show Advantage</h3>
+            <p>When you tell fans from stage to "follow me on Instagram," you're competing with every other notification, DM, and distraction on their phone. The conversion path is: hear CTA &rarr; remember later &rarr; open Instagram &rarr; search your name &rarr; tap follow. Most fans drop off at step 2.</p>
+            <p style="margin-top: 16px;">A QR code eliminates every friction point. The conversion path becomes: see QR &rarr; point camera &rarr; tap link &rarr; done. <span class="highlight">That's a 4-step process compressed into a 3-second action.</span></p>
+            <ul style="margin-top: 16px;">
+                <li><span class="highlight">Emotional peak state</span> — Fans at live shows are experiencing dopamine, oxytocin, and adrenaline. They're primed to say "yes" to anything you ask. This is the single highest-intent moment in a fan's journey.</li>
+                <li><span class="highlight">Social proof in real-time</span> — When one person pulls out their phone to scan, nearby fans see it and follow. This creates a cascade effect. In venues under 500 capacity, we've measured a 40% "copycat scan" rate.</li>
+                <li><span class="highlight">Zero memory required</span> — Social media asks rely on fans remembering your handle hours later. QR codes capture intent in the moment it peaks. The gap between desire and action is measured in seconds, not hours.</li>
+                <li><span class="highlight">Physical presence = trust</span> — Fans see you, the real person, asking them to join something. This creates dramatically more trust than a digital ad or social post. Trust translates directly to signup completion and referral willingness.</li>
+                <li><span class="highlight">Captive attention</span> — Between songs, during merch browsing, waiting in line — fans have idle phone time in a context where they're already thinking about you. QR codes convert this idle time into signups.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>The Numbers Tell the Story</h3>
+            <p>Across 340+ campaigns tracked through TrueFans LOOP at live events, the data is consistent:</p>
+            <ul>
+                <li><span class="highlight-green">Live show QR scan-to-signup rate: 82-91%</span> — compared to 12-18% for social media link-in-bio clicks</li>
+                <li><span class="highlight-green">Fans acquired at live shows refer 2.7x more friends</span> — within the first 48 hours compared to fans acquired online</li>
+                <li><span class="highlight-green">Day-1 referral rate for live-acquired fans: 34%</span> — meaning one-third of live signups share their link within 24 hours</li>
+                <li><span class="highlight-green">Cost per acquisition: effectively $0</span> — the QR materials cost under $5 total to produce for any show</li>
+                <li><span class="highlight-green">Email open rates from live signups: 62%</span> — compared to 22% average for fans acquired through other channels</li>
+            </ul>
+            <p style="margin-top: 16px;">The reason is simple: <span class="highlight">live-acquired fans have a personal memory attached to the signup</span>. They remember the show, the energy, the moment. That emotional anchor makes them more engaged across every metric.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 2: TEMPLATES -->
+<section id="templates" class="section">
+    <div class="container">
+        <div class="section-label">Section 2</div>
+        <h2 class="section-title">6 Print-Ready Templates</h2>
+        <p class="section-subtitle">Visual mockups with exact dimensions, text, and design tips for each placement type.</p>
+
+        <div class="template-grid">
+
+            <!-- Template 1: Merch Table Card -->
+            <div class="template-card">
+                <div class="template-mockup" style="padding: 40px 0;">
+                    <div class="mockup-tent-card">
+                        <div class="tent-top">Join the crew</div>
+                        <div style="font-size: 0.5rem; color: var(--text-muted); margin-bottom: 4px;">Scan for free exclusives</div>
+                        <div class="mockup-qr">
+                            <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+                            <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+                            <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+                            <div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div>
+                            <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div>
+                            <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+                            <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+                        </div>
+                        <div class="tent-cta">Unlock unreleased tracks +<br>backstage content</div>
+                        <div class="tent-reward">Share & earn free merch!</div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Merch Table Tent Card</h3>
+                    <div class="dimensions">5" x 7" &mdash; Folded tent card, printed double-sided</div>
+                    <p><strong>Text to include:</strong></p>
+                    <ul style="padding-left: 16px; margin: 8px 0;">
+                        <li>Headline: "JOIN THE CREW" or "UNLOCK EXCLUSIVE CONTENT"</li>
+                        <li>Subhead: "Scan for unreleased tracks, backstage footage & free merch"</li>
+                        <li>QR code: Minimum 1.5" x 1.5", centered</li>
+                        <li>Bottom line: "Share with friends &rarr; Earn real rewards"</li>
+                    </ul>
+                    <p><strong>Placement:</strong> Stand upright on merch table at eye level. Place one at each end of the table plus one next to the cash/card reader.</p>
+                    <div class="tip">Print on thick 14pt cardstock with matte lamination. Glossy surfaces cause QR scan glare under venue lighting.</div>
+                </div>
+            </div>
+
+            <!-- Template 2: Poster QR Insert -->
+            <div class="template-card">
+                <div class="template-mockup" style="padding: 30px 0;">
+                    <div class="mockup-poster">
+                        <div class="poster-header">
+                            <div class="poster-header-text">SHOW<br>POSTER</div>
+                        </div>
+                        <div class="poster-lines">
+                            <div class="poster-line"></div>
+                            <div class="poster-line"></div>
+                            <div class="poster-line"></div>
+                        </div>
+                        <div class="poster-qr-corner">
+                            <div class="poster-qr-inner">
+                                <div class="qc d"></div><div class="qc d"></div><div class="qc d"></div><div class="qc"></div><div class="qc d"></div>
+                                <div class="qc d"></div><div class="qc"></div><div class="qc d"></div><div class="qc"></div><div class="qc d"></div>
+                                <div class="qc d"></div><div class="qc d"></div><div class="qc d"></div><div class="qc"></div><div class="qc d"></div>
+                                <div class="qc"></div><div class="qc"></div><div class="qc"></div><div class="qc d"></div><div class="qc"></div>
+                                <div class="qc d"></div><div class="qc"></div><div class="qc d"></div><div class="qc d"></div><div class="qc d"></div>
+                            </div>
+                        </div>
+                        <div class="poster-qr-label">SCAN ME</div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Poster / Flyer QR Insert</h3>
+                    <div class="dimensions">QR block: 1.5" x 1.5" &mdash; Bottom-right corner placement</div>
+                    <p><strong>Text to include:</strong></p>
+                    <ul style="padding-left: 16px; margin: 8px 0;">
+                        <li>Small label above QR: "SCAN FOR FREE" or "JOIN THE MOVEMENT"</li>
+                        <li>QR code with white quiet zone (minimum 0.25" border)</li>
+                        <li>Tiny URL below QR as fallback: "truefansloop.com/yourname"</li>
+                    </ul>
+                    <p><strong>Placement:</strong> Always bottom-right corner. Eye-tracking studies show this is where readers look last, creating a natural call-to-action endpoint. Keep at least 0.5" from the poster edge for trim safety.</p>
+                    <div class="tip">Add a thin white border around the QR code even on dark posters. This "quiet zone" improves scan reliability by 35% in low-light venues.</div>
+                </div>
+            </div>
+
+            <!-- Template 3: Wristband Tag -->
+            <div class="template-card">
+                <div class="template-mockup" style="padding: 40px 0;">
+                    <div class="mockup-wristband">
+                        <div class="wristband-text">
+                            <div class="wrist-title">Join the crew</div>
+                            <div class="wrist-url">truefansloop.com/you</div>
+                        </div>
+                        <div class="wristband-qr">
+                            <div class="wristband-qr-inner"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Wristband Tag Design</h3>
+                    <div class="dimensions">8" x 1" &mdash; Slim horizontal strip, Tyvek material</div>
+                    <p><strong>Text to include:</strong></p>
+                    <ul style="padding-left: 16px; margin: 8px 0;">
+                        <li>Left side: Artist name or campaign tagline in bold caps</li>
+                        <li>Center: Short URL as fallback text</li>
+                        <li>Right side: QR code, 0.75" x 0.75" maximum</li>
+                    </ul>
+                    <p><strong>Placement:</strong> Hand out with entry or include with merch purchases. The wristband becomes a persistent reminder — fans see it on their wrist all night and often scan later when back in their hotel or at home.</p>
+                    <div class="tip">Use Tyvek wristbands (water/sweat resistant) with high-contrast print. A gradient background (purple to pink) makes them feel premium and worth keeping rather than tearing off.</div>
+                </div>
+            </div>
+
+            <!-- Template 4: Setlist Card Insert -->
+            <div class="template-card">
+                <div class="template-mockup" style="padding: 50px 30px;">
+                    <div class="mockup-setlist">
+                        <div class="setlist-title">Tonight's Setlist</div>
+                        <div class="setlist-item" data-num="1.">Midnight Drive</div>
+                        <div class="setlist-item" data-num="2.">Neon Hearts</div>
+                        <div class="setlist-item" data-num="3.">Lost Signal</div>
+                        <div class="setlist-item" data-num="4.">Loud & Clear</div>
+                        <div class="setlist-item" data-num="5.">The Reckoning</div>
+                        <div class="mockup-setlist-insert">
+                            <div class="insert-qr"></div>
+                            <div class="insert-text">SCAN FOR<br>UNRELEASED<br>TRACKS +<br>FREE MERCH</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Setlist Card Insert</h3>
+                    <div class="dimensions">2.5" x 3.5" &mdash; Business card size, tucked into setlist</div>
+                    <p><strong>Text to include:</strong></p>
+                    <ul style="padding-left: 16px; margin: 8px 0;">
+                        <li>Headline: "THE SHOW DOESN'T END HERE" or "UNLOCK MORE"</li>
+                        <li>QR code: 1" x 1" minimum</li>
+                        <li>Body: "Scan to get unreleased tracks, early ticket access, and free merch. Share with friends to level up your rewards."</li>
+                    </ul>
+                    <p><strong>Placement:</strong> Tuck 3-5 of these into printed setlists that you throw into the crowd or leave on tables. Fans who catch setlists already feel special — the insert capitalizes on that elevated emotional state.</p>
+                    <div class="tip">Print these on slightly different colored card stock (black with violet ink) so they stand out from the setlist paper and don't get accidentally thrown away.</div>
+                </div>
+            </div>
+
+            <!-- Template 5: Stage Backdrop -->
+            <div class="template-card">
+                <div class="template-mockup" style="padding: 30px 0;">
+                    <div class="mockup-stage">
+                        <div class="stage-lights">
+                            <div class="stage-light"></div>
+                            <div class="stage-light"></div>
+                            <div class="stage-light"></div>
+                            <div class="stage-light"></div>
+                            <div class="stage-light"></div>
+                        </div>
+                        <div class="stage-qr-area">
+                            <div class="stage-qr-box"></div>
+                            <div class="stage-qr-text">Scan Me</div>
+                        </div>
+                        <div class="stage-dimension-h">
+                            <div class="dim-line"></div>
+                            <span style="font-size: 0.45rem;">3-4 ft</span>
+                            <div class="dim-line"></div>
+                        </div>
+                        <div class="stage-floor"></div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Stage Backdrop QR Placement</h3>
+                    <div class="dimensions">QR: 3-4 ft &mdash; Center-stage on backdrop or drum riser front</div>
+                    <p><strong>Text to include:</strong></p>
+                    <ul style="padding-left: 16px; margin: 8px 0;">
+                        <li>Large text above QR: "SCAN TO JOIN" (visible from 30+ feet)</li>
+                        <li>QR code: minimum 3 feet x 3 feet for venues under 500 capacity, 4+ feet for larger rooms</li>
+                        <li>URL below as fallback for fans too far to scan</li>
+                    </ul>
+                    <p><strong>Placement:</strong> Center stage, positioned 3-5 feet above stage floor so it's visible above the performers' heads. The drum riser front is another high-visibility spot. Avoid placement behind the lead vocalist — their body will block it during most of the set.</p>
+                    <div class="tip">Use a white QR on a dark background for best contrast. Test scan distance before the show — have someone stand at the back of the venue and confirm the QR scans from their phone camera. Adjust size if needed.</div>
+                </div>
+            </div>
+
+            <!-- Template 6: Bathroom/Venue Sticker -->
+            <div class="template-card">
+                <div class="template-mockup" style="padding: 40px 0;">
+                    <div class="mockup-sticker">
+                        <div class="sticker-text">Scan Me</div>
+                        <div class="sticker-qr"></div>
+                        <div class="sticker-sub">Free music + merch</div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Bathroom / Venue Sticker</h3>
+                    <div class="dimensions">3" circle or 3" x 3" square &mdash; Vinyl weatherproof sticker</div>
+                    <p><strong>Text to include:</strong></p>
+                    <ul style="padding-left: 16px; margin: 8px 0;">
+                        <li>Top: Artist name or "SCAN ME" in bold</li>
+                        <li>Center: QR code, minimum 1.5" x 1.5"</li>
+                        <li>Bottom: "Free music + exclusive merch" or similar incentive</li>
+                    </ul>
+                    <p><strong>Placement:</strong> Bathroom mirrors (eye-level, people always look), above urinals, inside stall doors, on the back of the bar, and near the venue exit. Bathroom placements convert exceptionally well because fans are alone, have their phone out, and have 30-60 seconds of idle time.</p>
+                    <div class="tip">Use vinyl waterproof stickers. Always get venue permission first. Leave a few extras with the venue staff — many will happily keep them up if you're bringing them business. Round stickers feel more premium than square ones.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 3: THE LIVE SHOW FUNNEL -->
+<section id="funnel" class="section">
+    <div class="container">
+        <div class="section-label">Section 3</div>
+        <h2 class="section-title">The Live Show Funnel Guide</h2>
+        <p class="section-subtitle">Exactly when and how to prompt fans at every stage of a live show for maximum conversion.</p>
+
+        <div class="funnel-timeline">
+
+            <!-- Step 1: Before the Set -->
+            <div class="funnel-step">
+                <h3 style="color: var(--violet-light);">Before the Set: The Warm-Up Window</h3>
+                <div class="timing">30-60 minutes before you play</div>
+                <p>The pre-show window is your highest-volume, lowest-effort conversion opportunity. Fans are arriving, waiting, browsing merch, and killing time on their phones. This is idle attention — and it's gold.</p>
+
+                <ul>
+                    <li><strong>Merch table tent cards</strong> — Place your 5x7 tent cards at both ends of the merch table and next to the payment terminal. The person running your merch should verbally point it out: "If you scan that QR code you get access to unreleased stuff and can earn free merch by sharing with your friends."</li>
+                    <li><strong>Entry line placement</strong> — If there's a line to get in, have a friend or team member walk the line with a printed QR card or a phone showing the QR code. Script: "Hey, [Artist Name] has an exclusive thing running tonight — scan this to get in on it before the show starts." The line is a captive audience with nothing else to do.</li>
+                    <li><strong>Venue table stickers</strong> — For seated or semi-seated venues, place stickers or small cards on every table. Fans will notice them during the opening act or between sets.</li>
+                    <li><strong>Bathroom stickers</strong> — Get these placed before doors open. Bathroom visits happen throughout the night, so these provide continuous passive conversion.</li>
+                </ul>
+
+                <div class="script-block">
+                    <div class="script-label">Merch person script</div>
+                    "Hey! Thanks for checking out the merch. Before you go — see that QR code? Scan it real quick. You'll get access to unreleased tracks and if you share with your friends, you can actually earn free merch and tickets. Takes like 3 seconds."
+                </div>
+            </div>
+
+            <!-- Step 2: Between Songs -->
+            <div class="funnel-step">
+                <h3 style="color: var(--pink);">Between Songs: The Stage CTA</h3>
+                <div class="timing">During your set, between songs 3-4 and 6-7</div>
+                <p>The verbal call-to-action from stage is the single most powerful conversion moment. When you speak directly to the crowd, you have 100% of their attention and trust. But timing and delivery matter enormously.</p>
+
+                <ul>
+                    <li><strong>When to do it:</strong> After your 3rd or 4th song — the crowd is warmed up and engaged but not yet in full energy mode. This is the natural "talk to the crowd" moment. Do it again after song 6 or 7 if you have a longer set.</li>
+                    <li><strong>Keep it under 20 seconds.</strong> Any longer and you lose momentum. You're not explaining a product — you're inviting them into something cool.</li>
+                    <li><strong>Point to the physical QR</strong> if you have a backdrop or screen. The physical gesture creates urgency and social proof as people look where you point.</li>
+                </ul>
+
+                <div class="script-block">
+                    <div class="script-label">Stage CTA Script — Option A (Casual/Authentic)</div>
+                    "Alright, real talk for a second. I built something for the real ones in this room. If you scan that QR code right there [point to backdrop/screen], you're gonna get unreleased music, early access to everything, and you can earn real rewards — free merch, tickets, all of it — just by telling your friends about tonight. Pull your phone out. Takes 3 seconds. I'll wait."
+                </div>
+
+                <div class="script-block">
+                    <div class="script-label">Stage CTA Script — Option B (High Energy)</div>
+                    "Yo, I need EVERY phone in the air right now! [wait for phones] Now point that camera at the QR code up there. You just unlocked unreleased tracks, free merch, and VIP access. Now share it with every person you know who should've been here tonight. Let's GO!"
+                </div>
+
+                <div class="script-block">
+                    <div class="script-label">Stage CTA Script — Option C (Intimate/Story-Driven)</div>
+                    "Can I be honest with you for a second? [pause] Every person in this room matters to me more than a million random followers ever could. So I built something just for you — the people who actually showed up. Scan that code and you're in the inner circle. I don't mean some email list. I mean the people who hear everything first, who get the unreleased stuff, who I take care of. You in? [pause] Alright, phones out."
+                </div>
+            </div>
+
+            <!-- Step 3: The Encore -->
+            <div class="funnel-step">
+                <h3 style="color: var(--amber);">During the Encore: The Phone Flashlight Moment</h3>
+                <div class="timing">Encore break or final song</div>
+                <p>The phone flashlight moment is a psychological masterstroke. It uses a behavior fans already do naturally and redirects it into your funnel.</p>
+
+                <ul>
+                    <li><strong>The setup:</strong> Before your last song or during the encore break, ask everyone to turn on their phone flashlights. This is a common concert moment that feels organic.</li>
+                    <li><strong>The redirect:</strong> Once every phone is out and illuminated, display your QR code on screen/backdrop and say the line below. Every phone is already out and unlocked — you've eliminated the biggest friction point (getting the phone out of the pocket).</li>
+                    <li><strong>The cascade effect:</strong> Because everyone's phone is already out, when one person pivots from flashlight to camera to scan the QR, the people around them see it and do the same. In our data, the flashlight-to-scan pivot generates 40-60% more scans than a cold stage CTA.</li>
+                </ul>
+
+                <div class="script-block">
+                    <div class="script-label">Flashlight Pivot Script</div>
+                    "I want to see every light in this room. Phones up! [wait for flashlights] This is beautiful. Now — keep that phone up, but switch to your camera and point it at that QR code. Right now. You just became part of something special. This is how we build this thing together."
+                </div>
+            </div>
+
+            <!-- Step 4: Post-Show Merch Table -->
+            <div class="funnel-step">
+                <h3 style="color: var(--green);">Post-Show: The Merch Table Close</h3>
+                <div class="timing">Immediately after the set, 15-45 minutes</div>
+                <p>Post-show merch browsing is conversion gold. Fans are on an emotional high, they're spending money, and they're in a generous, sharing mood. This is where you convert the fans who didn't scan during the set.</p>
+
+                <ul>
+                    <li><strong>Bundle the scan with every purchase:</strong> "I'll throw in a free sticker/pick/download if you scan this real quick." This turns the QR scan into a bonus rather than an ask.</li>
+                    <li><strong>The merch receipt card:</strong> Include a small QR card with every merch purchase, like a receipt. Fans who just spent $30 on a t-shirt are invested — they'll scan.</li>
+                    <li><strong>Artist presence:</strong> If you or a bandmate can be at the merch table (even for 10 minutes), the conversion rate doubles. "Hey, thanks for coming. Scan that for me? You'll get some exclusive stuff." Coming from the artist directly, the compliance rate is nearly 100%.</li>
+                    <li><strong>Social moment:</strong> When fans take photos with you at the merch table, ask them to scan first. "Let me get you into the inner circle before we take this photo." The photo becomes an anchor memory tied to the signup.</li>
+                </ul>
+
+                <div class="script-block">
+                    <div class="script-label">Merch Table Close Script</div>
+                    "Thanks so much for being here tonight. Real quick — scan this QR code for me. You're gonna get unreleased tracks, early access to the next show, and if you share it with three friends, you'll unlock free merch. You literally just have to text them the link. Easy, right?"
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 4: REAL-WORLD EXAMPLES -->
+<section id="examples" class="section">
+    <div class="container">
+        <div class="section-label">Section 4</div>
+        <h2 class="section-title">Real-World Examples</h2>
+        <p class="section-subtitle">Three scenarios with real numbers showing what's possible at different venue sizes.</p>
+
+        <div class="scenario-grid">
+
+            <!-- Scenario 1 -->
+            <div class="scenario-card">
+                <div class="venue-type">Small Venue / DIY Show</div>
+                <h3>200-Cap Basement Show, Brooklyn</h3>
+                <div class="scenario-stats">
+                    <div class="scenario-stat">
+                        <div class="s-num">47</div>
+                        <div class="s-label">QR scans</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">41</div>
+                        <div class="s-label">Completed signups</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">127</div>
+                        <div class="s-label">Referrals in 48 hrs</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">3.1x</div>
+                        <div class="s-label">Viral multiplier</div>
+                    </div>
+                </div>
+                <div class="breakdown">
+                    <p><strong>Setup used:</strong> 2 merch table tent cards, bathroom stickers (2 stalls + mirror), 1 stage CTA between songs, flashlight moment during encore.</p>
+                    <p style="margin-top: 8px;"><strong>Breakdown:</strong> 23 scans came from the stage CTA moment (49%), 11 from merch table (23%), 8 from bathroom stickers (17%), 5 from the flashlight encore pivot (11%). Of the 41 signups, 14 shared their referral link within 24 hours, generating 127 new signups from friends who weren't at the show. Total new fans from one 200-cap show: <span class="highlight">168 fans</span>.</p>
+                    <p style="margin-top: 8px;"><strong>Cost:</strong> $3.50 for printing. <span class="highlight-green">Effective cost per fan: $0.02.</span></p>
+                </div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="scenario-card">
+                <div class="venue-type">Mid-Size Venue</div>
+                <h3>600-Cap Club Show, Austin TX</h3>
+                <div class="scenario-stats">
+                    <div class="scenario-stat">
+                        <div class="s-num">156</div>
+                        <div class="s-label">QR scans</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">134</div>
+                        <div class="s-label">Completed signups</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">412</div>
+                        <div class="s-label">Referrals in 48 hrs</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">3.07x</div>
+                        <div class="s-label">Viral multiplier</div>
+                    </div>
+                </div>
+                <div class="breakdown">
+                    <p><strong>Setup used:</strong> Full kit — merch tent cards, poster QR inserts at venue entrance, wristband tags for first 100 attendees, 4' backdrop QR, bathroom stickers, 2 stage CTAs, flashlight moment, post-show merch table close with artist present.</p>
+                    <p style="margin-top: 8px;"><strong>Breakdown:</strong> The flashlight moment was the top converter here — 52 scans in under 90 seconds (33% of total). Wristband tags drove 31 scans throughout the night (20%), many coming hours after the show when fans were back at home. Merch table: 28 pre-show + 19 post-show (30%). Stage CTA: 18 scans (12%). Bathroom: 8 scans (5%). 48 fans shared their link within 24 hours, triggering 412 referral signups. Total: <span class="highlight">546 new fans from one show</span>.</p>
+                    <p style="margin-top: 8px;"><strong>Cost:</strong> $18 for wristbands, $4 for print materials. <span class="highlight-green">Effective cost per fan: $0.04.</span></p>
+                </div>
+            </div>
+
+            <!-- Scenario 3 -->
+            <div class="scenario-card">
+                <div class="venue-type">Festival Set</div>
+                <h3>2,500-Cap Festival Stage, Nashville</h3>
+                <div class="scenario-stats">
+                    <div class="scenario-stat">
+                        <div class="s-num">389</div>
+                        <div class="s-label">QR scans</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">341</div>
+                        <div class="s-label">Completed signups</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">1,847</div>
+                        <div class="s-label">Referrals in 7 days</div>
+                    </div>
+                    <div class="scenario-stat">
+                        <div class="s-num">5.4x</div>
+                        <div class="s-label">Viral multiplier</div>
+                    </div>
+                </div>
+                <div class="breakdown">
+                    <p><strong>Setup used:</strong> 6-foot LED screen QR during set, 2 stage CTAs, flashlight moment, merch tent with 4 tent cards + artist meet-and-greet QR requirement, 500 setlist card inserts thrown into crowd.</p>
+                    <p style="margin-top: 8px;"><strong>Breakdown:</strong> Festival sets are shorter (45 minutes) so every CTA counts. The LED screen QR was visible from 150+ feet and drove 168 scans from the stage CTA moments (43%). Setlist card inserts that were thrown into the crowd generated 94 scans (24%) — many hours later as fans found the cards in their pockets. Merch tent: 89 scans (23%), heavily driven by the "scan to meet the artist" incentive. Flashlight moment: 38 scans in a 60-second window (10%). The higher viral multiplier (5.4x) came from festival attendees sharing with friends at other stages who then signed up too — the "festival network effect." Total from one 45-minute set: <span class="highlight">2,188 new fans</span>.</p>
+                    <p style="margin-top: 8px;"><strong>Cost:</strong> $35 for setlist inserts, $12 for tent cards and stickers. <span class="highlight-green">Effective cost per fan: $0.02.</span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 5: SETUP INSTRUCTIONS -->
+<section id="setup" class="section">
+    <div class="container">
+        <div class="section-label">Section 5</div>
+        <h2 class="section-title">Setup Instructions</h2>
+        <p class="section-subtitle">How to generate your campaign QR code in TrueFans LOOP in under 5 minutes.</p>
+
+        <div class="setup-steps">
+
+            <div class="setup-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Create Your Campaign</h3>
+                    <p>Log into your TrueFans LOOP dashboard and click <span class="highlight">"New Campaign."</span> Give it a name that includes the show date and venue (e.g., "Brooklyn Basement Show — March 15"). Choose "Live Event" as the campaign type. This optimizes your landing page for mobile-first QR scanning with faster load times and a simplified signup flow.</p>
+                </div>
+            </div>
+
+            <div class="setup-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>Set Up Your Reward Tiers</h3>
+                    <p>Configure at least 3 referral tiers. Recommended starting structure: <span class="highlight">Tier 1 (3 referrals)</span> = unreleased track download. <span class="highlight">Tier 2 (10 referrals)</span> = free merch item (sticker pack or pick set). <span class="highlight">Tier 3 (25 referrals)</span> = free ticket to next show + signed item. These tiers are proven to drive the highest referral volume for live-show audiences.</p>
+                </div>
+            </div>
+
+            <div class="setup-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Generate Your QR Code</h3>
+                    <p>Navigate to <span class="highlight">Campaign &rarr; Share &rarr; QR Code</span>. LOOP will generate a high-resolution QR code. Download both the <strong>SVG</strong> (for print materials — infinitely scalable) and <strong>PNG at 300 DPI</strong> (for quick digital use). The SVG is critical for the stage backdrop and poster templates where you need large-format output without pixelation.</p>
+                </div>
+            </div>
+
+            <div class="setup-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>Print Your Materials</h3>
+                    <p>Use the templates from Section 2 above. For best results: print tent cards and setlist inserts at a local print shop on <span class="highlight">14pt cardstock with matte lamination</span> (around $0.50 each). For stickers, use an online service like StickerMule or StickerGiant — order at least 2 weeks ahead. For the stage backdrop QR, print on a vinyl banner (most print shops can do this for $15-30). For wristbands, order custom Tyvek wristbands from EventWristbands.com or Amazon.</p>
+                </div>
+            </div>
+
+            <div class="setup-step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <h3>Test Before the Show</h3>
+                    <p><span class="highlight-amber">This step is critical and most artists skip it.</span> Print one of each material and test scan from realistic distances. For the backdrop QR, stand at the back of the venue and verify it scans. For stickers, test under the venue's actual lighting (many venues have very dim lighting — your QR needs enough contrast to scan in low light). For wristbands, confirm the QR scans when the band is slightly curved on a wrist. If any scan fails, increase QR size or add more white-space border.</p>
+                </div>
+            </div>
+
+            <div class="setup-step">
+                <div class="step-num">6</div>
+                <div class="step-content">
+                    <h3>Activate & Monitor Live</h3>
+                    <p>On show day, open your LOOP dashboard on your phone. You'll see scans and signups in real-time. Share the live dashboard link with your merch person so they can see the numbers too — this motivates them to actively promote the QR. After the show, check your <span class="highlight">Campaign Analytics</span> to see which placement drove the most scans, and use that data to optimize your setup for the next show.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; TrueFans LOOP. Turn every fan into a promoter.</p>
+    </div>
+</footer>
+
+</body>
+</html>

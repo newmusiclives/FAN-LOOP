@@ -151,7 +151,7 @@ const checkoutRoutes = require('./src/routes/checkout');
 
 // Home page — serve landing page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 app.use('/admin', authRoutes);

@@ -1229,13 +1229,13 @@
         }
 
         /* ========== ANIMATIONS ========== */
-        .fade-in {
+        .js-ready .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .fade-in.visible {
+        .js-ready .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1428,8 +1428,8 @@
         <div class="features-grid fade-in">
             <div class="feature-card">
                 <div class="feature-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">&#9835;</div>
-                <h4>7 Campaign Templates</h4>
-                <p>Pre-Save, Tour, Music Drop, Merch, Contest, Listening Party, Fan Club &mdash; launch in minutes</p>
+                <h4>15 Campaign Templates</h4>
+                <p>Pre-Save, Album Release, Tour, Merch Drop, Ticket Giveaway, Music Video, Vinyl Pre-Order, Remix Contest, and more &mdash; fully written, just add your details</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">&#9733;</div>
@@ -1454,7 +1454,7 @@
             <div class="feature-card">
                 <div class="feature-icon" style="background: rgba(139,92,246,0.12); color: var(--violet);">&#9830;</div>
                 <h4>Tiered Reward System</h4>
-                <p>7 customizable reward levels from digital downloads to VIP experiences &mdash; you choose what to unlock at each milestone</p>
+                <p>7 customizable reward levels per campaign from digital downloads to VIP experiences &mdash; all pre-built into each of our 15 templates</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background: rgba(236,72,153,0.12); color: var(--pink);">&#9819;</div>
@@ -1464,7 +1464,7 @@
             <div class="feature-card">
                 <div class="feature-icon" style="background: rgba(6,182,212,0.12); color: var(--cyan);">&#8644;</div>
                 <h4>Fan CRM + Export</h4>
-                <p>Tag, segment, and export your list to Mailchimp, ConvertKit, Beehiiv, Klaviyo &mdash; or anywhere via webhook</p>
+                <p>Tag, segment, and export your list to GoHighLevel, Mailchimp, ConvertKit, Beehiiv, Klaviyo &mdash; or anywhere via Zapier webhook</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background: rgba(16,185,129,0.12); color: var(--green);">&#9737;</div>
@@ -1495,7 +1495,7 @@
     <div class="container">
         <div class="text-center fade-in">
             <span class="section-label">Reward Engine</span>
-            <h2 class="section-title">7 Tiers That Turn Casual Listeners<br><span class="text-gradient">Into Obsessed Promoters</span></h2>
+            <h2 class="section-title">7 Reward Tiers Per Campaign That Turn Casual Listeners<br><span class="text-gradient">Into Obsessed Promoters</span></h2>
             <p class="section-subtitle mx-auto">Each tier unlocks progressively more exclusive rewards. Fans see their progress and compete to reach the top.</p>
         </div>
 
@@ -1565,7 +1565,8 @@
     <div class="container">
         <div class="text-center fade-in">
             <span class="section-label">Campaign Templates</span>
-            <h2 class="section-title">7 Battle-Tested Campaigns<br><span class="text-gradient">Ready to Launch in Minutes</span></h2>
+            <h2 class="section-title">15 Ready-to-Launch Campaigns<br><span class="text-gradient">Just Add Your Name &amp; Hit Go</span></h2>
+            <p class="section-subtitle mx-auto">Every template comes fully loaded with headlines, share messages, email copy, reward tiers, and brand colors. Pick one, swap in your details, and launch in minutes.</p>
         </div>
 
         <div class="campaign-grid fade-in">
@@ -1573,43 +1574,91 @@
                 <span class="campaign-emoji">&#127925;</span>
                 <h4>Pre-Save Campaign</h4>
                 <div class="hook">"Be the first to hear it &mdash; and unlock bonus tracks by sharing"</div>
-                <p>Maximize pre-save numbers + grow your list simultaneously. Perfect for singles, EPs, and albums.</p>
-            </div>
-            <div class="campaign-card">
-                <span class="campaign-emoji">&#127908;</span>
-                <h4>Tour / Show Announcement</h4>
-                <div class="hook">"Win free tickets + backstage passes &mdash; the more friends you bring, the better your seats"</div>
-                <p>Sell tickets through fan-driven promotion. Capture data by city for tour routing.</p>
-            </div>
-            <div class="campaign-card">
-                <span class="campaign-emoji">&#128293;</span>
-                <h4>Unreleased Music Drop</h4>
-                <div class="hook">"I made something special. Only fans who share get to hear it."</div>
-                <p>Keep engagement alive between release cycles. Re-engage your dormant list + acquire new fans.</p>
+                <p>Drive pre-saves on Spotify &amp; Apple Music while growing your list. Pre-built reward tiers from acoustic demos to album credits.</p>
             </div>
             <div class="campaign-card">
                 <span class="campaign-emoji">&#128085;</span>
-                <h4>Merch Launch</h4>
-                <div class="hook">"Help us spread the word and earn free gear"</div>
-                <p>Drive merch sales through word-of-mouth. Fans earn discount codes and free items at each tier.</p>
+                <h4>Merch Drop</h4>
+                <div class="hook">"Limited edition dropping soon &mdash; share for early access &amp; free gear"</div>
+                <p>Create urgency around limited merch. Fans unlock discounts, free items, and exclusive colorways by referring friends.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127915;</span>
+                <h4>Ticket Giveaway</h4>
+                <div class="hook">"Every share = another entry. More shares = better odds to win VIP."</div>
+                <p>Raffle VIP tickets, meet &amp; greets, and backstage passes. Every referral = bonus entries. Guaranteed prizes at every tier.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#128275;</span>
+                <h4>Exclusive Content Unlock</h4>
+                <div class="hook">"The vault is open. Share to unlock demos, unreleased tracks &amp; more."</div>
+                <p>Gate premium content behind referrals. Fans unlock deeper levels &mdash; from demos to full unreleased albums.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#129309;</span>
+                <h4>Meet &amp; Greet</h4>
+                <div class="hook">"Your biggest fans earn face time. Video calls to backstage dinners."</div>
+                <p>Reward top promoters with personal access. From thank-you videos to 1-on-1 calls to private dinners.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#11088;</span>
+                <h4>Fan Club Launch</h4>
+                <div class="hook">"Join the inner circle. Recruit members, climb the ranks, earn perks for life."</div>
+                <p>Build an exclusive community with referral-gated tiers. Members earn their rank from Bronze to Founding Legend.</p>
             </div>
             <div class="campaign-card">
                 <span class="campaign-emoji">&#127942;</span>
-                <h4>Fan Competition</h4>
-                <div class="hook">"Top 10 on the leaderboard win [grand prize]. Compete now."</div>
-                <p>Intense short-burst list growth through gamified competition. Perfect for high-energy fanbases.</p>
+                <h4>Fan Contest</h4>
+                <div class="hook">"Compete for #1 on the leaderboard. Prizes at every level."</div>
+                <p>Timed competition with live leaderboard. Grand prize for the top fan, guaranteed rewards at every tier.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#128191;</span>
+                <h4>Album Release Party</h4>
+                <div class="hook">"Join the launch squad &mdash; early access, deluxe tracks, signed vinyl"</div>
+                <p>Rally fans around your album drop. Launch squad members unlock early listening, bonus tracks, and release party invites.</p>
             </div>
             <div class="campaign-card">
                 <span class="campaign-emoji">&#127911;</span>
                 <h4>Listening Party</h4>
-                <div class="hook">"Join the private listening party &mdash; invite friends for VIP access"</div>
-                <p>Create release-day buzz. Fans earn VIP room access and artist Q&amp;A time by referring others.</p>
+                <div class="hook">"Earn your seat &mdash; share to upgrade from GA to front-row VIP"</div>
+                <p>Stream new music live with fans. Referral tiers gate access from general admission to backstage hangout.</p>
             </div>
             <div class="campaign-card">
-                <span class="campaign-emoji">&#128142;</span>
-                <h4>Lifetime Fan Club</h4>
-                <div class="hook">"Join the inner circle. Earn rewards for life just by spreading the music."</div>
-                <p>Always-on growth engine running 24/7. Perpetual referral tracking with seasonal reward refreshes.</p>
+                <span class="campaign-emoji">&#128652;</span>
+                <h4>Tour Announcement</h4>
+                <div class="hook">"Get presale codes &mdash; share to unlock VIP upgrades &amp; backstage passes"</div>
+                <p>Build demand city-by-city. Fans earn presale access, seat upgrades, backstage passes, and all-access tour experiences.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127916;</span>
+                <h4>Music Video Premiere</h4>
+                <div class="hook">"See it before the world. Share for behind-the-scenes &amp; director's cut."</div>
+                <p>Build buzz for your video drop. Fans earn early viewing, BTS footage, premiere watch party access, and even a cameo.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#128192;</span>
+                <h4>Vinyl / Physical Pre-Order</h4>
+                <div class="hook">"Limited pressing &mdash; share to unlock exclusive colorways &amp; signed copies"</div>
+                <p>Build a waitlist for vinyl, CDs, or cassettes. Top referrers unlock rare test pressings and signed editions.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127899;&#65039;</span>
+                <h4>Remix Contest</h4>
+                <div class="hook">"Download stems, make your remix, or share to vote for your favorite"</div>
+                <p>Release stems and let producers compete. Fans share to vote. Winning remix gets an official release on all platforms.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127908;</span>
+                <h4>Backstage Pass VIP</h4>
+                <div class="hook">"Start with GA. Refer friends to upgrade all the way to backstage."</div>
+                <p>Tied to a specific show. Fans earn their way from general admission to soundcheck, meet &amp; greet, and side-stage viewing.</p>
+            </div>
+            <div class="campaign-card">
+                <span class="campaign-emoji">&#127873;</span>
+                <h4>Holiday / Seasonal Special</h4>
+                <div class="hook">"Unwrap exclusive gifts &mdash; share to unlock bigger rewards for everyone"</div>
+                <p>Capitalize on holidays and seasonal moments. Festive themed rewards from exclusive tracks to signed merch bundles.</p>
             </div>
         </div>
     </div>
@@ -1701,16 +1750,16 @@
                     <div class="step-visual-inner">
                         <div class="mock-icon">&#127912;</div>
                         <div class="mock-text">
-                            <strong>Template Selector</strong><br>
-                            Pre-Save &bull; Tour &bull; Drop<br>
-                            Merch &bull; Contest &bull; Party<br>
-                            <span style="color: var(--violet);">&#9654; Click to customize</span>
+                            <strong>15 Campaign Templates</strong><br>
+                            Pre-Save &bull; Album &bull; Tour<br>
+                            Merch &bull; Video &bull; Vinyl &bull; +9 more<br>
+                            <span style="color: var(--violet);">&#9654; Pick one &amp; auto-fill</span>
                         </div>
                     </div>
                 </div>
                 <div class="step-num">1</div>
                 <h4>Pick Your Campaign</h4>
-                <p>Choose from 7 templates. Customize branding, upload rewards, let AI write your copy. Takes 5 minutes.</p>
+                <p>Choose from 15 ready-to-launch templates. Add your artist info once, pick a template, and go live in minutes.</p>
             </div>
             <div class="step">
                 <div class="step-visual">
@@ -1772,13 +1821,14 @@
 
                 <div style="space-y: 12px;">
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Unlimited campaigns</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> <strong>15 ready-to-launch templates</strong></div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> One-time artist profile &mdash; auto-fills every campaign</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> AI Copy Generator</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Fan Referral Tracking Engine</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Tiered Reward System</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Fan Referral Tracking + Tiered Rewards</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Leaderboard &amp; Gamification</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Fan CRM + CSV Export</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Analytics Dashboard</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Anti-Fraud Detection</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> <strong>GoHighLevel integration</strong> (contacts, tags, workflows)</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Fan CRM + Export (CSV, Mailchimp, ConvertKit, Zapier)</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Analytics Dashboard + Anti-Fraud</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> QR Codes + All Share Channels</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--green);">&#10003;</span> Priority support</div>
                 </div>
@@ -1788,7 +1838,7 @@
                 </div>
             </div>
 
-            <!-- $37/mo Tier -->
+            <!-- $27/mo Tier -->
             <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px;">
                 <div style="font-size: 14px; font-weight: 600; color: var(--violet-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Standalone</div>
                 <div style="display: flex; align-items: baseline; gap: 4px;">
@@ -1799,13 +1849,14 @@
 
                 <div style="space-y: 12px;">
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> 3 active campaigns</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> <strong>15 ready-to-launch templates</strong></div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> One-time artist profile setup</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> AI Copy Generator</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Fan Referral Tracking Engine</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Tiered Reward System</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Fan Referral Tracking + Tiered Rewards</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Leaderboard &amp; Gamification</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Fan CRM + CSV Export</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Analytics Dashboard</div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Anti-Fraud Detection</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> GoHighLevel + Zapier integrations</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Fan CRM + Export (CSV, Mailchimp, ConvertKit)</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Analytics Dashboard + Anti-Fraud</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> QR Codes + All Share Channels</div>
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); font-size: 15px;"><span style="color: var(--violet-light);">&#10003;</span> Email support</div>
                 </div>
@@ -1833,33 +1884,51 @@
         <div class="bonus-grid fade-in">
             <div class="bonus-card">
                 <div class="bonus-num">Bonus #1</div>
-                <h4>Commercial License</h4>
-                <p>Run TrueFans LOOP campaigns for OTHER artists and keep 100% of what you charge. Perfect for managers, labels, and music marketers.</p>
-                <div class="bonus-value">Value: $497</div>
-            </div>
-            <div class="bonus-card">
-                <div class="bonus-num">Bonus #2</div>
-                <h4>Genre-Specific Swipe File</h4>
-                <p>Pre-written campaigns for Hip-Hop, R&amp;B, Pop, EDM, Rock, Country, Latin, Indie, and Gospel. Just plug in your artist name.</p>
+                <h4>Genre-Specific Swipe File Library</h4>
+                <p>90+ pre-written share messages, email sequences, and social captions &mdash; tailored for <strong>9 genres</strong>: Hip-Hop, R&amp;B, Pop, EDM, Rock, Country, Latin, Indie, and Gospel. Each genre pack includes 10 Twitter/X posts, 10 Instagram captions, 5 WhatsApp/SMS scripts, 5 email templates, and 5 TikTok hook scripts. Just copy, paste your name, and post. Layered on top of our 15 built-in campaign templates for maximum conversion.</p>
                 <div class="bonus-value">Value: $197</div>
             </div>
             <div class="bonus-card">
-                <div class="bonus-num">Bonus #3</div>
+                <div class="bonus-num">Bonus #2</div>
                 <h4>"First 1,000 Fans" Playbook</h4>
-                <p>Step-by-step guide for artists starting from zero. How to seed your campaign and hit 1,000 subscribers in your first 30 days.</p>
+                <p>A 47-page step-by-step guide for artists starting from any audience size &mdash; even zero. Covers: <strong>Day 1-3:</strong> Setting up your artist profile and launching your first campaign. <strong>Day 4-7:</strong> The "Seed &amp; Spark" strategy &mdash; how to get your first 50 signups from your existing audience (even if it's just friends and family). <strong>Day 8-14:</strong> The "Multiplication Phase" &mdash; activating your referral engine and hitting 250+ fans. <strong>Day 15-30:</strong> Scaling to 1,000 with cross-platform promotion, collaboration swaps, and the "Content Loop" method. Includes real case studies, daily checklists, and copy-paste scripts for every step.</p>
+                <div class="bonus-value">Value: $97</div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #3</div>
+                <h4>Concert &amp; Live Show QR Strategy Kit</h4>
+                <p>Turn every live performance into a list-building machine. This kit includes: <strong>6 print-ready design templates</strong> (Canva + PDF) for merch table cards, poster QR inserts, flyer backs, wristband tags, stage backdrop QR placement guides, and setlist card inserts. Plus a <strong>"Live Show Funnel" guide</strong> explaining exactly when and how to prompt fans to scan &mdash; before the set, between songs, during the encore, and at the merch table. Includes real-world examples from artists who added 200-500 fans per show using these exact templates.</p>
                 <div class="bonus-value">Value: $97</div>
             </div>
             <div class="bonus-card">
                 <div class="bonus-num">Bonus #4</div>
-                <h4>Concert QR Strategy Kit</h4>
-                <p>Templates for merch inserts, poster QR codes, table cards, and wristband tags. Turn every live show into a list-building machine.</p>
-                <div class="bonus-value">Value: $97</div>
+                <h4>Superfan Nurture Email Sequence</h4>
+                <p>A complete <strong>10-email automated sequence</strong> (ready to paste into GoHighLevel, Mailchimp, or ConvertKit) that turns new signups into streaming fans, merch buyers, and ticket purchasers. Includes: <strong>Email 1:</strong> Welcome + referral link reminder (sent immediately). <strong>Email 2:</strong> Your story &mdash; building connection (Day 1). <strong>Email 3:</strong> "Your friends are joining" social proof nudge (Day 3). <strong>Email 4:</strong> Reward progress update + share CTA (Day 5). <strong>Email 5:</strong> Exclusive content drop (Day 7). <strong>Email 6:</strong> Fan spotlight / leaderboard update (Day 10). <strong>Email 7:</strong> "Almost there" tier nudge (Day 14). <strong>Email 8:</strong> Merch or ticket offer (Day 18). <strong>Email 9:</strong> Re-engagement for inactive fans (Day 25). <strong>Email 10:</strong> VIP invitation + next campaign teaser (Day 30). Each email comes in 3 tonal variants: Hype/Energy, Chill/Authentic, and Professional &mdash; so you can match your brand voice. Average open rate: 45%+.</p>
+                <div class="bonus-value">Value: $147</div>
             </div>
             <div class="bonus-card">
                 <div class="bonus-num">Bonus #5</div>
-                <h4>Superfan Nurture Sequence</h4>
-                <p>10-part email sequence that turns new signups into streaming fans, merch buyers, and ticket purchasers. 45%+ open rates.</p>
-                <div class="bonus-value">Value: $147</div>
+                <h4>GoHighLevel Campaign Automation Pack</h4>
+                <p>Pre-built <strong>GHL workflow templates</strong> you can import directly into your GoHighLevel account with one click. Includes: <strong>New Fan Welcome workflow</strong> (SMS + email + wait + follow-up). <strong>Referral Milestone workflow</strong> (automated congratulations + next-tier nudge when fans hit 3, 5, 10, 25 referrals). <strong>Reward Fulfillment workflow</strong> (digital delivery automation for each tier). <strong>Re-engagement workflow</strong> (win back fans who signed up but never shared). <strong>VIP Pipeline</strong> (automatically moves top referrers into a VIP opportunity pipeline for personal outreach). Each workflow comes with setup instructions, suggested timing, and A/B test variants. Works with any GHL sub-account.</p>
+                <div class="bonus-value">Value: $297</div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">Bonus #6</div>
+                <h4>Social Media Launch Toolkit</h4>
+                <p><strong>30 days of done-for-you social content</strong> designed to promote your campaigns. Includes: 15 Instagram story templates (Canva), 10 TikTok video scripts with hook-retention-CTA structure, 10 Twitter/X thread templates, 5 Instagram Reel concepts with shot lists, a "Link in Bio" landing page template optimized for campaign conversion, and a <strong>30-day content calendar</strong> mapping exactly what to post each day from campaign launch through the first month. Each piece includes fill-in-the-blank placeholders &mdash; just add your name, song title, and campaign link.</p>
+                <div class="bonus-value">Value: $197</div>
+            </div>
+        </div>
+
+        <!-- Commercial License Upsell -->
+        <div class="fade-in" style="max-width: 700px; margin: 48px auto 0; padding: 32px; background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(139,92,246,0.05)); border: 2px solid rgba(245,158,11,0.3); border-radius: 20px; text-align: center;">
+            <div style="font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 12px;">Upgrade Available</div>
+            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 12px;">Commercial License &mdash; Run Campaigns for Other Artists</h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.8; margin-bottom: 8px;">Want to use TrueFans LOOP as a <strong>service for other artists, bands, labels, or managers</strong>? The Commercial License lets you run unlimited campaigns for clients and keep 100% of what you charge. Perfect for music marketers, digital agencies, artist managers, and indie labels.</p>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 24px;">Includes: white-label client onboarding templates, client reporting dashboard access, multi-artist management, and a "Done-for-You Campaign Setup" SOP you can hand to a VA. Add as many client artists as you want &mdash; one flat fee.</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                <span style="font-size: 18px; font-weight: 800; color: var(--text-primary);">$250 <span style="font-size: 14px; font-weight: 500; color: var(--text-muted);">one-time</span></span>
+                <a href="#" class="cta-btn" style="padding: 14px 28px; font-size: 15px;" onclick="openVerifyModal(); return false;">Add Commercial License</a>
             </div>
         </div>
     </div>
@@ -1915,7 +1984,7 @@
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    <p>If you can post on Instagram, you can use TrueFans LOOP. Campaign setup takes 5 minutes with our templates. No coding, no design skills needed.</p>
+                    <p>If you can post on Instagram, you can use TrueFans LOOP. Enter your artist info once, pick from 15 templates, and launch in minutes. No coding, no design skills needed.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -1942,7 +2011,7 @@
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    <p>Export to CSV, Mailchimp, ConvertKit, Beehiiv, Klaviyo, and any platform via Zapier webhook. Spotify pre-save integration coming soon.</p>
+                    <p>Native GoHighLevel integration (auto-sync contacts, tags, workflows). Plus export to CSV, Mailchimp, ConvertKit, Beehiiv, Klaviyo, and any platform via Zapier/Make webhook. Spotify pre-save integration coming soon.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -1970,7 +2039,7 @@
             100 fans &rarr; 1,000. &nbsp;&nbsp; 1,000 &rarr; 10,000. &nbsp;&nbsp; <span class="text-gradient">When do you start?</span>
         </p>
         <a href="#" class="cta-btn" style="font-size: 20px; padding: 24px 48px;" onclick="openVerifyModal(); return false;">Start Growing My Fanbase &mdash; FREE</a>
-        <p class="cta-sub" style="margin-top: 16px;">Free with TrueFans CONNECT &bull; $37/mo without &bull; 30-day guarantee &bull; Cancel-proof fan list</p>
+        <p class="cta-sub" style="margin-top: 16px;">Free with TrueFans CONNECT &bull; $27/mo without &bull; 30-day guarantee &bull; Cancel-proof fan list</p>
     </div>
 </section>
 
@@ -1986,36 +2055,6 @@
     </div>
 </footer>
 
-<!-- TrueFans CONNECT Verification Modal -->
-<div id="tfcModal" role="dialog" aria-modal="true" aria-labelledby="tfcModalTitle" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px;">
-    <div style="background:#111118; border:1px solid rgba(139,92,246,0.3); border-radius:20px; max-width:520px; width:100%; padding:40px; position:relative;">
-        <button onclick="closeVerifyModal()" aria-label="Close verification dialog" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#64748b; font-size:24px; cursor:pointer;">&times;</button>
-
-        <div style="text-align:center; margin-bottom:32px;">
-            <div style="font-size:48px; margin-bottom:12px;" aria-hidden="true">&#128279;</div>
-            <h3 id="tfcModalTitle" style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#f8fafc; margin-bottom:8px;">Verify Your TrueFans CONNECT Account</h3>
-            <p style="color:#94a3b8; font-size:14px;">Paste your TrueFans CONNECT profile or account link below so we can verify your active membership and unlock TrueFans LOOP for free.</p>
-        </div>
-
-        <div style="margin-bottom:16px;">
-            <label for="tfcLink" style="display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; font-weight:500;">Your TrueFans CONNECT Link</label>
-            <input id="tfcLink" type="url" placeholder="https://truefansconnect.com/yourname" autocomplete="url" style="width:100%; background:#1a1a2e; border:1px solid #2a2a3e; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-size:15px; outline:none;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='#2a2a3e'">
-        </div>
-
-        <div id="tfcMessage" role="alert" aria-live="polite" style="min-height:20px; font-size:13px; margin-bottom:16px; text-align:center;"></div>
-
-        <button id="tfcVerifyBtn" onclick="verifyTrueFans()" style="width:100%; padding:14px; border:none; border-radius:10px; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Verify My Account</button>
-
-        <div style="text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid #1e1e2e;">
-            <p style="color:#94a3b8; font-size:14px; font-weight:600; margin-bottom:14px;">Don't have a TrueFans CONNECT account?</p>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <a href="https://truefansconnect.com" target="_blank" rel="noopener noreferrer" style="display:block; padding:12px; border-radius:10px; background:#1a1a2e; border:1px solid #10b981; color:#10b981; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign Up for TrueFans CONNECT (Free) &mdash; Then Come Back</a>
-                <a href="/admin/login?plan=paid" onclick="closeVerifyModal();" style="display:block; padding:12px; border-radius:10px; background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Start TrueFans LOOP for $37/mo</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- ========== SCRIPTS ========== -->
 <script>
     // TrueFans CONNECT verification modal
@@ -2030,14 +2069,13 @@
         document.getElementById('tfcModal').style.display = 'none';
         document.body.style.overflow = '';
     }
-    // Close modal on Escape key and backdrop click (wait for DOM)
-    document.addEventListener('DOMContentLoaded', function() {
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeVerifyModal();
-        });
-        document.getElementById('tfcModal').addEventListener('click', function(e) {
-            if (e.target === this) closeVerifyModal();
-        });
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeVerifyModal();
+    });
+    // Close modal on backdrop click
+    document.getElementById('tfcModal').addEventListener('click', function(e) {
+        if (e.target === this) closeVerifyModal();
     });
 
     async function verifyTrueFans() {
@@ -2103,46 +2141,74 @@
         el.setAttribute('aria-expanded', !isOpen);
     }
 
-    // DOM-dependent initializations
-    document.addEventListener('DOMContentLoaded', function() {
-        // Scroll fade-in
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Generate waveform bars
-        (function() {
-            const waveform = document.getElementById('waveform');
-            for (let i = 0; i < 80; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'bar';
-                bar.style.animationDelay = (Math.random() * 1.5) + 's';
-                bar.style.height = (20 + Math.random() * 80) + '%';
-                waveform.appendChild(bar);
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
-        })();
+        });
+    }, { threshold: 0.1 });
 
-        // Generate floating particles
-        (function() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (8 + Math.random() * 12) + 's';
-                p.style.animationDelay = Math.random() * 10 + 's';
-                p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
-                container.appendChild(p);
-            }
-        })();
-    });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.body.classList.add('js-ready');
+
+    // Generate waveform bars
+    (function() {
+        const waveform = document.getElementById('waveform');
+        for (let i = 0; i < 80; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.animationDelay = (Math.random() * 1.5) + 's';
+            bar.style.height = (20 + Math.random() * 80) + '%';
+            waveform.appendChild(bar);
+        }
+    })();
+
+    // Generate floating particles
+    (function() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (8 + Math.random() * 12) + 's';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+            container.appendChild(p);
+        }
+    })();
 </script>
+
+<!-- TrueFans CONNECT Verification Modal -->
+<div id="tfcModal" role="dialog" aria-modal="true" aria-labelledby="tfcModalTitle" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px;">
+    <div style="background:#111118; border:1px solid rgba(139,92,246,0.3); border-radius:20px; max-width:520px; width:100%; padding:40px; position:relative;">
+        <button onclick="closeVerifyModal()" aria-label="Close verification dialog" style="position:absolute; top:16px; right:20px; background:none; border:none; color:#64748b; font-size:24px; cursor:pointer;">&times;</button>
+
+        <div style="text-align:center; margin-bottom:32px;">
+            <div style="font-size:48px; margin-bottom:12px;" aria-hidden="true">&#128279;</div>
+            <h3 id="tfcModalTitle" style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:800; color:#f8fafc; margin-bottom:8px;">Verify Your TrueFans CONNECT Account</h3>
+            <p style="color:#94a3b8; font-size:14px;">Paste your TrueFans CONNECT profile or account link below so we can verify your active membership and unlock TrueFans LOOP for free.</p>
+        </div>
+
+        <div style="margin-bottom:16px;">
+            <label for="tfcLink" style="display:block; font-size:13px; color:#94a3b8; margin-bottom:6px; font-weight:500;">Your TrueFans CONNECT Link</label>
+            <input id="tfcLink" type="url" placeholder="https://truefansconnect.com/yourname" autocomplete="url" style="width:100%; background:#1a1a2e; border:1px solid #2a2a3e; color:#e2e8f0; border-radius:10px; padding:14px 16px; font-size:15px; outline:none;" onfocus="this.style.borderColor='#8b5cf6'" onblur="this.style.borderColor='#2a2a3e'">
+        </div>
+
+        <div id="tfcMessage" role="alert" aria-live="polite" style="min-height:20px; font-size:13px; margin-bottom:16px; text-align:center;"></div>
+
+        <button id="tfcVerifyBtn" onclick="verifyTrueFans()" style="width:100%; padding:14px; border:none; border-radius:10px; background:linear-gradient(135deg,#10b981,#059669); color:#fff; font-size:16px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Verify My Account</button>
+
+        <div style="text-align:center; margin-top:24px; padding-top:24px; border-top:1px solid #1e1e2e;">
+            <p style="color:#94a3b8; font-size:14px; font-weight:600; margin-bottom:14px;">Don't have a TrueFans CONNECT account?</p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <a href="https://truefansconnect.com" target="_blank" rel="noopener noreferrer" style="display:block; padding:12px; border-radius:10px; background:#1a1a2e; border:1px solid #10b981; color:#10b981; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign Up for TrueFans CONNECT (Free) &mdash; Then Come Back</a>
+                <a href="/admin/login?plan=paid" onclick="closeVerifyModal();" style="display:block; padding:12px; border-radius:10px; background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; font-size:14px; font-weight:600; text-decoration:none; text-align:center; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Start TrueFans LOOP for $37/mo</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Structured Data -->
 <script type="application/ld+json">

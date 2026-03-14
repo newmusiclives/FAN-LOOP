@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoHighLevel Campaign Automation Pack — TrueFans LOOP Bonus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --purple: #8B5CF6;
+            --purple-glow: rgba(139, 92, 246, 0.35);
+            --purple-dark: #6D28D9;
+            --purple-light: #A78BFA;
+            --green: #10B981;
+            --green-glow: rgba(16, 185, 129, 0.25);
+            --amber: #F59E0B;
+            --red: #EF4444;
+            --cyan: #06B6D4;
+            --bg: #0A0A0F;
+            --bg-card: #111118;
+            --bg-card-alt: #16161F;
+            --text: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: rgba(139, 92, 246, 0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+        /* HEADER */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 70%);
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            color: var(--purple-light);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 30%, var(--purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* NAV */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 0 auto 60px;
+            max-width: 700px;
+        }
+        .toc h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--purple-light);
+        }
+        .toc a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+        .toc a:hover { color: var(--purple-light); }
+        .toc a span { color: var(--text-muted); margin-right: 8px; }
+
+        /* SECTIONS */
+        section { margin-bottom: 80px; }
+        section > .container > h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        section > .container > .section-sub {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        .card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            color: var(--purple-light);
+        }
+        .card p, .card li {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        .card ul, .card ol {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        .card li { margin-bottom: 6px; }
+
+        .tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 100px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+        .tag-purple { background: rgba(139,92,246,0.15); color: var(--purple-light); }
+        .tag-green { background: rgba(16,185,129,0.15); color: var(--green); }
+        .tag-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+        .tag-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+        .tag-red { background: rgba(239,68,68,0.15); color: var(--red); }
+
+        /* FLOW DIAGRAMS */
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            align-items: flex-start;
+            margin: 24px 0 32px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        .flow-step {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            min-width: 170px;
+            max-width: 200px;
+            text-align: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .flow-step .step-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .flow-step .step-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .flow-step .step-detail {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .flow-step.trigger { border-color: var(--green); }
+        .flow-step.trigger .step-label { color: var(--green); }
+        .flow-step.action { border-color: var(--purple); }
+        .flow-step.action .step-label { color: var(--purple-light); }
+        .flow-step.wait { border-color: var(--amber); }
+        .flow-step.wait .step-label { color: var(--amber); }
+        .flow-step.condition { border-color: var(--cyan); border-style: dashed; }
+        .flow-step.condition .step-label { color: var(--cyan); }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            flex-shrink: 0;
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+
+        /* MESSAGE BLOCKS */
+        .msg-block {
+            background: var(--bg-card-alt);
+            border-left: 3px solid var(--purple);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 12px 0;
+            position: relative;
+        }
+        .msg-block.sms { border-left-color: var(--green); }
+        .msg-block.email { border-left-color: var(--purple); }
+        .msg-block .msg-type {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .msg-block.sms .msg-type { color: var(--green); }
+        .msg-block.email .msg-type { color: var(--purple-light); }
+        .msg-block .msg-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .msg-block .msg-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .msg-block .msg-subject {
+            font-size: 13px;
+            color: var(--amber);
+            margin-bottom: 8px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            color: var(--purple-light);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { background: rgba(139,92,246,0.3); }
+
+        .timing-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245,158,11,0.08);
+            border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: var(--amber);
+        }
+        .timing-note::before { content: "⏱"; }
+
+        .tip-box {
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .tip-box strong { color: var(--green); }
+
+        /* TABLE */
+        .field-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        .field-table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--bg-card-alt);
+            color: var(--purple-light);
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+        }
+        .field-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: var(--text-secondary);
+        }
+        .field-table code {
+            background: rgba(139,92,246,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--purple-light);
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        .step-list { counter-reset: step-counter; list-style: none; padding-left: 0; }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 12px 0 12px 48px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 32px;
+            height: 32px;
+            background: rgba(139,92,246,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--purple-light);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 40px 0;
+            color: var(--purple-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        footer {
+            text-align: center;
+            padding: 40px 24px 60px;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .flow { flex-direction: column; align-items: stretch; }
+            .flow-step { max-width: 100%; }
+            .flow-arrow { width: auto; height: 30px; transform: rotate(90deg); }
+            .hero { padding: 60px 16px 40px; }
+            .card { padding: 24px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-badge">BONUS RESOURCE</div>
+    <h1>GoHighLevel Campaign Automation Pack</h1>
+    <p>5 complete, copy-paste workflow templates that connect TrueFans LOOP to GoHighLevel for fully automated fan engagement, referral tracking, and reward fulfillment.</p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="container">
+    <div class="toc">
+        <h2>What's Inside</h2>
+        <a href="#intro"><span>01</span> Introduction — GHL + TrueFans LOOP Integration</a>
+        <a href="#workflow-1"><span>02</span> Workflow: New Fan Welcome Sequence</a>
+        <a href="#workflow-2"><span>03</span> Workflow: Referral Milestone Celebrations</a>
+        <a href="#workflow-3"><span>04</span> Workflow: Reward Fulfillment Automation</a>
+        <a href="#workflow-4"><span>05</span> Workflow: Re-engagement Campaign</a>
+        <a href="#workflow-5"><span>06</span> Workflow: VIP Pipeline Automation</a>
+        <a href="#custom-fields"><span>07</span> Custom Field Setup Guide</a>
+        <a href="#import"><span>08</span> Import &amp; Setup Instructions</a>
+    </div>
+</div>
+
+<!-- INTRODUCTION -->
+<section id="intro">
+    <div class="container">
+        <h2>How GHL + TrueFans LOOP Work Together</h2>
+        <p class="section-sub">TrueFans LOOP handles the referral tracking, link generation, and tier management. GoHighLevel handles the multi-channel outreach, pipeline management, and task automation. Together, they create a fully hands-off fan growth engine.</p>
+
+        <div class="card">
+            <h3>The Integration Architecture</h3>
+            <p style="margin-bottom: 16px;">TrueFans LOOP sends webhook events to GHL whenever a fan action occurs. GHL receives those events, updates contact records, and triggers the appropriate automation workflow. Here is how data flows between the two systems:</p>
+
+            <div class="flow">
+                <div class="flow-step trigger">
+                    <div class="step-label">Source</div>
+                    <div class="step-title">TrueFans LOOP</div>
+                    <div class="step-detail">Fan signs up or refers</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Webhook</div>
+                    <div class="step-title">Event Fires</div>
+                    <div class="step-detail">POST to GHL endpoint</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">GHL</div>
+                    <div class="step-title">Contact Updated</div>
+                    <div class="step-detail">Tags &amp; fields set</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Automation</div>
+                    <div class="step-title">Workflow Triggers</div>
+                    <div class="step-detail">SMS, email, tasks</div>
+                </div>
+            </div>
+
+            <h4>What's Included in This Pack</h4>
+            <ul>
+                <li><strong>5 complete workflow templates</strong> with every message written out, every delay configured, and every trigger condition specified</li>
+                <li><strong>Full SMS and email copy</strong> you can paste directly into GHL — no writing required</li>
+                <li><strong>Visual flow diagrams</strong> for each workflow so you can see the logic at a glance</li>
+                <li><strong>Custom field configuration</strong> — the exact fields you need to create in GHL for the integration to work</li>
+                <li><strong>Step-by-step setup instructions</strong> so you can have everything running in under an hour</li>
+            </ul>
+
+            <h4>Prerequisites</h4>
+            <ul>
+                <li>An active GoHighLevel account (any plan)</li>
+                <li>A TrueFans LOOP campaign already created</li>
+                <li>Access to GHL Workflows (formerly "Automations")</li>
+                <li>SMS and email sending configured in GHL</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>Tip:</strong> Set up all the custom fields (Section 7) before building the workflows. The workflows reference these fields, so they need to exist first.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW 1: NEW FAN WELCOME -->
+<section id="workflow-1">
+    <div class="container">
+        <h2>Workflow 1: New Fan Welcome Sequence</h2>
+        <p class="section-sub">Automatically welcome every new fan who joins your campaign and guide them toward making their first referral within the first 3 days.</p>
+
+        <div class="card">
+            <h3>Flow Overview</h3>
+            <div style="margin-bottom: 12px;">
+                <span class="tag tag-green">Trigger: Tag Added</span>
+                <span class="tag tag-purple">4 Actions</span>
+                <span class="tag tag-amber">3-Day Sequence</span>
+            </div>
+
+            <div class="flow">
+                <div class="flow-step trigger">
+                    <div class="step-label">Trigger</div>
+                    <div class="step-title">Tag Added</div>
+                    <div class="step-detail">"fanloop" tag</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Immediate</div>
+                    <div class="step-title">SMS Welcome</div>
+                    <div class="step-detail">Instant send</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step wait">
+                    <div class="step-label">Wait</div>
+                    <div class="step-title">1 Hour</div>
+                    <div class="step-detail">Delay</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Email</div>
+                    <div class="step-title">Referral Link</div>
+                    <div class="step-detail">How it works</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step wait">
+                    <div class="step-label">Wait</div>
+                    <div class="step-title">Day 2</div>
+                    <div class="step-detail">+24 hours</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">SMS</div>
+                    <div class="step-title">Follow-Up</div>
+                    <div class="step-detail">Nudge to share</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step wait">
+                    <div class="step-label">Wait</div>
+                    <div class="step-title">Day 3</div>
+                    <div class="step-detail">+24 hours</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Email</div>
+                    <div class="step-title">Sharing Tips</div>
+                    <div class="step-detail">Best practices</div>
+                </div>
+            </div>
+
+            <h4>Trigger Configuration</h4>
+            <ul>
+                <li><strong>Trigger Type:</strong> Contact Tag Added</li>
+                <li><strong>Tag Name:</strong> <code>fanloop</code></li>
+                <li><strong>Run Once Per Contact:</strong> Yes</li>
+                <li><strong>Allow Re-entry:</strong> No</li>
+            </ul>
+
+            <h4>Step-by-Step GHL Setup</h4>
+            <ol class="step-list">
+                <li>Navigate to <strong>Automation &gt; Workflows</strong> and click <strong>+ Create Workflow</strong>. Select "Start from scratch."</li>
+                <li>Click <strong>Add New Trigger</strong>. Choose <strong>Contact Tag</strong> as the trigger type. Set the tag to <code>fanloop</code>. Set filter to "Tag Added."</li>
+                <li>Add a <strong>Send SMS</strong> action immediately after the trigger (no delay). Paste the SMS Welcome message below.</li>
+                <li>Add a <strong>Wait</strong> step. Set to <strong>1 hour</strong>.</li>
+                <li>Add a <strong>Send Email</strong> action. Paste the referral link email content below.</li>
+                <li>Add a <strong>Wait</strong> step. Set to <strong>24 hours</strong>.</li>
+                <li>Add a <strong>Send SMS</strong> action. Paste the Day 2 follow-up message below.</li>
+                <li>Add a <strong>Wait</strong> step. Set to <strong>24 hours</strong>.</li>
+                <li>Add a <strong>Send Email</strong> action. Paste the Day 3 sharing tips email below.</li>
+                <li>Toggle the workflow to <strong>Published</strong> and save.</li>
+            </ol>
+
+            <h4>Message 1: Immediate SMS Welcome</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">Welcome SMS — Sent immediately on tag</div>
+                <div class="msg-content">Hey {{contact.first_name}}! 🎉 Welcome to [ARTIST NAME]'s inner circle! You're officially part of something special.
+
+Your personal referral link is ready — share it with friends who'd love [ARTIST NAME]'s music and unlock exclusive rewards.
+
+Tap here to grab your link: {link}
+
+The more friends you invite, the bigger the rewards. Let's go!</div>
+            </div>
+
+            <div class="timing-note">Send this SMS immediately — no delay. First impressions matter. The fan just signed up and is most engaged right now.</div>
+
+            <h4>Message 2: Email with Referral Link (1 Hour Later)</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email</div>
+                <div class="msg-subject">Subject: Your VIP referral link is ready, {{contact.first_name}} 🔗</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+Welcome to [ARTIST NAME]'s fan community! We're thrilled to have you here.
+
+Here's the deal: you now have your very own referral link. Every time someone joins through YOUR link, you get credit — and those credits unlock real rewards.
+
+YOUR REFERRAL LINK:
+{link}
+
+HOW IT WORKS:
+1. Share your link with friends, family, or anyone who loves great music
+2. When they sign up through your link, you get credit
+3. Hit referral milestones to unlock exclusive rewards
+
+THE REWARD TIERS:
+• 3 referrals — Unreleased bonus track download
+• 5 referrals — Exclusive behind-the-scenes video content
+• 10 referrals — Signed digital artwork + shoutout
+• 25 referrals — VIP access package + personal video message
+
+The easiest way to share? Copy your link and drop it in a text message to 3 friends right now. That's all it takes to hit your first reward tier.
+
+Let's build this together,
+[ARTIST NAME] Team</div>
+            </div>
+
+            <div class="timing-note">1-hour delay gives the SMS time to land. The email provides more detail without overwhelming the fan at signup.</div>
+
+            <h4>Message 3: Day 2 Follow-Up SMS</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">Day 2 Nudge — Sent 24 hours after welcome email</div>
+                <div class="msg-content">Hey {{contact.first_name}}, quick reminder — your referral link for [ARTIST NAME] is live!
+
+Just 3 friends and you unlock an exclusive unreleased track 🎵
+
+Share your link: {link}
+
+Text it to a friend right now — takes 10 seconds!</div>
+            </div>
+
+            <h4>Message 4: Day 3 Email with Sharing Tips</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email</div>
+                <div class="msg-subject">Subject: 5 easy ways to share &amp; unlock your rewards faster</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+Want to hit your first reward tier fast? Here are the 5 best ways to share your referral link and get your friends on board:
+
+1. TEXT MESSAGE (Highest conversion!)
+Copy this and send to friends who love music:
+"Hey! I just joined [ARTIST NAME]'s fan community and it's amazing. Check it out: {link}"
+
+2. INSTAGRAM STORY
+Post a screenshot of your favorite [ARTIST NAME] song, add your referral link with the link sticker, and write "Join me in [ARTIST NAME]'s inner circle 🔥"
+
+3. TWITTER / X POST
+Tweet: "Just joined [ARTIST NAME]'s fan community — exclusive content, rewards, and more. Get in: {link} 🎶"
+
+4. FACEBOOK POST
+Share in any music group you're part of: "If you're a [ARTIST NAME] fan, you NEED to join this. Exclusive rewards for sharing: {link}"
+
+5. DISCORD / GROUP CHATS
+Drop your link in any Discord server or group chat where people talk about music. Simple message: "Yo, [ARTIST NAME] has a referral program with sick rewards. Join through my link: {link}"
+
+YOUR CURRENT STATS:
+• Referrals so far: {{contact.custom_field.referral_count}}
+• Next reward at: 3 referrals
+
+Remember, your link is: {link}
+
+You've got this!
+[ARTIST NAME] Team</div>
+            </div>
+
+            <div class="timing-note">Day 3 is the final touch in the welcome sequence. After this, the contact enters the standard engagement track (or the re-engagement workflow if they have 0 referrals by Day 7).</div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW 2: REFERRAL MILESTONE -->
+<section id="workflow-2">
+    <div class="container">
+        <h2>Workflow 2: Referral Milestone Celebrations</h2>
+        <p class="section-sub">Celebrate every milestone with an instant SMS that congratulates the fan and teases the next tier to keep momentum going.</p>
+
+        <div class="card">
+            <h3>Flow Overview</h3>
+            <div style="margin-bottom: 12px;">
+                <span class="tag tag-green">Trigger: Custom Field Change</span>
+                <span class="tag tag-cyan">Conditional Branching</span>
+                <span class="tag tag-purple">4 Milestone Messages</span>
+            </div>
+
+            <div class="flow">
+                <div class="flow-step trigger">
+                    <div class="step-label">Trigger</div>
+                    <div class="step-title">Field Changed</div>
+                    <div class="step-detail">referral_count updated</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step condition">
+                    <div class="step-label">Condition</div>
+                    <div class="step-title">Check Count</div>
+                    <div class="step-detail">= 3, 5, 10, or 25?</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Action</div>
+                    <div class="step-title">Send SMS</div>
+                    <div class="step-detail">Milestone congrats</div>
+                </div>
+            </div>
+
+            <h4>Trigger Configuration</h4>
+            <ul>
+                <li><strong>Trigger Type:</strong> Contact Changed &gt; Custom Field Updated</li>
+                <li><strong>Field:</strong> <code>referral_count</code></li>
+                <li><strong>Allow Re-entry:</strong> Yes (must fire on every update)</li>
+            </ul>
+
+            <h4>Step-by-Step GHL Setup</h4>
+            <ol class="step-list">
+                <li>Create a new workflow. Add trigger: <strong>Contact Changed</strong>. Select the custom field <code>referral_count</code>.</li>
+                <li>Add an <strong>If/Else</strong> branch. Set condition: <code>referral_count</code> equals <strong>3</strong>. In the "Yes" path, add a Send SMS action with the 3-referral message.</li>
+                <li>In the "No" path, add another <strong>If/Else</strong> branch. Condition: <code>referral_count</code> equals <strong>5</strong>. Add the 5-referral SMS in the "Yes" path.</li>
+                <li>Continue nesting: add another <strong>If/Else</strong> for <code>referral_count</code> equals <strong>10</strong>. Add the 10-referral SMS.</li>
+                <li>Final <strong>If/Else</strong>: <code>referral_count</code> equals <strong>25</strong>. Add the 25-referral SMS.</li>
+                <li>Publish the workflow.</li>
+            </ol>
+
+            <h4>Milestone 1: 3 Referrals</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">3-Referral Milestone — Tier 1 Unlocked</div>
+                <div class="msg-content">🎉 {{contact.first_name}}, you just hit 3 referrals! You've unlocked your first reward — an exclusive unreleased bonus track from [ARTIST NAME]!
+
+Check your email for download instructions.
+
+Next unlock at 5 referrals: behind-the-scenes video content you can't get anywhere else 👀
+
+Keep sharing: {link}</div>
+            </div>
+
+            <h4>Milestone 2: 5 Referrals</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">5-Referral Milestone — Tier 2 Unlocked</div>
+                <div class="msg-content">🔥 {{contact.first_name}}, 5 referrals! You're on fire! You just unlocked exclusive behind-the-scenes video content from [ARTIST NAME].
+
+Details are heading to your inbox now.
+
+Only 5 more referrals until you unlock Tier 3: a signed digital artwork + personal shoutout from [ARTIST NAME]! 🎨
+
+Share your link: {link}</div>
+            </div>
+
+            <h4>Milestone 3: 10 Referrals</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">10-Referral Milestone — Tier 3 Unlocked</div>
+                <div class="msg-content">🏆 {{contact.first_name}}, 10 referrals?! You're officially in the top tier of [ARTIST NAME] fans. You've unlocked a signed digital artwork AND a personal shoutout!
+
+Check your email for details on claiming your rewards.
+
+The ultimate unlock is at 25 referrals: VIP access package + a personal video message from [ARTIST NAME]. Only 15 more to go! 🚀
+
+Keep the momentum: {link}</div>
+            </div>
+
+            <h4>Milestone 4: 25 Referrals</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">25-Referral Milestone — VIP Unlocked</div>
+                <div class="msg-content">👑 {{contact.first_name}}, WOW. 25 referrals!! You are an absolute legend and one of [ARTIST NAME]'s top supporters EVER.
+
+You've unlocked the VIP package:
+✅ VIP access to everything
+✅ Personal video message from [ARTIST NAME]
+✅ All previous tier rewards
+
+Someone from our team will be reaching out to you personally. You deserve the royal treatment.
+
+Thank you for being incredible. 💜</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong> You can add additional milestones at custom numbers (like 7, 15, 50) by adding more If/Else branches. Always tease the next tier to keep fans motivated.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW 3: REWARD FULFILLMENT -->
+<section id="workflow-3">
+    <div class="container">
+        <h2>Workflow 3: Reward Fulfillment Automation</h2>
+        <p class="section-sub">Automatically send reward delivery instructions the moment a fan reaches a tier, with different paths for digital and physical rewards.</p>
+
+        <div class="card">
+            <h3>Flow Overview</h3>
+            <div style="margin-bottom: 12px;">
+                <span class="tag tag-green">Trigger: Tag Added</span>
+                <span class="tag tag-cyan">Conditional: Digital vs Physical</span>
+                <span class="tag tag-purple">Tier-Specific Emails</span>
+            </div>
+
+            <div class="flow">
+                <div class="flow-step trigger">
+                    <div class="step-label">Trigger</div>
+                    <div class="step-title">Tag Added</div>
+                    <div class="step-detail">Tier tag applied</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step condition">
+                    <div class="step-label">Condition</div>
+                    <div class="step-title">Which Tier?</div>
+                    <div class="step-detail">Branch by tag name</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Email</div>
+                    <div class="step-title">Reward Details</div>
+                    <div class="step-detail">Delivery instructions</div>
+                </div>
+            </div>
+
+            <h4>Trigger Configuration</h4>
+            <ul>
+                <li><strong>Trigger Type:</strong> Contact Tag Added</li>
+                <li><strong>Tags (any of):</strong> <code>tier_1_unlocked</code>, <code>tier_2_unlocked</code>, <code>tier_3_unlocked</code>, <code>tier_4_vip</code></li>
+                <li><strong>Allow Re-entry:</strong> Yes</li>
+            </ul>
+
+            <h4>Step-by-Step GHL Setup</h4>
+            <ol class="step-list">
+                <li>Create a new workflow. Add trigger: <strong>Contact Tag Added</strong>. Add all four tier tags.</li>
+                <li>Add an <strong>If/Else</strong> branch checking which tag was added. Branch 1: contact has tag <code>tier_1_unlocked</code>.</li>
+                <li>In Tier 1 branch: Add <strong>Send Email</strong> action with the Tier 1 reward email below.</li>
+                <li>Add Branch 2: contact has tag <code>tier_2_unlocked</code>. Add Send Email with Tier 2 content.</li>
+                <li>Add Branch 3: contact has tag <code>tier_3_unlocked</code>. Add Send Email with Tier 3 content.</li>
+                <li>Add Branch 4: contact has tag <code>tier_4_vip</code>. Add Send Email with VIP content. Also add an <strong>Internal Notification</strong> action to alert your team.</li>
+                <li>Publish the workflow.</li>
+            </ol>
+
+            <h4>Tier 1 Reward Email: Unreleased Bonus Track (Digital)</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email — Digital Reward</div>
+                <div class="msg-subject">Subject: 🎵 Your exclusive unreleased track is here!</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+You did it! 3 referrals earned, and your exclusive reward is ready.
+
+YOUR REWARD: Unreleased Bonus Track by [ARTIST NAME]
+
+HOW TO CLAIM:
+1. Click the download link below
+2. The track will download as an MP3 file
+3. Add it to your music library and enjoy!
+
+👉 DOWNLOAD YOUR TRACK: [INSERT DOWNLOAD LINK]
+
+This track is exclusively for fans like you who go above and beyond. It's not available on Spotify, Apple Music, or anywhere else.
+
+Want to unlock even more? You're only 2 referrals away from Tier 2: exclusive behind-the-scenes video content.
+
+Your referral link: {link}
+
+Thank you for being an amazing supporter,
+[ARTIST NAME] Team</div>
+            </div>
+
+            <h4>Tier 2 Reward Email: Behind-the-Scenes Content (Digital)</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email — Digital Reward</div>
+                <div class="msg-subject">Subject: 🎬 Your behind-the-scenes access is unlocked!</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+5 referrals strong! Here's your exclusive behind-the-scenes content.
+
+YOUR REWARD: Exclusive Behind-the-Scenes Video Content
+
+HOW TO ACCESS:
+1. Click the link below to access your private video page
+2. You'll find studio sessions, songwriting clips, and more
+3. Bookmark the page — new content may be added!
+
+👉 WATCH NOW: [INSERT VIDEO PAGE LINK]
+
+Password: [INSERT ACCESS PASSWORD]
+
+This content is only available to Tier 2+ fans. Please don't share the access link publicly — it's our special thing.
+
+Next milestone: 10 referrals for a signed digital artwork + personal shoutout from [ARTIST NAME].
+
+Your referral link: {link}
+
+Rock on,
+[ARTIST NAME] Team</div>
+            </div>
+
+            <h4>Tier 3 Reward Email: Signed Artwork + Shoutout (Digital + Physical)</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email — Digital + Physical Reward</div>
+                <div class="msg-subject">Subject: 🎨 Your signed artwork &amp; shoutout — claim now!</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+10 referrals! You're in the elite tier of [ARTIST NAME]'s fan community. Incredible work.
+
+YOUR REWARDS:
+1. Signed Digital Artwork — custom piece by [ARTIST NAME]
+2. Personal Shoutout — a public thank-you from [ARTIST NAME]
+
+HOW TO CLAIM YOUR SIGNED ARTWORK:
+1. Reply to this email with your full name (as you'd like it on the artwork)
+2. We'll create your personalized signed digital artwork
+3. You'll receive it via email within 5-7 business days as a high-res download
+
+HOW TO CLAIM YOUR SHOUTOUT:
+1. Reply with your social media handle (Instagram, Twitter/X, or TikTok)
+2. [ARTIST NAME] will give you a shoutout in an upcoming post or story
+3. We'll notify you before it goes live so you can screenshot it!
+
+WANT SOMETHING EVEN BIGGER?
+At 25 referrals, you unlock the VIP package: full VIP access + a personal video message from [ARTIST NAME]. Only 15 more referrals to go.
+
+Your referral link: {link}
+
+You're a legend,
+[ARTIST NAME] Team</div>
+            </div>
+
+            <h4>Tier 4 Reward Email: VIP Package (Digital + Personal)</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email — VIP Reward</div>
+                <div class="msg-subject">Subject: 👑 Welcome to VIP — you've earned the ultimate reward</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+25 referrals. We're speechless. You are one of [ARTIST NAME]'s most dedicated fans, and we want you to know how much that means.
+
+YOUR VIP PACKAGE INCLUDES:
+✅ Everything from Tiers 1, 2, and 3
+✅ VIP Access Pass — priority access to future releases, events, and content
+✅ Personal Video Message — a one-on-one video from [ARTIST NAME] just for you
+
+HOW IT ALL HAPPENS:
+
+VIP ACCESS PASS:
+Your VIP status is now permanently on your account. You'll receive early access to:
+• New music (before public release)
+• Concert/event pre-sale codes
+• Exclusive merch drops
+• Private community access
+
+PERSONAL VIDEO MESSAGE:
+1. Reply to this email with what you'd like [ARTIST NAME] to say (a greeting, a birthday message, anything!)
+2. [ARTIST NAME] will record a personal video just for you
+3. Expect delivery within 10-14 business days
+
+A member of our team will also reach out to you personally to make sure you get everything you deserve.
+
+From the bottom of our hearts, thank you.
+
+With love,
+[ARTIST NAME] Team
+
+P.S. You can always keep sharing your link ({link}) — you're now an official ambassador, and we'll have surprise bonuses for our top ambassadors throughout the year.</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Tip:</strong> For physical rewards (merch, signed items), add an Internal Notification action in GHL that sends an email to your fulfillment team with the contact's shipping details. Use the <code>shipping_address</code> custom field.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW 4: RE-ENGAGEMENT -->
+<section id="workflow-4">
+    <div class="container">
+        <h2>Workflow 4: Re-engagement Campaign</h2>
+        <p class="section-sub">Win back fans who signed up but haven't shared yet. This 14-day sequence nudges them with increasingly compelling reasons to start referring.</p>
+
+        <div class="card">
+            <h3>Flow Overview</h3>
+            <div style="margin-bottom: 12px;">
+                <span class="tag tag-green">Trigger: Time-Based</span>
+                <span class="tag tag-cyan">Condition: 0 Referrals</span>
+                <span class="tag tag-purple">3 Touchpoints</span>
+                <span class="tag tag-amber">14-Day Sequence</span>
+            </div>
+
+            <div class="flow">
+                <div class="flow-step trigger">
+                    <div class="step-label">Trigger</div>
+                    <div class="step-title">Day 7</div>
+                    <div class="step-detail">7 days after tag added</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step condition">
+                    <div class="step-label">Condition</div>
+                    <div class="step-title">Referrals = 0?</div>
+                    <div class="step-detail">Check referral_count</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Day 7</div>
+                    <div class="step-title">SMS Nudge</div>
+                    <div class="step-detail">"Friends missing out"</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step wait">
+                    <div class="step-label">Wait</div>
+                    <div class="step-title">3 Days</div>
+                    <div class="step-detail">Until Day 10</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Day 10</div>
+                    <div class="step-title">Email</div>
+                    <div class="step-detail">Easy share link</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step wait">
+                    <div class="step-label">Wait</div>
+                    <div class="step-title">4 Days</div>
+                    <div class="step-detail">Until Day 14</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Day 14</div>
+                    <div class="step-title">Final Nudge</div>
+                    <div class="step-detail">Last chance SMS</div>
+                </div>
+            </div>
+
+            <h4>Trigger Configuration</h4>
+            <ul>
+                <li><strong>Trigger Type:</strong> Contact Tag Added</li>
+                <li><strong>Tag:</strong> <code>fanloop</code></li>
+                <li><strong>Initial Wait:</strong> 7 days after trigger</li>
+                <li><strong>Entry Condition:</strong> Custom field <code>referral_count</code> equals <code>0</code></li>
+                <li><strong>Run Once Per Contact:</strong> Yes</li>
+            </ul>
+
+            <h4>Step-by-Step GHL Setup</h4>
+            <ol class="step-list">
+                <li>Create a new workflow. Add trigger: <strong>Contact Tag Added</strong> with tag <code>fanloop</code>.</li>
+                <li>Add a <strong>Wait</strong> step set to <strong>7 days</strong>.</li>
+                <li>Add an <strong>If/Else</strong> condition: <code>referral_count</code> equals <code>0</code>. Only proceed on "Yes" path — the "No" path means they've already referred someone, so we end the workflow.</li>
+                <li>In the "Yes" path, add <strong>Send SMS</strong> with the Day 7 message below.</li>
+                <li>Add a <strong>Wait</strong> step set to <strong>3 days</strong>.</li>
+                <li>Add another <strong>If/Else</strong> condition: <code>referral_count</code> still equals <code>0</code>. This re-checks in case they referred someone after the Day 7 SMS.</li>
+                <li>In the "Yes" path, add <strong>Send Email</strong> with the Day 10 email below.</li>
+                <li>Add a <strong>Wait</strong> step set to <strong>4 days</strong>.</li>
+                <li>Add a final <strong>If/Else</strong>: <code>referral_count</code> equals <code>0</code>.</li>
+                <li>In the "Yes" path, add <strong>Send SMS</strong> with the Day 14 final nudge below.</li>
+                <li>Publish the workflow.</li>
+            </ol>
+
+            <h4>Message 1: Day 7 — "Your Friends Are Missing Out" SMS</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">Day 7 Re-engagement — First Nudge</div>
+                <div class="msg-content">Hey {{contact.first_name}}! Your friends are missing out on [ARTIST NAME]'s exclusive fan community 😢
+
+You have a personal referral link that unlocks rewards for BOTH of you. Just share it with ONE friend to get started.
+
+It takes 10 seconds: {link}
+
+3 friends = a free unreleased track. You got this! 💪</div>
+            </div>
+
+            <h4>Message 2: Day 10 — Easy Share Email</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Email</div>
+                <div class="msg-subject">Subject: The easiest way to share (we made it stupid simple)</div>
+                <div class="msg-content">Hi {{contact.first_name}},
+
+We noticed you haven't shared your referral link yet — and we totally get it. Life gets busy.
+
+So we made it as easy as possible. Here are 3 one-tap sharing options:
+
+OPTION 1: COPY-PASTE TEXT MESSAGE
+Copy this message and send it to a friend:
+"Hey! Check out [ARTIST NAME]'s fan community — exclusive music, rewards, and more: {link}"
+
+OPTION 2: SHARE ON SOCIAL
+Post your link with this caption:
+"Just joined [ARTIST NAME]'s inner circle 🎶 Exclusive rewards when you join through my link: {link}"
+
+OPTION 3: JUST FORWARD THIS EMAIL
+Literally forward this email to someone who loves music. They'll see what it's all about and can sign up directly.
+
+YOUR LINK: {link}
+
+REMEMBER WHAT'S AT STAKE:
+• 3 referrals = Unreleased bonus track (exclusive!)
+• 5 referrals = Behind-the-scenes video content
+• 10 referrals = Signed artwork + shoutout
+• 25 referrals = VIP access + personal video message
+
+Even ONE referral puts you on the board. Start small — text one friend right now.
+
+Let's make it happen,
+[ARTIST NAME] Team</div>
+            </div>
+
+            <h4>Message 3: Day 14 — Final Nudge SMS</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">Day 14 Re-engagement — Final Nudge</div>
+                <div class="msg-content">{{contact.first_name}}, last reminder! Your [ARTIST NAME] referral link is still active and ready to earn you rewards 🎁
+
+Fun fact: the average fan hits their first reward tier in just 2 days of sharing.
+
+One tap to start: {link}
+
+We believe in you! 🙌</div>
+            </div>
+
+            <div class="timing-note">After Day 14, stop messaging. If they haven't engaged after 3 touchpoints, further messages risk opt-outs. Let them re-engage organically.</div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW 5: VIP PIPELINE -->
+<section id="workflow-5">
+    <div class="container">
+        <h2>Workflow 5: VIP Pipeline Automation</h2>
+        <p class="section-sub">When a fan hits 25 referrals, automatically move them into a VIP pipeline, alert your team, and begin the white-glove experience.</p>
+
+        <div class="card">
+            <h3>Flow Overview</h3>
+            <div style="margin-bottom: 12px;">
+                <span class="tag tag-green">Trigger: Field Value</span>
+                <span class="tag tag-purple">Pipeline + Notifications</span>
+                <span class="tag tag-amber">Task Scheduling</span>
+            </div>
+
+            <div class="flow">
+                <div class="flow-step trigger">
+                    <div class="step-label">Trigger</div>
+                    <div class="step-title">Referrals &ge; 25</div>
+                    <div class="step-detail">referral_count threshold</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Action</div>
+                    <div class="step-title">Add to Pipeline</div>
+                    <div class="step-detail">VIP Fans pipeline</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Action</div>
+                    <div class="step-title">Notify Admin</div>
+                    <div class="step-detail">Email + in-app</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Action</div>
+                    <div class="step-title">VIP Welcome</div>
+                    <div class="step-detail">SMS to fan</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step action">
+                    <div class="step-label">Task</div>
+                    <div class="step-title">Personal Outreach</div>
+                    <div class="step-detail">Scheduled in 24hrs</div>
+                </div>
+            </div>
+
+            <h4>Trigger Configuration</h4>
+            <ul>
+                <li><strong>Trigger Type:</strong> Contact Changed &gt; Custom Field Updated</li>
+                <li><strong>Field:</strong> <code>referral_count</code></li>
+                <li><strong>Condition:</strong> <code>referral_count</code> is greater than or equal to <code>25</code></li>
+                <li><strong>Run Once Per Contact:</strong> Yes</li>
+            </ul>
+
+            <h4>Pre-Requisite: Create the VIP Pipeline</h4>
+            <p style="margin-bottom: 12px;">Before building this workflow, create a pipeline in GHL:</p>
+            <ol class="step-list">
+                <li>Go to <strong>Opportunities &gt; Pipelines</strong> and click <strong>+ Create Pipeline</strong>.</li>
+                <li>Name it <strong>"VIP Fans"</strong>.</li>
+                <li>Create these stages: <strong>New VIP</strong> &rarr; <strong>Outreach Scheduled</strong> &rarr; <strong>Contacted</strong> &rarr; <strong>Rewards Delivered</strong> &rarr; <strong>Ambassador Active</strong>.</li>
+                <li>Save the pipeline.</li>
+            </ol>
+
+            <h4>Step-by-Step GHL Setup</h4>
+            <ol class="step-list">
+                <li>Create a new workflow. Add trigger: <strong>Contact Changed</strong> on field <code>referral_count</code>.</li>
+                <li>Add an <strong>If/Else</strong> condition: <code>referral_count</code> is greater than or equal to <code>25</code>.</li>
+                <li>In the "Yes" path, add <strong>Add to Pipeline</strong> action. Select the "VIP Fans" pipeline, stage "New VIP".</li>
+                <li>Add <strong>Add Tag</strong> action. Tag: <code>vip_fan</code>.</li>
+                <li>Add <strong>Internal Notification</strong> action. Set to email your admin. Use the admin notification template below.</li>
+                <li>Add <strong>Send SMS</strong> action with the VIP welcome message below.</li>
+                <li>Add a <strong>Wait</strong> step set to <strong>10 minutes</strong>.</li>
+                <li>Add <strong>Create Task</strong> action. Title: "Personal outreach to VIP fan: {{contact.first_name}} {{contact.last_name}}". Due date: 1 day from now. Assign to your team lead.</li>
+                <li>Add <strong>Update Pipeline Stage</strong> action. Move opportunity to "Outreach Scheduled" stage.</li>
+                <li>Publish the workflow.</li>
+            </ol>
+
+            <h4>Action 1: Admin Notification Email</h4>
+            <div class="msg-block email">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">Internal Email — To Admin</div>
+                <div class="msg-subject">Subject: 🚨 New VIP Fan Alert: {{contact.first_name}} {{contact.last_name}} hit 25 referrals!</div>
+                <div class="msg-content">NEW VIP FAN ALERT
+
+A fan just reached 25 referrals and has been moved to the VIP pipeline.
+
+CONTACT DETAILS:
+• Name: {{contact.first_name}} {{contact.last_name}}
+• Email: {{contact.email}}
+• Phone: {{contact.phone}}
+• Total Referrals: {{contact.custom_field.referral_count}}
+• Joined: {{contact.date_created}}
+
+AUTOMATED ACTIONS COMPLETED:
+✅ Added to VIP Fans pipeline (stage: New VIP)
+✅ Tagged as vip_fan
+✅ VIP welcome SMS sent
+✅ Personal outreach task created (due in 24 hours)
+
+NEXT STEPS:
+1. Review the contact record in GHL
+2. Complete the personal outreach task within 24 hours
+3. Coordinate with [ARTIST NAME] for the personal video message
+4. Move the pipeline opportunity to "Contacted" after outreach
+5. Move to "Rewards Delivered" once all VIP rewards are fulfilled
+
+This fan is a top-tier supporter. Treat them like gold.</div>
+            </div>
+
+            <h4>Action 2: VIP Welcome SMS to Fan</h4>
+            <div class="msg-block sms">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type">SMS</div>
+                <div class="msg-label">VIP Welcome — Sent immediately after pipeline add</div>
+                <div class="msg-content">👑 {{contact.first_name}}!! This is [ARTIST NAME]'s team — we just got the alert that you hit 25 referrals. You are INCREDIBLE.
+
+We're setting up your VIP package right now:
+🎵 All tier rewards
+🎬 Personal video message
+⭐ VIP access to everything
+
+Someone from our team will personally reach out to you within 24 hours. We want to make sure you get the royal treatment you deserve.
+
+THANK YOU for being the ultimate fan. 💜</div>
+            </div>
+
+            <h4>Action 3: Scheduled Task — Personal Outreach</h4>
+            <div class="msg-block email" style="border-left-color: var(--amber);">
+                <button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+                <div class="msg-type" style="color: var(--amber);">GHL Task</div>
+                <div class="msg-label">Personal Outreach — Due 24 hours after VIP trigger</div>
+                <div class="msg-content">TASK TITLE:
+Personal outreach to VIP fan: {{contact.first_name}} {{contact.last_name}}
+
+TASK DESCRIPTION:
+This fan hit 25 referrals and is now a VIP. Complete these steps:
+
+1. Call or text them personally to say thank you
+2. Ask what name/message they want in their personal video from [ARTIST NAME]
+3. Confirm all previous tier rewards have been delivered
+4. Ask if they'd be interested in being a long-term ambassador
+5. Update the pipeline stage to "Contacted" when done
+
+PRIORITY: High
+DUE: 24 hours from now
+ASSIGNED TO: [Team Lead Name]</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong> Set up a GHL notification (bell icon + email) for the admin so they never miss a VIP alert. You can also connect this to a Slack webhook if your team uses Slack.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CUSTOM FIELDS -->
+<section id="custom-fields">
+    <div class="container">
+        <h2>Custom Field Setup Guide</h2>
+        <p class="section-sub">These custom fields must be created in GHL before the workflows will function. Here is every field you need, its type, and its purpose.</p>
+
+        <div class="card">
+            <h3>Required Custom Fields</h3>
+            <p style="margin-bottom: 16px;">Navigate to <strong>Settings &gt; Custom Fields</strong> in GHL and create each of the following:</p>
+
+            <table class="field-table">
+                <thead>
+                    <tr>
+                        <th>Field Name</th>
+                        <th>Field Key</th>
+                        <th>Type</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Referral Count</td>
+                        <td><code>referral_count</code></td>
+                        <td>Number</td>
+                        <td>Total referrals this contact has generated. Updated by TrueFans LOOP webhook.</td>
+                    </tr>
+                    <tr>
+                        <td>Referral Link</td>
+                        <td><code>referral_link</code></td>
+                        <td>Text</td>
+                        <td>The contact's unique referral URL. Populated on signup.</td>
+                    </tr>
+                    <tr>
+                        <td>Referral Tier</td>
+                        <td><code>referral_tier</code></td>
+                        <td>Dropdown</td>
+                        <td>Current tier: None, Tier 1, Tier 2, Tier 3, VIP</td>
+                    </tr>
+                    <tr>
+                        <td>Campaign ID</td>
+                        <td><code>campaign_id</code></td>
+                        <td>Text</td>
+                        <td>The TrueFans LOOP campaign this contact belongs to.</td>
+                    </tr>
+                    <tr>
+                        <td>Referred By</td>
+                        <td><code>referred_by</code></td>
+                        <td>Text</td>
+                        <td>Email or ID of the contact who referred this person.</td>
+                    </tr>
+                    <tr>
+                        <td>Signup Date</td>
+                        <td><code>loop_signup_date</code></td>
+                        <td>Date</td>
+                        <td>When the contact joined the campaign via TrueFans LOOP.</td>
+                    </tr>
+                    <tr>
+                        <td>Last Referral Date</td>
+                        <td><code>last_referral_date</code></td>
+                        <td>Date</td>
+                        <td>Timestamp of the most recent referral. Used for re-engagement logic.</td>
+                    </tr>
+                    <tr>
+                        <td>Rewards Claimed</td>
+                        <td><code>rewards_claimed</code></td>
+                        <td>Text (Multi-line)</td>
+                        <td>Comma-separated list of claimed reward IDs. Prevents duplicate fulfillment.</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Address</td>
+                        <td><code>shipping_address</code></td>
+                        <td>Text (Multi-line)</td>
+                        <td>For physical rewards. Collected when fan hits a physical reward tier.</td>
+                    </tr>
+                    <tr>
+                        <td>VIP Status</td>
+                        <td><code>vip_status</code></td>
+                        <td>Dropdown</td>
+                        <td>Options: Not VIP, VIP Pending, VIP Active, Ambassador</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Required Tags</h4>
+            <p style="margin-bottom: 12px;">Create these tags in GHL (Settings &gt; Tags or create them on-the-fly):</p>
+            <table class="field-table">
+                <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Applied When</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>fanloop</code></td>
+                        <td>Contact joins any TrueFans LOOP campaign</td>
+                    </tr>
+                    <tr>
+                        <td><code>tier_1_unlocked</code></td>
+                        <td>Contact hits 3 referrals</td>
+                    </tr>
+                    <tr>
+                        <td><code>tier_2_unlocked</code></td>
+                        <td>Contact hits 5 referrals</td>
+                    </tr>
+                    <tr>
+                        <td><code>tier_3_unlocked</code></td>
+                        <td>Contact hits 10 referrals</td>
+                    </tr>
+                    <tr>
+                        <td><code>tier_4_vip</code></td>
+                        <td>Contact hits 25 referrals</td>
+                    </tr>
+                    <tr>
+                        <td><code>vip_fan</code></td>
+                        <td>Contact moves into VIP pipeline</td>
+                    </tr>
+                    <tr>
+                        <td><code>re_engagement_sent</code></td>
+                        <td>Re-engagement workflow has started for this contact</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <strong>Important:</strong> Field keys must match exactly. TrueFans LOOP webhooks reference these keys when updating contact data. A mismatch means the workflows won't trigger properly.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- IMPORT INSTRUCTIONS -->
+<section id="import">
+    <div class="container">
+        <h2>Import &amp; Setup Instructions</h2>
+        <p class="section-sub">Follow this step-by-step guide to recreate all five workflows in your GoHighLevel account.</p>
+
+        <div class="card">
+            <h3>Complete Setup Checklist</h3>
+            <ol class="step-list">
+                <li>
+                    <strong>Create Custom Fields</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Go to Settings &gt; Custom Fields. Create all 10 fields listed in Section 7. Double-check that the field keys match exactly.</span>
+                </li>
+                <li>
+                    <strong>Create Tags</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Go to Settings &gt; Tags (or create them when first used in a workflow). Create all 7 tags listed in Section 7.</span>
+                </li>
+                <li>
+                    <strong>Create the VIP Pipeline</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Go to Opportunities &gt; Pipelines. Create the "VIP Fans" pipeline with stages: New VIP &rarr; Outreach Scheduled &rarr; Contacted &rarr; Rewards Delivered &rarr; Ambassador Active.</span>
+                </li>
+                <li>
+                    <strong>Build Workflow 1: New Fan Welcome</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Go to Automation &gt; Workflows &gt; Create Workflow. Follow the step-by-step instructions in Section 2. Copy-paste all message content from this page using the Copy buttons.</span>
+                </li>
+                <li>
+                    <strong>Build Workflow 2: Referral Milestone</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Create a new workflow. Follow Section 3 instructions. Set up all 4 If/Else branches for milestones 3, 5, 10, and 25.</span>
+                </li>
+                <li>
+                    <strong>Build Workflow 3: Reward Fulfillment</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Create a new workflow. Follow Section 4 instructions. Set up the tier tag triggers and all 4 reward emails.</span>
+                </li>
+                <li>
+                    <strong>Build Workflow 4: Re-engagement</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Create a new workflow. Follow Section 5 instructions. Make sure the 7-day initial wait is configured correctly.</span>
+                </li>
+                <li>
+                    <strong>Build Workflow 5: VIP Pipeline</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Create a new workflow. Follow Section 6 instructions. Make sure the VIP Fans pipeline exists before building this workflow.</span>
+                </li>
+                <li>
+                    <strong>Configure TrueFans LOOP Webhooks</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">In your TrueFans LOOP campaign settings, add a webhook URL pointing to your GHL account's inbound webhook endpoint. Map the fields: email, first_name, last_name, phone, referral_count, referral_link, campaign_id.</span>
+                </li>
+                <li>
+                    <strong>Test the Integration</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Create a test contact in TrueFans LOOP. Verify the webhook fires, the contact appears in GHL with the correct custom fields, and the New Fan Welcome workflow triggers. Manually update the referral_count field to test milestone and VIP workflows.</span>
+                </li>
+                <li>
+                    <strong>Publish All Workflows</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Toggle each workflow from "Draft" to "Published." Double-check trigger conditions and If/Else logic. Monitor the first few contacts to ensure everything fires correctly.</span>
+                </li>
+                <li>
+                    <strong>Customize Message Content</strong><br>
+                    <span style="color: var(--text-secondary); font-size: 14px;">Replace all [ARTIST NAME], [SONG TITLE], and placeholder links with your actual content. Update reward descriptions to match your specific tier offerings. Adjust timing delays if needed for your audience.</span>
+                </li>
+            </ol>
+
+            <div class="tip-box">
+                <strong>Estimated Setup Time:</strong> 45-60 minutes for all five workflows if you have the custom fields and pipeline already created. Budget an additional 15 minutes for webhook configuration and testing.
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; TrueFans LOOP — GoHighLevel Campaign Automation Pack</p>
+        <a href="/bonuses" class="back-link">&larr; Back to All Bonuses</a>
+    </div>
+</footer>
+
+<script>
+function copyMsg(btn) {
+    const block = btn.parentElement;
+    const content = block.querySelector('.msg-content');
+    const subject = block.querySelector('.msg-subject');
+    let text = '';
+    if (subject) text += subject.textContent + '\n\n';
+    text += content.textContent;
+    navigator.clipboard.writeText(text.trim()).then(() => {
+        btn.textContent = 'Copied!';
+        btn.style.background = 'rgba(16,185,129,0.2)';
+        btn.style.borderColor = 'rgba(16,185,129,0.4)';
+        btn.style.color = '#10B981';
+        setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.style.background = '';
+            btn.style.borderColor = '';
+            btn.style.color = '';
+        }, 2000);
+    });
+}
+</script>
+</body>
+</html>

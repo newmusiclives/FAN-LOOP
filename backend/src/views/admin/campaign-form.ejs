@@ -9,7 +9,47 @@
   <div class="bg-red-900/30 border border-red-800 text-red-300 px-4 py-3 rounded-lg mb-6 text-sm"><%= error %></div>
 <% } %>
 
-<form method="POST" action="<%= campaign && campaign.id ? `/admin/campaigns/${campaign.id}` : '/admin/campaigns' %>" class="max-w-3xl">
+<% if (!campaign || !campaign.id) { %>
+<!-- ══════════ TEMPLATE PICKER (new campaigns only) ══════════ -->
+<div class="mb-8" id="templatePicker">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-semibold">Choose a Campaign Template</h3>
+    <span class="text-xs text-gray-500">Select a template to auto-fill everything — just swap in your details</span>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <% if (typeof templates !== 'undefined') { templates.forEach(tpl => { %>
+      <div class="template-card card p-4 cursor-pointer border-2 border-transparent hover:border-purple-500/50 transition-all"
+           data-type="<%= tpl.type %>"
+           onclick="selectTemplate('<%= tpl.type %>')">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-2xl"><%= tpl.emoji %></span>
+          <div>
+            <div class="font-semibold text-sm"><%= tpl.name %></div>
+            <div class="text-xs text-gray-500"><%= tpl.tagline %></div>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 line-clamp-2"><%= tpl.description %></p>
+        <div class="mt-2 flex flex-wrap gap-1">
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-900/30 text-purple-300"><%= tpl.reward_tiers.length %> reward tiers</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-900/30 text-blue-300">share messages</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-green-900/30 text-green-300">brand colors</span>
+        </div>
+      </div>
+    <% }) } %>
+  </div>
+  <div id="selectedTemplateBanner" class="hidden mt-4 p-3 rounded-lg bg-purple-900/20 border border-purple-700/40 flex items-center justify-between">
+    <div>
+      <span class="text-sm text-purple-300" id="selectedTemplateName"></span>
+      <span class="text-xs text-gray-500 ml-2">— all fields auto-filled. Edit anything below.</span>
+    </div>
+    <button type="button" onclick="clearTemplate()" class="text-xs text-gray-400 hover:text-white px-2 py-1 rounded hover:bg-gray-700">Clear template</button>
+  </div>
+</div>
+<% } %>
+
+<form method="POST" action="<%= campaign && campaign.id ? `/admin/campaigns/${campaign.id}` : '/admin/campaigns' %>" class="max-w-3xl" id="campaignForm">
+  <input type="hidden" name="use_template" id="useTemplate" value="0">
+
   <div class="card p-6 mb-6">
     <h3 class="text-lg font-semibold mb-4">Basic Info</h3>
     <div class="grid grid-cols-2 gap-4">
@@ -23,7 +63,7 @@
       </div>
       <div>
         <label class="block text-sm text-gray-400 mb-1">Artist *</label>
-        <select name="artist_id" required class="w-full">
+        <select name="artist_id" required class="w-full" id="artistSelect">
           <option value="">Select artist...</option>
           <% artists.forEach(a => { %>
             <option value="<%= a.id %>" <%= (campaign?.artist_id == a.id) ? 'selected' : '' %>><%= a.name %></option>
@@ -32,9 +72,10 @@
       </div>
       <div>
         <label class="block text-sm text-gray-400 mb-1">Type</label>
-        <select name="type" class="w-full">
-          <% ['pre-save','merch-drop','ticket-giveaway','exclusive-content','meet-greet','fan-club','contest'].forEach(t => { %>
-            <option value="<%= t %>" <%= (campaign?.type === t) ? 'selected' : '' %>><%= t %></option>
+        <select name="type" class="w-full" id="typeSelect">
+          <% const allTypes = ['pre-save','merch-drop','ticket-giveaway','exclusive-content','meet-greet','fan-club','contest','album-release','listening-party','tour-announcement','music-video','vinyl-preorder','remix-contest','backstage-pass','holiday-special']; %>
+          <% allTypes.forEach(t => { %>
+            <option value="<%= t %>" <%= (campaign?.type === t) ? 'selected' : '' %>><%= t.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ') %></option>
           <% }) %>
         </select>
       </div>
@@ -72,7 +113,7 @@
   <!-- Share Messages -->
   <div class="card p-6 mb-6">
     <h3 class="text-lg font-semibold mb-4">Share Messages</h3>
-    <p class="text-xs text-gray-500 mb-4">Use {link} where the referral link should go</p>
+    <p class="text-xs text-gray-500 mb-4">Use {link} where the referral link should go. Replace [BRACKETED] placeholders with your details.</p>
     <% const sm = campaign?.share_messages ? (typeof campaign.share_messages === 'string' ? JSON.parse(campaign.share_messages) : campaign.share_messages) : {}; %>
     <div class="space-y-4">
       <div>
@@ -103,13 +144,119 @@
     </div>
   </div>
 
+  <!-- Reward Tiers Preview (shown when template selected) -->
+  <div class="card p-6 mb-6 hidden" id="rewardTiersPreview">
+    <h3 class="text-lg font-semibold mb-2">Reward Tiers</h3>
+    <p class="text-xs text-gray-500 mb-4">These reward tiers will be auto-created when you save. You can edit them after creation.</p>
+    <div id="rewardTiersList" class="space-y-2"></div>
+  </div>
+
   <div class="flex gap-3">
     <button type="submit" class="btn-primary px-6 py-2.5 rounded-lg text-white font-semibold">Save Campaign</button>
     <a href="/admin/campaigns" class="px-6 py-2.5 rounded-lg text-gray-400 hover:text-white">Cancel</a>
   </div>
 </form>
 
+<style>
+  .template-card.selected {
+    border-color: #8b5cf6 !important;
+    background: rgba(139, 92, 246, 0.08);
+  }
+  .template-card:hover { transform: translateY(-2px); }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
 <script>
+// Template auto-fill
+let currentTemplate = null;
+
+async function selectTemplate(type) {
+  // Highlight selected card
+  document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`.template-card[data-type="${type}"]`)?.classList.add('selected');
+
+  // Fetch template with artist substitution
+  const artistId = document.getElementById('artistSelect').value;
+  const url = `/admin/campaigns/template/${type}${artistId ? '?artist_id=' + artistId : ''}`;
+
+  try {
+    const res = await fetch(url);
+    const tpl = await res.json();
+    currentTemplate = tpl;
+
+    // Auto-fill form fields
+    const form = document.getElementById('campaignForm');
+    document.getElementById('typeSelect').value = tpl.type;
+
+    // Only fill title/slug if empty
+    const titleInput = form.querySelector('[name=title]');
+    const slugInput = form.querySelector('[name=slug]');
+    if (!titleInput.value) titleInput.value = tpl.name;
+    if (!slugInput.value) slugInput.value = tpl.type;
+
+    form.querySelector('[name=headline]').value = tpl.headline;
+    form.querySelector('[name=subheadline]').value = tpl.subheadline;
+    form.querySelector('[name=description]').value = tpl.campaign_description;
+
+    // Colors
+    form.querySelector('[name=primary_color]').value = tpl.brand_colors.primary_color;
+    form.querySelector('[name=secondary_color]').value = tpl.brand_colors.secondary_color;
+
+    // Share messages
+    form.querySelector('[name=share_twitter]').value = tpl.share_messages.twitter;
+    form.querySelector('[name=share_whatsapp]').value = tpl.share_messages.whatsapp;
+    form.querySelector('[name=share_email_subject]').value = tpl.share_messages.email_subject;
+    form.querySelector('[name=share_email_body]').value = tpl.share_messages.email_body;
+
+    // Mark template in use
+    document.getElementById('useTemplate').value = '1';
+
+    // Show banner
+    const banner = document.getElementById('selectedTemplateBanner');
+    banner.classList.remove('hidden');
+    document.getElementById('selectedTemplateName').textContent = tpl.emoji + ' ' + tpl.name + ' template loaded';
+
+    // Show reward tiers preview
+    const preview = document.getElementById('rewardTiersPreview');
+    const list = document.getElementById('rewardTiersList');
+    preview.classList.remove('hidden');
+    list.innerHTML = tpl.reward_tiers.map((t, i) => `
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e]">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-600/20 text-purple-300 flex items-center justify-center text-xs font-bold">${t.referrals_required}</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-semibold">${t.tier_name}</div>
+          <div class="text-xs text-gray-400 truncate">${t.description}</div>
+        </div>
+        <div class="text-xs text-gray-500">${t.referrals_required} ref${t.referrals_required > 1 ? 's' : ''}</div>
+      </div>
+    `).join('');
+
+  } catch (e) {
+    console.error('Failed to load template:', e);
+  }
+}
+
+function clearTemplate() {
+  currentTemplate = null;
+  document.getElementById('useTemplate').value = '0';
+  document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('selectedTemplateBanner').classList.add('hidden');
+  document.getElementById('rewardTiersPreview').classList.add('hidden');
+}
+
+// Re-fetch template when artist changes (to update placeholders)
+document.getElementById('artistSelect')?.addEventListener('change', () => {
+  if (currentTemplate) {
+    selectTemplate(currentTemplate.type);
+  }
+});
+
+// AI Copy Generator
 document.getElementById('aiGenerateBtn')?.addEventListener('click', async () => {
   const btn = document.getElementById('aiGenerateBtn');
   const results = document.getElementById('aiResults');

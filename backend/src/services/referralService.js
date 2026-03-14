@@ -8,6 +8,7 @@ const Analytics = require('../models/Analytics');
 const Leaderboard = require('../models/Leaderboard');
 const fraudService = require('./fraudService');
 const webhookService = require('./webhookService');
+const ghlService = require('./gohighlevelService');
 
 function generateCode() {
   return uuidv4().replace(/-/g, '').substring(0, 8);
@@ -113,6 +114,10 @@ async function processSignup({ campaign_id, email, name, referral_code_from, ip_
     const artist = Artist.findById(campaign.artist_id);
     if (artist) {
       webhookService.fireSignupWebhooks(artist.id, { fan, campaign });
+      // Sync to GoHighLevel
+      ghlService.syncFanToGHL(artist.id, { fan, campaign }).catch(e =>
+        console.error('GHL sync error:', e.message)
+      );
     }
   } catch (e) {
     console.error('Webhook error:', e.message);
@@ -127,9 +132,29 @@ async function processSignup({ campaign_id, email, name, referral_code_from, ip_
 
 function checkAndUnlockRewards(fan, campaignId) {
   const rewards = Reward.listByCampaign(campaignId);
+  let highestTier = null;
   for (const reward of rewards) {
     if (fan.referral_count >= reward.referrals_required) {
       RewardClaim.create({ fan_id: fan.id, reward_id: reward.id });
+      highestTier = reward.tier_name;
+    }
+  }
+
+  // Update GHL contact when fan reaches a new tier
+  if (highestTier) {
+    try {
+      const campaign = Campaign.findById(campaignId);
+      if (campaign) {
+        const Artist = require('../models/Artist');
+        const artist = Artist.findById(campaign.artist_id);
+        if (artist) {
+          ghlService.updateFanInGHL(artist.id, { fan, campaign, newTier: highestTier }).catch(e =>
+            console.error('GHL tier update error:', e.message)
+          );
+        }
+      }
+    } catch (e) {
+      console.error('GHL tier update error:', e.message);
     }
   }
 }

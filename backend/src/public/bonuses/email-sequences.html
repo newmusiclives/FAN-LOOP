@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superfan Nurture Email Sequences — TrueFans LOOP</title>
+    <meta name="description" content="Complete 10-email nurture sequence in 3 tonal variants. Copy-paste ready templates to turn new fans into superfan referral machines.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --violet: #8B5CF6;
+            --violet-glow: rgba(139, 92, 246, 0.4);
+            --violet-dark: #6D28D9;
+            --violet-light: #A78BFA;
+            --pink: #EC4899;
+            --cyan: #06B6D4;
+            --green: #10B981;
+            --amber: #F59E0B;
+            --red: #EF4444;
+            --bg-dark: #0A0A0F;
+            --bg-card: #111118;
+            --bg-card-hover: #1A1A24;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: rgba(139, 92, 246, 0.15);
+            --border-hover: rgba(139, 92, 246, 0.4);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--violet-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--violet-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--violet), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .hero .placeholder-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(139, 92, 246, 0.06);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .hero .placeholder-note code {
+            background: rgba(139, 92, 246, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--violet-light);
+        }
+
+        /* Nav */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .top-nav .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .top-nav .logo span { color: var(--violet); }
+
+        .top-nav .back-link {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .top-nav .back-link:hover { color: var(--violet); }
+
+        /* Section */
+        .section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+        }
+
+        /* Email block */
+        .email-block {
+            margin-bottom: 60px;
+        }
+
+        .email-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .email-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .email-meta {
+            flex: 1;
+        }
+
+        .email-meta h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .email-meta .email-timing {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--violet-light);
+            background: rgba(139, 92, 246, 0.1);
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+
+        /* Variant tabs */
+        .variant-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 0;
+            flex-wrap: wrap;
+        }
+
+        .variant-tab {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .variant-tab:hover {
+            color: var(--text-secondary);
+            background: var(--bg-card-hover);
+        }
+
+        .variant-tab.active {
+            background: var(--bg-card);
+            color: var(--violet-light);
+            border-color: var(--border-hover);
+        }
+
+        .variant-tab.hype { border-top: 2px solid var(--pink); }
+        .variant-tab.chill { border-top: 2px solid var(--cyan); }
+        .variant-tab.pro { border-top: 2px solid var(--amber); }
+
+        /* Email content */
+        .email-variants {
+            position: relative;
+        }
+
+        .email-variant {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 0 12px 12px 12px;
+            padding: 28px;
+            position: relative;
+        }
+
+        .email-variant.active {
+            display: block;
+        }
+
+        .email-field {
+            margin-bottom: 16px;
+        }
+
+        .email-field-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--violet);
+            margin-bottom: 6px;
+        }
+
+        .email-field-value {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .email-field-value p {
+            margin-bottom: 12px;
+        }
+
+        .email-field-value p:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-body-content {
+            white-space: pre-wrap;
+            font-size: 0.93rem;
+            line-height: 1.85;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, var(--green), #059669);
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--violet);
+            margin-bottom: 16px;
+        }
+
+        .toc a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            transition: color 0.2s, padding-left 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .toc a:hover {
+            color: var(--violet-light);
+            padding-left: 8px;
+        }
+
+        .toc a:last-child { border-bottom: none; }
+
+        .toc .toc-day {
+            display: inline-block;
+            min-width: 56px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--violet-light);
+            background: rgba(139, 92, 246, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav class="top-nav">
+        <a href="/" class="logo">TrueFans <span>LOOP</span></a>
+        <a href="/" class="back-link">&larr; Back to Home</a>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Bonus Resource</div>
+        <h1>Superfan Nurture<br><span>Email Sequences</span></h1>
+        <p>10 complete emails in 3 tonal variants. Copy, paste, customize, and launch a 30-day sequence that turns new signups into superfan referral machines.</p>
+        <div class="placeholder-note">
+            <strong>Placeholders used throughout:</strong>
+            <code>[ARTIST NAME]</code> <code>[SONG TITLE]</code> <code>[CAMPAIGN NAME]</code> <code>{referral_link}</code> <code>{referral_count}</code> <code>{next_tier}</code>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="toc">
+        <h3>All 10 Emails</h3>
+        <a href="#email-1"><span class="toc-day">Day 0</span> Email 1: Welcome + Referral Link</a>
+        <a href="#email-2"><span class="toc-day">Day 1</span> Email 2: Your Story — Building Connection</a>
+        <a href="#email-3"><span class="toc-day">Day 3</span> Email 3: "Your Friends Are Joining" Social Proof</a>
+        <a href="#email-4"><span class="toc-day">Day 5</span> Email 4: Reward Progress Update + Share CTA</a>
+        <a href="#email-5"><span class="toc-day">Day 7</span> Email 5: Exclusive Content Drop</a>
+        <a href="#email-6"><span class="toc-day">Day 10</span> Email 6: Fan Spotlight / Leaderboard Update</a>
+        <a href="#email-7"><span class="toc-day">Day 14</span> Email 7: "Almost There" Tier Nudge</a>
+        <a href="#email-8"><span class="toc-day">Day 18</span> Email 8: Merch or Ticket Offer</a>
+        <a href="#email-9"><span class="toc-day">Day 25</span> Email 9: Re-Engagement for Inactive Fans</a>
+        <a href="#email-10"><span class="toc-day">Day 30</span> Email 10: VIP Invitation + Next Campaign Teaser</a>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<section class="section">
+<div class="container">
+
+<!-- ==================== EMAIL 1 ==================== -->
+<div class="email-block" id="email-1">
+    <div class="email-header">
+        <div class="email-number">1</div>
+        <div class="email-meta">
+            <h2>Welcome + Referral Link</h2>
+            <div class="email-timing">Day 0 — Send immediately after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e1-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e1-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e1-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <!-- HYPE -->
+        <div class="email-variant active" id="e1-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">YOU'RE IN! Welcome to [CAMPAIGN NAME] 🔥</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Your exclusive link is inside — share it and unlock insane rewards.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">LET'S GOOO! 🎉
+
+You just joined [CAMPAIGN NAME] and honestly? That makes you one of the real ones.
+
+I'm [ARTIST NAME], and you're now part of something most fans never get access to. This isn't a regular email list — this is the inner circle.
+
+Here's what you just unlocked:
+- Unreleased music before anyone else hears it
+- Behind-the-scenes content from the studio and the road
+- Exclusive merch drops and early ticket access
+- Real rewards for spreading the word
+
+But here's where it gets CRAZY. You have your own personal referral link:
+
+👉 {referral_link}
+
+Every friend who signs up through YOUR link counts toward your rewards. The more people you bring in, the bigger the rewards get.
+
+Here's the tier breakdown:
+🏆 3 referrals = Unreleased track download
+🏆 10 referrals = Free merch pack
+🏆 25 referrals = VIP tickets + signed merch
+
+You're currently at {referral_count} referrals. Your next reward unlocks at {next_tier}.
+
+Share your link everywhere — text it to your group chat, drop it on your socials, send it to anyone who needs to hear [SONG TITLE].
+
+This is how we build something massive together. And it starts right now.
+
+LET'S GET IT,
+[ARTIST NAME]
+
+P.S. The fans who share in the first 24 hours always end up at the top of the leaderboard. Just saying. 👀</div></div>
+            </div>
+        </div>
+
+        <!-- CHILL -->
+        <div class="email-variant" id="e1-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Hey — welcome to [CAMPAIGN NAME]</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Glad you're here. Here's your personal link + what's coming next.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+Thanks for signing up. Genuinely. It means a lot that you're here.
+
+I'm [ARTIST NAME], and I started [CAMPAIGN NAME] because I wanted a real way to connect with the people who actually care about the music — not just algorithms and follower counts.
+
+So here's what this is: you're now part of a small group that gets first access to everything. New music, behind-the-scenes stuff, things I don't share anywhere else. No spam, no gimmicks.
+
+And here's the cool part — you have your own referral link:
+
+{referral_link}
+
+If your friends sign up through that link, you both win. You'll unlock rewards like unreleased tracks, free merch, and VIP access. And I get to grow this the right way — through people who genuinely love the music sharing it with people who will too.
+
+Right now you're at {referral_count} referrals. Your next reward is at {next_tier}.
+
+No pressure at all. But if you know someone who'd dig [SONG TITLE], send them that link. It takes like 10 seconds and it genuinely helps more than you'd think.
+
+Really glad you're here.
+
+— [ARTIST NAME]
+
+P.S. Hit reply if you want to say what's up. I actually read these.</div></div>
+            </div>
+        </div>
+
+        <!-- PRO -->
+        <div class="email-variant" id="e1-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Welcome to [CAMPAIGN NAME] — Your Referral Link Is Ready</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">You're in. Here's how to unlock exclusive rewards by sharing with friends.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Welcome to [CAMPAIGN NAME].
+
+Thank you for joining. You now have access to exclusive content, early releases, and rewards that aren't available anywhere else.
+
+My name is [ARTIST NAME], and I created this program to build a closer relationship with the fans who truly support the music. Here's what you can expect:
+
+What you get as a member:
+• Early access to new releases before they hit streaming platforms
+• Behind-the-scenes content from recording sessions and tours
+• Exclusive merch opportunities and pre-sale ticket access
+• Real rewards for helping grow the community
+
+Your personal referral link:
+{referral_link}
+
+When your friends join through your link, you earn credit toward reward tiers:
+• 3 referrals — Unreleased track download
+• 10 referrals — Complimentary merch package
+• 25 referrals — VIP concert experience + signed merchandise
+
+Current referral count: {referral_count}
+Next reward tier: {next_tier}
+
+The easiest way to get started is to share your link with 2-3 friends who would enjoy [SONG TITLE]. A quick text message or social media share is all it takes.
+
+Thank you for being part of this.
+
+Best,
+[ARTIST NAME]
+
+P.S. Fans who share their link within the first 24 hours see 3x more referral signups on average — early momentum makes a big difference.</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 2 ==================== -->
+<div class="email-block" id="email-2">
+    <div class="email-header">
+        <div class="email-number">2</div>
+        <div class="email-meta">
+            <h2>Your Story — Building Connection</h2>
+            <div class="email-timing">Day 1 — 24 hours after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e2-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e2-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e2-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e2-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">The story I've never told publicly...</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">How [SONG TITLE] almost didn't happen — and what it means now.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Real talk — I want to tell you something I don't usually share.
+
+Before [SONG TITLE] existed, I almost quit. Straight up. I was broke, playing to empty rooms, and everyone around me was telling me to "get a real job." There was this one night — I played a show to literally 6 people. Six. And one of them was the bartender.
+
+But one of those people came up after the set and said, "That song you played third — I've never felt something like that before." They were talking about the early version of [SONG TITLE].
+
+That one person kept me going. ONE fan who actually felt the music.
+
+That's what this whole thing is about. I'm not trying to be a faceless artist with millions of passive listeners. I want to build something REAL with the people who actually feel it. People like you.
+
+[CAMPAIGN NAME] exists because I believe the best way to grow isn't through ads or algorithms — it's through people who love the music sharing it with other people who need to hear it.
+
+Every time you share your link, you're not just "promoting" something. You're handing someone a feeling. The same feeling that person gave me in that empty room.
+
+Your link: {referral_link}
+Your referrals so far: {referral_count}
+
+Keep building. This means everything to me.
+
+ALL LOVE,
+[ARTIST NAME]
+
+P.S. I wrote [SONG TITLE] the morning after that show. The whole thing poured out in one take. True story.</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e2-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">How this all started (the real version)</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">I wanted to share something personal with you.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey again,
+
+I figured since you're here, you might want to know how all of this started. The real version, not the polished bio.
+
+I started making music in my bedroom. Literally — a laptop, a cheap mic, and a closet full of clothes that I used as a vocal booth because I couldn't afford a studio. The neighbors complained constantly.
+
+For a long time, nobody cared. I put out songs and they'd get maybe 30 plays. Most of those were probably me hitting refresh. It's kind of funny now, but at the time it was pretty crushing.
+
+The thing that changed everything wasn't a viral moment or getting playlisted. It was a handful of people who found [SONG TITLE] and shared it with their friends. Literally just texted it to people. That organic, word-of-mouth thing — that's what built the foundation of everything I have now.
+
+That's why I built [CAMPAIGN NAME]. Because I've seen firsthand that one person sharing a song with the right friend can change everything. Not algorithms. Not ads. Real people.
+
+So yeah — that's my story. I'm still the same person making music in weird rooms and hoping it connects with someone. The only difference now is I have people like you in my corner.
+
+If any of this resonated, maybe share your link with someone who needs to hear something real right now:
+
+{referral_link}
+
+You're at {referral_count} referrals. No rush — just whenever it feels right.
+
+Thanks for reading this. Seriously.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e2-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Why I Started [CAMPAIGN NAME] — A Personal Note</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">The origin story behind the music and this community.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">I want to take a moment to share something personal with you.
+
+Every artist has an origin story, and mine isn't particularly glamorous. I started writing songs in a small apartment with borrowed equipment. For the first two years, my music reached almost no one. I played shows where the audience was smaller than the band.
+
+The turning point came when a small group of dedicated listeners began sharing [SONG TITLE] with their friends. Not because anyone asked them to — but because the music meant something to them. That organic growth, driven by genuine connection, built the foundation of everything that followed.
+
+That experience taught me something important: the music industry's obsession with viral moments and algorithmic discovery misses the point. The most powerful force in music has always been one person telling another, "You need to hear this."
+
+That's the principle behind [CAMPAIGN NAME]. I built this program to formalize what was already happening naturally — fans sharing music they believe in and being recognized for the impact they create.
+
+You're now part of that story. Every referral you make through your link isn't just a number — it's another person who gets to experience something real.
+
+Your referral link: {referral_link}
+Current referrals: {referral_count}
+Next reward at: {next_tier}
+
+I look forward to building this alongside you.
+
+With gratitude,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 3 ==================== -->
+<div class="email-block" id="email-3">
+    <div class="email-header">
+        <div class="email-number">3</div>
+        <div class="email-meta">
+            <h2>"Your Friends Are Joining" Social Proof</h2>
+            <div class="email-timing">Day 3 — 3 days after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e3-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e3-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e3-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e3-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">It's blowing up 🚀 — check the numbers</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">People are joining fast — don't miss what's happening inside [CAMPAIGN NAME].</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Yo — you need to see what's happening.
+
+[CAMPAIGN NAME] is MOVING. In just a few days, hundreds of fans have joined and the referral chain is going crazy.
+
+Here's the vibe right now:
+🔥 The community is growing by the hour
+🔥 Fans are unlocking rewards left and right
+🔥 People are sharing [SONG TITLE] in group chats everywhere
+
+And where are you in all this? Let's check:
+
+Your referral count: {referral_count}
+Next reward tier: {next_tier}
+
+Some fans have already hit their first reward tier. They're getting unreleased tracks and exclusive content RIGHT NOW while others are still sleeping on it.
+
+I don't want you to miss out. All it takes is sending your link to a few friends who'd actually enjoy the music:
+
+👉 {referral_link}
+
+Think about it — who in your contacts would lose their mind over [SONG TITLE]? Text them. Right now. It literally takes 10 seconds and it could push you to your next reward.
+
+The momentum is real. Don't just watch — be part of it.
+
+LET'S KEEP THIS GOING,
+[ARTIST NAME]
+
+P.S. The top referrer right now has over 40 signups. FORTY. The leaderboard is getting competitive. 🏆</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e3-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Something cool is happening</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">People you know might already be in [CAMPAIGN NAME]. Quick update.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+Just wanted to pop in with a quick update because something genuinely cool is happening.
+
+Since [CAMPAIGN NAME] launched, the community has been growing steadily. Not in a "we bought a bunch of ads" way — in a "people are actually sharing this with their friends" way. Which is exactly what I hoped for.
+
+I've been watching the referral activity and it's honestly heartwarming. People are texting links to their friends, posting in group chats, sharing on their stories. All because they discovered something they liked and wanted other people to experience it too.
+
+Your referral count is at {referral_count} right now.
+
+If you haven't shared your link yet, no stress at all. But if you know even one person who'd appreciate [SONG TITLE], here it is:
+
+{referral_link}
+
+That one share might be the thing that introduces someone to their new favorite artist. And selfishly, it gets you closer to {next_tier} — which unlocks some really good stuff.
+
+Either way, thanks for being here. It's cool watching this grow organically.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e3-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">[CAMPAIGN NAME] Community Update — Growth Report</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">The community is growing rapidly. Here's where you stand and how to level up.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Quick update on [CAMPAIGN NAME]:
+
+The response has been exceptional. In just a few days, our community has grown significantly, driven entirely by organic referrals from fans like you.
+
+Here's what the data shows:
+• Community growth is accelerating day over day
+• The average fan who shares their link sees 3+ signups
+• Fans are unlocking reward tiers ahead of schedule
+
+Your current stats:
+• Referral count: {referral_count}
+• Next reward tier: {next_tier}
+
+Many fans have already reached their first reward tier by sharing with just a few friends. If you haven't started yet, the most effective approach is simple:
+
+1. Think of 3-5 friends who would enjoy [SONG TITLE]
+2. Send them your personal link: {referral_link}
+3. A quick text message converts better than social media posts
+
+The early phase of any campaign is when momentum builds fastest. Fans who share during the first week consistently end up with the most referrals by campaign end.
+
+Your involvement makes a real difference. Thank you for being part of this.
+
+Best,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 4 ==================== -->
+<div class="email-block" id="email-4">
+    <div class="email-header">
+        <div class="email-number">4</div>
+        <div class="email-meta">
+            <h2>Reward Progress Update + Share CTA</h2>
+            <div class="email-timing">Day 5 — 5 days after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e4-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e4-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e4-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e4-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Your reward tracker — you're closer than you think 🏆</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">{referral_count} referrals down, {next_tier} is within reach. Keep pushing!</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">CHECK YOUR STATS! 📊
+
+Alright, let's see where you're at in [CAMPAIGN NAME]:
+
+🎯 Your referral count: {referral_count}
+🎯 Next reward unlocks at: {next_tier}
+
+You're SO close. Can you feel it? A few more shares and you're unlocking real, tangible rewards.
+
+Here's what's waiting for you at the next tier:
+✅ Unreleased music that nobody else has heard
+✅ Exclusive merch you literally cannot buy anywhere
+✅ Content I only share with the inner circle
+
+The fans who are CRUSHING IT right now all did the same thing — they shared their link in three places:
+
+1. Their group chat (the one with the friends who actually have good taste)
+2. Their Instagram/TikTok story with a "you need to hear this" caption
+3. A direct text to that one friend who's always looking for new music
+
+Your link: {referral_link}
+
+Every single share counts. Every person who clicks that link and signs up moves you closer to the reward you want.
+
+DON'T STOP NOW,
+[ARTIST NAME]
+
+P.S. I'm dropping something MASSIVE for the fans who hit the top tier. You don't want to be the one who stopped one referral short. Trust me on this. 🔥</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e4-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Quick check-in — here's where you stand</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Your [CAMPAIGN NAME] progress + an easy way to level up.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+Just wanted to check in on your [CAMPAIGN NAME] progress. Sometimes these things get lost in the inbox shuffle, so here's a quick snapshot:
+
+Your referrals so far: {referral_count}
+Your next reward: {next_tier}
+
+If you're already there — amazing, thank you for sharing. If not, no worries at all. It only takes a couple of friends signing up to move the needle.
+
+The easiest way I've seen people do it: just text your link to one or two people with something like "hey, check this out — it's [ARTIST NAME]'s thing, you'd like it." That personal touch works way better than blasting it on social media.
+
+Your link whenever you're ready: {referral_link}
+
+For what it's worth, the rewards at the next tier are genuinely cool — not filler stuff. I made sure of that because I want this to feel worth your time.
+
+Thanks for being part of this. Even just being here matters.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e4-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Your [CAMPAIGN NAME] Progress Report</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Referral count: {referral_count}. Here's how to reach your next reward tier.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Here's your [CAMPAIGN NAME] progress update:
+
+Current referral count: {referral_count}
+Next reward tier: {next_tier}
+Status: Active
+
+Based on current community data, fans who share their link through direct messages (text, DM, WhatsApp) see the highest conversion rate — approximately 3x higher than social media posts.
+
+Recommended next steps to reach your next tier:
+1. Send your referral link directly to 3-5 friends who enjoy similar music
+2. Include a personal note — something like "Thought you'd enjoy this artist's new project"
+3. Share on one social platform with a brief endorsement
+
+Your referral link: {referral_link}
+
+Reward tier breakdown:
+• Tier 1 (3 referrals): Unreleased track download
+• Tier 2 (10 referrals): Exclusive merch package
+• Tier 3 (25 referrals): VIP experience + signed merchandise
+
+Each referral brings you one step closer. The data consistently shows that fans who share during the first week reach the highest tiers.
+
+Thank you for your continued participation.
+
+Best regards,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 5 ==================== -->
+<div class="email-block" id="email-5">
+    <div class="email-header">
+        <div class="email-number">5</div>
+        <div class="email-meta">
+            <h2>Exclusive Content Drop</h2>
+            <div class="email-timing">Day 7 — 1 week after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e5-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e5-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e5-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e5-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">EXCLUSIVE DROP 🎵 — for [CAMPAIGN NAME] members ONLY</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">This is NOT on streaming. Only you get this. Open now.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">🔒 MEMBERS ONLY CONTENT 🔒
+
+I promised the inner circle gets things nobody else does. Time to deliver.
+
+I'm dropping something exclusively for [CAMPAIGN NAME] members right now. This is NOT on Spotify. NOT on Apple Music. NOT on YouTube. This is ONLY for the people in this community.
+
+Here's what you're getting:
+
+🎵 An unreleased demo version of [SONG TITLE] — this is the raw, stripped-down version I recorded at 2am before it became the song you know. You can hear every imperfection and honestly? I think it hits harder than the final version.
+
+This is the stuff I used to keep locked in a folder on my laptop. But you're not just a random listener — you're part of [CAMPAIGN NAME]. You earned this.
+
+Now here's the thing — I want MORE people to experience this community. Not the content (that stays exclusive), but the feeling of being on the inside.
+
+Share your link and bring more real ones in:
+👉 {referral_link}
+
+Your referral count: {referral_count}
+Next tier at: {next_tier}
+
+The next exclusive drop is even BIGGER. And the fans who've hit the higher reward tiers? They're getting something I haven't even announced yet. 👀
+
+STAY LOCKED IN,
+[ARTIST NAME]
+
+P.S. Seriously — do not share this content publicly. This is for the inner circle only. But DO share your referral link so your friends can get their OWN access to drops like this.</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e5-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Made something just for you</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">An unreleased version of [SONG TITLE] — only for [CAMPAIGN NAME] members.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+You've been part of [CAMPAIGN NAME] for a week now, and I wanted to give you something to say thanks.
+
+I dug into my archives and pulled out the original demo of [SONG TITLE]. It's the version I recorded late one night before the producers got their hands on it — just me, a guitar, and a voice memo that somehow captured something the polished version doesn't quite have.
+
+I'm sharing this only with [CAMPAIGN NAME] members. It won't be on any platform or any playlist. It's just for us.
+
+I hope you enjoy hearing it in its rawest form. There's something about a demo that lets you hear the emotion before it gets smoothed out.
+
+If you know someone who'd really appreciate something like this — not just anyone, but someone who actually listens deeply — feel free to share your referral link with them:
+
+{referral_link}
+
+They won't get this specific drop (that's just for current members), but they'll be in for the next one. And trust me, the next one is special.
+
+You're at {referral_count} referrals. Next reward at {next_tier}.
+
+Thanks for being here for a whole week. That actually means something.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e5-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Exclusive Content Drop — [CAMPAIGN NAME] Members Only</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Your one-week member reward: unreleased demo of [SONG TITLE].</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">As a one-week member of [CAMPAIGN NAME], you've earned access to exclusive content.
+
+Today's drop: the original demo recording of [SONG TITLE].
+
+This is the unproduced, raw version recorded before any studio work began. It's available exclusively to [CAMPAIGN NAME] members and will not be released on any streaming platform.
+
+This is part of our commitment to making membership genuinely valuable. The inner circle gets things that aren't available anywhere else — period.
+
+Upcoming exclusive drops will include:
+• Behind-the-scenes studio session footage
+• Acoustic versions of fan-favorite tracks
+• Early previews of upcoming releases
+• Personal commentary and songwriting breakdowns
+
+To ensure future exclusive content reaches you, stay active in the community. And to unlock higher-tier rewards, continue sharing your referral link:
+
+{referral_link}
+
+Current stats:
+• Referral count: {referral_count}
+• Next tier: {next_tier}
+
+Members who refer friends also help shape the community — every new member brings fresh energy and increases the value of future exclusive drops.
+
+Thank you for your first week with us.
+
+Best,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 6 ==================== -->
+<div class="email-block" id="email-6">
+    <div class="email-header">
+        <div class="email-number">6</div>
+        <div class="email-meta">
+            <h2>Fan Spotlight / Leaderboard Update</h2>
+            <div class="email-timing">Day 10 — 10 days after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e6-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e6-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e6-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e6-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">THE LEADERBOARD IS LIVE 🏆 — where do you rank?</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Top fans are pulling ahead. Check your position and make your move.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">The competition is HEATING UP! 🔥
+
+I wanted to give you a look at the [CAMPAIGN NAME] leaderboard because honestly? Some of you are going INSANE with the referrals.
+
+Our top fans right now are absolutely crushing it. Some have brought in dozens of new members. They're unlocking every reward tier and building a reputation as the ultimate supporters.
+
+These aren't influencers or people with huge followings. They're regular fans who genuinely love the music and told their friends about it. That's it. That's the whole strategy.
+
+Now let's talk about YOU:
+
+Your referral count: {referral_count}
+Next tier: {next_tier}
+
+There's still SO much room to climb. The leaderboard is wide open and every single referral moves you up.
+
+Here's your game plan to climb:
+1. Share your link in your top 3 group chats RIGHT NOW
+2. Post it on your story with [SONG TITLE] playing in the background
+3. DM it to that one friend who always asks "what should I listen to?"
+
+Your link: {referral_link}
+
+I'm keeping a close eye on the top of the leaderboard. The fans who end up there are getting something special that I haven't announced yet. But let's just say it's going to be WORTH IT.
+
+WHO WANTS THE TOP SPOT?
+[ARTIST NAME]
+
+P.S. I see every single referral that comes in. I know exactly who's putting in work. And I don't forget the real ones. Ever.</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e6-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Shoutout to the fans making this happen</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">A few fans have gone above and beyond — here's what's happening.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+I have to take a second to shout out some of the fans in [CAMPAIGN NAME] who have blown me away.
+
+There are people in this community who have shared their referral links with so many friends that they've single-handedly built pockets of new listeners in their cities. I'm talking about someone in Portland who brought in a whole friend group. Someone in Atlanta who got their entire college dorm signed up. These are real people with no platform, no following — just a genuine love for the music and friends who trust their taste.
+
+That's the whole point. This was never about numbers on a screen. It's about real humans connecting over something that matters to them.
+
+I see every referral, by the way. I know who's sharing. And it means more than any streaming number ever could.
+
+Your referrals: {referral_count}
+Next reward: {next_tier}
+
+If you've been meaning to share and just haven't gotten around to it, here's your link:
+
+{referral_link}
+
+No competition, no pressure. Just — if someone comes to mind who'd enjoy this, send it their way. That's all.
+
+Thanks to everyone who's been part of this so far. You're building something with me and I won't forget it.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e6-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">[CAMPAIGN NAME] Leaderboard Update — Your Standing</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Top referrers are earning major rewards. Here's the current landscape.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Here's your [CAMPAIGN NAME] leaderboard update as of Day 10:
+
+Community highlights:
+• Top referrers have brought in 30+ new members each
+• Dozens of fans have reached Tier 1 rewards
+• The community continues to grow through organic referrals
+
+Your current position:
+• Referral count: {referral_count}
+• Next reward tier: {next_tier}
+
+I want to recognize the fans who have gone above and beyond in growing this community. The top referrers are not people with large social media followings — they're dedicated fans who shared their link through personal messages, group chats, and word of mouth.
+
+This reinforces what we've always known: personal recommendations from trusted friends are the most effective form of discovery.
+
+If you'd like to improve your standing, the data shows these strategies work best:
+1. Direct text messages to 5-10 friends (highest conversion rate)
+2. Sharing in music-focused group chats or Discord servers
+3. Instagram/TikTok story posts with a direct link
+
+Your referral link: {referral_link}
+
+I'm planning something special for the fans at the top of the leaderboard at campaign's end. Stay active and keep sharing.
+
+Best,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 7 ==================== -->
+<div class="email-block" id="email-7">
+    <div class="email-header">
+        <div class="email-number">7</div>
+        <div class="email-meta">
+            <h2>"Almost There" Tier Nudge</h2>
+            <div class="email-timing">Day 14 — 2 weeks after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e7-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e7-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e7-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e7-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">You're THIS close 🤏 — don't stop now!</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Just a few more referrals to unlock {next_tier}. Finish what you started!</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">I'm looking at the numbers and I HAD to email you.
+
+You're SO close to hitting {next_tier}. Like, painfully close.
+
+Here's where you stand:
+📊 Current referrals: {referral_count}
+🎯 Next reward at: {next_tier}
+
+You can literally get there TODAY. A couple more friends sign up through your link and BOOM — you've unlocked it.
+
+Let me remind you what's waiting at that tier:
+✅ Content that nobody outside this tier has access to
+✅ Rewards that you cannot buy — they can only be earned
+✅ Recognition as one of the top supporters in [CAMPAIGN NAME]
+
+Here's the fastest way to close the gap:
+
+Think of the last person you talked to about music. Got them in your head? Good. Now text them this:
+
+"Hey — check this out: {referral_link} — it's [ARTIST NAME]'s community thing. You'd be into it."
+
+That's it. That text takes 15 seconds and it might be the one that pushes you over the line.
+
+The fans who've already hit their tier? They're enjoying their rewards RIGHT NOW while you're reading this. Don't let a few referrals be the difference.
+
+FINISH THIS,
+[ARTIST NAME]
+
+P.S. I'm also about to announce a BONUS reward for fans who hit {next_tier} before the end of the month. The clock is ticking. ⏰</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e7-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">You're really close to something cool</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">A few more referrals and you unlock your next reward. Thought you should know.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+I was looking through the [CAMPAIGN NAME] numbers and noticed you're really close to hitting your next reward tier.
+
+You're at {referral_count} referrals and {next_tier} is the next milestone. You're almost there.
+
+I'm not going to hit you with a hard sell — you know the drill by now. But I did want to let you know how close you are because it'd be a shame to leave that reward on the table when you're this close.
+
+The rewards at that tier are some of the best things I've put together for this campaign. They're things I'm genuinely proud of and I want you to have them.
+
+If a couple more friends signed up through your link, you'd be there:
+
+{referral_link}
+
+Maybe there's someone you've been meaning to share it with but just forgot? Or someone you talked to about music recently who'd be into it?
+
+Either way — you've been great. Two weeks in and you're still here. That alone puts you ahead of most people.
+
+— [ARTIST NAME]
+
+P.S. I'm working on something special for fans who hit {next_tier} this month. Stay tuned.</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e7-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">You're Close to Your Next Reward Tier — [CAMPAIGN NAME]</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Current: {referral_count} referrals. Next tier: {next_tier}. Here's how to get there.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Two-week milestone update for your [CAMPAIGN NAME] membership:
+
+Current referral count: {referral_count}
+Next reward tier: {next_tier}
+Time in program: 14 days
+
+You are within reach of your next reward tier. Based on your current progress, just a few additional referrals would unlock the next level of exclusive content and rewards.
+
+Here's what the next tier includes:
+• Exclusive unreleased content not available at lower tiers
+• Priority access to limited-edition merch drops
+• Enhanced community status and recognition
+
+Recommended action to close the gap:
+1. Review your recent conversations — who mentioned wanting new music?
+2. Send your referral link to 3-5 of those contacts directly
+3. Include a brief personal note about why you enjoy being part of this community
+
+Your referral link: {referral_link}
+
+Data insight: Fans who reach their next tier within the first two weeks are 4x more likely to hit the highest tier by campaign end. The momentum you build now carries forward.
+
+Additionally, a bonus reward will be available for fans who reach {next_tier} before the end of this month.
+
+Best regards,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 8 ==================== -->
+<div class="email-block" id="email-8">
+    <div class="email-header">
+        <div class="email-number">8</div>
+        <div class="email-meta">
+            <h2>Merch or Ticket Offer</h2>
+            <div class="email-timing">Day 18 — 18 days after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e8-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e8-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e8-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e8-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">🎁 EXCLUSIVE OFFER — [CAMPAIGN NAME] members only</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Limited merch + early ticket access. This won't last — open now.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">OKAY THIS IS BIG. 🎁
+
+I've been holding onto this and the time has finally come. As a [CAMPAIGN NAME] member, you're getting something nobody else gets:
+
+🎫 EARLY ACCESS to upcoming show tickets — before they go on sale to the public. If the shows sell out (and some of them WILL), you'll already have yours locked in.
+
+👕 EXCLUSIVE MERCH DROP — I designed a limited-edition piece specifically for this community. It's not in any store, not on any website. The only way to get it is through [CAMPAIGN NAME]. When it's gone, it's gone forever.
+
+Here's the thing — your referral tier determines what you unlock:
+
+• Tier 1 fans: Early ticket access (24-hour head start)
+• Tier 2 fans: Early tickets + exclusive merch at a discount
+• Tier 3 fans: Early tickets + FREE exclusive merch + backstage access where available
+
+You're at {referral_count} referrals. Your next tier is {next_tier}.
+
+If you haven't hit the tier you want yet, NOW is the time to push. Share your link, get a few more friends in, and level up before the merch drop goes live:
+
+👉 {referral_link}
+
+The merch is limited quantity. The tickets will sell out. The fans who've been putting in work on their referrals are about to be HEAVILY rewarded.
+
+DON'T SLEEP ON THIS,
+[ARTIST NAME]
+
+P.S. The exclusive merch piece? I can't show you yet but I'll tell you this — it's the best thing I've ever designed. You're going to want it. Get those referrals up. 🔥</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e8-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Something for you — tickets + merch, members only</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Early ticket access and a limited merch drop for [CAMPAIGN NAME] members.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+I've got something tangible for you this time.
+
+First — upcoming shows. As a [CAMPAIGN NAME] member, you get early ticket access before the general public. I know how frustrating it is when shows sell out before you even hear about them. That won't happen to you anymore.
+
+Second — I've been working on an exclusive merch piece that's only available to this community. It's not a generic t-shirt with a logo slapped on it. I actually put time into designing something I'm proud of, and I wanted it to be specifically for the people who've been part of this journey.
+
+What you get access to depends on where you are with referrals:
+
+• Tier 1: Early ticket access (you get a 24-hour head start)
+• Tier 2: Early tickets + the exclusive merch at a special price
+• Tier 3: Early tickets + free merch + backstage access at select shows
+
+You're at {referral_count} referrals, with {next_tier} as your next milestone.
+
+If you want to level up before the merch drop, sharing with a few more friends would get you there:
+
+{referral_link}
+
+I've been meaning to do something like this for a while — give back to the fans who've been here since the beginning. It feels right.
+
+More details coming soon.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e8-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Exclusive Offer: Early Tickets + Limited Merch — [CAMPAIGN NAME]</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Members-only access to upcoming shows and a limited-edition merch drop.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">An exclusive opportunity for [CAMPAIGN NAME] members:
+
+We're introducing two new benefits that reward your commitment to this community.
+
+1. Early Ticket Access
+All [CAMPAIGN NAME] members will receive early access to upcoming show tickets — a 24-hour window before public on-sale. This ensures you can secure your spot before general availability.
+
+2. Limited-Edition Merch Drop
+A community-exclusive merchandise piece has been designed specifically for [CAMPAIGN NAME] members. This item will not be available through any other channel and quantities are strictly limited.
+
+Your tier determines your benefits:
+• Tier 1 (3+ referrals): Early ticket access
+• Tier 2 (10+ referrals): Early tickets + exclusive merch at member pricing
+• Tier 3 (25+ referrals): Early tickets + complimentary merch + backstage access
+
+Your current status:
+• Referral count: {referral_count}
+• Next tier: {next_tier}
+
+To maximize your benefits before the merch drop goes live, consider sharing your referral link with additional contacts:
+
+{referral_link}
+
+These offers are available exclusively to [CAMPAIGN NAME] members and reflect our commitment to rewarding the fans who actively support and grow this community.
+
+More details on the merch drop will be announced shortly.
+
+Best regards,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 9 ==================== -->
+<div class="email-block" id="email-9">
+    <div class="email-header">
+        <div class="email-number">9</div>
+        <div class="email-meta">
+            <h2>Re-Engagement for Inactive Fans</h2>
+            <div class="email-timing">Day 25 — 25 days after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e9-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e9-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e9-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e9-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Did we lose you? 😢 (I hope not)</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Haven't seen you in a while. Here's what you've been missing in [CAMPAIGN NAME].</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey — I noticed you've been quiet lately and I had to check in.
+
+No judgment AT ALL. Life gets busy, inboxes get crazy, I get it. But I didn't want you to miss what's been happening in [CAMPAIGN NAME] while you were away.
+
+Here's what's gone down recently:
+🔥 Exclusive content drops that only members got access to
+🔥 The leaderboard heated up — top fans are stacking rewards
+🔥 A limited merch drop was announced (and it's going fast)
+🔥 Upcoming show announcements with early member access
+
+And through all of it, your referral link has been sitting there waiting for you:
+
+👉 {referral_link}
+
+Your count is still at {referral_count}. Your next reward is at {next_tier}. Nothing is lost — you can pick up right where you left off.
+
+Here's what I want you to do right now (it takes 30 seconds):
+1. Think of ONE person who'd enjoy [SONG TITLE]
+2. Text them your link
+3. That's it. You're back in the game.
+
+I don't want to be that artist who loses touch with the real fans. You signed up for a reason. Whatever that reason was — it's still here. I'm still here. The community is still growing.
+
+Come back and be part of it.
+
+STILL HERE FOR YOU,
+[ARTIST NAME]
+
+P.S. If you're over it and want to unsubscribe, no hard feelings. But if there's even a small part of you that's still interested — give it one more shot. The next few weeks are going to be the best part. 🙏</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e9-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">Hey — just checking in</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">No pressure. Just wanted to make sure you're still getting value from this.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+It's been a little while since I've heard from you, and I just wanted to check in. Genuinely — no agenda, no sales pitch.
+
+I know how it goes. You sign up for something with good intentions and then life happens. Your inbox fills up. You forget. Totally normal.
+
+But I wanted to let you know that [CAMPAIGN NAME] is still here, and so am I. We've had some really cool moments in the community lately — exclusive content drops, merch announcements, fans connecting over the music. It's turned into something I'm really proud of.
+
+Your referral link is still active: {referral_link}
+Your count: {referral_count}
+Next reward: {next_tier}
+
+If you want to re-engage, amazing. Even sharing with just one friend puts you back in motion.
+
+If this isn't your thing anymore, that's completely okay too. You can unsubscribe anytime and I won't take it personally. I'd rather have a small group of people who genuinely want to be here than a big list of people who don't.
+
+But if there's still a part of you that connects with the music — I'd love to have you stick around. The next few weeks are going to be special.
+
+Either way, thanks for giving this a chance.
+
+— [ARTIST NAME]</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e9-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">We Miss You in [CAMPAIGN NAME] — Quick Update</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">Your membership is still active. Here's what you've missed and how to jump back in.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">It's been a while since we've seen activity on your [CAMPAIGN NAME] membership, and I wanted to reach out personally.
+
+Your membership is still fully active, and your referral progress is preserved:
+• Referral count: {referral_count}
+• Next reward tier: {next_tier}
+• Status: Active (no action needed to maintain)
+
+Here's what's happened in the community recently:
+• Multiple exclusive content drops for members
+• A limited-edition merch opportunity was announced
+• Early ticket access for upcoming shows was activated
+• The community leaderboard has seen significant movement
+
+You haven't missed your window. Everything you've built so far — your referral count, your tier progress — is still intact. You can resume at any time by sharing your link:
+
+{referral_link}
+
+If you'd like to re-engage, the simplest step is to share your link with one or two contacts today. That single action restores your momentum and moves you toward your next reward.
+
+If you'd prefer to unsubscribe, you can do so at any time using the link at the bottom of this email. No negative consequences — your current rewards remain accessible.
+
+I hope to see you active in the community again.
+
+Best,
+[ARTIST NAME]</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMAIL 10 ==================== -->
+<div class="email-block" id="email-10">
+    <div class="email-header">
+        <div class="email-number">10</div>
+        <div class="email-meta">
+            <h2>VIP Invitation + Next Campaign Teaser</h2>
+            <div class="email-timing">Day 30 — 30 days after signup</div>
+        </div>
+    </div>
+
+    <div class="variant-tabs">
+        <div class="variant-tab hype active" onclick="switchVariant(this, 'e10-hype')">Hype / Energy</div>
+        <div class="variant-tab chill" onclick="switchVariant(this, 'e10-chill')">Chill / Authentic</div>
+        <div class="variant-tab pro" onclick="switchVariant(this, 'e10-pro')">Professional</div>
+    </div>
+
+    <div class="email-variants">
+        <div class="email-variant active" id="e10-hype">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">🏆 30 DAYS IN — You've earned VIP status. Here's what's next.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">You survived the full campaign. Now the REAL rewards begin.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">30 DAYS. You made it. 🏆
+
+I want you to take a second and appreciate what just happened. You joined [CAMPAIGN NAME] a month ago and you STAYED. You didn't unsubscribe. You didn't ignore the emails. You're HERE.
+
+Do you know what that makes you? A VIP. Not a "we call everyone VIP" VIP. A real one.
+
+Here's your final campaign stats:
+📊 Total referrals: {referral_count}
+📊 Highest tier reached: {next_tier}
+📊 Status: VIP Member
+
+Every single referral you made brought someone new into this world. Every share, every text, every DM — it all added up. You helped build this community with your own two hands.
+
+And now? It's time for what's NEXT.
+
+I'm about to launch a brand new campaign — and as a VIP from [CAMPAIGN NAME], you're getting:
+
+🔓 EARLY ACCESS — You'll be the first to know about the new campaign, before anyone else even hears about it
+🔓 BONUS TIER START — Your loyalty carries over. You're starting the next campaign with bonus referral credits
+🔓 EXCLUSIVE VIP REWARDS — New tiers, bigger rewards, and things I've never offered before
+🔓 INNER CIRCLE ACCESS — Direct communication channel for VIP members only
+
+This is just the beginning. [CAMPAIGN NAME] was chapter one. Chapter two is going to be MASSIVE.
+
+Keep your referral link warm — share it one more time before the new campaign drops:
+
+👉 {referral_link}
+
+Every referral you make now still counts AND carries momentum into what's coming next.
+
+Thank you for being part of this from the start. I literally could not have built this without fans like you. That's not a line — it's the truth.
+
+THE BEST IS AHEAD,
+[ARTIST NAME]
+
+P.S. The new campaign launches soon. You'll be the first to know. Stay ready. 🚀</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e10-chill">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">One month. Thank you — and here's what's coming.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">A personal thank you + a preview of the next chapter.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Hey,
+
+It's been 30 days since you joined [CAMPAIGN NAME]. I wanted to take a minute to say something I don't say often enough: thank you.
+
+Not the generic, auto-generated "thanks for subscribing" kind. A real, genuine thank you. You gave this a chance. You stuck around. You're reading this email right now instead of hitting delete. That means something to me.
+
+Your final stats:
+• Referrals: {referral_count}
+• Tier reached: {next_tier}
+
+Whether that number is 0 or 100, you being here matters. Seriously. Every person in this community adds something — even if it's just knowing that someone out there cares about the music.
+
+Now — I want to tell you what's coming next.
+
+I'm working on a new campaign. I can't share all the details yet, but I can tell you this: the rewards are bigger, the content is better, and the community is going to be even closer.
+
+As someone who was part of [CAMPAIGN NAME] from the start, you're getting:
+
+• First access to the new campaign before anyone else
+• Your loyalty recognized — you're starting with a head start
+• VIP-only rewards that aren't available to new members
+• A direct line to me for feedback and requests
+
+I built this whole thing because I believe music grows best through real human connection. You proved that belief right over the past 30 days.
+
+Your link still works if you want to keep sharing: {referral_link}
+
+More soon. And again — genuinely — thank you.
+
+— [ARTIST NAME]
+
+P.S. If there's anything you'd want to see in the next campaign — different rewards, different content, anything — hit reply and tell me. I'm listening.</div></div>
+            </div>
+        </div>
+
+        <div class="email-variant" id="e10-pro">
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+            <div class="email-field">
+                <div class="email-field-label">Subject Line</div>
+                <div class="email-field-value">[CAMPAIGN NAME] Complete — Your VIP Status + Next Campaign Preview</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Preview Text</div>
+                <div class="email-field-value">30-day campaign wrap-up, your final stats, and an exclusive preview of what's next.</div>
+            </div>
+            <div class="email-field">
+                <div class="email-field-label">Email Body</div>
+                <div class="email-field-value"><div class="email-body-content">Congratulations on completing 30 days as a [CAMPAIGN NAME] member.
+
+Your campaign summary:
+• Total referrals generated: {referral_count}
+• Highest tier achieved: {next_tier}
+• Member status: VIP (30-day active member)
+• Rewards earned: All tier-appropriate rewards have been delivered or are being processed
+
+Thank you for your participation and contribution to this community. The growth we've achieved was driven entirely by fans like you sharing the music they believe in with people who needed to hear it.
+
+As a recognized VIP member, you are now eligible for the following benefits in our upcoming campaign:
+
+1. Early Access — You will receive notification of the next campaign before it launches publicly, with an exclusive enrollment window.
+
+2. Loyalty Bonus — Your participation in [CAMPAIGN NAME] earns you bonus referral credits in the next campaign, giving you a meaningful head start.
+
+3. VIP-Exclusive Rewards — The next campaign will feature reward tiers available only to returning VIP members, including meet-and-greet opportunities, studio session invitations, and limited-edition collaborative merchandise.
+
+4. Direct Feedback Channel — As a VIP, you will have access to a direct communication channel for sharing feedback, requests, and ideas that will shape future campaigns and releases.
+
+Your referral link remains active and any new referrals will be credited to your account:
+{referral_link}
+
+The next campaign is currently in development and will launch soon. You will be the first to know.
+
+It has been a privilege building this community with your support. The next chapter will be even more rewarding.
+
+With sincere gratitude,
+[ARTIST NAME]
+
+P.S. If you have suggestions for the next campaign — reward ideas, content preferences, or format feedback — please reply to this email. Your input directly influences our planning.</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; TrueFans LOOP. Turn every fan into a promoter.</p>
+    </div>
+</footer>
+
+<script>
+function switchVariant(tab, variantId) {
+    // Deactivate all tabs in this group
+    const tabs = tab.parentElement.querySelectorAll('.variant-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Deactivate all variants in this group
+    const variants = tab.parentElement.nextElementSibling.querySelectorAll('.email-variant');
+    variants.forEach(v => v.classList.remove('active'));
+
+    // Activate the target variant
+    document.getElementById(variantId).classList.add('active');
+}
+
+function copyEmail(btn) {
+    const variant = btn.closest('.email-variant');
+    const fields = variant.querySelectorAll('.email-field');
+    let text = '';
+
+    fields.forEach(field => {
+        const label = field.querySelector('.email-field-label').textContent;
+        const value = field.querySelector('.email-field-value').textContent.trim();
+        text += label + ':\n' + value + '\n\n';
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+        }, 2000);
+    }).catch(() => {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        } catch(e) {
+            btn.textContent = 'Failed';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+        }
+        document.body.removeChild(textarea);
+    });
+}
+</script>
+
+</body>
+</html>

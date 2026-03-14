@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First 1,000 Fans Playbook — TrueFans LOOP</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0A0A0F;
+            --bg-card: #12121A;
+            --bg-card-hover: #1A1A26;
+            --border: #1E1E2E;
+            --text: #F8FAFC;
+            --text-muted: #94A3B8;
+            --text-dim: #64748B;
+            --accent: #8B5CF6;
+            --accent-light: #A78BFA;
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --green: #10B981;
+            --green-light: #34D399;
+            --green-glow: rgba(16, 185, 129, 0.15);
+            --yellow: #F59E0B;
+            --red: #EF4444;
+            --blue: #3B82F6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* ── Header ── */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            background: linear-gradient(180deg, rgba(139,92,246,0.08) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-glow);
+            border: 1px solid rgba(139,92,246,0.3);
+            color: var(--accent-light);
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 19px;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Table of Contents ── */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin: 48px auto;
+        }
+        .toc h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--accent-light);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: toc-counter;
+        }
+        .toc > ol > li {
+            counter-increment: toc-counter;
+            margin-bottom: 6px;
+        }
+        .toc > ol > li > a {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            color: var(--text);
+            text-decoration: none;
+            padding: 6px 0;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .toc > ol > li > a:hover { color: var(--accent-light); }
+        .toc > ol > li > a::before {
+            content: counter(toc-counter, decimal-leading-zero);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 28px;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 38px;
+        }
+        .toc ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            padding: 3px 0;
+            display: block;
+            transition: color 0.2s;
+        }
+        .toc ul li a:hover { color: var(--accent-light); }
+
+        /* ── Sections ── */
+        section { padding: 56px 0; }
+        section + section { border-top: 1px solid var(--border); }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 36px 0 12px;
+            color: var(--text);
+        }
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 8px;
+            color: var(--text);
+        }
+        p { margin-bottom: 16px; color: var(--text-muted); }
+        p strong, li strong { color: var(--text); }
+
+        ul, ol { margin-bottom: 16px; padding-left: 24px; color: var(--text-muted); }
+        li { margin-bottom: 8px; }
+        li::marker { color: var(--accent); }
+
+        /* ── Phase Badge ── */
+        .phase-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+        .phase-1 .phase-label { background: rgba(139,92,246,0.15); color: var(--accent-light); }
+        .phase-2 .phase-label { background: rgba(59,130,246,0.15); color: #60A5FA; }
+        .phase-3 .phase-label { background: rgba(16,185,129,0.15); color: var(--green-light); }
+        .phase-4 .phase-label { background: rgba(245,158,11,0.15); color: #FBBF24; }
+
+        /* ── Collapsible ── */
+        details {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        details[open] { border-color: rgba(139,92,246,0.3); }
+        details summary {
+            cursor: pointer;
+            padding: 20px 24px;
+            font-weight: 700;
+            font-size: 19px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            color: var(--text);
+        }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::after {
+            content: "+";
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--accent);
+            transition: transform 0.2s;
+        }
+        details[open] summary::after { content: "\2212"; }
+        .details-body { padding: 0 24px 24px; }
+
+        /* ── Cards ── */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .card-green { border-left: 3px solid var(--green); }
+        .card-purple { border-left: 3px solid var(--accent); }
+        .card-yellow { border-left: 3px solid var(--yellow); }
+        .card-blue { border-left: 3px solid var(--blue); }
+
+        /* ── Script / Copy blocks ── */
+        .script-block {
+            background: #0D1117;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.65;
+            color: #C9D1D9;
+            white-space: pre-wrap;
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+        }
+        .script-block .label {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(139,92,246,0.2);
+            color: var(--accent-light);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* ── Stat blocks ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat .number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent-light);
+            line-height: 1;
+        }
+        .stat .number.green { color: var(--green-light); }
+        .stat .desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* ── Checklist ── */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(30,30,46,0.5);
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            margin-top: 3px;
+        }
+
+        /* ── Case Study ── */
+        .case-study {
+            background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(16,185,129,0.06));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+        .case-study h4 {
+            color: var(--green-light);
+            margin-top: 0;
+        }
+
+        /* ── Table ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--accent-light);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td { color: var(--text-muted); }
+        tr:hover td { color: var(--text); }
+
+        /* ── Callout ── */
+        .callout {
+            display: flex;
+            gap: 14px;
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+        .callout-icon { font-size: 20px; min-width: 24px; text-align: center; }
+        .callout-tip { background: var(--green-glow); border: 1px solid rgba(16,185,129,0.25); }
+        .callout-tip .callout-icon { color: var(--green); }
+        .callout-warn { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); }
+        .callout-warn .callout-icon { color: var(--yellow); }
+        .callout-key { background: var(--accent-glow); border: 1px solid rgba(139,92,246,0.25); }
+        .callout-key .callout-icon { color: var(--accent); }
+
+        /* ── Numbered Steps ── */
+        .steps { counter-reset: step-counter; list-style: none; padding-left: 0; }
+        .steps li {
+            counter-increment: step-counter;
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(30,30,46,0.5);
+        }
+        .steps li:last-child { border-bottom: none; }
+        .steps li::before {
+            content: counter(step-counter);
+            background: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+        .footer a { color: var(--accent-light); text-decoration: none; }
+
+        /* ── Progress Bar ── */
+        .progress-bar {
+            background: rgba(139,92,246,0.1);
+            border-radius: 100px;
+            height: 8px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--accent), var(--green));
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .toc { padding: 24px 20px; }
+            details summary { padding: 16px 18px; font-size: 17px; }
+            .details-body { padding: 0 18px 18px; }
+            .hero { padding: 56px 20px 40px; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════ HERO ════════════════════════════════════════════ -->
+<header class="hero">
+    <div class="hero-badge">TrueFans LOOP Bonus Playbook</div>
+    <h1>The First 1,000 Fans Playbook</h1>
+    <p>Your 30-Day Roadmap to a Real Fanbase</p>
+</header>
+
+<div class="container">
+
+<!-- ════════════════════════════════════════ TABLE OF CONTENTS ════════════════════════════════════ -->
+<nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li>
+            <a href="#introduction">Introduction: Why 1,000 True Fans Changes Everything</a>
+        </li>
+        <li>
+            <a href="#phase-1">Phase 1: Days 1-3 &mdash; Setup &amp; Foundation</a>
+            <ul>
+                <li><a href="#p1-profile">Setting up your artist profile</a></li>
+                <li><a href="#p1-template">Choosing your first campaign template</a></li>
+                <li><a href="#p1-rewards">Crafting your reward tiers</a></li>
+                <li><a href="#p1-integration">Setting up GoHighLevel/email integration</a></li>
+                <li><a href="#p1-checklist">Daily checklist: Days 1-3</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#phase-2">Phase 2: Days 4-7 &mdash; The "Seed &amp; Spark" Strategy</a>
+            <ul>
+                <li><a href="#p2-fifty">The 50-person rule</a></li>
+                <li><a href="#p2-find">Where to find your first 50</a></li>
+                <li><a href="#p2-dm">The personal DM script</a></li>
+                <li><a href="#p2-inner">The "inner circle" launch</a></li>
+                <li><a href="#p2-social">Social media announcement templates</a></li>
+                <li><a href="#p2-checklist">Daily checklist: Days 4-7</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#phase-3">Phase 3: Days 8-14 &mdash; The Multiplication Phase</a>
+            <ul>
+                <li><a href="#p3-kfactor">Understanding K-factor</a></li>
+                <li><a href="#p3-engine">Activating your referral engine</a></li>
+                <li><a href="#p3-reminder">The "3x Share Reminder" system</a></li>
+                <li><a href="#p3-collab">Collaboration swaps</a></li>
+                <li><a href="#p3-content">Content ideas that drive shares</a></li>
+                <li><a href="#p3-case1">Case Study #1</a></li>
+                <li><a href="#p3-checklist">Daily checklist: Days 8-14</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#phase-4">Phase 4: Days 15-30 &mdash; Scaling to 1,000</a>
+            <ul>
+                <li><a href="#p4-cross">Cross-platform promotion</a></li>
+                <li><a href="#p4-loop">The "Content Loop" method</a></li>
+                <li><a href="#p4-leaderboard">Leveraging your leaderboard</a></li>
+                <li><a href="#p4-second">Launching your second campaign</a></li>
+                <li><a href="#p4-convert">Converting fans to revenue</a></li>
+                <li><a href="#p4-case2">Case Study #2</a></li>
+                <li><a href="#p4-case3">Case Study #3</a></li>
+                <li><a href="#p4-checklist">Daily checklist: Days 15-30</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#appendix">Appendix</a>
+            <ul>
+                <li><a href="#app-action">Quick-reference daily action card</a></li>
+                <li><a href="#app-trouble">Troubleshooting: 10 fixes</a></li>
+                <li><a href="#app-schedule">Recommended posting schedule</a></li>
+            </ul>
+        </li>
+    </ol>
+</nav>
+
+<!-- ════════════════════════════════════════ INTRODUCTION ════════════════════════════════════════ -->
+<section id="introduction">
+    <h2>Introduction: Why 1,000 True Fans Changes Everything</h2>
+
+    <p>In 2008, Kevin Kelly wrote an essay that changed how independent creators think about success. His thesis was simple: <strong>you don't need millions of fans. You need 1,000 true fans</strong> &mdash; people who will buy anything you release, show up to your shows, and tell their friends about you without being asked.</p>
+
+    <p>For musicians, this number is even more powerful than Kelly imagined. Here is what 1,000 genuine fans actually means in practice:</p>
+
+    <div class="stats-row">
+        <div class="stat">
+            <div class="number">1,000</div>
+            <div class="desc">True fans</div>
+        </div>
+        <div class="stat">
+            <div class="number green">$3-5K</div>
+            <div class="desc">Monthly streaming revenue</div>
+        </div>
+        <div class="stat">
+            <div class="number">200-400</div>
+            <div class="desc">Guaranteed show attendees</div>
+        </div>
+        <div class="stat">
+            <div class="number green">$50K+</div>
+            <div class="desc">Annual merch + music sales</div>
+        </div>
+    </div>
+
+    <p>But here is the part most artists get wrong: <strong>they try to "promote" their way to 1,000 fans.</strong> They post and pray. They spam links. They buy followers. None of it works because promotion is a one-way street. What you actually need is a <em>system</em> &mdash; a self-reinforcing loop where every new fan brings more fans.</p>
+
+    <h3>What This Playbook Covers</h3>
+    <p>Over the next 30 days, you will build a referral-powered fan acquisition system using TrueFans LOOP. This is not theory. Every tactic in this guide has been tested by real artists on the platform. You will get:</p>
+    <ul>
+        <li><strong>Day-by-day action plans</strong> so you never wonder "what should I do today?"</li>
+        <li><strong>Copy-paste scripts</strong> for DMs, social posts, and emails</li>
+        <li><strong>Specific numbers and benchmarks</strong> so you know if you are on track</li>
+        <li><strong>Real case studies</strong> from artists who have used this exact system</li>
+        <li><strong>Troubleshooting guides</strong> for when things stall</li>
+    </ul>
+
+    <h3>The Mindset Shift: From "Promoting" to "Building a Movement"</h3>
+    <p>Before we start, you need to internalize one idea that will change everything:</p>
+
+    <div class="callout callout-key">
+        <div class="callout-icon">&#9670;</div>
+        <div><strong>Stop thinking of fans as an audience. Start thinking of them as a team.</strong> Your first fans are not passive listeners. They are co-builders of something that matters. When you treat them like partners in a movement, they share because they <em>want</em> to, not because you asked them to.</div>
+    </div>
+
+    <p>Every tactic in this playbook is built on that principle. You are not going to spam people. You are going to invite them into something exciting and give them a reason to bring their friends. That is the difference between promotion and a movement.</p>
+
+    <p>Let us get started.</p>
+</section>
+
+<!-- ════════════════════════════════════════ PHASE 1 ════════════════════════════════════════ -->
+<section id="phase-1" class="phase-1">
+    <span class="phase-label">Phase 1</span>
+    <h2>Days 1-3: Setup & Foundation</h2>
+    <p>These three days are about building the infrastructure that makes everything else work. Do not rush this. A great foundation is the difference between a campaign that fizzles at 47 people and one that snowballs to thousands.</p>
+
+    <div class="progress-bar"><div class="fill" style="width: 10%"></div></div>
+    <p style="font-size:14px; color: var(--text-dim);">Campaign progress: foundation</p>
+
+    <!-- P1: Profile -->
+    <details id="p1-profile">
+        <summary>Setting Up Your TrueFans LOOP Artist Profile</summary>
+        <div class="details-body">
+            <p>Your artist profile is your first impression. When someone lands on your referral page, they decide within 3 seconds whether to sign up or bounce. Here is exactly how to set it up for maximum conversions.</p>
+
+            <h4>Profile Photo</h4>
+            <ul>
+                <li><strong>Use a high-quality, well-lit photo of you (not a logo).</strong> Profiles with human faces convert 38% better than logos.</li>
+                <li>Crop it tight &mdash; head and shoulders. Make sure it looks good at 80x80 pixels (it gets used as a thumbnail).</li>
+                <li>If you are a band, use a group photo where everyone is visible. Avoid live shots &mdash; they tend to be blurry.</li>
+            </ul>
+
+            <h4>Bio / Description</h4>
+            <p>You have about 25 words before people stop reading. Your bio should answer one question: <strong>"Why should I care?"</strong></p>
+
+            <div class="script-block"><span class="label">Template</span>
+[Genre] artist from [City]. [One unique thing about you or your sound].
+Join the [Campaign Name] for exclusive [reward] before anyone else.
+
+EXAMPLE:
+R&B/soul artist from Atlanta. Blending 90s nostalgia with modern production.
+Join The Velvet List for unreleased tracks and secret listening sessions.</div>
+
+            <h4>Brand Consistency Tips</h4>
+            <ul>
+                <li>Use the same profile photo across TrueFans LOOP, Instagram, Spotify, and Twitter/X. Recognition builds trust.</li>
+                <li>Pick 2-3 brand colors that match your album art or website. Use them in your campaign landing page.</li>
+                <li>Write in your natural voice. If you are casual on social media, be casual here. Authenticity converts better than polish.</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Pro tip:</strong> Add a link to your best song (Spotify, YouTube, or SoundCloud) in your bio. Fans who listen before signing up have 2x higher referral rates because they have already experienced your value.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P1: Template -->
+    <details id="p1-template">
+        <summary>Choosing Your First Campaign Template</summary>
+        <div class="details-body">
+            <p>TrueFans LOOP offers several campaign templates. Choosing the right one matters because each template is optimized for a different goal. Here is a breakdown:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Template</th>
+                        <th>Best For</th>
+                        <th>Avg. K-factor</th>
+                        <th>Difficulty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Waitlist / Exclusive Access</strong></td>
+                        <td>New releases, album drops</td>
+                        <td>1.4 - 2.1</td>
+                        <td>Easy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Giveaway / Contest</strong></td>
+                        <td>Quick growth, viral spikes</td>
+                        <td>1.8 - 3.5</td>
+                        <td>Easy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tiered Reward</strong></td>
+                        <td>Long-term fan building</td>
+                        <td>1.3 - 1.8</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ambassador / Street Team</strong></td>
+                        <td>Superfan activation</td>
+                        <td>2.0 - 4.0</td>
+                        <td>Advanced</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Recommendation for Your First Campaign</h4>
+            <p>If this is your first campaign, start with the <strong>Waitlist / Exclusive Access</strong> template. Here is why:</p>
+            <ol>
+                <li>It is the simplest to set up (you can launch in under 30 minutes).</li>
+                <li>It creates natural urgency ("Get early access before everyone else").</li>
+                <li>The reward is easy to deliver (just release your music to the list first).</li>
+                <li>It has a solid K-factor range, meaning each fan brings 1.4 to 2.1 additional fans on average.</li>
+            </ol>
+
+            <div class="callout callout-warn">
+                <div class="callout-icon">!</div>
+                <div><strong>Avoid starting with the Ambassador template</strong> unless you already have 500+ engaged fans. It requires more setup and active management. Save it for Phase 4 or your second campaign.</div>
+            </div>
+
+            <h4>Campaign Name Ideas</h4>
+            <p>Your campaign name should feel like a club people want to join, not a marketing gimmick. Some formulas that work well:</p>
+            <ul>
+                <li><strong>"The [Adjective] [Noun]"</strong> &mdash; The Velvet List, The Inner Frequency, The Gold Room</li>
+                <li><strong>"[Your Name]'s [Concept]"</strong> &mdash; Maya's First 500, The Dex Lab, Rico's Circle</li>
+                <li><strong>"[Action] [Benefit]"</strong> &mdash; Unlock the Vault, Enter the Session, Join the Wave</li>
+            </ul>
+        </div>
+    </details>
+
+    <!-- P1: Rewards -->
+    <details id="p1-rewards">
+        <summary>Crafting Your Reward Tiers</summary>
+        <div class="details-body">
+            <p>Reward tiers are the engine of your referral system. Get them right and fans will actively compete to share. Get them wrong and your campaign flatlines. Here is the psychology behind what works.</p>
+
+            <h4>The Three Motivations Behind Fan Sharing</h4>
+            <ol class="steps">
+                <li><strong>Exclusivity:</strong> People share when they get access to something others do not have. This is the most powerful motivator. "Only the first 100 people get this" is irresistible.</li>
+                <li><strong>Status:</strong> People share when it makes them look good. Leaderboard positions, "founding member" titles, and shout-outs tap into this. Your top referrers are not just fans &mdash; they are proving they have taste and influence.</li>
+                <li><strong>Reciprocity:</strong> People share when they feel they have received genuine value first. Give them something real before asking them to share. An unreleased track, a behind-the-scenes video, a personal voice memo &mdash; anything that makes them feel like an insider.</li>
+            </ol>
+
+            <h4>Recommended Tier Structure (Proven to Work)</h4>
+            <div class="card card-purple">
+                <table>
+                    <thead>
+                        <tr><th>Referrals</th><th>Reward</th><th>Why It Works</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>0 (signup)</strong></td><td>Instant download (unreleased track, demo, or remix)</td><td>Immediate value creates reciprocity</td></tr>
+                        <tr><td><strong>3 referrals</strong></td><td>Exclusive behind-the-scenes content pack</td><td>Low bar, easy win &mdash; gets momentum going</td></tr>
+                        <tr><td><strong>7 referrals</strong></td><td>Early access to your next release (24-48 hrs before public)</td><td>Exclusivity + bragging rights</td></tr>
+                        <tr><td><strong>15 referrals</strong></td><td>Name in album credits / "Founding Fan" NFT or certificate</td><td>Permanent status, deeply personal</td></tr>
+                        <tr><td><strong>30 referrals</strong></td><td>1-on-1 video call / private listening session invite</td><td>Ultimate insider experience, story-worthy</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Key insight:</strong> The jump from 0 to 3 referrals is where 80% of your growth comes from. Make that first reward compelling enough that people immediately think of 3 friends to send it to. If your Tier 1 reward is weak, your entire campaign suffers.</div>
+            </div>
+
+            <h4>Rewards to Avoid</h4>
+            <ul>
+                <li><strong>Generic merch discounts</strong> &mdash; "10% off a t-shirt" does not motivate sharing. Save merch for higher tiers and make it exclusive (limited edition, signed).</li>
+                <li><strong>Anything you can find on YouTube for free</strong> &mdash; If your "exclusive" content is just your music video, fans will not feel special.</li>
+                <li><strong>Rewards that are hard to deliver</strong> &mdash; If you promise personalized songs for every person who hits 15 referrals and 200 people do it, you are in trouble. Plan for success.</li>
+            </ul>
+        </div>
+    </details>
+
+    <!-- P1: Integration -->
+    <details id="p1-integration">
+        <summary>Setting Up GoHighLevel / Email Integration</summary>
+        <div class="details-body">
+            <p>Your fan list is only as valuable as your ability to communicate with it. Setting up email integration on Day 1 means every fan who joins is automatically added to your email system where you can nurture them long-term.</p>
+
+            <h4>Step-by-Step GoHighLevel Setup</h4>
+            <ol class="steps">
+                <li><strong>Connect your GoHighLevel account</strong> in TrueFans LOOP settings under Integrations. You will need your GHL API key (found in Settings &gt; Business Profile &gt; API Keys).</li>
+                <li><strong>Create a dedicated tag</strong> in GoHighLevel called something like "LOOP-[CampaignName]". Every fan who signs up through your campaign will receive this tag automatically.</li>
+                <li><strong>Set up a welcome automation.</strong> In GHL, create a workflow triggered by the tag. The workflow should send a welcome email immediately (within 1 minute of signup). Include their reward link and a personal thank-you message.</li>
+                <li><strong>Create a 3-email nurture sequence:</strong>
+                    <ul>
+                        <li><strong>Email 1 (immediate):</strong> Welcome + first reward delivery + "Here is your unique share link"</li>
+                        <li><strong>Email 2 (24 hours later):</strong> Your story &mdash; why you make music, what this campaign means to you</li>
+                        <li><strong>Email 3 (72 hours later):</strong> Share reminder + show them the leaderboard + next reward tier teaser</li>
+                    </ul>
+                </li>
+                <li><strong>Test the entire flow</strong> by signing up with your own email. Verify you receive all 3 emails with correct links.</li>
+            </ol>
+
+            <div class="callout callout-warn">
+                <div class="callout-icon">!</div>
+                <div><strong>Do not skip the test.</strong> A broken welcome email means every new fan gets silence instead of excitement. That single point of failure can tank your entire referral rate. Spend 10 minutes testing. It will save you hundreds of fans.</div>
+            </div>
+
+            <h4>Alternative: No GoHighLevel?</h4>
+            <p>If you are not using GoHighLevel, TrueFans LOOP also integrates with Mailchimp, ConvertKit, and generic webhooks. The same principles apply &mdash; connect, tag, automate a welcome sequence, and test. The critical thing is that no fan should sign up and hear nothing from you for days.</p>
+        </div>
+    </details>
+
+    <!-- P1: Checklist -->
+    <details id="p1-checklist">
+        <summary>Daily Checklist: Days 1-3</summary>
+        <div class="details-body">
+            <h4>Day 1</h4>
+            <ul class="checklist">
+                <li>Create your TrueFans LOOP account and complete your artist profile (photo, bio, links)</li>
+                <li>Choose your campaign template (Waitlist/Exclusive Access recommended)</li>
+                <li>Write your campaign name and description</li>
+                <li>Set up GoHighLevel or email integration and create your tag</li>
+                <li>Prepare your instant signup reward (unreleased track, exclusive content)</li>
+            </ul>
+
+            <h4>Day 2</h4>
+            <ul class="checklist">
+                <li>Design your reward tiers (use the 0 / 3 / 7 / 15 / 30 structure above)</li>
+                <li>Write your 3-email welcome sequence in GoHighLevel</li>
+                <li>Customize your campaign landing page (colors, copy, images)</li>
+                <li>Test the full signup flow with your own email address</li>
+                <li>Fix any broken links or formatting issues</li>
+            </ul>
+
+            <h4>Day 3</h4>
+            <ul class="checklist">
+                <li>Write your launch DM script (you will use this in Phase 2)</li>
+                <li>Make a list of 50 people to personally invite (see Phase 2 for how to find them)</li>
+                <li>Create 3 social media graphics or short videos for your launch announcement</li>
+                <li>Do a final test of the entire flow: signup &rarr; email &rarr; reward &rarr; share link</li>
+                <li>Set your launch date for Day 4 and commit to it publicly (post "Something is coming tomorrow" on your socials)</li>
+            </ul>
+        </div>
+    </details>
+</section>
+
+<!-- ════════════════════════════════════════ PHASE 2 ════════════════════════════════════════ -->
+<section id="phase-2" class="phase-2">
+    <span class="phase-label">Phase 2</span>
+    <h2>Days 4-7: The "Seed & Spark" Strategy</h2>
+    <p>This is launch week. The goal is simple: get 50 real, engaged people into your campaign. That number sounds small, but it is the critical mass that makes viral referral mechanics kick in. Every large fanbase started with a small one.</p>
+
+    <div class="progress-bar"><div class="fill" style="width: 25%"></div></div>
+    <p style="font-size:14px; color: var(--text-dim);">Campaign progress: seeding</p>
+
+    <!-- P2: 50 -->
+    <details id="p2-fifty">
+        <summary>The 50-Person Rule: Why You Only Need 50 to Start</summary>
+        <div class="details-body">
+            <p>Here is the math that changes everything:</p>
+
+            <div class="card card-green">
+                <p style="margin-bottom:0"><strong>If you get 50 people into your campaign and your K-factor is 1.5</strong> (meaning each person refers 1.5 others on average), here is what happens:</p>
+                <ul style="margin-top:12px">
+                    <li>Round 1: 50 fans &rarr; they refer 75 new people</li>
+                    <li>Round 2: 75 fans &rarr; they refer 112 new people</li>
+                    <li>Round 3: 112 fans &rarr; they refer 168 new people</li>
+                    <li>Round 4: 168 fans &rarr; they refer 252 new people</li>
+                    <li><strong>Total after 4 referral rounds: 657 fans from 50 starters</strong></li>
+                </ul>
+            </div>
+
+            <p>A K-factor of 1.5 is not exceptional &mdash; it is the average for well-structured campaigns on TrueFans LOOP. Some campaigns hit 2.0 or higher. The point is: <strong>you do not need to individually recruit 1,000 people.</strong> You need to recruit 50 of the <em>right</em> people and let the system multiply.</p>
+
+            <p>But here is the catch: those first 50 cannot be random followers. They need to be people who genuinely care about your music and have active social networks. A single superfan with 2,000 Instagram followers who actually engages with their audience is worth more than 100 bot followers.</p>
+
+            <h4>Who Makes an Ideal "Seed" Fan?</h4>
+            <ul>
+                <li>People who have commented on your posts (not just liked &mdash; <em>commented</em>)</li>
+                <li>Friends and family who genuinely listen to your music (not just "support")</li>
+                <li>Other musicians in your genre (they have audiences of music lovers)</li>
+                <li>People who have shared your music before without being asked</li>
+                <li>Local venue staff, DJs, playlist curators who know your sound</li>
+            </ul>
+        </div>
+    </details>
+
+    <!-- P2: Find -->
+    <details id="p2-find">
+        <summary>Where to Find Your First 50 (Even With Zero Following)</summary>
+        <div class="details-body">
+            <p>If you are starting from scratch with no social media following, no email list, and no fanbase, here is exactly where to find 50 engaged people. These are ranked from highest to lowest conversion rate.</p>
+
+            <h4>Source 1: Your Phone Contacts (Target: 15-20 people)</h4>
+            <p>Scroll through your phone contacts. Identify people who:</p>
+            <ul>
+                <li>Have told you they like your music</li>
+                <li>Are active on social media (they will share)</li>
+                <li>Are generally supportive of what you do</li>
+            </ul>
+            <p>Text them personally. Do not send a mass text. Personalized messages convert at 60-70%. Mass texts convert at 5-10%.</p>
+
+            <h4>Source 2: Instagram Engaged Followers (Target: 10-15 people)</h4>
+            <p>Go to your last 10 Instagram posts. Look at who commented (not just liked). These people took the time to write something, which means they actually care. DM each of them individually.</p>
+
+            <h4>Source 3: Music Communities (Target: 10-15 people)</h4>
+            <p>If you have zero social following, this is your goldmine:</p>
+            <ul>
+                <li><strong>Reddit:</strong> r/IndieMusicFeedback, r/WeAreTheMusicMakers, r/ThisIsOurMusic, r/makinghiphop</li>
+                <li><strong>Discord:</strong> Search for "[your genre] music" Discord servers. Join 3-5 and be genuinely active for a few days before promoting.</li>
+                <li><strong>Facebook Groups:</strong> Search for "[your genre] artists" or "[your city] musicians." Many of these have thousands of members who actively engage.</li>
+                <li><strong>SoundCloud / Audiomack:</strong> Find artists in your genre with 500-5,000 followers. Comment genuinely on their tracks. Build a relationship before asking for anything.</li>
+            </ul>
+
+            <div class="callout callout-warn">
+                <div class="callout-icon">!</div>
+                <div><strong>Critical rule:</strong> Never drop your campaign link cold in a community. Spend at least 2-3 days being a genuine, contributing member first. People can smell drive-by promotion from a mile away and it will get you banned or ignored.</div>
+            </div>
+
+            <h4>Source 4: Local Scene (Target: 5-10 people)</h4>
+            <ul>
+                <li>Other artists you have played shows with or met at open mics</li>
+                <li>Staff at local venues, record shops, or studios</li>
+                <li>Music teachers, producers, or engineers you have worked with</li>
+            </ul>
+
+            <h4>Source 5: Twitter/X Music Spaces (Target: 5-10 people)</h4>
+            <p>Search for music-related Twitter Spaces in your genre. Join as a listener, engage in the conversation, and connect with hosts and other participants afterward. These people are already passionate about discovering new music.</p>
+        </div>
+    </details>
+
+    <!-- P2: DM -->
+    <details id="p2-dm">
+        <summary>The Personal DM Script (Copy-Paste Ready)</summary>
+        <div class="details-body">
+            <p>The way you invite your first 50 people determines whether they actually join and share, or just say "cool" and forget about it. Here are battle-tested scripts for different platforms and relationships.</p>
+
+            <h4>Script 1: For Close Friends and Family</h4>
+            <div class="script-block"><span class="label">Copy & Paste</span>
+Hey [Name]! I'm doing something new with my music and I'd really love your help.
+
+I just launched [Campaign Name] — it's basically an exclusive list where people who sign up early get [specific reward, e.g., "unreleased tracks before anyone else"].
+
+Here's the cool part: everyone gets a personal invite link, and if you share it with 3 friends who sign up, you unlock [Tier 1 reward, e.g., "a behind-the-scenes content pack"].
+
+Would you be down to sign up and share it around? It takes literally 30 seconds:
+[YOUR CAMPAIGN LINK]
+
+This would mean a lot to me. Thanks! 🙏</div>
+
+            <h4>Script 2: For Engaged Followers / Commenters</h4>
+            <div class="script-block"><span class="label">Copy & Paste</span>
+Hey [Name]! I noticed you've been rocking with my music — really appreciate that.
+
+I'm launching something called [Campaign Name] for my most engaged supporters. It's an invite-only list where you get [specific reward] just for signing up, plus bigger rewards the more friends you bring in.
+
+I wanted to personally invite you before I open it up to everyone:
+[YOUR CAMPAIGN LINK]
+
+No pressure at all, but I'd love to have you in the inner circle.</div>
+
+            <h4>Script 3: For Fellow Musicians / Collaborators</h4>
+            <div class="script-block"><span class="label">Copy & Paste</span>
+Hey [Name]! Hope you're doing well.
+
+I just set up a referral campaign for my upcoming [release/project] using TrueFans LOOP — basically fans sign up and earn rewards for sharing with friends.
+
+I'm looking for a few artists to do a cross-promo swap. Here's the idea: I share your campaign/music with my list, you share mine with yours. Everyone wins.
+
+Interested? Here's my campaign if you want to check it out:
+[YOUR CAMPAIGN LINK]
+
+Either way, keep making great music. 🎵</div>
+
+            <h4>Script 4: For Cold Outreach (Communities, New Connections)</h4>
+            <div class="script-block"><span class="label">Copy & Paste</span>
+Hey [Name]! I came across your [post/comment/track] in [community/platform] and really liked [specific thing you liked].
+
+I'm an independent [genre] artist and I'm building something cool — a fan community called [Campaign Name] where early supporters get exclusive access to [specific reward].
+
+If you're into discovering new music, I'd love for you to check it out:
+[YOUR CAMPAIGN LINK]
+
+No worries if it's not your thing. Just thought you might dig it based on your taste.</div>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Conversion benchmarks:</strong> Expect a 40-60% signup rate from Script 1, 20-35% from Script 2, 15-25% from Script 3, and 5-15% from Script 4. This is why you start with close contacts and work outward.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P2: Inner Circle -->
+    <details id="p2-inner">
+        <summary>The "Inner Circle" Launch</summary>
+        <div class="details-body">
+            <p>Before you announce your campaign to the world, run a 24-48 hour "inner circle" launch. This serves two critical purposes:</p>
+            <ol>
+                <li><strong>Social proof:</strong> When you go public, you can say "200 people already joined" instead of launching to crickets.</li>
+                <li><strong>Bug testing:</strong> Your closest supporters will tell you if something is broken. Strangers will just leave.</li>
+            </ol>
+
+            <h4>How to Run Your Inner Circle Launch</h4>
+            <ol class="steps">
+                <li><strong>Day 4, Morning:</strong> Send personal DMs to your top 20 people (use Script 1 and 2). Tell them explicitly: "You're one of the first people I'm sharing this with."</li>
+                <li><strong>Day 4, Afternoon:</strong> Send to the next 15 people. By end of day, you should have 15-25 signups.</li>
+                <li><strong>Day 4, Evening:</strong> Send a follow-up to anyone who saw your message but did not respond: "Hey, just checking — did you get a chance to look at this? No worries if not!" (This single follow-up recovers 20-30% of non-responders.)</li>
+                <li><strong>Day 5:</strong> Send to the remaining people on your list. Also reach out to Sources 3-5 (communities, local scene, Twitter Spaces).</li>
+                <li><strong>Day 5, Evening:</strong> Check your numbers. If you are at 30+ signups, you are ready to go public on Day 6. If you are under 20, spend Day 6 on more personal outreach before going public.</li>
+            </ol>
+
+            <div class="callout callout-key">
+                <div class="callout-icon">&#9670;</div>
+                <div><strong>The magic of "you're one of the first":</strong> When people feel like early adopters, they share more aggressively. They are not just fans &mdash; they are founding members. Use language like "inner circle," "founding fan," "before anyone else," and "I wanted you to be one of the first to know." This is not manipulation. It is the truth &mdash; they <em>are</em> first, and that genuinely matters.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P2: Social -->
+    <details id="p2-social">
+        <summary>Social Media Announcement Templates</summary>
+        <div class="details-body">
+            <p>Once your inner circle has 30+ members, it is time to go public. Here are announcement templates for each platform.</p>
+
+            <h4>Instagram Post / Carousel</h4>
+            <div class="script-block"><span class="label">Caption</span>
+I built something for the real ones.
+
+[Campaign Name] is live — it's an exclusive community for people who actually rock with my music. Not followers. Not numbers. Real fans.
+
+Here's how it works:
+→ Sign up (free) and instantly get [reward]
+→ Share with friends to unlock [tier 1 reward]
+→ Top supporters get [top tier reward]
+
+[Number] people already joined in the first 24 hours.
+
+Link in bio to join before it fills up. 🔗
+
+This is just the beginning. 🖤</div>
+
+            <h4>Instagram Story Series (3 slides)</h4>
+            <div class="script-block"><span class="label">Slide Scripts</span>
+SLIDE 1: "I've been working on something behind the scenes..."
+(Use a candid photo or short selfie video)
+
+SLIDE 2: "It's called [Campaign Name] — an exclusive fan community where early supporters get [rewards]. [Number] people already joined."
+(Use your campaign graphic + swipe-up/link sticker)
+
+SLIDE 3: "The top referrers get [top reward]. Drop everything and join now 👇"
+(Link sticker to your campaign page)</div>
+
+            <h4>Twitter / X Thread</h4>
+            <div class="script-block"><span class="label">Thread</span>
+Tweet 1:
+I'm trying something different. Instead of chasing algorithms, I'm building a real fan community from scratch.
+
+It's called [Campaign Name], and it rewards people who actually share my music — not just listen and leave.
+
+Here's how it works 🧵
+
+Tweet 2:
+Step 1: Sign up (free) → instantly get [reward]
+Step 2: Share your personal link with friends
+Step 3: The more friends who join through your link, the bigger rewards you unlock
+
+It's basically turning word-of-mouth into a game.
+
+Tweet 3:
+Rewards include:
+• 3 referrals → [Tier 1]
+• 7 referrals → [Tier 2]
+• 15 referrals → [Tier 3]
+• 30 referrals → [Tier 4]
+
+The top referrers are on a live leaderboard.
+
+Tweet 4:
+[Number] people joined in the first 48 hours.
+
+I'm only keeping this open for [timeframe]. If you rock with independent music and want to be part of something real, join here:
+
+[CAMPAIGN LINK]
+
+RT if you know someone who would be into this. 🙏</div>
+
+            <h4>TikTok / Reels Script</h4>
+            <div class="script-block"><span class="label">Video Script</span>
+[Hook — first 2 seconds, text on screen: "I'm giving away unreleased music to strangers"]
+
+"Okay so here's what I'm doing. I'm an independent artist and instead of paying for ads or begging Spotify for playlists, I built a fan community that literally grows itself.
+
+When you sign up, you get [reward] immediately. For free. Then you get a personal invite link. Every friend that signs up through your link unlocks bigger rewards — early access to my next drop, behind-the-scenes content, even a 1-on-1 call with me.
+
+[Show phone screen with campaign page]
+
+[Number] people joined in two days. Link in bio if you want in."
+
+[End with text: "[Campaign Name] — link in bio"]</div>
+        </div>
+    </details>
+
+    <!-- P2: Checklist -->
+    <details id="p2-checklist">
+        <summary>Daily Checklist: Days 4-7</summary>
+        <div class="details-body">
+            <h4>Day 4 — Inner Circle Launch</h4>
+            <ul class="checklist">
+                <li>Send personal DMs to your top 20 contacts (use Script 1 and 2)</li>
+                <li>Send to next 15 contacts in the afternoon</li>
+                <li>Follow up with non-responders in the evening</li>
+                <li>Monitor signups and fix any issues with the flow</li>
+                <li>Target: 15-25 signups by end of day</li>
+            </ul>
+
+            <h4>Day 5 — Expand the Circle</h4>
+            <ul class="checklist">
+                <li>Send to remaining people on your 50-person list</li>
+                <li>Reach out to 5-10 fellow musicians for cross-promo swaps (Script 3)</li>
+                <li>Post a teaser on your Instagram Story ("something big dropping tomorrow")</li>
+                <li>Join 2-3 music communities and start engaging genuinely</li>
+                <li>Target: 30-40 total signups by end of day</li>
+            </ul>
+
+            <h4>Day 6 — Go Public</h4>
+            <ul class="checklist">
+                <li>Post your main announcement on Instagram, Twitter/X, and TikTok</li>
+                <li>Post 3 Instagram Stories throughout the day with link</li>
+                <li>Share your campaign link in 2-3 music communities where you have been active</li>
+                <li>Reply to every comment and DM you receive about the campaign</li>
+                <li>Target: 50-80 total signups by end of day</li>
+            </ul>
+
+            <h4>Day 7 — Double Down</h4>
+            <ul class="checklist">
+                <li>Repost your announcement with updated numbers ("75 people joined in 3 days!")</li>
+                <li>DM your top 5 referrers and thank them personally</li>
+                <li>Share a behind-the-scenes look at how the campaign is going (screenshot of growth)</li>
+                <li>Send Email 3 (share reminder) to your full list if you have not automated it</li>
+                <li>Target: 80-120 total signups by end of day</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Benchmark check:</strong> If you have 50+ signups by Day 7, you are on track for 1,000 by Day 30. If you are under 30, do not panic &mdash; go back to personal outreach. The DMs always outperform public posts in the early days.</div>
+            </div>
+        </div>
+    </details>
+</section>
+
+<!-- ════════════════════════════════════════ PHASE 3 ════════════════════════════════════════ -->
+<section id="phase-3" class="phase-3">
+    <span class="phase-label">Phase 3</span>
+    <h2>Days 8-14: The Multiplication Phase</h2>
+    <p>You have your seed fans. Now it is time to turn them into a growth engine. This phase is all about maximizing your K-factor and creating systems that drive sharing on autopilot.</p>
+
+    <div class="progress-bar"><div class="fill" style="width: 50%"></div></div>
+    <p style="font-size:14px; color: var(--text-dim);">Campaign progress: multiplying</p>
+
+    <!-- P3: K-Factor -->
+    <details id="p3-kfactor">
+        <summary>Understanding K-Factor and Why It Matters</summary>
+        <div class="details-body">
+            <p>K-factor is the single most important metric in your campaign. It measures how many new fans each existing fan brings in, on average.</p>
+
+            <div class="card card-green">
+                <p><strong>K-factor = (invitations sent per user) x (conversion rate of invitations)</strong></p>
+                <p>Example: If each fan shares with 5 people and 30% of those people sign up:</p>
+                <p>K-factor = 5 x 0.30 = <strong>1.5</strong></p>
+                <p style="margin-bottom:0">This means every fan brings in 1.5 new fans. Since 1.5 is greater than 1.0, your campaign grows exponentially.</p>
+            </div>
+
+            <h4>K-Factor Benchmarks</h4>
+            <table>
+                <thead>
+                    <tr><th>K-Factor</th><th>What It Means</th><th>Action Needed</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Below 0.5</strong></td><td>Campaign is stalling</td><td>Rework rewards, fix messaging</td></tr>
+                    <tr><td><strong>0.5 - 0.9</strong></td><td>Growing slowly, needs help</td><td>Boost share reminders, improve rewards</td></tr>
+                    <tr><td><strong>1.0 - 1.5</strong></td><td>Healthy growth</td><td>Maintain and optimize</td></tr>
+                    <tr><td><strong>1.5 - 2.5</strong></td><td>Strong viral growth</td><td>Scale outreach to pour fuel on fire</td></tr>
+                    <tr><td><strong>Above 2.5</strong></td><td>Exceptional (top 5% of campaigns)</td><td>Ride the wave, do not change anything</td></tr>
+                </tbody>
+            </table>
+
+            <p>Check your K-factor in the TrueFans LOOP dashboard. If it is below 1.0 after Day 7, see the troubleshooting section in the Appendix.</p>
+        </div>
+    </details>
+
+    <!-- P3: Engine -->
+    <details id="p3-engine">
+        <summary>Activating Your Referral Engine</summary>
+        <div class="details-body">
+            <p>Your referral engine has two parts: making it <em>easy</em> to share and making it <em>rewarding</em> to share. Here is how to max out both.</p>
+
+            <h4>Making It Easy</h4>
+            <ol class="steps">
+                <li><strong>One-tap sharing:</strong> Make sure your campaign page has share buttons for Instagram, Twitter/X, WhatsApp, iMessage, and plain link copy. Every extra click you require loses 20-30% of potential shares.</li>
+                <li><strong>Pre-written share messages:</strong> When fans click "share," the message should be pre-filled with something compelling. Do not make them write their own pitch. Example pre-fill: "Check out [Campaign Name] by [Artist] — I just signed up and got [reward]. Join through my link and we both unlock more: [LINK]"</li>
+                <li><strong>Visible progress:</strong> Fans need to see how many referrals they have and how close they are to the next tier. If they have 2 out of 3, they will actively hunt for that third person. Display this prominently on their dashboard.</li>
+            </ol>
+
+            <h4>Making It Rewarding</h4>
+            <ol class="steps">
+                <li><strong>Instant notifications:</strong> When someone signs up through a fan's link, send that fan an immediate notification: "Congrats! [Name] just joined through your link. You now have [X] referrals — [Y] more to unlock [next reward]!" This dopamine hit drives continued sharing.</li>
+                <li><strong>Public recognition:</strong> Share your leaderboard on social media. Tag the top referrers. People who see their name in public want to stay on top. People who are not on the list want to get there.</li>
+                <li><strong>Surprise rewards:</strong> Occasionally DM a random active referrer with a bonus: "Hey, you've been crushing it with 8 referrals. I just sent you an exclusive remix as a thank you." This creates stories people share ("OMG the artist just DM'd me").</li>
+            </ol>
+        </div>
+    </details>
+
+    <!-- P3: 3x Reminder -->
+    <details id="p3-reminder">
+        <summary>The "3x Share Reminder" System</summary>
+        <div class="details-body">
+            <p>Most fans sign up with good intentions to share but then life gets in the way. The 3x Share Reminder system ensures they follow through without being annoying.</p>
+
+            <h4>Reminder 1: The "Almost There" Email (Day 2 after signup)</h4>
+            <div class="script-block"><span class="label">Email Template</span>
+Subject: You're [X] referrals away from [next reward]
+
+Hey [Name],
+
+You signed up for [Campaign Name] — welcome! 🎶
+
+Right now you have [X] referrals. You only need [Y] more to unlock [next reward tier description].
+
+Here's your personal invite link (just send it to a few friends):
+[REFERRAL LINK]
+
+The people at the top of the leaderboard right now have [top referral count] referrals. Think you can beat them?
+
+— [Your Name]
+
+P.S. Remember, people who sign up through your link get [instant reward], so you're actually giving them something cool, not just asking for a favor.</div>
+
+            <h4>Reminder 2: The Social Proof Push (Day 5 after signup)</h4>
+            <div class="script-block"><span class="label">Email Template</span>
+Subject: [Total Campaign Signups] fans and counting...
+
+[Name],
+
+Quick update: [Campaign Name] just hit [total number] fans. This is growing way faster than I expected.
+
+Here's where you stand:
+• Your referrals: [X]
+• Next reward unlocks at: [Y] referrals
+• Top referrer right now: [Z] referrals
+
+Your invite link: [REFERRAL LINK]
+
+Share it on your story, send it in a group chat, or text it to that one friend who's always looking for new music. Every share counts.
+
+— [Your Name]</div>
+
+            <h4>Reminder 3: The Urgency Close (Day 10 after signup)</h4>
+            <div class="script-block"><span class="label">Email Template</span>
+Subject: Last chance to claim your [reward]
+
+[Name],
+
+I'm closing [Campaign Name] sign-ups in [X] days.
+
+You currently have [X] referrals. That means you're [Y] away from [specific reward]. After the campaign closes, these rewards are gone for good.
+
+Here's your link one last time: [REFERRAL LINK]
+
+Thanks for being part of this. Whether you share or not, I appreciate you being here.
+
+— [Your Name]</div>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Data point:</strong> Artists who use all 3 reminders see a 34% higher K-factor than those who only send the welcome email. Reminder 1 is the most impactful, recovering about 40% of inactive referrers.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P3: Collab -->
+    <details id="p3-collab">
+        <summary>Collaboration Swaps with Other Artists</summary>
+        <div class="details-body">
+            <p>Collaboration swaps are the highest-ROI growth tactic available to independent artists. Here is how they work and how to set them up.</p>
+
+            <h4>What Is a Collab Swap?</h4>
+            <p>You find another artist with a similar audience size and genre. You promote their campaign to your list. They promote yours to theirs. Both of you grow from each other's existing fans.</p>
+
+            <h4>How to Find Swap Partners</h4>
+            <ul>
+                <li><strong>TrueFans LOOP community:</strong> Check the artist directory or community forum for other active campaigns in your genre.</li>
+                <li><strong>Instagram:</strong> Search for artists with 500-10,000 followers in your genre. Look for active engagement (comments, not just likes).</li>
+                <li><strong>Spotify "Fans Also Like":</strong> Go to your Spotify profile (or a similar artist's) and check the "Fans Also Like" section. These artists share your audience.</li>
+            </ul>
+
+            <h4>The Swap Pitch Script</h4>
+            <div class="script-block"><span class="label">Copy & Paste</span>
+Hey [Artist Name],
+
+I'm [Your Name], a [genre] artist from [city]. I've been listening to your music and really dig [specific song or project].
+
+I'm running a fan-building campaign on TrueFans LOOP right now and I'm looking for artists to do cross-promo swaps with. The idea is simple:
+
+• I mention your music/campaign to my [X]-person list
+• You mention mine to your audience
+• We both grow
+
+I've got [current signup count] fans in my campaign so far. If this sounds interesting, let's chat.
+
+Here's my campaign: [LINK]
+Here's my music: [SPOTIFY/YT LINK]
+
+Keep making heat. 🔥</div>
+
+            <h4>Swap Best Practices</h4>
+            <ul>
+                <li><strong>Match audience sizes.</strong> If you have 100 fans and they have 10,000, they probably will not see equal value. Target artists within 0.5x to 2x of your audience size.</li>
+                <li><strong>Same genre, not same sound.</strong> You want audience overlap in taste, not a direct competitor. An R&B artist and a neo-soul artist have great overlap. Two rappers with identical styles might just compete.</li>
+                <li><strong>Coordinate timing.</strong> Agree on a specific day and time to promote each other. Both posting on the same day creates a sense of momentum.</li>
+                <li><strong>Do 2-3 swaps per week during Phase 3.</strong> Each successful swap typically adds 20-50 new fans to your campaign.</li>
+            </ul>
+        </div>
+    </details>
+
+    <!-- P3: Content -->
+    <details id="p3-content">
+        <summary>Content Ideas That Drive Shares</summary>
+        <div class="details-body">
+            <p>Not all content is created equal when it comes to driving campaign shares. Here are the content types ranked by their impact on referral rates, from most to least effective.</p>
+
+            <h4>Tier 1: High-Share Content (Post 3-4x per week)</h4>
+            <ul>
+                <li><strong>Leaderboard screenshots with commentary.</strong> "Shout out to @username who just hit 15 referrals and unlocked [reward]. Can anyone catch them?" This creates competition and FOMO.</li>
+                <li><strong>Milestone celebration posts.</strong> "[Campaign Name] just hit 300 fans! When I started this 10 days ago, I honestly didn't know if anyone would care. You all proved me wrong." Authentic gratitude drives shares.</li>
+                <li><strong>Fan spotlight / shout-outs.</strong> Pick one referrer per day and publicly thank them. Tag them. They will share it with their entire network.</li>
+            </ul>
+
+            <h4>Tier 2: Medium-Share Content (Post 2-3x per week)</h4>
+            <ul>
+                <li><strong>Behind-the-scenes studio clips.</strong> 15-30 second clips of you working on music, especially unreleased material. Fans share these because it makes them look like insiders.</li>
+                <li><strong>Countdown content.</strong> "Only [X] spots left" or "Campaign closes in [X] days." Urgency drives action.</li>
+                <li><strong>Snippet previews of rewards.</strong> Show 10 seconds of the exclusive track, blur the rest. "Want to hear the rest? Join [Campaign Name] — link in bio."</li>
+            </ul>
+
+            <h4>Tier 3: Foundation Content (Post 1-2x per week)</h4>
+            <ul>
+                <li><strong>Personal story posts.</strong> Share why you make music, a struggle you overcame, a moment that changed your artistic direction. These build emotional connection that makes fans want to champion you.</li>
+                <li><strong>Engagement bait tied to your campaign.</strong> "What should I name my next track? Top suggestions from [Campaign Name] members get first listen." This drives both engagement and signups.</li>
+            </ul>
+
+            <div class="callout callout-key">
+                <div class="callout-icon">&#9670;</div>
+                <div><strong>Content golden rule:</strong> Every piece of content should have one of two goals: (1) drive new signups or (2) remind existing fans to share. If a post does neither, save it for after the campaign.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P3: Case Study 1 -->
+    <details id="p3-case1">
+        <summary>Case Study #1: From 200 to 2,100 in 10 Days</summary>
+        <div class="details-body">
+            <div class="case-study">
+                <h4>Artist: Jalen Morae, R&B / Neo-Soul — Atlanta, GA</h4>
+                <p><strong>Starting point:</strong> 1,200 Instagram followers, 340 Spotify monthly listeners, no email list.</p>
+                <p><strong>Campaign type:</strong> Waitlist / Exclusive Access for an upcoming EP release.</p>
+
+                <h4>What He Did</h4>
+                <p><strong>Days 1-3 (Setup):</strong> Jalen created a campaign called "The Velvet Room." Signup reward was an unreleased acoustic version of his most-streamed song. Tier structure: 3 referrals = behind-the-scenes EP recording sessions, 7 referrals = the EP 48 hours early, 15 referrals = name in the liner notes, 30 referrals = a private Zoom listening party.</p>
+
+                <p><strong>Days 4-5 (Seed):</strong> He personally DM'd 62 people &mdash; 28 friends/family, 20 engaged Instagram followers, and 14 fellow R&B artists. 41 people signed up (66% conversion from personal DMs). He got 3 collab swap partners from his DMs to other artists.</p>
+
+                <p><strong>Days 6-7 (Public launch):</strong> Posted on Instagram (carousel + Stories), Twitter/X (thread), and TikTok (studio clip). Hit 198 signups by end of Day 7.</p>
+
+                <p><strong>Days 8-14 (Multiplication):</strong> His K-factor was 1.7. He ran 3 collab swaps (adding ~120 fans total). Posted leaderboard screenshots daily. Sent all 3 share reminder emails. His top referrer brought in 47 people single-handedly (a college student with a large group chat network).</p>
+
+                <div class="stats-row">
+                    <div class="stat"><div class="number">198</div><div class="desc">Fans at Day 7</div></div>
+                    <div class="stat"><div class="number green">2,134</div><div class="desc">Fans at Day 17</div></div>
+                    <div class="stat"><div class="number">1.7</div><div class="desc">K-factor</div></div>
+                    <div class="stat"><div class="number green">47</div><div class="desc">Top referrer's count</div></div>
+                </div>
+
+                <h4>Key Takeaways</h4>
+                <ul>
+                    <li>Personal DMs at a 66% conversion rate provided the seed that made everything else work.</li>
+                    <li>The acoustic version of an existing song cost him nothing to create but felt premium to fans.</li>
+                    <li>Collab swaps contributed roughly 120 fans directly, but many of <em>those</em> fans also referred others, creating a compounding effect.</li>
+                    <li>One superfan (the college student) was responsible for nearly 10% of the total growth. Identifying and empowering superfans is critical.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <!-- P3: Checklist -->
+    <details id="p3-checklist">
+        <summary>Daily Checklist: Days 8-14</summary>
+        <div class="details-body">
+            <h4>Every Day This Week</h4>
+            <ul class="checklist">
+                <li>Check your K-factor in the dashboard (target: above 1.0)</li>
+                <li>Post one piece of Tier 1 or Tier 2 content (leaderboard, milestone, or studio clip)</li>
+                <li>DM and thank your top 3 referrers of the day</li>
+                <li>Respond to every comment and DM about the campaign within 2 hours</li>
+            </ul>
+
+            <h4>Days 8-9</h4>
+            <ul class="checklist">
+                <li>Send "Almost There" reminder email (Reminder 1) to fans who signed up in the first wave</li>
+                <li>Reach out to 5 new potential collab swap partners</li>
+                <li>Post a milestone update if you crossed a round number (100, 200, 250)</li>
+            </ul>
+
+            <h4>Days 10-11</h4>
+            <ul class="checklist">
+                <li>Execute your first collab swap</li>
+                <li>Send "Social Proof" reminder email (Reminder 2) to early signups</li>
+                <li>Post a fan spotlight / shout-out for your top referrer</li>
+                <li>Try a new platform you have not posted on yet (TikTok, Twitter Spaces, YouTube Community)</li>
+            </ul>
+
+            <h4>Days 12-14</h4>
+            <ul class="checklist">
+                <li>Execute 1-2 more collab swaps</li>
+                <li>Post a "campaign update" showing growth numbers and a snippet of upcoming rewards</li>
+                <li>Send Reminder 3 (urgency) to your earliest signups</li>
+                <li>Review your analytics: which share channels are driving the most referrals? Double down on those.</li>
+                <li>Target: 300-500 total signups by Day 14</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Benchmark:</strong> If you are at 250+ fans by Day 14, you are solidly on track for 1,000 by Day 30. If you are at 150-250, you will need to increase your collab swaps and content output in Phase 4. If you are under 150, see the troubleshooting section.</div>
+            </div>
+        </div>
+    </details>
+</section>
+
+<!-- ════════════════════════════════════════ PHASE 4 ════════════════════════════════════════ -->
+<section id="phase-4" class="phase-4">
+    <span class="phase-label">Phase 4</span>
+    <h2>Days 15-30: Scaling to 1,000</h2>
+    <p>You have a growing campaign with real momentum. Now it is time to pour fuel on the fire, expand to new channels, and start converting fans into long-term supporters. This is where 300 becomes 1,000.</p>
+
+    <div class="progress-bar"><div class="fill" style="width: 75%"></div></div>
+    <p style="font-size:14px; color: var(--text-dim);">Campaign progress: scaling</p>
+
+    <!-- P4: Cross-Platform -->
+    <details id="p4-cross">
+        <summary>Cross-Platform Promotion Strategy</summary>
+        <div class="details-body">
+            <p>Most artists only promote on one or two platforms. To hit 1,000, you need to systematically expand. Here is the priority order and what works on each.</p>
+
+            <h4>Platform Priority Matrix</h4>
+            <table>
+                <thead>
+                    <tr><th>Platform</th><th>Best Content Type</th><th>Expected Fans per Post</th><th>Time Investment</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Instagram Stories</strong></td><td>Swipe-up with behind-the-scenes clips</td><td>5-20 per story</td><td>5 min</td></tr>
+                    <tr><td><strong>TikTok</strong></td><td>Studio snippets + campaign explainer</td><td>10-200 (high variance)</td><td>15-30 min</td></tr>
+                    <tr><td><strong>Twitter/X</strong></td><td>Threads + real-time updates</td><td>5-30 per thread</td><td>10 min</td></tr>
+                    <tr><td><strong>YouTube Community</strong></td><td>Polls + milestone updates</td><td>5-15 per post</td><td>5 min</td></tr>
+                    <tr><td><strong>WhatsApp/Telegram</strong></td><td>Direct link shares to group chats</td><td>3-10 per group</td><td>2 min per group</td></tr>
+                    <tr><td><strong>Reddit</strong></td><td>Genuine community posts (NOT spam)</td><td>10-50 per post</td><td>15 min</td></tr>
+                    <tr><td><strong>Facebook Groups</strong></td><td>Story post + link in comments</td><td>5-25 per group</td><td>10 min</td></tr>
+                    <tr><td><strong>Email Newsletter</strong></td><td>Dedicated campaign email</td><td>20-40% of list</td><td>20 min</td></tr>
+                </tbody>
+            </table>
+
+            <h4>The "3-2-1" Daily Posting Framework</h4>
+            <p>Every day during Phase 4, aim for:</p>
+            <ul>
+                <li><strong>3 Instagram Stories</strong> (morning, afternoon, evening) with campaign link</li>
+                <li><strong>2 posts on secondary platforms</strong> (rotate between TikTok, Twitter, Reddit, etc.)</li>
+                <li><strong>1 direct outreach action</strong> (collab swap, community post, or group chat share)</li>
+            </ul>
+            <p>This takes about 30-45 minutes per day and consistently drives 20-40 new signups daily.</p>
+        </div>
+    </details>
+
+    <!-- P4: Content Loop -->
+    <details id="p4-loop">
+        <summary>The "Content Loop" Method Explained Step by Step</summary>
+        <div class="details-body">
+            <p>The Content Loop is a system where every piece of content feeds into the next, creating a self-reinforcing cycle of growth. Here is how it works.</p>
+
+            <h4>The Loop (4 Steps, Repeated Weekly)</h4>
+            <ol class="steps">
+                <li>
+                    <div>
+                        <strong>Create value content</strong> (Monday-Tuesday)<br>
+                        <span style="color: var(--text-muted)">Record a studio session clip, write a personal story post, or create a snippet of unreleased music. This content attracts new eyes and gives existing fans something to share. <em>Goal: Attract attention.</em></span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Convert attention to signups</strong> (Wednesday-Thursday)<br>
+                        <span style="color: var(--text-muted)">Every value post should have a clear CTA pointing to your campaign. "If you liked this, you'll love what [Campaign Name] members are getting. Link in bio." Follow up your value content with a direct campaign promotion post. <em>Goal: Turn viewers into fans.</em></span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Activate sharing</strong> (Friday)<br>
+                        <span style="color: var(--text-muted)">Post your leaderboard update. Shout out top referrers. Send share reminder emails to recent signups. This turns passive fans into active promoters. <em>Goal: Turn fans into recruiters.</em></span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Celebrate and report</strong> (Weekend)<br>
+                        <span style="color: var(--text-muted)">Share campaign milestones, fan testimonials, and growth updates. "We hit 600 fans this week! Here's a preview of what I'm working on for you all." This social proof makes the value content (Step 1) even more effective the following week. <em>Goal: Build momentum for next week.</em></span>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="callout callout-key">
+                <div class="callout-icon">&#9670;</div>
+                <div><strong>Why it is a "loop":</strong> Step 4 feeds back into Step 1. Your milestone posts attract new viewers ("Whoa, 600 people signed up for this? Let me check it out"), which gives you more people to convert, which gives you more sharers, which gives you bigger milestones to celebrate. Each week is bigger than the last.</div>
+            </div>
+
+            <h4>Content Loop Calendar (Example Week)</h4>
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Content</th><th>Platform</th><th>Loop Step</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Mon</td><td>Studio session clip (30 sec)</td><td>TikTok + IG Reels</td><td>1 - Value</td></tr>
+                    <tr><td>Tue</td><td>Personal story post</td><td>Instagram + Twitter</td><td>1 - Value</td></tr>
+                    <tr><td>Wed</td><td>Campaign promo + "link in bio"</td><td>All platforms</td><td>2 - Convert</td></tr>
+                    <tr><td>Thu</td><td>Fan testimonial + campaign link</td><td>IG Stories + Twitter</td><td>2 - Convert</td></tr>
+                    <tr><td>Fri</td><td>Leaderboard update + shout-outs</td><td>All platforms + Email</td><td>3 - Activate</td></tr>
+                    <tr><td>Sat</td><td>Milestone celebration post</td><td>Instagram + TikTok</td><td>4 - Celebrate</td></tr>
+                    <tr><td>Sun</td><td>Behind-the-scenes or rest</td><td>IG Stories</td><td>4 - Celebrate</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </details>
+
+    <!-- P4: Leaderboard -->
+    <details id="p4-leaderboard">
+        <summary>Leveraging Your Leaderboard for Competition</summary>
+        <div class="details-body">
+            <p>Your TrueFans LOOP leaderboard is one of the most powerful growth tools at your disposal. When used correctly, it turns passive fans into competitive advocates. Here is how to weaponize it (in the best way possible).</p>
+
+            <h4>Strategy 1: The Weekly Champion</h4>
+            <p>Every Friday, announce the top referrer of the week and give them a special reward beyond their tier rewards. This could be a shout-out on your Story, a signed piece of merch, or a voice note thanking them by name. This creates a weekly competition cycle that keeps engagement high.</p>
+
+            <h4>Strategy 2: The "Top 10" Screenshot Post</h4>
+            <p>Take a screenshot of your top 10 leaderboard. Post it with tags. Caption: "These 10 people are the reason [Campaign Name] just hit [milestone]. The #1 spot just changed hands today. Who's coming for the crown?"</p>
+            <p>This works because:</p>
+            <ul>
+                <li>The people on the list will repost it (social proof for them)</li>
+                <li>People NOT on the list will try to get there</li>
+                <li>It shows the campaign is active and exciting</li>
+            </ul>
+
+            <h4>Strategy 3: Tier Races</h4>
+            <p>When you notice several fans are close to a reward tier, call it out: "5 people are just 1 referral away from unlocking [reward]. Who's going to be first?" This gentle nudge can drive a burst of sharing from people who were sitting at the threshold.</p>
+
+            <h4>Strategy 4: The "Challenge" Post</h4>
+            <div class="script-block"><span class="label">Template</span>
+CHALLENGE: The first person to hit 50 referrals gets [special prize].
+
+Current top referrer is at [X]. That means you need [50 - X] to pass them.
+
+Think you can do it? Your link is on your dashboard.
+
+I'm watching the leaderboard. 👀</div>
+        </div>
+    </details>
+
+    <!-- P4: Second Campaign -->
+    <details id="p4-second">
+        <summary>When and How to Launch Your Second Campaign</summary>
+        <div class="details-body">
+            <p>If your first campaign is performing well (K-factor above 1.2, steady daily signups), consider launching a second campaign between Days 20-25. Here is when it makes sense and how to do it without cannibalizing your first campaign.</p>
+
+            <h4>When to Launch a Second Campaign</h4>
+            <ul>
+                <li><strong>Your first campaign is above 500 fans</strong> and still growing</li>
+                <li><strong>You have a different offer</strong> that appeals to a different segment (e.g., your first campaign is a waitlist for an album, your second is a contest for concert tickets)</li>
+                <li><strong>You want to target a different platform.</strong> Run Campaign 1 on Instagram, Campaign 2 on TikTok. Different audiences, no overlap.</li>
+            </ul>
+
+            <h4>How to Structure It</h4>
+            <ol class="steps">
+                <li><strong>Choose a different template.</strong> If your first campaign was a Waitlist, make your second a Giveaway or Contest. Different mechanics attract different types of fans.</li>
+                <li><strong>Use your first campaign's fans as seeds for the second.</strong> Email your existing list: "You've been amazing supporters. I'm launching something new — [Campaign 2]. As a thank-you for being part of [Campaign 1], you get first access."</li>
+                <li><strong>Cross-promote between campaigns.</strong> Mention Campaign 2 in Campaign 1's reward delivery. "You just unlocked your early access track! P.S. — I'm also running [Campaign 2] where you can win [prize]. Check it out."</li>
+            </ol>
+
+            <div class="callout callout-warn">
+                <div class="callout-icon">!</div>
+                <div><strong>Do not launch a second campaign if your first is struggling.</strong> If you are under 200 fans by Day 20, focus all your energy on fixing and growing Campaign 1. Splitting attention between two underperforming campaigns is worse than excelling at one.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P4: Converting -->
+    <details id="p4-convert">
+        <summary>Converting Fans to Streamers, Buyers, and Ticket Holders</summary>
+        <div class="details-body">
+            <p>Fans on your campaign list are not just numbers. They are real people who opted in because they care about your music. Here is how to turn that attention into real revenue.</p>
+
+            <h4>Converting to Streamers</h4>
+            <ul>
+                <li><strong>Pre-save campaigns:</strong> Before any release, email your entire fan list with a pre-save link. Fans who pre-save trigger Spotify's algorithm on release day, getting you on algorithmic playlists. A list of 1,000 fans generating 800+ pre-saves will almost certainly trigger Release Radar and Discover Weekly placements.</li>
+                <li><strong>Listening party emails:</strong> On release day, send an email at 12:01 AM: "It's here. Go listen now." Include direct links to Spotify, Apple Music, and YouTube. First-day streams matter more than any other day.</li>
+                <li><strong>The "save the song" ask:</strong> After the first week, email again: "If you liked [song], saving it on Spotify helps more than you know. It tells the algorithm to show it to more people."</li>
+            </ul>
+
+            <h4>Converting to Buyers (Merch + Music)</h4>
+            <ul>
+                <li><strong>Exclusive drops for your list.</strong> Create limited-edition merch (50-100 units) available ONLY to your fan list. Scarcity + exclusivity = sales. "I made 50 hoodies for [Campaign Name] members. Once they're gone, they're gone."</li>
+                <li><strong>Bundle pricing.</strong> Offer your album + a signed poster + a sticker pack as a bundle at a slight discount. Bundles convert 2-3x better than individual items.</li>
+                <li><strong>Fan-funded releases.</strong> Use your list to crowdfund your next project. "I need $5,000 to finish this album. If 250 of you pre-order at $20, we're there." With 1,000 engaged fans, hitting 250 pre-orders is realistic.</li>
+            </ul>
+
+            <h4>Converting to Ticket Holders</h4>
+            <ul>
+                <li><strong>Early-bird pricing for your list.</strong> Give your fan list first access to tickets at a lower price. "Tickets go public at $25. For [Campaign Name] members, they're $15 for the next 48 hours."</li>
+                <li><strong>Guaranteed meet-and-greet for top referrers.</strong> Your leaderboard leaders get automatic meet-and-greet access at your shows. This costs you nothing but has enormous perceived value.</li>
+                <li><strong>Location-based targeting.</strong> If you have fans' zip codes or cities (from signup data), email fans in specific cities when you book shows there. Personalized "I'm coming to YOUR city" emails have open rates above 60%.</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>Revenue benchmark:</strong> A well-nurtured list of 1,000 true fans can realistically generate $3,000-$8,000 per release cycle through combined streaming, merch, and ticket sales. That number grows as you nurture the relationship over multiple releases.</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- P4: Case Study 2 -->
+    <details id="p4-case2">
+        <summary>Case Study #2: Indie Band Hits 5,000 Fans in 3 Weeks</summary>
+        <div class="details-body">
+            <div class="case-study">
+                <h4>Artist: The Paper Satellites, Indie Rock / Alt — Portland, OR</h4>
+                <p><strong>Starting point:</strong> 4-piece band. 3,200 Instagram followers, 890 Spotify monthly listeners, 220-person email list from playing local shows.</p>
+                <p><strong>Campaign type:</strong> Giveaway / Contest — Grand prize was 2 VIP passes to their album release show + signed vinyl + name in the album booklet.</p>
+
+                <h4>What Made Them Different</h4>
+                <p><strong>They leveraged their existing email list on Day 1.</strong> Instead of starting with DMs, they emailed their 220-person list with a dedicated launch email. 84 people signed up in the first 3 hours (38% conversion). That gave them massive seed momentum before they even posted on social media.</p>
+
+                <p><strong>They ran aggressive collab swaps.</strong> The band's guitarist was active in the Portland indie scene and personally knew 8 other bands. They set up a "swap chain" where all 8 bands promoted each other's campaigns over a 5-day period. Each swap added 40-80 fans, and the compounding referrals from those fans were enormous.</p>
+
+                <p><strong>They created a TikTok series.</strong> Their drummer started a daily 30-second TikTok series called "Day [X] of building a fan army" where he showed real-time dashboard numbers, read funny referral stories, and teased reward deliveries. Three of these videos broke 50K views, each driving 200-400 signups.</p>
+
+                <div class="stats-row">
+                    <div class="stat"><div class="number">84</div><div class="desc">Day 1 signups (email)</div></div>
+                    <div class="stat"><div class="number green">5,241</div><div class="desc">Total fans at Day 21</div></div>
+                    <div class="stat"><div class="number">2.3</div><div class="desc">K-factor</div></div>
+                    <div class="stat"><div class="number green">8</div><div class="desc">Collab swaps executed</div></div>
+                </div>
+
+                <h4>Key Takeaways</h4>
+                <ul>
+                    <li>An existing email list, even a small one, is the most powerful seed source. Those 220 people converting at 38% gave them 84 highly engaged starters &mdash; way more than the typical 50-person DM approach.</li>
+                    <li>Collab swaps compound when done in clusters. One swap adds fans. Eight swaps in the same scene create a network effect where fans start seeing the campaign from multiple sources, which increases trust and conversion rates.</li>
+                    <li>Consistent daily TikTok content with real numbers creates an authentic growth narrative that TikTok's algorithm rewards. Transparency about the process was more engaging than polished promotional content.</li>
+                    <li>They hit 5,000 instead of 1,000 because their K-factor (2.3) was well above average, driven by a compelling grand prize and consistent activation content.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <!-- P4: Case Study 3 -->
+    <details id="p4-case3">
+        <summary>Case Study #3: Producer Builds 3,000-Person Beat List With Zero Ad Spend</summary>
+        <div class="details-body">
+            <div class="case-study">
+                <h4>Artist: KVNG Sauce, Hip-Hop / Trap Producer — Houston, TX</h4>
+                <p><strong>Starting point:</strong> 800 Instagram followers (mostly other producers), 150 YouTube subscribers, no email list, $0 marketing budget.</p>
+                <p><strong>Campaign type:</strong> Tiered Reward — Free beat tape for signup, exclusive sample packs at higher tiers.</p>
+
+                <h4>His Strategy</h4>
+                <p><strong>He targeted rappers, not listeners.</strong> Instead of trying to build a general audience, KVNG Sauce focused on independent rappers who needed beats. His value proposition was simple: "Sign up, get a free beat tape. Refer 3 friends, get a custom drum kit. Refer 10, get a free exclusive beat lease."</p>
+
+                <p><strong>He went deep into rapper communities.</strong> He identified 15 active Facebook Groups and Discord servers for independent rappers and hip-hop artists. He spent a week being genuinely helpful &mdash; giving feedback on mixes, sharing production tips, answering questions. Then he dropped his campaign link with a post explaining the free beat tape offer. Because he had already built goodwill, the posts were received enthusiastically instead of being flagged as spam.</p>
+
+                <p><strong>He used YouTube as a referral driver.</strong> He started uploading "type beat" videos with a pinned comment linking to his campaign: "Want 5 free beats + exclusive drum kits? Join [Campaign Name]. Link: [URL]." Each video drove 10-30 signups, and he uploaded 3 per week.</p>
+
+                <p><strong>He made referral rewards match what his audience actually wanted.</strong> Producers and rappers do not care about behind-the-scenes vlogs. They want tools: beats, drum kits, sample packs, mixing presets. Every tier reward was something they could immediately use in their own music. This made sharing feel like doing their friends a favor, not asking for one.</p>
+
+                <div class="stats-row">
+                    <div class="stat"><div class="number">0</div><div class="desc">Dollars spent on ads</div></div>
+                    <div class="stat"><div class="number green">3,047</div><div class="desc">Total fans at Day 28</div></div>
+                    <div class="stat"><div class="number">1.9</div><div class="desc">K-factor</div></div>
+                    <div class="stat"><div class="number green">$4,200</div><div class="desc">Beat sales in first month after</div></div>
+                </div>
+
+                <h4>Key Takeaways</h4>
+                <ul>
+                    <li>Know your audience. KVNG Sauce's fans were not passive listeners &mdash; they were working artists who needed production tools. Tailoring rewards to that specific need made his referral rates exceptionally high.</li>
+                    <li>Community-first promotion works when you invest genuine time before asking for anything. His week of helpful engagement in 15 communities created a foundation of trust that paid dividends for the entire campaign.</li>
+                    <li>YouTube "type beat" videos are a perpetual signup engine. Unlike social media posts that disappear after 24 hours, his YouTube videos continued driving signups weeks after posting.</li>
+                    <li>The campaign paid for itself immediately. His 3,047-person beat buyer list generated $4,200 in sales within the first month after the campaign ended, with zero ad spend. That is the long-term power of owning your fan list.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <!-- P4: Checklist -->
+    <details id="p4-checklist">
+        <summary>Daily Checklist: Days 15-30</summary>
+        <div class="details-body">
+            <h4>Every Day (30-45 minutes)</h4>
+            <ul class="checklist">
+                <li>Post 3 Instagram Stories with campaign link</li>
+                <li>Post on 2 secondary platforms (rotate: TikTok, Twitter, Reddit, YouTube)</li>
+                <li>Do 1 direct outreach action (collab swap, group share, or DM outreach)</li>
+                <li>Check dashboard: K-factor, daily signups, leaderboard changes</li>
+                <li>Respond to all comments and DMs</li>
+            </ul>
+
+            <h4>Weekly Actions</h4>
+            <ul class="checklist">
+                <li>Monday: Plan your Content Loop for the week (value, convert, activate, celebrate)</li>
+                <li>Wednesday: Send share reminder emails to fans who signed up 5+ days ago</li>
+                <li>Friday: Post leaderboard update and shout out top referrers</li>
+                <li>Saturday: Post milestone celebration with updated numbers</li>
+                <li>Sunday: Review weekly analytics, adjust strategy for next week</li>
+            </ul>
+
+            <h4>Key Milestones</h4>
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Target Fans</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Day 15</td><td>350-500</td><td>On track</td></tr>
+                    <tr><td>Day 18</td><td>500-650</td><td>Solid momentum</td></tr>
+                    <tr><td>Day 21</td><td>650-800</td><td>Closing in</td></tr>
+                    <tr><td>Day 25</td><td>800-950</td><td>Almost there</td></tr>
+                    <tr><td>Day 30</td><td>1,000+</td><td>Mission accomplished</td></tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-tip">
+                <div class="callout-icon">&#10003;</div>
+                <div><strong>If you are ahead of schedule:</strong> Consider launching your second campaign around Day 22. Use your current list to seed it and aim for 2,000 total fans across both campaigns by Day 30.</div>
+            </div>
+
+            <div class="callout callout-warn">
+                <div class="callout-icon">!</div>
+                <div><strong>If you are behind schedule:</strong> Do not give up at Day 20 if you are at 400 fans. That is still an incredible result, and growth is often non-linear. A single viral TikTok or successful collab swap can add 200 fans in a day. Keep executing the daily checklist and the compounding effects will catch up.</div>
+            </div>
+        </div>
+    </details>
+</section>
+
+<!-- ════════════════════════════════════════ APPENDIX ════════════════════════════════════════ -->
+<section id="appendix">
+    <h2>Appendix</h2>
+
+    <!-- App: Action Card -->
+    <details id="app-action" open>
+        <summary>Quick-Reference Daily Action Card</summary>
+        <div class="details-body">
+            <p>Print this or screenshot it. These are the 7 actions that matter every single day of your campaign.</p>
+
+            <div class="card card-purple">
+                <h4 style="margin-top:0; color: var(--accent-light);">THE DAILY 7 &mdash; Your Non-Negotiable Actions</h4>
+                <ol>
+                    <li><strong>Check your dashboard</strong> (2 min) &mdash; K-factor, new signups, leaderboard changes</li>
+                    <li><strong>Post 1 piece of campaign content</strong> (10-15 min) &mdash; Rotate between value, conversion, activation, and celebration content</li>
+                    <li><strong>Post 3 Instagram Stories</strong> (5 min) &mdash; Morning, afternoon, evening. Always include your link.</li>
+                    <li><strong>Thank your top 3 referrers</strong> (5 min) &mdash; A simple DM: "You're crushing it. Thank you."</li>
+                    <li><strong>Respond to every comment and DM</strong> (5-10 min) &mdash; Speed matters. Reply within 2 hours.</li>
+                    <li><strong>Do 1 outreach action</strong> (10 min) &mdash; Send a collab swap pitch, share in a community, or DM 5 new potential fans.</li>
+                    <li><strong>Send 1 share reminder</strong> (5 min) &mdash; Email or DM a batch of fans who have not shared yet. Remind them what they are close to unlocking.</li>
+                </ol>
+                <p style="margin-bottom:0; color: var(--text-dim);"><strong>Total daily time: 40-55 minutes.</strong> That is less than an hour a day to build a fanbase that will support your career for years.</p>
+            </div>
+        </div>
+    </details>
+
+    <!-- App: Troubleshooting -->
+    <details id="app-trouble">
+        <summary>Troubleshooting: "My Campaign Isn't Growing" &mdash; 10 Fixes</summary>
+        <div class="details-body">
+            <p>If your campaign has stalled, work through these fixes in order. Most growth problems can be traced to one of these 10 issues.</p>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 1: Your Signup Reward Is Not Compelling Enough</h4>
+                <p><strong>Symptom:</strong> People visit your campaign page but do not sign up (low conversion rate).</p>
+                <p><strong>Fix:</strong> Replace your signup reward with something that has clear, immediate value. An unreleased track works better than "exclusive updates." A free beat pack works better than "early access to announcements." Ask yourself: "Would I sign up for this if I saw it from an artist I kind of liked?" If the answer is not an immediate yes, upgrade the reward.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 2: Your Tier 1 Reward Gap Is Too Large</h4>
+                <p><strong>Symptom:</strong> People sign up but do not refer anyone (K-factor below 0.5).</p>
+                <p><strong>Fix:</strong> If your first reward tier requires 5+ referrals, lower it to 3. The psychological difference between "refer 3 friends" and "refer 5 friends" is massive. Three feels doable. Five feels like work. You can always add more tiers at the top.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 3: You Are Not Sending Share Reminders</h4>
+                <p><strong>Symptom:</strong> Initial signups were strong but referrals have dried up.</p>
+                <p><strong>Fix:</strong> Implement the 3x Share Reminder system from Phase 3. Most fans intend to share but forget. A single "You're 1 referral away from [reward]" email can reactivate 30-40% of dormant fans.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 4: Your Campaign Page Looks Untrustworthy</h4>
+                <p><strong>Symptom:</strong> Low signup rate despite good traffic.</p>
+                <p><strong>Fix:</strong> Check your campaign page on mobile (70%+ of visitors are on phones). Ensure your photo is professional, your bio is clear, and your rewards are easy to understand at a glance. Remove any typos. Add social proof if possible ("Join 300+ fans who already signed up").</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 5: You Are Only Posting on One Platform</h4>
+                <p><strong>Symptom:</strong> Steady but slow growth that has plateaued.</p>
+                <p><strong>Fix:</strong> Expand to at least 2 additional platforms. If you have only been on Instagram, add TikTok and Twitter. Each platform has a different audience, and cross-platform promotion typically doubles growth rate within a week.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 6: You Have Not Done Any Collab Swaps</h4>
+                <p><strong>Symptom:</strong> Growth comes only from your own audience, which has a ceiling.</p>
+                <p><strong>Fix:</strong> Reach out to 10 artists this week for swaps. Even if only 2-3 say yes, each swap exposes your campaign to an entirely new audience. This is the single fastest way to break through a growth ceiling.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 7: Your Content Is Not Driving Action</h4>
+                <p><strong>Symptom:</strong> Good engagement on posts (likes, comments) but no signups.</p>
+                <p><strong>Fix:</strong> Every post needs a clear call-to-action. "Link in bio" is the minimum. Better: "Join [Campaign Name] before the early-bird rewards are gone &mdash; link in bio." Make sure your link is actually in your bio and it works on mobile. Test it yourself every few days.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 8: Your Welcome Email Is Broken or Missing</h4>
+                <p><strong>Symptom:</strong> People sign up but never engage or share.</p>
+                <p><strong>Fix:</strong> Sign up with a test email right now and check. Is the welcome email arriving? Does it include the reward? Does the referral link work? A broken welcome email is a silent killer &mdash; you lose fans without ever knowing why.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 9: You Gave Up on Personal Outreach Too Early</h4>
+                <p><strong>Symptom:</strong> Under 100 fans after 10+ days.</p>
+                <p><strong>Fix:</strong> Go back to personal DMs. Public posts are amplifiers, but personal messages are the engine. Send 10-15 personalized DMs per day for the next 5 days. Use the scripts from Phase 2 and target people who have engaged with your content recently.</p>
+            </div>
+
+            <div class="card card-yellow">
+                <h4 style="margin-top:0;">Fix 10: You Are Not Posting Consistently</h4>
+                <p><strong>Symptom:</strong> Sporadic growth spikes followed by flat periods.</p>
+                <p><strong>Fix:</strong> Commit to the Daily 7 action card above for 14 consecutive days without skipping. Growth is not about viral moments &mdash; it is about consistent daily actions that compound. Artists who post daily see 3-4x more growth than those who post 2-3 times per week.</p>
+            </div>
+        </div>
+    </details>
+
+    <!-- App: Schedule -->
+    <details id="app-schedule">
+        <summary>Recommended Posting Schedule by Platform</summary>
+        <div class="details-body">
+            <p>These posting times and frequencies are based on aggregate data from campaigns that hit 1,000+ fans. Adjust based on your specific audience, but start here.</p>
+
+            <h4>Instagram</h4>
+            <table>
+                <thead>
+                    <tr><th>Content Type</th><th>Frequency</th><th>Best Time</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Feed Post</td><td>4-5x per week</td><td>11 AM - 1 PM or 7 - 9 PM</td><td>Alternate between value content and campaign promo</td></tr>
+                    <tr><td>Stories</td><td>3x daily</td><td>9 AM, 1 PM, 8 PM</td><td>Always include link sticker. Use polls and questions for engagement.</td></tr>
+                    <tr><td>Reels</td><td>2-3x per week</td><td>12 PM or 6 PM</td><td>Studio clips, behind-the-scenes, campaign explainers</td></tr>
+                    <tr><td>Live</td><td>1x per week</td><td>8 - 10 PM (weekday evenings)</td><td>Q&A about your music + mention campaign. Pin link in comments.</td></tr>
+                </tbody>
+            </table>
+
+            <h4>TikTok</h4>
+            <table>
+                <thead>
+                    <tr><th>Content Type</th><th>Frequency</th><th>Best Time</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Short Video</td><td>1-2x daily</td><td>7 AM, 12 PM, or 10 PM</td><td>Hook in first 2 sec. Studio clips perform best.</td></tr>
+                    <tr><td>Duets / Stitches</td><td>2-3x per week</td><td>Any time</td><td>React to other artists or trending sounds in your genre</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Twitter / X</h4>
+            <table>
+                <thead>
+                    <tr><th>Content Type</th><th>Frequency</th><th>Best Time</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tweets</td><td>3-5x daily</td><td>8 AM, 12 PM, 5 PM, 9 PM</td><td>Mix campaign promo (1x) with genuine thoughts and engagement (4x)</td></tr>
+                    <tr><td>Threads</td><td>1-2x per week</td><td>10 AM - 12 PM</td><td>Campaign updates, personal stories, music industry insights</td></tr>
+                    <tr><td>Spaces</td><td>1x per week</td><td>8 - 10 PM</td><td>Host or join music-related Spaces. Mention campaign naturally.</td></tr>
+                </tbody>
+            </table>
+
+            <h4>YouTube</h4>
+            <table>
+                <thead>
+                    <tr><th>Content Type</th><th>Frequency</th><th>Best Time</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Community Posts</td><td>2-3x per week</td><td>Any time</td><td>Polls, updates, campaign milestone celebrations</td></tr>
+                    <tr><td>Shorts</td><td>2-3x per week</td><td>3 - 5 PM</td><td>Repurpose TikTok content</td></tr>
+                    <tr><td>Full Videos</td><td>1x per week</td><td>Saturday 12 - 3 PM</td><td>Type beats, studio vlogs, campaign journey updates</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Reddit</h4>
+            <table>
+                <thead>
+                    <tr><th>Content Type</th><th>Frequency</th><th>Best Time</th><th>Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Community Posts</td><td>2-3x per week</td><td>9 AM - 12 PM weekdays</td><td>Be genuinely helpful. Only mention campaign when relevant and allowed by sub rules.</td></tr>
+                    <tr><td>Feedback Threads</td><td>1x per week</td><td>Varies by subreddit</td><td>Share your music in feedback threads. Include campaign link in your profile, not the post.</td></tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-key">
+                <div class="callout-icon">&#9670;</div>
+                <div><strong>The 80/20 rule of platform posting:</strong> Spend 80% of your effort on the 1-2 platforms where your audience is most active. Use the remaining 20% to test and maintain presence on others. If you are an R&B artist, Instagram and TikTok are likely your 80%. If you are a producer, YouTube and Twitter might be. Follow the engagement, not the trends.</div>
+            </div>
+        </div>
+    </details>
+</section>
+
+<!-- ════════════════════════════════════════ FOOTER ════════════════════════════════════════ -->
+<div class="footer">
+    <p style="color: var(--text-dim);">The First 1,000 Fans Playbook &mdash; A TrueFans LOOP Bonus Resource</p>
+    <p style="color: var(--text-dim); margin-bottom: 0;">Built for artists who are serious about growing a real fanbase. &mdash; <a href="/">TrueFans LOOP</a></p>
+</div>
+
+</div><!-- /.container -->
+
+</body>
+</html>

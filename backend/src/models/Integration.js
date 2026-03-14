@@ -35,6 +35,10 @@ const Integration = {
 
   getActiveWebhooks(artistId) {
     return getDb().prepare("SELECT * FROM integrations WHERE artist_id = ? AND type = 'webhook' AND active = 1").all(artistId);
+  },
+
+  getActiveByType(artistId, type) {
+    return getDb().prepare("SELECT * FROM integrations WHERE artist_id = ? AND type = ? AND active = 1").all(artistId, type);
   }
 };
 

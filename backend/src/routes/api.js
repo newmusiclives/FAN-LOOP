@@ -115,4 +115,15 @@ router.post('/admin/leaderboard/:campaignId/refresh', adminAuth, (req, res) => {
   res.json({ success: true });
 });
 
+// ──────────── GoHighLevel Test ────────────
+router.post('/admin/integrations/test-ghl', adminAuth, async (req, res) => {
+  const { api_key, location_id } = req.body;
+  if (!api_key || !location_id) {
+    return res.json({ success: false, error: 'API Key and Location ID are required' });
+  }
+  const ghlService = require('../services/gohighlevelService');
+  const result = await ghlService.testConnection(api_key, location_id);
+  res.json(result);
+});
+
 module.exports = router;

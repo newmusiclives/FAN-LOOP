@@ -15,6 +15,7 @@ const { campaignCreateRules, artistCreateRules, rewardCreateRules } = require('.
 const { exportFansCSV } = require('../services/exportService');
 const fraudService = require('../services/fraudService');
 const { authLimiter } = require('../middleware/rateLimiter');
+const campaignTemplates = require('../data/campaign-templates');
 const router = express.Router();
 
 router.use(adminAuth);
@@ -58,7 +59,12 @@ router.post('/artists', artistCreateRules, (req, res) => {
     if (existing) {
       return res.render('admin/artist-form', { title: 'New Artist', artist: req.body, error: 'Slug already taken', user: req.user });
     }
-    Artist.create({ user_id: req.user.id, ...req.body });
+    const artistData = { ...req.body, user_id: req.user.id };
+    artistData.brand_config = {
+      primary_color: req.body.primary_color || '#8b5cf6',
+      secondary_color: req.body.secondary_color || '#ec4899'
+    };
+    Artist.create(artistData);
     res.redirect('/admin/artists');
   } catch (err) {
     res.render('admin/artist-form', { title: 'New Artist', artist: req.body, error: err.message, user: req.user });
@@ -75,7 +81,12 @@ router.post('/artists/:id', artistCreateRules, (req, res) => {
   if (req.flash_errors) {
     return res.render('admin/artist-form', { title: 'Edit Artist', artist: { id: req.params.id, ...req.body }, error: req.flash_errors.join(', '), user: req.user });
   }
-  Artist.update(req.params.id, req.body);
+  const updateData = { ...req.body };
+  updateData.brand_config = {
+    primary_color: req.body.primary_color || '#8b5cf6',
+    secondary_color: req.body.secondary_color || '#ec4899'
+  };
+  Artist.update(req.params.id, updateData);
   res.redirect('/admin/artists');
 });
 
@@ -93,18 +104,59 @@ router.get('/campaigns', (req, res) => {
 
 router.get('/campaigns/new', (req, res) => {
   const artists = Artist.listAll();
-  res.render('admin/campaign-form', { title: 'New Campaign', campaign: null, artists, error: null, user: req.user });
+  res.render('admin/campaign-form', { title: 'New Campaign', campaign: null, artists, error: null, user: req.user, templates: campaignTemplates });
+});
+
+// API: get template data for auto-fill (replaces ALL artist placeholders)
+router.get('/campaigns/template/:type', (req, res) => {
+  const tpl = campaignTemplates.find(t => t.type === req.params.type);
+  if (!tpl) return res.status(404).json({ error: 'Template not found' });
+
+  let result = JSON.parse(JSON.stringify(tpl));
+
+  // If artist_id provided, replace ALL placeholders from their profile
+  if (req.query.artist_id) {
+    const artist = Artist.findById(req.query.artist_id);
+    if (artist) {
+      const placeholders = Artist.getPlaceholderMap(artist);
+
+      // Also use artist's brand colors as defaults
+      const bc = artist.brand_config ? (typeof artist.brand_config === 'string' ? JSON.parse(artist.brand_config) : artist.brand_config) : {};
+      if (bc.primary_color) result.brand_colors.primary_color = bc.primary_color;
+      if (bc.secondary_color) result.brand_colors.secondary_color = bc.secondary_color;
+
+      const replaceAll = (str) => {
+        let out = str;
+        for (const [key, val] of Object.entries(placeholders)) {
+          if (val) out = out.split(key).join(val);
+        }
+        return out;
+      };
+
+      result.headline = replaceAll(result.headline);
+      result.subheadline = replaceAll(result.subheadline);
+      result.campaign_description = replaceAll(result.campaign_description);
+      result.share_messages.twitter = replaceAll(result.share_messages.twitter);
+      result.share_messages.whatsapp = replaceAll(result.share_messages.whatsapp);
+      result.share_messages.email_subject = replaceAll(result.share_messages.email_subject);
+      result.share_messages.email_body = replaceAll(result.share_messages.email_body);
+      result.reward_tiers.forEach(t => {
+        t.description = replaceAll(t.description);
+      });
+    }
+  }
+  res.json(result);
 });
 
 router.post('/campaigns', campaignCreateRules, (req, res) => {
   const artists = Artist.listAll();
   if (req.flash_errors) {
-    return res.render('admin/campaign-form', { title: 'New Campaign', campaign: req.body, artists, error: req.flash_errors.join(', '), user: req.user });
+    return res.render('admin/campaign-form', { title: 'New Campaign', campaign: req.body, artists, error: req.flash_errors.join(', '), user: req.user, templates: campaignTemplates });
   }
   try {
     const existing = Campaign.findBySlug(req.body.slug);
     if (existing) {
-      return res.render('admin/campaign-form', { title: 'New Campaign', campaign: req.body, artists, error: 'Slug already taken', user: req.user });
+      return res.render('admin/campaign-form', { title: 'New Campaign', campaign: req.body, artists, error: 'Slug already taken', user: req.user, templates: campaignTemplates });
     }
 
     const shareMessages = {};
@@ -113,7 +165,7 @@ router.post('/campaigns', campaignCreateRules, (req, res) => {
     if (req.body.share_email_subject) shareMessages.email_subject = req.body.share_email_subject;
     if (req.body.share_email_body) shareMessages.email_body = req.body.share_email_body;
 
-    Campaign.create({
+    const campaign = Campaign.create({
       ...req.body,
       share_messages: shareMessages,
       brand_config: {
@@ -121,9 +173,35 @@ router.post('/campaigns', campaignCreateRules, (req, res) => {
         secondary_color: req.body.secondary_color || '#ec4899'
       }
     });
+
+    // Auto-create reward tiers from template if using a template
+    if (req.body.use_template === '1' && req.body.type) {
+      const tpl = campaignTemplates.find(t => t.type === req.body.type);
+      if (tpl && campaign) {
+        const artist = Artist.findById(req.body.artist_id);
+        const placeholders = artist ? Artist.getPlaceholderMap(artist) : {};
+        const replaceAll = (str) => {
+          let out = str;
+          for (const [key, val] of Object.entries(placeholders)) {
+            if (val) out = out.split(key).join(val);
+          }
+          return out;
+        };
+        tpl.reward_tiers.forEach(tier => {
+          Reward.create({
+            campaign_id: campaign.id,
+            tier_name: tier.tier_name,
+            referrals_required: tier.referrals_required,
+            description: replaceAll(tier.description),
+            reward_type: 'digital'
+          });
+        });
+      }
+    }
+
     res.redirect('/admin/campaigns');
   } catch (err) {
-    res.render('admin/campaign-form', { title: 'New Campaign', campaign: req.body, artists, error: err.message, user: req.user });
+    res.render('admin/campaign-form', { title: 'New Campaign', campaign: req.body, artists, error: err.message, user: req.user, templates: campaignTemplates });
   }
 });
 
@@ -142,7 +220,7 @@ router.get('/campaigns/:id/edit', (req, res) => {
   const campaign = Campaign.findById(req.params.id);
   if (!campaign) return res.redirect('/admin/campaigns');
   const artists = Artist.listAll();
-  res.render('admin/campaign-form', { title: 'Edit Campaign', campaign, artists, error: null, user: req.user });
+  res.render('admin/campaign-form', { title: 'Edit Campaign', campaign, artists, error: null, user: req.user, templates: campaignTemplates });
 });
 
 router.post('/campaigns/:id', campaignCreateRules, (req, res) => {
@@ -236,6 +314,11 @@ router.get('/fans/export/csv', (req, res) => {
   exportFansCSV(req.query.campaign_id, res);
 });
 
+// ──────────── Bonuses ────────────
+router.get('/bonuses', (req, res) => {
+  res.render('admin/bonuses', { title: 'Bonus Content', user: req.user });
+});
+
 // ──────────── Analytics ────────────
 router.get('/analytics', (req, res) => {
   const campaigns = Campaign.listAll();
@@ -294,28 +377,43 @@ router.post('/settings/password', authLimiter, (req, res) => {
 });
 
 router.post('/settings/integrations', (req, res) => {
-  const { artist_id, type, name, webhook_url, api_key } = req.body;
+  const { artist_id, type, name } = req.body;
   const config = {};
-  if (webhook_url) {
-    // Validate webhook URL
-    try {
-      const parsed = new URL(webhook_url);
-      if (!['http:', 'https:'].includes(parsed.protocol)) {
-        return res.redirect('/admin/settings?error=invalid_webhook_url');
-      }
-      // Block internal/private network addresses
-      const hostname = parsed.hostname.toLowerCase();
-      if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0' ||
-          hostname.startsWith('10.') || hostname.startsWith('192.168.') || hostname.startsWith('172.') ||
-          hostname === '169.254.169.254') {
-        return res.redirect('/admin/settings?error=invalid_webhook_url');
-      }
-      config.url = parsed.toString();
-    } catch {
-      return res.redirect('/admin/settings?error=invalid_webhook_url');
+
+  if (type === 'gohighlevel') {
+    // GoHighLevel integration
+    if (!req.body.ghl_api_key || !req.body.ghl_location_id) {
+      return res.redirect('/admin/settings?error=ghl_missing_credentials');
     }
+    config.api_key = req.body.ghl_api_key;
+    config.location_id = req.body.ghl_location_id;
+    if (req.body.ghl_workflow_id) config.workflow_id = req.body.ghl_workflow_id;
+    if (req.body.ghl_tier_workflow_id) config.tier_workflow_id = req.body.ghl_tier_workflow_id;
+    if (req.body.ghl_cf_referral_code) config.custom_field_referral_code = req.body.ghl_cf_referral_code;
+    if (req.body.ghl_cf_campaign) config.custom_field_campaign = req.body.ghl_cf_campaign;
+    if (req.body.ghl_cf_referral_count) config.custom_field_referral_count = req.body.ghl_cf_referral_count;
+  } else {
+    // Webhook / Mailchimp / ConvertKit
+    if (req.body.webhook_url) {
+      try {
+        const parsed = new URL(req.body.webhook_url);
+        if (!['http:', 'https:'].includes(parsed.protocol)) {
+          return res.redirect('/admin/settings?error=invalid_webhook_url');
+        }
+        const hostname = parsed.hostname.toLowerCase();
+        if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0' ||
+            hostname.startsWith('10.') || hostname.startsWith('192.168.') || hostname.startsWith('172.') ||
+            hostname === '169.254.169.254') {
+          return res.redirect('/admin/settings?error=invalid_webhook_url');
+        }
+        config.url = parsed.toString();
+      } catch {
+        return res.redirect('/admin/settings?error=invalid_webhook_url');
+      }
+    }
+    if (req.body.api_key) config.api_key = req.body.api_key;
   }
-  if (api_key) config.api_key = api_key;
+
   Integration.create({ artist_id, type, name, config });
   res.redirect('/admin/settings');
 });

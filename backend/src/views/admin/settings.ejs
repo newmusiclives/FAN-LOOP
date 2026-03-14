@@ -4,7 +4,7 @@
   <h2 class="text-2xl font-bold">Settings</h2>
 </div>
 
-<div class="max-w-2xl space-y-6">
+<div class="max-w-3xl space-y-6">
   <!-- Password -->
   <div class="card p-6">
     <h3 class="text-lg font-semibold mb-4">Change Password</h3>
@@ -15,26 +15,136 @@
     </form>
   </div>
 
-  <!-- Integrations -->
+  <!-- Current Integrations -->
   <div class="card p-6">
-    <h3 class="text-lg font-semibold mb-4">Integrations</h3>
+    <h3 class="text-lg font-semibold mb-4">Active Integrations</h3>
 
-    <div class="space-y-3 mb-6">
-      <% integrations.forEach(int => { %>
-        <div class="flex items-center justify-between p-3 rounded-lg bg-[#1a1a2e]">
-          <div>
-            <div class="text-sm font-medium"><%= int.name %></div>
-            <div class="text-xs text-gray-500"><%= int.type %> — <%= int.active ? 'Active' : 'Inactive' %></div>
+    <% if (integrations.length === 0) { %>
+      <p class="text-sm text-gray-500">No integrations configured yet.</p>
+    <% } else { %>
+      <div class="space-y-3 mb-6">
+        <% integrations.forEach(int => { %>
+          <% const cfg = JSON.parse(int.config || '{}'); %>
+          <div class="flex items-center justify-between p-3 rounded-lg bg-[#1a1a2e]">
+            <div class="flex items-center gap-3">
+              <% if (int.type === 'gohighlevel') { %>
+                <span class="text-lg">🟢</span>
+              <% } else if (int.type === 'webhook') { %>
+                <span class="text-lg">🔗</span>
+              <% } else { %>
+                <span class="text-lg">📧</span>
+              <% } %>
+              <div>
+                <div class="text-sm font-medium"><%= int.name %></div>
+                <div class="text-xs text-gray-500">
+                  <% if (int.type === 'gohighlevel') { %>
+                    GoHighLevel — Location: <%= cfg.location_id ? cfg.location_id.substring(0, 8) + '...' : 'not set' %>
+                  <% } else { %>
+                    <%= int.type %> — <%= int.active ? 'Active' : 'Inactive' %>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+            <form method="POST" action="/admin/settings/integrations/<%= int.id %>/delete">
+              <button class="text-xs text-red-400 hover:text-red-300">Remove</button>
+            </form>
           </div>
-          <form method="POST" action="/admin/settings/integrations/<%= int.id %>/delete">
-            <button class="text-xs text-red-400 hover:text-red-300">Remove</button>
-          </form>
-        </div>
-      <% }) %>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- GoHighLevel Integration -->
+  <div class="card p-6">
+    <div class="flex items-center gap-3 mb-2">
+      <h3 class="text-lg font-semibold">GoHighLevel Integration</h3>
+      <span class="text-xs px-2 py-0.5 rounded bg-green-900/30 text-green-400 font-medium">Recommended</span>
     </div>
+    <p class="text-xs text-gray-500 mb-4">Connect GHL to automatically sync every fan as a contact — with tags, custom fields, and workflow triggers.</p>
+
+    <form method="POST" action="/admin/settings/integrations" class="space-y-4" id="ghlForm">
+      <input type="hidden" name="type" value="gohighlevel">
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Artist</label>
+          <select name="artist_id" required class="w-full text-sm">
+            <% artists.forEach(a => { %>
+              <option value="<%= a.id %>"><%= a.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Integration Name</label>
+          <input name="name" value="GoHighLevel" required class="w-full text-sm" placeholder="e.g. GoHighLevel — Main Account">
+        </div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-[#1a1a2e] border border-[#2a2a3e] space-y-4">
+        <h4 class="text-sm font-semibold text-purple-400">GHL API Credentials</h4>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">API Key or Access Token *</label>
+          <input name="ghl_api_key" required class="w-full text-sm" placeholder="eyJhbGciOi... or your API key">
+          <span class="text-xs text-gray-600">Found in GHL Settings &gt; Business Profile &gt; API Keys, or use an OAuth access token</span>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Location ID *</label>
+          <input name="ghl_location_id" required class="w-full text-sm" placeholder="e.g. abc123XYZ">
+          <span class="text-xs text-gray-600">Found in GHL Settings &gt; Business Profile &gt; Company ID / Location ID</span>
+        </div>
+
+        <div class="border-t border-[#2a2a3e] pt-4">
+          <h4 class="text-sm font-semibold text-purple-400 mb-3">Auto-Tagging &amp; Workflow Triggers</h4>
+          <p class="text-xs text-gray-500 mb-3">Every fan gets tagged with: <code class="text-purple-300">fanloop</code>, <code class="text-purple-300">campaign:{type}</code>, <code class="text-purple-300">campaign:{slug}</code>, <code class="text-purple-300">referred</code> or <code class="text-purple-300">direct-signup</code>. When fans hit reward tiers, they also get <code class="text-purple-300">tier:{name}</code> tags.</p>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Signup Workflow ID</label>
+              <input name="ghl_workflow_id" class="w-full text-sm" placeholder="Optional — triggers on every new fan">
+              <span class="text-xs text-gray-600">Workflow runs when a fan first signs up</span>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Tier Upgrade Workflow ID</label>
+              <input name="ghl_tier_workflow_id" class="w-full text-sm" placeholder="Optional — triggers on tier unlock">
+              <span class="text-xs text-gray-600">Workflow runs when a fan hits a new reward tier</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-[#2a2a3e] pt-4">
+          <h4 class="text-sm font-semibold text-purple-400 mb-3">Custom Fields (Optional)</h4>
+          <p class="text-xs text-gray-500 mb-3">Map FanLoop data to GHL custom fields. Enter the GHL Custom Field ID for each.</p>
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Referral Code Field ID</label>
+              <input name="ghl_cf_referral_code" class="w-full text-sm" placeholder="e.g. abc123">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Campaign Name Field ID</label>
+              <input name="ghl_cf_campaign" class="w-full text-sm" placeholder="e.g. def456">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Referral Count Field ID</label>
+              <input name="ghl_cf_referral_count" class="w-full text-sm" placeholder="e.g. ghi789">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button type="submit" class="btn-primary px-5 py-2 rounded-lg text-white text-sm">Connect GoHighLevel</button>
+        <button type="button" id="testGhlBtn" class="px-5 py-2 rounded-lg border border-green-700 text-green-400 text-sm hover:bg-green-900/20">Test Connection</button>
+      </div>
+      <div id="testResult" class="hidden text-sm mt-2"></div>
+    </form>
+  </div>
+
+  <!-- Other Integrations -->
+  <div class="card p-6">
+    <h3 class="text-lg font-semibold mb-4">Other Integrations</h3>
+    <p class="text-xs text-gray-500 mb-4">Webhooks (Zapier/Make), Mailchimp, ConvertKit — send fan data anywhere.</p>
 
     <form method="POST" action="/admin/settings/integrations" class="p-4 rounded-lg border border-dashed border-[#2a2a3e]">
-      <h4 class="text-sm font-medium mb-3">Add Integration</h4>
       <div class="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label class="text-xs text-gray-500">Artist</label>
@@ -47,7 +157,7 @@
         <div>
           <label class="text-xs text-gray-500">Type</label>
           <select name="type" required class="w-full text-sm">
-            <option value="webhook">Webhook (Zapier)</option>
+            <option value="webhook">Webhook (Zapier / Make)</option>
             <option value="mailchimp">Mailchimp</option>
             <option value="convertkit">ConvertKit</option>
           </select>
@@ -59,6 +169,74 @@
       <button class="btn-primary px-4 py-1.5 rounded-lg text-white text-sm">Add Integration</button>
     </form>
   </div>
+
+  <!-- What gets synced -->
+  <div class="card p-6 bg-[#1a1a2e] border-[#2a2a3e]">
+    <h3 class="text-sm font-semibold text-purple-400 mb-3">What Gets Synced to GoHighLevel</h3>
+    <div class="grid grid-cols-2 gap-4 text-xs text-gray-400">
+      <div>
+        <div class="font-semibold text-gray-300 mb-1">On Every Fan Signup:</div>
+        <ul class="space-y-1 list-disc list-inside">
+          <li>Contact created/updated (upsert by email)</li>
+          <li>Name, email, source tracked</li>
+          <li>Tags: fanloop, campaign type, campaign slug, source</li>
+          <li>Custom fields: referral code, campaign name, referral count</li>
+          <li>Signup workflow triggered (if configured)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold text-gray-300 mb-1">On Reward Tier Unlock:</div>
+        <ul class="space-y-1 list-disc list-inside">
+          <li>Contact updated with new tier tag</li>
+          <li>Referral count custom field updated</li>
+          <li>Tier workflow triggered (if configured)</li>
+          <li>Example tags: tier:Superfan, tier:VIP, tier:Legend</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+document.getElementById('testGhlBtn')?.addEventListener('click', async () => {
+  const btn = document.getElementById('testGhlBtn');
+  const result = document.getElementById('testResult');
+  const apiKey = document.querySelector('[name=ghl_api_key]').value;
+  const locationId = document.querySelector('[name=ghl_location_id]').value;
+
+  if (!apiKey || !locationId) {
+    result.classList.remove('hidden');
+    result.className = 'text-sm mt-2 text-red-400';
+    result.textContent = 'Please enter both API Key and Location ID first.';
+    return;
+  }
+
+  btn.textContent = 'Testing...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/admin/integrations/test-ghl', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: apiKey, location_id: locationId })
+    });
+    const data = await res.json();
+    result.classList.remove('hidden');
+    if (data.success) {
+      result.className = 'text-sm mt-2 text-green-400';
+      result.textContent = 'Connected! Location: ' + data.location_name;
+    } else {
+      result.className = 'text-sm mt-2 text-red-400';
+      result.textContent = 'Connection failed: ' + data.error;
+    }
+  } catch (e) {
+    result.classList.remove('hidden');
+    result.className = 'text-sm mt-2 text-red-400';
+    result.textContent = 'Test failed: ' + e.message;
+  }
+  btn.textContent = 'Test Connection';
+  btn.disabled = false;
+});
+</script>
 
 <%- include('../partials/admin-footer') %>

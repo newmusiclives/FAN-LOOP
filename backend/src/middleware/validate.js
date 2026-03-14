@@ -21,7 +21,7 @@ const fanSignupRules = [
 const campaignCreateRules = [
   body('title').trim().notEmpty().withMessage('Title is required').isLength({ max: 200 }),
   body('slug').trim().notEmpty().withMessage('Slug is required').matches(/^[a-z0-9-]+$/).withMessage('Slug must be lowercase letters, numbers, and hyphens'),
-  body('type').optional().isIn(['pre-save', 'merch-drop', 'ticket-giveaway', 'exclusive-content', 'meet-greet', 'fan-club', 'contest']),
+  body('type').optional().isIn(['pre-save', 'merch-drop', 'ticket-giveaway', 'exclusive-content', 'meet-greet', 'fan-club', 'contest', 'album-release', 'listening-party', 'tour-announcement', 'music-video', 'vinyl-preorder', 'remix-contest', 'backstage-pass', 'holiday-special']),
   body('artist_id').notEmpty().withMessage('Artist is required'),
   handleValidation
 ];
