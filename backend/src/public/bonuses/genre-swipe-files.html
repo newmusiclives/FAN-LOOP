@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueFans LOOP — Genre Swipe File Library</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0F;color:#F8FAFC;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;min-height:100vh}
+a{color:#8B5CF6;text-decoration:none}
+a:hover{color:#A78BFA}
+
+.header{text-align:center;padding:48px 24px 32px;border-bottom:1px solid rgba(139,92,246,0.2)}
+.header h1{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.header p{color:#94A3B8;font-size:1.1rem;max-width:640px;margin:0 auto}
+.badge{display:inline-block;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+
+.genre-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:24px;max-width:900px;margin:0 auto}
+.genre-nav button{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#C4B5FD;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:0.95rem;font-weight:600;transition:all .2s}
+.genre-nav button:hover,.genre-nav button.active{background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;border-color:transparent;transform:translateY(-1px)}
+
+.container{max-width:960px;margin:0 auto;padding:0 24px 60px}
+
+.genre-section{margin-top:32px}
+.genre-header{display:flex;align-items:center;justify-content:space-between;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:14px;padding:18px 24px;cursor:pointer;user-select:none;transition:all .2s}
+.genre-header:hover{background:rgba(139,92,246,0.14);border-color:rgba(139,92,246,0.4)}
+.genre-header h2{font-size:1.5rem;font-weight:700;display:flex;align-items:center;gap:12px}
+.genre-header .arrow{font-size:1.2rem;transition:transform .3s;color:#8B5CF6}
+.genre-header.open .arrow{transform:rotate(180deg)}
+
+.genre-body{display:none;padding:8px 0}
+.genre-body.open{display:block}
+
+.category-label{font-size:1.15rem;font-weight:700;color:#EC4899;margin:28px 0 14px;padding-bottom:8px;border-bottom:1px solid rgba(236,72,153,0.2);display:flex;align-items:center;gap:8px}
+
+.msg-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px 18px;margin-bottom:10px;position:relative;transition:border-color .2s}
+.msg-card:hover{border-color:rgba(139,92,246,0.3)}
+.msg-card p{font-size:0.92rem;color:#CBD5E1;white-space:pre-wrap}
+.msg-card .label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8B5CF6;margin-bottom:6px}
+.msg-card .subject{font-weight:700;color:#F8FAFC;margin-bottom:4px;font-size:0.95rem}
+
+.copy-btn{position:absolute;top:12px;right:12px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);color:#C4B5FD;padding:5px 14px;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:600;transition:all .2s}
+.copy-btn:hover{background:#8B5CF6;color:#fff}
+.copy-btn.copied{background:#10B981;border-color:#10B981;color:#fff}
+
+.footer{text-align:center;padding:40px 24px;border-top:1px solid rgba(139,92,246,0.15);color:#64748B;font-size:0.85rem}
+
+@media(max-width:640px){
+.header h1{font-size:1.6rem}
+.genre-nav button{padding:8px 14px;font-size:0.82rem}
+.genre-header h2{font-size:1.15rem}
+.msg-card{padding:14px 14px 14px 14px}
+.copy-btn{position:relative;top:auto;right:auto;display:block;margin-top:10px;text-align:center;width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="badge">Bonus Resource</div>
+<h1>TrueFans LOOP — Genre Swipe File Library</h1>
+<p>Pre-written, copy-paste share messages tailored to 9 music genres. Replace the placeholders and start sharing.</p>
+</div>
+
+<nav class="genre-nav" id="genreNav">
+<button onclick="scrollToGenre('hiphop')" class="active">Hip-Hop</button>
+<button onclick="scrollToGenre('rnb')">R&B</button>
+<button onclick="scrollToGenre('pop')">Pop</button>
+<button onclick="scrollToGenre('edm')">EDM</button>
+<button onclick="scrollToGenre('rock')">Rock</button>
+<button onclick="scrollToGenre('country')">Country</button>
+<button onclick="scrollToGenre('latin')">Latin</button>
+<button onclick="scrollToGenre('indie')">Indie</button>
+<button onclick="scrollToGenre('gospel')">Gospel</button>
+</nav>
+
+<div class="container">
+
+<!-- =============================== HIP-HOP =============================== -->
+<div class="genre-section" id="hiphop">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Hip-Hop</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>Just found [ARTIST NAME] and my whole playlist got rearranged. "[SONG TITLE]" goes dummy hard. If you sleep on this you missing out fr {link} #NewHipHop #NowPlaying</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>The bars on "[SONG TITLE]" by [ARTIST NAME] are insane. This the type of rap that reminds you why you fell in love with hip-hop. Tap in {link} #HipHop #Bars</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>Name one rapper going harder than [ARTIST NAME] right now. I'll wait. "[SONG TITLE]" is proof the underground is alive {link} #RealRap #Underground</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>[ARTIST NAME] just dropped "[SONG TITLE]" and it's everything. Flow is crazy, beat is crazy, whole vibe is crazy. Run it up {link} #HipHop #NewMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>If you fw lyrical rap you NEED to hear [ARTIST NAME]. "[SONG TITLE]" had me rewinding bars three times. No skip {link} #Rap #Lyrics #TrueFans</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>Late night drives hit different with "[SONG TITLE]" by [ARTIST NAME] on repeat. This one's a mood. Trust me and press play {link} #NightDrive #HipHop</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>Y'all keep sleeping on [ARTIST NAME] and it honestly hurts. "[SONG TITLE]" deserves a million streams minimum. Do the right thing {link} #SupportIndependentRap</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>Put [ARTIST NAME] on your radar immediately. "[SONG TITLE]" got that grimy beat with the smooth delivery and I can't stop playing it {link} #RapMusic #NextUp</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>POV: you discover [ARTIST NAME] for the first time and "[SONG TITLE]" rewires your entire brain. You're welcome {link} #HipHopHead #MusicDiscovery</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>I don't care what algorithm the playlist gods are pushing. [ARTIST NAME] is the one. Start with "[SONG TITLE]" and thank me later {link} #IndieRap #GemAlert</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Yo I just found this rapper [ARTIST NAME] and they go hard. Listen to "[SONG TITLE]" real quick and tell me that ain't fire. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Bro remember when you said nobody's rapping like they used to? Check out [ARTIST NAME] - "[SONG TITLE]". This is exactly what you been looking for. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>You gotta hear this. [ARTIST NAME] dropped "[SONG TITLE]" and the bars are stupid. I already got it on repeat. Peep it {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Need your opinion on something. This track "[SONG TITLE]" by [ARTIST NAME] - is this hard or am I bugging? {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>Adding this to the group playlist no discussion. "[SONG TITLE]" by [ARTIST NAME]. Play it at the cookout this weekend. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: This rapper is about to blow up - get in early</div>
+<p>I just discovered [ARTIST NAME] and their track "[SONG TITLE]" is next-level hip-hop. The lyricism, the production, the delivery - it all hits. Check it out before everyone else catches on: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: You need to hear "[SONG TITLE]" right now</div>
+<p>[ARTIST NAME] just released something special and I had to share it with you. If you love real bars over hard-hitting production, this track is going to be on repeat for you. Listen here: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: Found your next favorite rapper</div>
+<p>I know you've got a stacked playlist already, but [ARTIST NAME] deserves a spot. "[SONG TITLE]" is the kind of hip-hop that reminds you what the genre is capable of. One listen and you'll be hooked: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: Independent hip-hop gem you can't miss</div>
+<p>[ARTIST NAME] is doing something different and "[SONG TITLE]" proves it. No major label push, no gimmicks - just raw talent and a track that goes hard from start to finish. Press play: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: This track had me rewinding bars three times</div>
+<p>Not exaggerating - "[SONG TITLE]" by [ARTIST NAME] is that good. Every bar lands, the beat knocks, and the whole track feels like a statement. You need this in your rotation: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Stop scrolling - this underground rapper is about to change your whole playlist."
+
+CONCEPT: Film a reaction-style video listening to "[SONG TITLE]" by [ARTIST NAME] for the first time. Show genuine surprise at the bars. End with the track info on screen and link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "Name a rapper with zero skips. I'll go first."
+
+CONCEPT: Quick-cut montage of you vibing to different [ARTIST NAME] tracks, landing on "[SONG TITLE]" as the main feature. Use the trending "put you on" format. Text overlay with artist name and link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "POV: You discover [ARTIST NAME] and realize mainstream rap has been lying to you."
+
+CONCEPT: Start with a bored face scrolling through generic playlists, then cut to an excited reaction as "[SONG TITLE]" drops. Use the before/after transition. Pin comment with the link.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "This bar right here? Rewind that. One more time."
+
+CONCEPT: Play a specific hard-hitting bar from "[SONG TITLE]" by [ARTIST NAME] and keep rewinding it with increasingly hyped reactions. Use the zoom-in effect on each replay. Drop artist info at the end.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "Artists with under 10K followers who rap better than your favorite."
+
+CONCEPT: Use a ranking format counting down, with [ARTIST NAME] at number one. Play a snippet of "[SONG TITLE]" as the reveal. On-screen text says "Link in bio - you're welcome." Drive to fan signup.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== R&B =============================== -->
+<div class="genre-section" id="rnb">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>R&B</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>[ARTIST NAME] just dropped "[SONG TITLE]" and my soul left my body. This is the R&B we've been starving for. Vocals are unreal {link} #RnB #SoulMusic #NowPlaying</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>Candles lit. Phone off. "[SONG TITLE]" by [ARTIST NAME] on repeat. This is what R&B is supposed to feel like {link} #Vibes #RnBMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>If you think R&B is dead you just haven't found [ARTIST NAME] yet. "[SONG TITLE]" is smooth, soulful, and hits you right in the chest {link} #RnBRevival #NewMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>The vocal runs on "[SONG TITLE]" by [ARTIST NAME] are giving everything they need to give. Pure talent. No auto-tune needed {link} #RealRnB #Vocals</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>Added "[SONG TITLE]" by [ARTIST NAME] to my late night R&B playlist and now the whole mood is elevated. You need this in your life {link} #LateNightVibes #RnB</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>Somebody tell [ARTIST NAME] that "[SONG TITLE]" just healed something in me. This is therapy wrapped in a melody {link} #SoulfulMusic #HealingVibes</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>[ARTIST NAME] singing "[SONG TITLE]" is the definition of catching feelings through a speaker. Don't listen alone. Or do. Either way you'll be in your feels {link} #InMyFeelings #RnB</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>This generation's R&B is in good hands because [ARTIST NAME] exists. "[SONG TITLE]" is the smoothest thing I've heard all year {link} #SmoothRnB #TrueFans</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>Rainy day + "[SONG TITLE]" by [ARTIST NAME] = perfection. The harmonies on this track are next level. Run it up {link} #RainyDayPlaylist #RnBSoul</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>You ever hear a song and just close your eyes? That's "[SONG TITLE]" by [ARTIST NAME]. Pure emotion in every note. Stream it now {link} #MusicIsHealing #NewRnB</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Hey, you still into that smooth R&B vibe? Check out [ARTIST NAME] - "[SONG TITLE]" is exactly your type of song. Trust me on this one. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Ok so I found this R&B singer [ARTIST NAME] and I literally can't stop replaying "[SONG TITLE]". The vocals are insane. Listen and tell me what you think {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>Remember when we were talking about how nobody makes real R&B anymore? [ARTIST NAME] proved us wrong. Play "[SONG TITLE]" right now. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Adding "[SONG TITLE]" by [ARTIST NAME] to the chill playlist. This is that smooth late-night energy we always need. You'll love it {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>I need you to hear this. "[SONG TITLE]" by [ARTIST NAME]. If this doesn't give you chills something is wrong. Pure soul. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: The R&B voice you didn't know you needed</div>
+<p>[ARTIST NAME] has this way of making every note feel personal, and "[SONG TITLE]" is the perfect example. Smooth production, raw vocals, and lyrics that hit close to home. Give it a listen: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: Press play, close your eyes, thank me later</div>
+<p>I discovered [ARTIST NAME] this week and "[SONG TITLE]" stopped me in my tracks. It's the kind of R&B that makes you feel something real. You deserve to hear this: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: Real R&B still exists - here's proof</div>
+<p>If you've been saying R&B isn't what it used to be, [ARTIST NAME] is about to change your mind. "[SONG TITLE]" has soul, depth, and vocals that will give you chills. Listen now: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: This song just became my entire evening</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] is the kind of track you put on and suddenly two hours have passed. Silky smooth, emotionally rich, and impossible to skip. Add it to your rotation: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: Your next favorite R&B artist is right here</div>
+<p>I've been telling everyone about [ARTIST NAME] because talent like this deserves to be heard. "[SONG TITLE]" is a masterclass in modern R&B - soulful, polished, and deeply authentic. Start here: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "If this R&B song doesn't give you chills, check your pulse."
+
+CONCEPT: Close-up of you pressing play on "[SONG TITLE]" by [ARTIST NAME]. Slow pan to your reaction as the vocals hit. Use a soft-lit aesthetic. Text overlay with song title. Link in bio for fan signup.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "R&B fans, drop everything. I found the one."
+
+CONCEPT: Duet-style video where you introduce [ARTIST NAME] and explain why "[SONG TITLE]" stands out. Play the chorus underneath your narration. End with on-screen text directing to link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "Songs that make you text your ex at 2am - starting with this one."
+
+CONCEPT: Moody late-night lighting. You scroll through your phone, then "[SONG TITLE]" by [ARTIST NAME] starts playing. Show the relatable moment. Pin comment with the streaming link.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "This vocal run just ended every singing competition ever."
+
+CONCEPT: Screen-record a specific vocal moment from "[SONG TITLE]" by [ARTIST NAME]. React with wide eyes and replay it. Use the "wait for it" format. Drop artist handle and link in the caption.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "Underrated R&B artists that deserve millions of streams - thread."
+
+CONCEPT: Start a series format with [ARTIST NAME] as the first feature. Play "[SONG TITLE]" while showing their streaming numbers. Call out that they deserve more. Ask viewers to share and follow for part two.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== POP =============================== -->
+<div class="genre-section" id="pop">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Pop</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>Obsessed is an understatement. "[SONG TITLE]" by [ARTIST NAME] is the catchiest thing I've heard in months. Stuck in my head on a permanent loop {link} #PopMusic #Bop</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>[ARTIST NAME] understood the assignment. "[SONG TITLE]" is a certified pop anthem and it deserves to be everywhere this summer {link} #SummerBop #NewPop</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>The chorus on "[SONG TITLE]" by [ARTIST NAME] lives rent-free in my head. If you like catchy music you literally cannot skip this {link} #PopHit #Earworm</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>Just discovered [ARTIST NAME] and wow. "[SONG TITLE]" is the kind of pop song that makes you roll down your windows and sing at full volume {link} #DrivePlaylist #PopVibes</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>Your main pop girl could never. [ARTIST NAME] delivered with "[SONG TITLE]" and I need the world to hear it immediately {link} #PopStar #StreamThis</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>I don't make the rules but "[SONG TITLE]" by [ARTIST NAME] is song of the year material. The production is flawless and the hook is lethal {link} #SOTY #PopPerfection</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>Added "[SONG TITLE]" by [ARTIST NAME] to every single one of my playlists. Morning playlist? Yes. Workout playlist? Yes. Crying playlist? Also yes {link} #Versatile #PopMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>The bridge on "[SONG TITLE]" by [ARTIST NAME] is a religious experience. If you skip past it you have no taste. Full stop {link} #TheBridge #PopGems</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>[ARTIST NAME] makes music for people who actually like music. "[SONG TITLE]" is smart, catchy, and impossibly fun. Get into it {link} #QualityPop #MusicLovers</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>Manifesting [ARTIST NAME] world domination because "[SONG TITLE]" is too good to stay underground. Stream it. Share it. Put it on your story {link} #NextBigThing #PopRising</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>OMG you have to hear this song. "[SONG TITLE]" by [ARTIST NAME] is the catchiest thing ever. I've had it on repeat all day. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Found our new karaoke song. "[SONG TITLE]" by [ARTIST NAME]. The chorus is so good you'll know it after one listen. Thank me later {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>Ok I'm putting you on right now. This artist [ARTIST NAME] is incredible and "[SONG TITLE]" is a straight pop banger. You're gonna be obsessed. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>This just became my personality. "[SONG TITLE]" by [ARTIST NAME]. If you don't add this to the playlist we can't be friends anymore {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>Remember that song I kept humming yesterday? Found it. "[SONG TITLE]" by [ARTIST NAME]. It's been stuck in my head for a reason - it's incredible. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: Your new favorite song is waiting</div>
+<p>I found [ARTIST NAME] this week and "[SONG TITLE]" has not left my rotation since. It's pop music at its finest - catchy, well-produced, and impossible to listen to just once. You'll love it: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: This pop song is going to be everywhere soon</div>
+<p>Mark my words - "[SONG TITLE]" by [ARTIST NAME] is about to blow up. The melody is infectious, the production is pristine, and the whole thing just feels like a hit. Get ahead of the curve: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: The pop anthem you didn't know you needed</div>
+<p>[ARTIST NAME] just released "[SONG TITLE]" and it's the kind of song that makes your whole day better. Bright, energetic, and genuinely uplifting. Press play and let it wash over you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: Catchy doesn't even begin to describe this</div>
+<p>Fair warning - once you hear "[SONG TITLE]" by [ARTIST NAME], it will live in your head for days. But honestly, that's a good thing because this song is pure joy. Don't say I didn't warn you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: I found the song of the summer early</div>
+<p>It's [ARTIST NAME] with "[SONG TITLE]" and I'm calling it right now. This track has everything - a hook that won't quit, production that sparkles, and the kind of energy that makes you want to dance. Listen here: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Songs that will be stuck in your head after one listen - number one."
+
+CONCEPT: Point to your ear as "[SONG TITLE]" by [ARTIST NAME] starts playing. Show yourself vibing, then cut to you still humming it hours later doing random tasks. Text: "I warned you." Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "This indie pop artist deserves a billion streams and I'll prove it in 15 seconds."
+
+CONCEPT: Quick countdown format showing different moments from "[SONG TITLE]" by [ARTIST NAME] - the verse, the pre-chorus buildup, and the chorus drop. End with a call to stream and follow.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "Tell me why this song isn't on every playlist in the world yet."
+
+CONCEPT: Screen record "[SONG TITLE]" by [ARTIST NAME] playing on your phone with the stream count visible. Act baffled that it doesn't have more plays. Encourage viewers to fix that. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "POV: your friend sends you a random song and it actually slaps."
+
+CONCEPT: Start with a text notification on screen. Open it to reveal "[SONG TITLE]" by [ARTIST NAME]. Go from skeptical to fully dancing within seconds. Relatable format drives shares.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "Songs that make you feel like the main character - starting here."
+
+CONCEPT: Cinematic walking montage set to "[SONG TITLE]" by [ARTIST NAME]. Hair flip optional. Slow motion optional but recommended. End screen with artist handle and "link in bio for more."</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== EDM =============================== -->
+<div class="genre-section" id="edm">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>EDM</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>The drop on "[SONG TITLE]" by [ARTIST NAME] just rearranged my entire nervous system. This is the electronic music we need more of {link} #EDM #TheDrop #Rave</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>[ARTIST NAME] is criminally underrated in the EDM scene. "[SONG TITLE]" has festival main stage energy and it deserves to be there {link} #FestivalSeason #ElectronicMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>If you played "[SONG TITLE]" by [ARTIST NAME] at any festival the crowd would lose their minds. This track is pure energy from start to finish {link} #EDMFamily #Bass</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>3am driving with "[SONG TITLE]" by [ARTIST NAME] hitting the subwoofer is a spiritual experience. The bass design on this track is unreal {link} #NightDrive #BassMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>The build-up on "[SONG TITLE]" by [ARTIST NAME] gave me actual goosebumps. When that drop hits you will ascend. Headphones mandatory {link} #Goosebumps #EDMDrop</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>Just added "[SONG TITLE]" by [ARTIST NAME] to my gym playlist and accidentally set a new PR. This track is pure adrenaline in audio form {link} #GymMusic #EDMWorkout</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>[ARTIST NAME] makes the kind of electronic music that reminds you why you started going to shows. "[SONG TITLE]" captures that feeling perfectly {link} #PLUR #RaveCulture</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>Sound design nerds will appreciate "[SONG TITLE]" by [ARTIST NAME] on a different level. Every synth layer is meticulously crafted. Absolute production masterclass {link} #SoundDesign #Producer</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>Need a track that makes you feel like you're headlining a festival? "[SONG TITLE]" by [ARTIST NAME] is that track. Volume up, world off {link} #MainStage #EDMVibes</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>[ARTIST NAME] dropped "[SONG TITLE]" and honestly the electronic music scene needs to pay attention. This producer is making waves and you should be listening {link} #NextUpEDM #ProducerLife</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Put your headphones on right now. "[SONG TITLE]" by [ARTIST NAME]. The drop is insane. You're gonna want to blast this at the pregame. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Found our next festival anthem. "[SONG TITLE]" by [ARTIST NAME]. If this doesn't make you want to rage idk what will. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>This producer [ARTIST NAME] is going to be massive. Check out "[SONG TITLE]" - the production quality is next level. Trust the process and press play {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Adding "[SONG TITLE]" by [ARTIST NAME] to the party playlist. This one's a heater. Bass heavy, energy high, vibes immaculate. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>Remember that DJ set we loved last month? This track gives me the same energy. "[SONG TITLE]" by [ARTIST NAME]. Play it loud. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: This drop will rearrange your brain chemistry</div>
+<p>I don't say this lightly - "[SONG TITLE]" by [ARTIST NAME] has one of the best drops I've heard this year. The build-up is masterful and the payoff is massive. Headphones on, volume up: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: Your new gym/drive/festival track just landed</div>
+<p>[ARTIST NAME] just released "[SONG TITLE]" and it's pure kinetic energy. Whether you need motivation at the gym or the perfect track for a night drive, this is it. Press play: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: An electronic producer you need to know about</div>
+<p>[ARTIST NAME] is making waves in the EDM world and "[SONG TITLE]" shows exactly why. The sound design is innovative, the energy is relentless, and the production is flawless. Dive in: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: Festival-ready track alert</div>
+<p>Imagine this playing on a main stage with 50,000 people. "[SONG TITLE]" by [ARTIST NAME] was built for that moment and you can feel it in every beat. Experience it now: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: The electronic track I can't stop replaying</div>
+<p>I've listened to "[SONG TITLE]" by [ARTIST NAME] more times than I'd like to admit today. The production is addictive - layers of synths, perfectly timed builds, and a drop that delivers every time. You need this: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Wait for the drop. Just... wait for it."
+
+CONCEPT: Film yourself completely still during the build-up of "[SONG TITLE]" by [ARTIST NAME]. When the drop hits, cut to an explosive reaction - headbanging, jumping, losing it. The contrast sells the track. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "EDM producers who deserve to headline festivals - number one."
+
+CONCEPT: Show [ARTIST NAME]'s profile/artwork, then drop into "[SONG TITLE]" at the best moment. Cut to festival crowd footage that matches the energy. Text overlay with streaming link.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "This is what happens when you play '[SONG TITLE]' in the car with the bass up."
+
+CONCEPT: POV dashboard camera. You start calm, then "[SONG TITLE]" by [ARTIST NAME] drops and you're headbanging at a red light. Relatable car vibes always perform. Link in bio for the track.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "Songs that make you feel like the final boss just appeared."
+
+CONCEPT: Gaming or cinematic edit synced to "[SONG TITLE]" by [ARTIST NAME]. Dark visuals during the buildup, explosion of color and movement on the drop. Tag the artist and link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "I found an EDM producer with 5K followers who sounds like they should have 5 million."
+
+CONCEPT: Show the follower count, express disbelief, then let "[SONG TITLE]" by [ARTIST NAME] play over a quick montage of reactions. End with "go follow them right now" and link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== ROCK =============================== -->
+<div class="genre-section" id="rock">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Rock</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>Rock is NOT dead. [ARTIST NAME] just proved it with "[SONG TITLE]". Raw guitars, real drums, and a chorus that hits like a wall of sound {link} #RockMusic #RockIsNotDead</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>The guitar riff on "[SONG TITLE]" by [ARTIST NAME] has been living in my head all week. This is the rock music the world needs right now {link} #GuitarRiff #NewRock</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>Cranked "[SONG TITLE]" by [ARTIST NAME] to full volume and my neighbors now know what good music sounds like. No regrets {link} #LoudMusic #RockOn</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>[ARTIST NAME] brings the energy that made rock legendary. "[SONG TITLE]" is a fist-in-the-air, windows-down anthem and I'm here for every second of it {link} #RockAnthem #TurnItUp</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>If you grew up on guitar-driven music you owe it to yourself to hear [ARTIST NAME]. "[SONG TITLE]" carries that spirit forward with fresh energy {link} #GuitarMusic #RockRevival</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] gives me the same feeling as hearing my favorite rock songs for the first time. Pure adrenaline and raw emotion {link} #RockFeels #Adrenaline</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>The drums on "[SONG TITLE]" by [ARTIST NAME] hit like thunder and the vocals cut right through. This band deserves a massive audience {link} #RockBand #LiveMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>[ARTIST NAME] dropped "[SONG TITLE]" and it's giving classic rock energy with a modern edge. Best of both worlds. Crank it {link} #ClassicVibes #ModernRock</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>Every once in a while a rock song comes along that reminds you why this genre matters. "[SONG TITLE]" by [ARTIST NAME] is that song {link} #RockMatters #MusicIsLife</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>Saw someone say rock doesn't produce new talent anymore and I immediately sent them "[SONG TITLE]" by [ARTIST NAME]. Argument over {link} #ProofIsInTheMusic #RockLives</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Dude. "[SONG TITLE]" by [ARTIST NAME]. Play it loud. The guitar tone alone is worth the listen. This band goes hard. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Found a rock band you're going to love. [ARTIST NAME] - start with "[SONG TITLE]". It's raw, it's loud, and it's exactly our vibe. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>Adding "[SONG TITLE]" by [ARTIST NAME] to the road trip playlist immediately. This is the kind of rock song you blast with the windows down. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Remember how we said we can't find good new rock bands? Problem solved. [ARTIST NAME]. "[SONG TITLE]". You're welcome. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>I just air-guitared so hard to "[SONG TITLE]" by [ARTIST NAME] that I pulled something. Worth it. Give it a listen. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: Rock is alive and this track proves it</div>
+<p>[ARTIST NAME] just released "[SONG TITLE]" and it's a shot of pure rock adrenaline. Driving guitars, thunderous drums, and vocals with real grit - this is the real deal. Turn it up: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: This guitar riff will haunt you (in a good way)</div>
+<p>I can't get the opening riff of "[SONG TITLE]" by [ARTIST NAME] out of my head and honestly I don't want to. It's the kind of rock track that makes you want to pick up a guitar and start a band. Listen: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: A rock band worth getting excited about</div>
+<p>Every few years a band comes along that reignites your love for rock music. [ARTIST NAME] is that band for me right now, and "[SONG TITLE]" is the perfect entry point. Raw, energetic, and unforgettable: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: Your speakers are going to thank you for this one</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] is meant to be played loud. It's got that wall-of-sound energy that fills a room and makes everything else disappear. Do yourself a favor and crank it: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: New rock find that hits like a classic</div>
+<p>[ARTIST NAME] has the rare ability to sound timeless while still feeling fresh. "[SONG TITLE]" channels the best of rock's legacy without being a copycat. It stands on its own and it stands tall: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "People say rock is dead. Play this and say that again."
+
+CONCEPT: Start with a black screen and the text "rock is dead?" Then slam-cut to "[SONG TITLE]" by [ARTIST NAME] at full volume with you headbanging. The energy shift sells the point. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "This guitar riff lives in my head rent-free and now it's moving into yours."
+
+CONCEPT: Film yourself humming or air-guitaring the riff from "[SONG TITLE]" by [ARTIST NAME], then cut to the actual track playing. Show the progression from casual to fully rocking out.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "New rock bands that would absolutely destroy a stadium tour."
+
+CONCEPT: Quick montage of [ARTIST NAME] content - clips, artwork, streaming screenshots - set to "[SONG TITLE]." Make the case that they belong on the big stage. End with link to support them.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "Songs that make you want to quit your job and follow a rock band on tour."
+
+CONCEPT: Start with a tired office/school setting. "[SONG TITLE]" by [ARTIST NAME] kicks in and you transition into a completely different energy - leather jacket, sunglasses, living the dream. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "Tell me your favorite rock song and I'll tell you to replace it with this."
+
+CONCEPT: Read a few comments suggesting big rock songs, then play "[SONG TITLE]" by [ARTIST NAME] as your counter. Confident energy, genuine enthusiasm. Drive viewers to check them out.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== COUNTRY =============================== -->
+<div class="genre-section" id="country">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Country</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] is that front-porch, sweet-tea, golden-hour kind of country song. Genuine storytelling at its finest {link} #CountryMusic #FrontPorchVibes</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>[ARTIST NAME] writes songs that feel like coming home. "[SONG TITLE]" hit me right in the heart and I've been playing it on repeat since {link} #RealCountry #Storytelling</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>Dirt road. Windows down. "[SONG TITLE]" by [ARTIST NAME] on the radio. That's the whole mood and I don't need anything else {link} #CountryRoad #SummerCountry</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>If you love country music with real heart and honest lyrics you need [ARTIST NAME] in your life. "[SONG TITLE]" is authentic from the first note to the last {link} #AuthenticCountry #NashvilleSound</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>[ARTIST NAME] poured their whole soul into "[SONG TITLE]" and you can hear every ounce of it. This is the country music I grew up loving {link} #SoulfulCountry #CountryFan</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>Bonfire playlist just got upgraded. "[SONG TITLE]" by [ARTIST NAME] is officially the song of the summer for anyone with a tailgate and good taste {link} #Bonfire #TailgatePlaylist</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>Nashville is sleeping on [ARTIST NAME] and it doesn't make sense. "[SONG TITLE]" is better than 90% of what's on country radio right now {link} #IndependentCountry #NashvilleGem</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>Three chords and the truth. That's what "[SONG TITLE]" by [ARTIST NAME] delivers and that's all country music ever needed {link} #ThreeChordsAndTheTruth #CountryRoots</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>I wasn't expecting "[SONG TITLE]" by [ARTIST NAME] to make me emotional but here I am. A beautifully written country song that just hits different {link} #CountryFeels #InMyFeelings</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>Introducing the country artist your playlist is missing. [ARTIST NAME] with "[SONG TITLE]" - twangy, honest, and completely unforgettable {link} #CountryGem #NewCountry</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Hey you gotta hear this country song. "[SONG TITLE]" by [ARTIST NAME]. It's giving honest storytelling and good vibes. Perfect for the drive home. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Found our next bonfire anthem. "[SONG TITLE]" by [ARTIST NAME]. It's real country with real heart. You're gonna love this one. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>This country artist [ARTIST NAME] deserves way more fans. Listen to "[SONG TITLE]" and tell me that's not one of the best songs you've heard this year. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Adding "[SONG TITLE]" by [ARTIST NAME] to the lake day playlist. No arguments. It's too good. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>I know you said you don't listen to much country but make an exception for this. "[SONG TITLE]" by [ARTIST NAME]. Trust me on this. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: A country song that feels like a warm sunset</div>
+<p>[ARTIST NAME] has a gift for making music that feels personal and "[SONG TITLE]" is the perfect example. Honest lyrics, beautiful melodies, and the kind of authenticity that country music was built on. Give it a listen: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: Real country music still exists - listen to this</div>
+<p>If you've been frustrated with what passes for country music these days, [ARTIST NAME] is the antidote. "[SONG TITLE]" is rooted in tradition but sounds completely fresh. It's storytelling at its finest: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: This country artist is going to be a star</div>
+<p>I just discovered [ARTIST NAME] and I'm convinced they're going to be a household name. "[SONG TITLE]" has everything - heart, soul, and a melody that sticks with you long after it ends. Get in early: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: The country song I've had on repeat all week</div>
+<p>I can't stop listening to "[SONG TITLE]" by [ARTIST NAME]. There's something about the way they tell a story through song that just pulls you in. If you love genuine country music, this one's for you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: Pour some sweet tea and press play on this</div>
+<p>[ARTIST NAME] makes the kind of country music that makes you slow down and appreciate the moment. "[SONG TITLE]" is warm, heartfelt, and beautifully crafted. Perfect for a quiet evening: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Country songs that make you want to buy a truck and move to a small town."
+
+CONCEPT: Start in a city setting looking bored. "[SONG TITLE]" by [ARTIST NAME] kicks in and you transition to a countryside aesthetic - flannel, open fields, golden hour. The lifestyle shift sells the song. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "If you say country music is all the same, you haven't heard this."
+
+CONCEPT: Quick reaction video listening to "[SONG TITLE]" by [ARTIST NAME]. Show genuine emotion as the lyrics hit. Use subtitles for the key lyric. End with "follow for more real country music finds."</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "Songs for driving down a back road with nowhere to be."
+
+CONCEPT: POV driving footage on a country road. "[SONG TITLE]" by [ARTIST NAME] plays as the soundtrack. Peaceful, aesthetic, relatable. Text overlay with the song info. Link in bio for more.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "Independent country artists who write better songs than Nashville is pushing."
+
+CONCEPT: Showcase [ARTIST NAME] with a split screen - mainstream hit on one side, "[SONG TITLE]" on the other. Let the audience decide. Pin the link in comments.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "This song made me call my mama. Not kidding."
+
+CONCEPT: Emotional storytelling angle. Play "[SONG TITLE]" by [ARTIST NAME] and share a brief personal connection to the lyrics. Vulnerability drives engagement in country TikTok. End with a follow prompt.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== LATIN =============================== -->
+<div class="genre-section" id="latin">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Latin</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>[ARTIST NAME] just dropped "[SONG TITLE]" and the rhythm is INFECTIOUS. Can't stop moving. This is the Latin heat your playlist needs {link} #LatinMusic #Fuego #Reggaeton</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>The way "[SONG TITLE]" by [ARTIST NAME] makes you want to dance from the very first beat. Latin music at its absolute best {link} #BailaConmigo #LatinVibes</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>No skips. No pauses. "[SONG TITLE]" by [ARTIST NAME] is pure fuego from start to finish. If you love Latin music this one's a must {link} #PuraVida #MusicaLatina</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>[ARTIST NAME] brings that authentic Latin flavor on "[SONG TITLE]" and it hits different. The percussion alone will have you moving {link} #Sabor #LatinBeat</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>Just discovered [ARTIST NAME] and "[SONG TITLE]" is already the soundtrack to my whole week. Latin music that transcends language {link} #NoLanguageBarrier #LatinHit</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>Friday night pregame playlist starts and ends with "[SONG TITLE]" by [ARTIST NAME]. This track brings the party energy instantly {link} #FridayVibes #Fiesta</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>The production on "[SONG TITLE]" by [ARTIST NAME] is world class. Blending traditional Latin sounds with modern production in the best way possible {link} #LatinFusion #NextLevel</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>[ARTIST NAME] is doing something special with Latin music. "[SONG TITLE]" is fresh, vibrant, and packed with energy. This artist deserves the spotlight {link} #RisingLatinStar #Musica</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>Tried to listen to "[SONG TITLE]" by [ARTIST NAME] while sitting still. Failed immediately. This rhythm is unstoppable {link} #CantStopDancing #LatinGroove</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>Put [ARTIST NAME] on at the cookout and watch what happens. "[SONG TITLE]" turns any gathering into a full-blown fiesta {link} #Cookout #PartyStarter #LatinMusic</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>You need to hear this. "[SONG TITLE]" by [ARTIST NAME]. The beat is insane and you won't be able to stop moving. Perfect for the party this weekend. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Found our new pregame anthem. "[SONG TITLE]" by [ARTIST NAME]. Pure Latin energy. Play it and thank me later. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>This Latin artist [ARTIST NAME] is about to blow up. "[SONG TITLE]" already has me hooked. Check it out before everyone else discovers them. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Adding "[SONG TITLE]" by [ARTIST NAME] to the playlist right now. Don't even argue. This one is fuego. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>Even if you don't speak the language, "[SONG TITLE]" by [ARTIST NAME] will move you. The rhythm is universal. Trust me and press play. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: This Latin track will get you out of your seat</div>
+<p>[ARTIST NAME] just released "[SONG TITLE]" and it's impossible to listen without moving. The rhythm is infectious, the production is vibrant, and the energy is pure celebration. Press play: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: The Latin artist everyone's about to discover</div>
+<p>I found [ARTIST NAME] this week and "[SONG TITLE]" blew me away. They blend traditional Latin rhythms with contemporary production in a way that feels both fresh and authentic. Get ahead of the wave: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: Music this good needs no translation</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] proves that great music transcends language. The groove, the melody, the sheer energy of this track speaks directly to your body. You'll be dancing before the first verse ends: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: Your summer playlist is incomplete without this</div>
+<p>[ARTIST NAME] brought the heat with "[SONG TITLE]" and it's the kind of Latin track that turns any moment into a celebration. Bright, rhythmic, and completely addictive. Add it now: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: Pure Latin fire - one listen and you're hooked</div>
+<p>I've been replaying "[SONG TITLE]" by [ARTIST NAME] all day and the energy hasn't worn off. The percussion is tight, the melody is catchy, and the whole track radiates warmth. You need this in your life: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Songs that turn any room into a dance floor - starting with this."
+
+CONCEPT: Show an empty room. "[SONG TITLE]" by [ARTIST NAME] starts playing and you immediately start dancing. Cut to friends joining in. The spontaneous dance energy is relatable and shareable. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "Latin music fans, you're sleeping on [ARTIST NAME]."
+
+CONCEPT: Quick intro talking to camera about why "[SONG TITLE]" stands out. Play the best 10 seconds of the track. Use on-screen text with the artist name and streaming info. Encourage duets.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "I tried to sit still during this song. Watch what happened."
+
+CONCEPT: Start seated and serious. "[SONG TITLE]" by [ARTIST NAME] plays and you gradually can't resist the rhythm. End up fully dancing. The "I tried" format always gets shares. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "Learn this dance to '[SONG TITLE]' - easy tutorial."
+
+CONCEPT: Create a simple dance or move set to "[SONG TITLE]" by [ARTIST NAME]. Teach it step by step, then show the full routine. Dance challenges drive massive engagement. Tag the artist and link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "Songs that hit different when you play them at the family cookout."
+
+CONCEPT: POV format at a gathering. You put on "[SONG TITLE]" by [ARTIST NAME] and everyone reacts positively - abuela dancing, cousins vibing. Family + Latin music = viral potential. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== INDIE =============================== -->
+<div class="genre-section" id="indie">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Indie</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>[ARTIST NAME] makes the kind of music that feels like a secret only you know about. "[SONG TITLE]" is intimate, raw, and absolutely beautiful {link} #IndieMusic #HiddenGem</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>There's something about "[SONG TITLE]" by [ARTIST NAME] that makes the world feel quieter. In the best way. Indie music at its most honest {link} #IndieVibes #QuietBeauty</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>Coffee shop. Rain outside. "[SONG TITLE]" by [ARTIST NAME] in my earbuds. This is the perfect moment and this is the perfect song for it {link} #CoffeeShopVibes #IndieFolk</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>If your taste in music leans toward the beautifully weird and wonderfully honest, [ARTIST NAME] is your next obsession. Start with "[SONG TITLE]" {link} #IndieArtist #MusicNerd</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>[ARTIST NAME] doesn't make music for algorithms. They make music for humans. "[SONG TITLE]" is proof that authenticity wins every time {link} #Authentic #IndieForever</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>Just put "[SONG TITLE]" by [ARTIST NAME] on while walking through the city at dusk and it turned my commute into a movie scene {link} #Soundtrack #IndieWalk</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>The lyrics on "[SONG TITLE]" by [ARTIST NAME] read like poetry. Indie music that makes you think and feel simultaneously. A rare combination {link} #PoeticLyrics #IndieGem</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>Supporting independent artists matters and [ARTIST NAME] is exactly why. "[SONG TITLE]" is gorgeous, personal, and made without compromise {link} #SupportIndieMusic #RealArt</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>In a world of overproduced music, "[SONG TITLE]" by [ARTIST NAME] feels like a deep breath. Simple, sincere, and stunning {link} #LessIsMore #IndieSound</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>Added "[SONG TITLE]" by [ARTIST NAME] to my "songs that make me stare out windows contemplatively" playlist. It fits perfectly {link} #WindowStaring #IndiePlaylist</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Found an indie artist I think you'd really connect with. [ARTIST NAME] - listen to "[SONG TITLE]". It's quiet and beautiful and exactly our vibe. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>Ok this is one of those songs you listen to alone with headphones and just feel things. "[SONG TITLE]" by [ARTIST NAME]. Let me know what you think. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>Remember when we were making that chill playlist? I found the missing track. "[SONG TITLE]" by [ARTIST NAME]. It's perfect. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>This indie artist [ARTIST NAME] has like no followers and it's criminal. "[SONG TITLE]" is one of the most honest songs I've heard in a long time. Help me spread the word? {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>Put on "[SONG TITLE]" by [ARTIST NAME] during your morning coffee tomorrow. It's the kind of song that makes ordinary moments feel meaningful. Trust me. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: A song that sounds like a secret you want to share</div>
+<p>[ARTIST NAME] makes music that feels personal, like it was written just for you. "[SONG TITLE]" is one of those rare tracks that stops you in your tracks and makes you listen closer. I hope you love it: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: The indie discovery I can't keep to myself</div>
+<p>I stumbled onto [ARTIST NAME] recently and "[SONG TITLE]" has been on constant rotation. It's understated, emotionally rich, and the kind of music that rewards repeat listens. Give it your full attention: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: When music feels like poetry - listen to this</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] is the kind of song where every lyric matters. It's thoughtful, delicate, and beautifully arranged. If you appreciate songwriting as an art form, this is for you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: An independent artist making extraordinary music</div>
+<p>[ARTIST NAME] doesn't have a major label or a PR team, just pure talent and a song called "[SONG TITLE]" that deserves to be heard by thousands. Supporting artists like this is how we keep real music alive: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: This quiet little song completely floored me</div>
+<p>Sometimes the most powerful music is the simplest. "[SONG TITLE]" by [ARTIST NAME] doesn't need a massive production to make an impact - just honest words and a voice that carries real emotion. Listen softly: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Songs that make your walk home feel like an indie movie."
+
+CONCEPT: Cinematic walking footage - golden hour, city streets or nature trails. "[SONG TITLE]" by [ARTIST NAME] plays as the soundtrack. Dreamy, aesthetic, shareable. Text overlay with song info. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "Artists with under 1,000 listeners who make music this beautiful."
+
+CONCEPT: Show [ARTIST NAME]'s streaming numbers on screen. Express genuine disbelief. Play the most emotional 15 seconds of "[SONG TITLE]." Ask viewers to go stream it right now. Pin link in comments.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "Songs I listen to when I want to feel everything at once."
+
+CONCEPT: Cozy aesthetic - blankets, dim lighting, headphones on. "[SONG TITLE]" by [ARTIST NAME] plays. Show yourself genuinely moved. The vulnerability and aesthetics drive indie TikTok engagement. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "If you only discover one new artist today, make it this one."
+
+CONCEPT: Direct to camera, genuine recommendation style. Share why [ARTIST NAME] stands out and play a clip of "[SONG TITLE]." Authenticity over production value. This format builds trust and drives follows.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "POV: you find a song that perfectly describes how you feel but can't put into words."
+
+CONCEPT: Contemplative, relatable moment - staring at the ceiling, journaling, sitting alone. "[SONG TITLE]" by [ARTIST NAME] plays. Key lyric appears as text on screen. Emotional resonance drives saves and shares.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+<!-- =============================== GOSPEL =============================== -->
+<div class="genre-section" id="gospel">
+<div class="genre-header" onclick="toggleGenre(this)">
+<h2>Gospel</h2>
+<span class="arrow">&#9660;</span>
+</div>
+<div class="genre-body">
+
+<div class="category-label">Twitter / X Posts</div>
+
+<div class="msg-card">
+<div class="label">Tweet #1</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] just ministered to my whole spirit. This is the worship music that moves mountains. Let it fill your soul {link} #GospelMusic #Worship #Faith</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #2</div>
+<p>Started my morning with "[SONG TITLE]" by [ARTIST NAME] and my entire day shifted. When the music carries the anointing you just know {link} #MorningWorship #GospelGem</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #3</div>
+<p>[ARTIST NAME] put their whole heart into "[SONG TITLE]" and you can feel the presence in every note. This is what gospel music is about {link} #ThePresence #GospelSoul</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #4</div>
+<p>If you need a song to lift you up today, "[SONG TITLE]" by [ARTIST NAME] is it. Powerful vocals, powerful message, powerful anointing {link} #Uplifted #GospelPower</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #5</div>
+<p>The harmonies on "[SONG TITLE]" by [ARTIST NAME] gave me chills and tears at the same time. Gospel music that touches the deepest part of your soul {link} #GospelHarmonies #SoulStirring</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #6</div>
+<p>[ARTIST NAME] is a voice the gospel world needs to hear. "[SONG TITLE]" is praise and worship wrapped in pure talent. Share it with someone who needs hope today {link} #ShareHope #GospelArtist</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #7</div>
+<p>Put "[SONG TITLE]" by [ARTIST NAME] on during your quiet time and watch what happens. This song creates an atmosphere of worship that's undeniable {link} #QuietTime #WorshipAtmosphere</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #8</div>
+<p>Sometimes a song comes along that feels like a prayer answered. "[SONG TITLE]" by [ARTIST NAME] is that song for me. May it bless you too {link} #PrayerInSong #Blessed</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #9</div>
+<p>The bridge on "[SONG TITLE]" by [ARTIST NAME] took me straight to the altar. You don't just hear gospel music like this - you experience it {link} #AltarCall #GospelExperience</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Tweet #10</div>
+<p>Support gospel artists who pour their faith into their music. [ARTIST NAME] is one of them and "[SONG TITLE]" is a testament to their gift. Stream and share {link} #SupportGospel #TrueFans</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">WhatsApp / SMS Scripts</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #1</div>
+<p>Hey I wanted to share this song with you. "[SONG TITLE]" by [ARTIST NAME]. It really ministered to me this morning and I think it'll bless you too. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #2</div>
+<p>If you need some encouragement today, play "[SONG TITLE]" by [ARTIST NAME]. The message and the music are both powerful. Let me know what you think. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #3</div>
+<p>Found this gospel artist [ARTIST NAME] and their song "[SONG TITLE]" is incredible. The vocals, the worship, all of it. Add it to your worship playlist. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #4</div>
+<p>Can you share this with the worship team? "[SONG TITLE]" by [ARTIST NAME] would be perfect for Sunday service. The anointing on this song is real. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">WhatsApp #5</div>
+<p>Put this on during your drive to work tomorrow. "[SONG TITLE]" by [ARTIST NAME]. It'll set the tone for your whole day. Praise music that truly moves. {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">Email Subject Lines + Body Previews</div>
+
+<div class="msg-card">
+<div class="label">Email #1</div>
+<div class="subject">Subject: A gospel song that will lift your spirit today</div>
+<p>[ARTIST NAME] has a gift that goes beyond music, and "[SONG TITLE]" is a testament to that. The vocals carry a weight of faith and the message speaks directly to the heart. Let it minister to you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #2</div>
+<div class="subject">Subject: This worship song changed my morning routine</div>
+<p>I started playing "[SONG TITLE]" by [ARTIST NAME] during my quiet time and it has transformed those moments completely. The presence of worship in this song is tangible and real. I pray it blesses you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #3</div>
+<div class="subject">Subject: Share this with someone who needs encouragement</div>
+<p>"[SONG TITLE]" by [ARTIST NAME] is more than a song - it's a declaration of faith and hope. If you know someone going through a hard season, this music could be the encouragement they need. Listen and share: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #4</div>
+<div class="subject">Subject: Gospel music that moves you to your core</div>
+<p>[ARTIST NAME] pours authentic worship into everything they create, and "[SONG TITLE]" is no exception. From the first note to the last, this track takes you on a spiritual journey. Experience it for yourself: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">Email #5</div>
+<div class="subject">Subject: A voice anointed for this season - listen now</div>
+<p>I believe [ARTIST NAME] was raised up for a time like this. "[SONG TITLE]" carries a message that the world needs to hear right now - hope, faith, and the power of praise. Let it wash over you: {link}</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="category-label">TikTok Hook Scripts</div>
+
+<div class="msg-card">
+<div class="label">TikTok #1</div>
+<p>HOOK (first 3 sec): "Gospel songs that make you raise your hands no matter where you are."
+
+CONCEPT: Film yourself in an everyday setting - grocery store, car, office. "[SONG TITLE]" by [ARTIST NAME] starts playing and you can't help but worship. The contrast between the mundane setting and genuine praise is powerful. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #2</div>
+<p>HOOK (first 3 sec): "If this song doesn't move you, check your pulse and your spirit."
+
+CONCEPT: Close-up of pressing play on "[SONG TITLE]" by [ARTIST NAME]. Film a genuine worship reaction. Tears, raised hands, closed eyes - whatever feels authentic. Gospel TikTok values sincerity above all. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #3</div>
+<p>HOOK (first 3 sec): "Songs I play when I need to remember that God is still on the throne."
+
+CONCEPT: Start with a text screen listing life struggles, then "[SONG TITLE]" by [ARTIST NAME] plays and the mood shifts to peace and hope. Visual transition from darkness to light. Share artist info on the end screen.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #4</div>
+<p>HOOK (first 3 sec): "This gospel artist has under 5K followers and sings like this."
+
+CONCEPT: Show [ARTIST NAME]'s profile with their follower count. Play the most powerful vocal moment from "[SONG TITLE]." Express genuine disbelief at the talent-to-followers ratio. Call viewers to go support them now.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+<div class="msg-card">
+<div class="label">TikTok #5</div>
+<p>HOOK (first 3 sec): "Play this for your church praise team and watch their reaction."
+
+CONCEPT: Film a group of friends or church members hearing "[SONG TITLE]" by [ARTIST NAME] for the first time. Capture genuine reactions - goosebumps, hands raised, emotional moments. Authentic reactions drive shares in gospel communities. Link in bio.</p>
+<button class="copy-btn" onclick="copyMsg(this)">Copy</button>
+</div>
+
+</div>
+</div>
+
+</div><!-- end container -->
+
+<div class="footer">
+<p>TrueFans LOOP &mdash; Genre Swipe File Library &bull; Replace [ARTIST NAME], [SONG TITLE], and {link} with your details before sharing.</p>
+</div>
+
+<script>
+function toggleGenre(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  header.classList.toggle('open');
+}
+
+function scrollToGenre(id) {
+  const section = document.getElementById(id);
+  if (!section) return;
+  const header = section.querySelector('.genre-header');
+  const body = section.querySelector('.genre-body');
+  // open it if not already open
+  if (!body.classList.contains('open')) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // update nav active
+  document.querySelectorAll('.genre-nav button').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function copyMsg(btn) {
+  const card = btn.closest('.msg-card');
+  let text = '';
+  const subject = card.querySelector('.subject');
+  const paragraphs = card.querySelectorAll('p');
+  if (subject) {
+    text += subject.textContent + '\n\n';
+  }
+  paragraphs.forEach(p => {
+    text += p.textContent + '\n';
+  });
+  text = text.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
